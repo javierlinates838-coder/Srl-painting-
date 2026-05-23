@@ -7,132 +7,94 @@ import { BeforeAfterSlider } from "./before-after-slider";
 
 export function BeforeAfterGallery() {
   const [active, setActive] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
+  const [fade, setFade] = useState(false);
   const project = beforeAfterProjects[active];
 
-  const goTo = useCallback(
-    (index: number) => {
-      if (index === active || transitioning) return;
-      setTransitioning(true);
+  const go = useCallback(
+    (i: number) => {
+      if (i === active) return;
+      setFade(true);
       setTimeout(() => {
-        setActive(index);
-        setTransitioning(false);
-      }, 200);
+        setActive(i);
+        setFade(false);
+      }, 220);
     },
-    [active, transitioning],
+    [active],
   );
 
-  const next = useCallback(() => {
-    goTo((active + 1) % beforeAfterProjects.length);
-  }, [active, goTo]);
+  const next = useCallback(() => go((active + 1) % beforeAfterProjects.length), [active, go]);
 
   useEffect(() => {
-    const t = setInterval(next, 8000);
+    const t = setInterval(next, 9000);
     return () => clearInterval(t);
   }, [next]);
 
   return (
-    <section id="work" className="bg-dark py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        {/* Header */}
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+    <section id="work" className="section-pad bg-paper">
+      <div className="container-main">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-end lg:gap-16">
           <div>
-            <p className="eyebrow text-maroon-hover">Before &amp; After</p>
-            <h2 className="font-heading mt-2 text-3xl font-bold text-white sm:text-4xl">
-              Drag to compare results
+            <div className="accent-rule" />
+            <p className="label mt-4">Portfolio</p>
+            <h2 className="display-lg mt-3 text-black">
+              Real transformations.<br />Drag to compare.
             </h2>
-            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-zinc-400">
-              Three recent transformations. Swap in your real Instagram photos when ready.
+            <p className="body-lg mt-4 max-w-md">
+              Every project starts with surface prep and ends with a walkthrough you&apos;re happy with.
+              These are sample showcases — swap in your Instagram photos anytime.
             </p>
-          </div>
 
-          {/* Project tabs */}
-          <div className="flex gap-1 rounded-lg border border-white/[0.08] bg-white/[0.04] p-1">
-            {beforeAfterProjects.map((p, i) => (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => goTo(i)}
-                className={`rounded-md px-4 py-2 text-[13px] font-semibold transition ${
-                  i === active
-                    ? "bg-maroon text-white shadow-sm"
-                    : "text-zinc-400 hover:text-white"
-                }`}
-              >
-                {p.category}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Slider + info */}
-        <div
-          className={`mt-10 grid gap-8 transition-opacity duration-200 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12 ${
-            transitioning ? "opacity-60" : "opacity-100"
-          }`}
-        >
-          <BeforeAfterSlider
-            key={project.id}
-            beforeSrc={project.before}
-            afterSrc={project.after}
-            beforeAlt={`Before — ${project.title}`}
-            afterAlt={`After — ${project.title}`}
-            autoSlide
-            className="ring-1 ring-white/[0.08]"
-          />
-
-          <div className="flex flex-col justify-center">
-            <span className="text-[12px] font-semibold uppercase tracking-wider text-zinc-500">
-              {project.location}
-            </span>
-            <h3 className="font-heading mt-1 text-2xl font-bold text-white">{project.title}</h3>
-            <p className="mt-4 text-[15px] leading-relaxed text-zinc-400">{project.description}</p>
-
-            <div className="mt-8 flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => goTo((active - 1 + beforeAfterProjects.length) % beforeAfterProjects.length)}
-                aria-label="Previous"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-zinc-400 transition hover:border-white/20 hover:text-white"
-              >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={next}
-                aria-label="Next"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-zinc-400 transition hover:border-white/20 hover:text-white"
-              >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-              <span className="text-[13px] text-zinc-500">
-                {active + 1} / {beforeAfterProjects.length}
-              </span>
+            <div className="mt-8 flex flex-col gap-2">
+              {beforeAfterProjects.map((p, i) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => go(i)}
+                  className={`flex items-start gap-4 rounded-xl border p-4 text-left transition ${
+                    i === active
+                      ? "border-brand/30 bg-brand-tint shadow-sm"
+                      : "border-black/8 bg-white hover:border-black/15"
+                  }`}
+                >
+                  <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${i === active ? "bg-brand text-white" : "bg-paper-2 text-zinc-500"}`}>
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="font-display text-[15px] font-bold text-black">{p.title}</p>
+                    <p className="mt-0.5 text-[12px] text-zinc-500">{p.location} · {p.scope}</p>
+                  </div>
+                </button>
+              ))}
             </div>
+          </div>
 
-            <Link href="#contact" className="btn btn-primary mt-8 w-fit">
-              Get a similar result
-            </Link>
+          <div className={`transition-opacity duration-200 ${fade ? "opacity-50" : "opacity-100"}`}>
+            <BeforeAfterSlider
+              key={project.id}
+              beforeSrc={project.before}
+              afterSrc={project.after}
+              beforeAlt={`Before — ${project.title}`}
+              afterAlt={`After — ${project.title}`}
+              autoSlide
+              className="shadow-xl shadow-black/10"
+            />
+            <div className="mt-5 surface p-5">
+              <p className="font-display text-lg font-bold text-black">{project.title}</p>
+              <p className="mt-2 text-[14px] leading-relaxed text-zinc-600">{project.description}</p>
+              <Link href="#contact" className="btn btn-brand mt-4 !text-[13px]">
+                Get a quote like this
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Instagram CTA */}
-        <div className="mt-16 flex flex-col items-center rounded-xl border border-white/[0.06] bg-white/[0.03] px-6 py-10 text-center">
-          <p className="font-heading text-xl font-bold text-white">More projects on Instagram</p>
-          <p className="mt-2 max-w-sm text-[14px] text-zinc-400">
-            Follow {site.instagramHandle} for the latest before-and-after photos and reviews.
-          </p>
-          <a
-            href={site.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-white mt-5"
-          >
-            {site.instagramHandle}
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 rounded-2xl bg-charcoal px-6 py-8 text-center sm:flex-row sm:text-left lg:px-10">
+          <div>
+            <p className="font-display text-xl font-bold text-white">More projects on Instagram</p>
+            <p className="mt-1 text-[14px] text-zinc-400">Follow {site.instagramHandle} for the latest work and reviews.</p>
+          </div>
+          <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-light shrink-0">
+            View Instagram
           </a>
         </div>
       </div>

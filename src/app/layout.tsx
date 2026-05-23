@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const heading = Outfit({
-  variable: "--font-heading",
+const display = Plus_Jakarta_Sans({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["600", "700", "800"],
 });
 
 const body = Inter({
@@ -16,28 +16,30 @@ const body = Inter({
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} | Licensed Painting Contractor in California`,
+  metadataBase: new URL("https://srl-painting.vercel.app"),
+  title: `${site.name} | Licensed Painter in Bakersfield & Los Angeles`,
   description: site.description,
-  icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
-  },
+  keywords: [
+    "painter Bakersfield",
+    "house painting Kern County",
+    "cabinet refinishing California",
+    "commercial painting Los Angeles",
+    "SRL Painting",
+  ],
+  icons: { icon: "/logo.png", apple: "/logo.png" },
   openGraph: {
     title: site.name,
     description: site.description,
     type: "website",
-    images: ["/logo.png"],
+    locale: "en_US",
+    images: [{ url: "/logo.png", width: 400, height: 460, alt: site.name }],
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${heading.variable} ${body.variable}`}>
-      <body className="font-body antialiased">{children}</body>
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

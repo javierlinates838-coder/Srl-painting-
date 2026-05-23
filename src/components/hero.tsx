@@ -1,58 +1,71 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
-import { BrandLogo } from "./brand-logo";
+import { beforeAfterProjects, site } from "@/lib/site";
+import { BeforeAfterSlider } from "./before-after-slider";
 
 export function Hero() {
+  const project = beforeAfterProjects[0];
+
   return (
-    <section className="relative overflow-hidden bg-dark pt-16">
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_-20%,rgba(139,26,53,0.3),transparent)]" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
+    <section className="relative overflow-hidden bg-charcoal text-white">
+      <div className="grain pointer-events-none absolute inset-0" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_-10%,rgba(127,29,58,.45),transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(127,29,58,.12),transparent_40%)]" />
 
-      <div className="relative mx-auto max-w-6xl px-5 py-20 lg:px-8 lg:py-28">
-        <div className="mx-auto max-w-3xl text-center">
-          <BrandLogo className="animate-in mx-auto h-auto w-[140px] drop-shadow-2xl sm:w-[180px]" />
-
-          <p className="animate-in delay-1 eyebrow mt-8">California C-33 · Lic. {site.license}</p>
-
-          <h1 className="animate-in delay-2 font-heading mt-4 text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.08] text-white">
-            Professional painting that transforms your property
-          </h1>
-
-          <p className="animate-in delay-3 mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-zinc-400">
-            {site.description}
-          </p>
-
-          <div className="animate-in delay-3 mt-8 flex flex-wrap justify-center gap-3">
-            <Link href="#contact" className="btn btn-primary">
-              Get a free estimate
-            </Link>
-            <Link href="#work" className="btn btn-ghost-light">
-              See before &amp; after
-            </Link>
-          </div>
-        </div>
-
-        {/* Quick stats row */}
-        <div className="animate-in delay-3 mx-auto mt-16 grid max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.06] sm:grid-cols-4">
-          {[
-            { v: "C-33", l: "Licensed" },
-            { v: "4", l: "Services" },
-            { v: "4", l: "Cities" },
-            { v: "Free", l: "Estimates" },
-          ].map((s) => (
-            <div key={s.l} className="bg-dark-surface px-4 py-5 text-center">
-              <p className="font-heading text-xl font-bold text-white">{s.v}</p>
-              <p className="mt-0.5 text-[11px] font-medium uppercase tracking-wider text-zinc-500">{s.l}</p>
+      <div className="container-main section-pad relative">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <div className="reveal flex flex-wrap items-center gap-3">
+              <span className="label text-brand-light">California Licensed Contractor</span>
+              <span className="h-1 w-1 rounded-full bg-zinc-600" />
+              <span className="text-[12px] font-medium text-zinc-500">C-33 · Lic. {site.license}</span>
             </div>
-          ))}
+
+            <h1 className="reveal reveal-d1 display-xl mt-5 text-white">
+              Painting done right.
+              <span className="mt-1 block text-zinc-400">Prep, precision, and finishes that last.</span>
+            </h1>
+
+            <p className="reveal reveal-d2 body-lg mt-6 max-w-lg !text-zinc-400">
+              {site.description}
+            </p>
+
+            <div className="reveal reveal-d3 mt-8 flex flex-wrap gap-3">
+              <Link href="#contact" className="btn btn-brand">
+                Request Free Estimate
+              </Link>
+              <Link href="#work" className="btn btn-outline">
+                See Before &amp; After
+              </Link>
+            </div>
+
+            <div className="reveal reveal-d3 mt-10 grid grid-cols-3 gap-4 border-t border-white/10 pt-8">
+              {[
+                { n: "4", l: "Core services" },
+                { n: "4", l: "Cities served" },
+                { n: "C-33", l: "State license" },
+              ].map((s) => (
+                <div key={s.l}>
+                  <p className="font-display text-2xl font-bold text-white">{s.n}</p>
+                  <p className="mt-0.5 text-[11px] font-medium uppercase tracking-wider text-zinc-500">{s.l}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="reveal reveal-d2">
+            <BeforeAfterSlider
+              beforeSrc={project.before}
+              afterSrc={project.after}
+              beforeAlt={`Before — ${project.title}`}
+              afterAlt={`After — ${project.title}`}
+              autoSlide
+              className="shadow-2xl shadow-black/40 ring-1 ring-white/10"
+            />
+            <p className="mt-3 flex items-center justify-between text-[12px] text-zinc-500">
+              <span>{project.title} · {project.location}</span>
+              <span className="text-zinc-600">Drag slider to compare</span>
+            </p>
+          </div>
         </div>
       </div>
     </section>

@@ -4,26 +4,51 @@ import { BrandLogo } from "./brand-logo";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] bg-dark py-12">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 sm:flex-row sm:justify-between lg:px-8">
-        <div className="flex items-center gap-2.5">
-          <BrandLogo className="h-8 w-auto" />
-          <span className="font-heading text-[14px] font-semibold text-white">{site.name}</span>
+    <footer className="border-t border-white/10 bg-black py-14 text-zinc-500">
+      <div className="container-main">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="sm:col-span-2">
+            <div className="flex items-center gap-3">
+              <BrandLogo className="h-10 w-auto" />
+              <div>
+                <p className="font-display font-bold text-white">{site.name}</p>
+                <p className="text-[12px]">{site.licenseClass} · #{site.license}</p>
+              </div>
+            </div>
+            <p className="mt-4 max-w-sm text-[13px] leading-relaxed">{site.description}</p>
+          </div>
+
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Navigate</p>
+            <ul className="mt-4 space-y-2 text-[13px]">
+              <li><Link href="#work" className="hover:text-white">Our Work</Link></li>
+              <li><Link href="#services" className="hover:text-white">Services</Link></li>
+              <li><Link href="#about" className="hover:text-white">About</Link></li>
+              <li><Link href="#contact" className="hover:text-white">Contact</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Connect</p>
+            <ul className="mt-4 space-y-2 text-[13px]">
+              <li>
+                <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  {site.instagramHandle}
+                </a>
+              </li>
+              <li>
+                <a href={site.licenseVerifyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  CSLB License Lookup
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-zinc-500">
-          <Link href="#work" className="hover:text-white">Work</Link>
-          <Link href="#services" className="hover:text-white">Services</Link>
-          <Link href="#faq" className="hover:text-white">FAQ</Link>
-          <Link href="#contact" className="hover:text-white">Contact</Link>
-          <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white">
-            Instagram
-          </a>
-        </nav>
-
-        <p className="text-[12px] text-zinc-600">
-          © {new Date().getFullYear()} · Lic. {site.license}
-        </p>
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-[12px] sm:flex-row">
+          <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+          <p>Licensed &amp; bonded · California contractor</p>
+        </div>
       </div>
     </footer>
   );

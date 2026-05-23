@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type BeforeAfterSliderProps = {
+type Props = {
   beforeSrc: string;
   afterSrc: string;
   beforeAlt: string;
@@ -19,88 +19,82 @@ export function BeforeAfterSlider({
   afterAlt,
   autoSlide = false,
   className = "",
-}: BeforeAfterSliderProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
+}: Props) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState(50);
+  const [dragging, setDragging] = useState(false);
+  const [touched, setTouched] = useState(false);
 
-  const clamp = (v: number) => Math.max(4, Math.min(96, v));
+  const clamp = (v: number) => Math.max(3, Math.min(97, v));
 
-  const update = useCallback((clientX: number) => {
-    const el = containerRef.current;
+  const move = useCallback((x: number) => {
+    const el = ref.current;
     if (!el) return;
-    const { left, width } = el.getBoundingClientRect();
-    setPosition(clamp(((clientX - left) / width) * 100));
-    setHasInteracted(true);
+    const r = el.getBoundingClientRect();
+    setPos(clamp(((x - r.left) / r.width) * 100));
+    setTouched(true);
   }, []);
 
   useEffect(() => {
-    if (!autoSlide || isDragging || hasInteracted) return;
-    let frame: number;
-    let start: number | null = null;
-    const animate = (ts: number) => {
-      if (!start) start = ts;
-      const t = ((ts - start) % 4000) / 4000;
-      setPosition(15 + (0.5 - Math.cos(t * Math.PI * 2) * 0.5) * 70);
-      frame = requestAnimationFrame(animate);
+    if (!autoSlide || dragging || touched) return;
+    let f: number;
+    let s: number | null = null;
+    const loop = (t: number) => {
+      if (!s) s = t;
+      const p = ((t - s) % 4500) / 4500;
+      setPos(12 + (0.5 - Math.cos(p * Math.PI * 2) * 0.5) * 76);
+      f = requestAnimationFrame(loop);
     };
-    frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
-  }, [autoSlide, isDragging, hasInteracted]);
+    f = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(f);
+  }, [autoSlide, dragging, touched]);
 
   useEffect(() => {
-    if (!isDragging) return;
-    const move = (e: MouseEvent | TouchEvent) =>
-      update("touches" in e ? e.touches[0].clientX : e.clientX);
-    const end = () => setIsDragging(false);
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", end);
-    window.addEventListener("touchmove", move, { passive: true });
-    window.addEventListener("touchend", end);
+    if (!dragging) return;
+    const mm = (e: MouseEvent | TouchEvent) =>
+      move("touches" in e ? e.touches[0].clientX : e.clientX);
+    const mu = () => setDragging(false);
+    window.addEventListener("mousemove", mm);
+    window.addEventListener("mouseup", mu);
+    window.addEventListener("touchmove", mm, { passive: true });
+    window.addEventListener("touchend", mu);
     return () => {
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseup", end);
-      window.removeEventListener("touchmove", move);
-      window.removeEventListener("touchend", end);
+      window.removeEventListener("mousemove", mm);
+      window.removeEventListener("mouseup", mu);
+      window.removeEventListener("touchmove", mm);
+      window.removeEventListener("touchend", mu);
     };
-  }, [isDragging, update]);
+  }, [dragging, move]);
 
   return (
     <div
-      ref={containerRef}
-      className={`ba-slider group relative overflow-hidden rounded-xl bg-zinc-900 ${className}`}
-      onMouseDown={(e) => { setIsDragging(true); update(e.clientX); }}
-      onTouchStart={(e) => { setIsDragging(true); update(e.touches[0].clientX); }}
+      ref={ref}
+      className={`ba-slider group relative select-none overflow-hidden rounded-[calc(var(--radius)+4px)] bg-black ${className}`}
+      onMouseDown={(e) => { setDragging(true); move(e.clientX); }}
+      onTouchStart={(e) => { setDragging(true); move(e.touches[0].clientX); }}
     >
-      <div className="relative aspect-[16/10] w-full">
-        <Image src={afterSrc} alt={afterAlt} fill className="object-cover" sizes="(max-width:768px) 100vw, 60vw" draggable={false} />
-
-        <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
-          <Image src={beforeSrc} alt={beforeAlt} fill className="object-cover brightness-90 saturate-[0.85]" sizes="(max-width:768px) 100vw, 60vw" draggable={false} />
+      <div className="relative aspect-[5/3] w-full sm:aspect-[16/10]">
+        <Image src={afterSrc} alt={afterAlt} fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" draggable={false} />
+        <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+          <Image src={beforeSrc} alt={beforeAlt} fill className="object-cover brightness-[0.88] saturate-[0.8] contrast-[1.05]" sizes="(max-width:768px) 100vw, 50vw" draggable={false} />
+          <div className="absolute inset-0 bg-black/10" />
         </div>
 
-        <div className="ba-handle absolute inset-y-0 z-10 w-px -translate-x-1/2 cursor-ew-resize" style={{ left: `${position}%` }}>
-          <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-white/80 shadow-[0_0_8px_rgba(0,0,0,0.4)]" />
-          <div className={`absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-maroon shadow-lg transition ${isDragging ? "scale-110" : ""}`}>
+        <div className="ba-handle absolute inset-y-0 z-10 -translate-x-1/2 cursor-ew-resize" style={{ left: `${pos}%` }}>
+          <div className="absolute inset-y-0 left-1/2 w-[2px] -translate-x-1/2 bg-white shadow-[0_0_20px_rgba(0,0,0,.5)]" />
+          <div className={`absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[3px] border-white bg-brand shadow-xl transition ${dragging ? "scale-110" : "group-hover:scale-105"}`}>
             <svg className="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
             </svg>
           </div>
         </div>
 
-        <span className="absolute left-3 top-3 rounded-md bg-black/60 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+        <span className="absolute left-4 top-4 rounded-md bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
           Before
         </span>
-        <span className="absolute right-3 top-3 rounded-md bg-maroon/90 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+        <span className="absolute right-4 top-4 rounded-md bg-brand px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">
           After
         </span>
-
-        {!hasInteracted && autoSlide && (
-          <span className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-md bg-white/90 px-3 py-1 text-[11px] font-semibold text-ink shadow">
-            Drag to compare
-          </span>
-        )}
       </div>
     </div>
   );

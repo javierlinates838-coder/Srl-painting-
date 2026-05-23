@@ -5,9 +5,9 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 
 const links = [
-  { href: "#work", label: "Work" },
+  { href: "#work", label: "Our Work" },
   { href: "#services", label: "Services" },
-  { href: "#reviews", label: "Reviews" },
+  { href: "#about", label: "About" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -20,7 +20,7 @@ export function MobileNav() {
         type="button"
         onClick={() => setOpen(!open)}
         aria-label={open ? "Close menu" : "Open menu"}
-        className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-white md:hidden"
+        className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-white lg:hidden"
       >
         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           {open ? (
@@ -32,20 +32,20 @@ export function MobileNav() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 top-16 z-40 bg-dark/98 backdrop-blur-xl md:hidden">
-          <nav className="flex flex-col gap-1 p-5">
+        <div className="fixed inset-0 top-[4.25rem] z-40 bg-charcoal/98 backdrop-blur-xl lg:hidden">
+          <nav className="container-main flex flex-col gap-1 py-6">
             {links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-4 py-3 text-[15px] font-medium text-zinc-300 hover:bg-white/5 hover:text-white"
+                className="rounded-lg px-4 py-3.5 font-display text-lg font-semibold text-zinc-300 hover:bg-white/5 hover:text-white"
               >
                 {l.label}
               </Link>
             ))}
-            <Link href="#contact" onClick={() => setOpen(false)} className="btn btn-primary mt-4 w-full">
-              Free estimate
+            <Link href="#contact" onClick={() => setOpen(false)} className="btn btn-brand mt-4 w-full">
+              Free Estimate
             </Link>
           </nav>
         </div>
