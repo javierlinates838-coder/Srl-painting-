@@ -33,7 +33,7 @@ export function Header() {
     >
       <div className="container-main flex h-[4.25rem] items-center justify-between">
         <Link href="#" className="flex items-center gap-3">
-          <BrandLogo className="h-10 w-auto" priority />
+          <BrandLogo className="h-11 w-auto min-h-[44px] object-contain" priority />
           <div className="hidden sm:block">
             <p className="font-display text-[15px] font-bold leading-none text-white">{site.name}</p>
             <p className="mt-0.5 text-[11px] font-medium text-zinc-500">Lic. {site.license}</p>

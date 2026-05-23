@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="sm:col-span-2">
             <div className="flex items-center gap-3">
-              <BrandLogo className="h-10 w-auto" />
+              <BrandLogo className="h-11 w-auto min-h-[44px] object-contain" />
               <div>
                 <p className="font-display font-bold text-white">{site.name}</p>
                 <p className="text-[12px]">{site.licenseClass} · #{site.license}</p>

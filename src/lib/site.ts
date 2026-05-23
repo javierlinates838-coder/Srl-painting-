@@ -90,9 +90,9 @@ export const beforeAfterProjects = [
     description:
       "Weather-worn siding and faded trim replaced with a crisp, coordinated color scheme — sealed for Central Valley heat and sun exposure.",
     before:
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1600&q=85",
+      "/projects/exterior-before.jpg",
     after:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=85",
+      "/projects/exterior-after.jpg",
   },
   {
     id: "cabinets",
@@ -103,9 +103,9 @@ export const beforeAfterProjects = [
     description:
       "Dated oak cabinets transformed with a durable white spray finish and updated pulls — full kitchen refresh without a six-figure remodel.",
     before:
-      "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1600&q=85",
+      "/projects/cabinets-before.jpg",
     after:
-      "https://images.unsplash.com/photo-1556912173-46c336c7fd55?auto=format&fit=crop&w=1600&q=85",
+      "/projects/cabinets-after.jpg",
   },
   {
     id: "interior",
@@ -116,9 +116,9 @@ export const beforeAfterProjects = [
     description:
       "Scuffed walls and dated trim brought back to life with smooth coverage, repaired surfaces, and a modern neutral palette throughout.",
     before:
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1600&q=85",
+      "/projects/interior-before.jpg",
     after:
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=85",
+      "/projects/interior-after.jpg",
   },
 ] as const;
 
