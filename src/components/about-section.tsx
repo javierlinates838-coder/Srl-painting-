@@ -24,9 +24,7 @@ export function AboutSection() {
             <div className="accent-rule bg-brand-light" />
             <p className="label label-light mt-4">About</p>
             <h2 className="display-lg mt-3 text-white">
-              Local crew.
-              <br />
-              <span className="text-gradient">Licensed work.</span>
+              Local crew. <span className="text-gradient">Licensed work.</span>
             </h2>
             <p className="mt-5 text-[15px] leading-relaxed text-zinc-400">
               SRL Painting is a California-licensed contractor serving Kern County and Los Angeles.
@@ -56,8 +54,8 @@ export function AboutSection() {
 
           <ul className="space-y-4">
             {pillars.map((p, i) => (
-              <Reveal key={p.title} as="li" delay={(i + 1) as 1 | 2 | 3}>
-                <div className="surface-dark card-lift p-6">
+              <Reveal key={p.title} as="li" delay={(i + 1) as 1 | 2 | 3} className="h-full">
+                <div className="surface-dark card-lift h-full p-6">
                   <div className="flex items-start gap-4">
                     <span className="icon-box-dark flex h-12 w-12 shrink-0">{pillarIcons[i]}</span>
                     <div>

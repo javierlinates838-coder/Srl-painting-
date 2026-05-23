@@ -49,39 +49,38 @@ export function ServicesSection() {
           </div>
         </Reveal>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[300px_1fr]">
-          <div className="flex flex-row gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0">
+        <div className="mt-14 grid gap-8 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] lg:items-start">
+          <div className="scrollbar-hide -mx-1 flex flex-row gap-2 overflow-x-auto px-1 pb-2 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0">
             {services.map((s, i) => (
-              <Reveal key={s.id} delay={(i + 1) as 1 | 2 | 3 | 4}>
-                <button
-                  type="button"
-                  onClick={() => setActive(i)}
-                  className={`card-lift flex shrink-0 items-center gap-3 rounded-2xl border px-4 py-4 text-left transition lg:w-full ${
-                    i === active
-                      ? "border-brand bg-brand text-white shadow-lg shadow-brand/25"
-                      : "border-black/6 bg-paper hover:border-brand/25 hover:bg-white"
-                  }`}
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => setActive(i)}
+                className={`card-lift flex w-[240px] shrink-0 items-center gap-3 rounded-2xl border px-4 py-4 text-left transition sm:w-[260px] lg:w-full ${
+                  i === active
+                    ? "border-brand bg-brand text-white shadow-lg shadow-brand/25"
+                    : "border-black/6 bg-paper hover:border-brand/25 hover:bg-white"
+                }`}
+              >
+                <span
+                  className={`icon-box h-11 w-11 shrink-0 ${i === active ? "!bg-white/15 !text-white !shadow-none" : ""}`}
                 >
-                  <span
-                    className={`icon-box h-11 w-11 shrink-0 ${i === active ? "!bg-white/15 !text-white !shadow-none" : ""}`}
-                  >
-                    {icons[s.id]}
-                  </span>
-                  <div>
-                    <p className={`font-display text-[14px] font-bold ${i === active ? "text-white" : "text-black"}`}>
-                      {s.title}
-                    </p>
-                    <p className={`mt-0.5 text-[12px] ${i === active ? "text-white/70" : "text-zinc-500"}`}>
-                      {s.summary}
-                    </p>
-                  </div>
-                </button>
-              </Reveal>
+                  {icons[s.id]}
+                </span>
+                <div className="min-w-0">
+                  <p className={`font-display text-[14px] font-bold ${i === active ? "text-white" : "text-black"}`}>
+                    {s.title}
+                  </p>
+                  <p className={`mt-0.5 text-[12px] ${i === active ? "text-white/70" : "text-zinc-500"}`}>
+                    {s.summary}
+                  </p>
+                </div>
+              </button>
             ))}
           </div>
 
-          <Reveal delay={2}>
-            <div className="relative overflow-hidden rounded-2xl border border-black/6 bg-paper p-8 shadow-lg shadow-black/5 lg:p-10">
+          <Reveal delay={1}>
+            <div className="relative min-w-0 overflow-hidden rounded-2xl border border-black/6 bg-paper p-6 shadow-lg shadow-black/5 sm:p-8 lg:p-10">
               <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand/10 blur-3xl" aria-hidden />
               <div className="relative">
                 <span className="icon-box mb-5 h-14 w-14">{icons[current.id]}</span>

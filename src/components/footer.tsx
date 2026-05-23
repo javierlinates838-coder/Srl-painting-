@@ -4,14 +4,14 @@ import { BrandLogo } from "./brand-logo";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black py-16 text-zinc-500">
+    <footer className="border-t border-white/10 bg-black py-14 text-zinc-500 sm:py-16">
       <div className="container-main">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <BrandLogo className="h-14 w-auto object-contain" />
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <BrandLogo className="h-12 w-auto object-contain sm:h-14" />
             <p className="mt-4 text-[13px] text-zinc-400">{site.licenseClass} · Lic. {site.license}</p>
-            <p className="mt-3 max-w-sm text-[13px] leading-relaxed">{site.tagline}</p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <p className="mt-3 max-w-xs text-[13px] leading-relaxed">{site.tagline}</p>
+            <div className="mt-6 flex flex-wrap gap-2.5">
               <a
                 href={site.instagramDm}
                 target="_blank"
@@ -31,7 +31,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
+          <div>
             <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Navigate</p>
             <ul className="mt-4 space-y-2.5 text-[13px]">
               {["work:Our Work", "services:Services", "about:About", "contact:Contact"].map((l) => {
@@ -47,7 +47,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="lg:col-span-3">
+          <div>
             <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Services</p>
             <ul className="mt-4 space-y-2.5 text-[13px]">
               {services.map((s) => (
@@ -60,7 +60,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="lg:col-span-2">
+          <div>
             <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Connect</p>
             <ul className="mt-4 space-y-2.5 text-[13px]">
               <li>
@@ -78,7 +78,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-[12px] sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-center text-[12px] sm:flex-row sm:text-left">
           <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
           <p>Licensed &amp; bonded · California C-33 contractor</p>
         </div>

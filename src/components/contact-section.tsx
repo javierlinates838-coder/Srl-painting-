@@ -42,13 +42,12 @@ export function ContactSection() {
     <section id="contact" className="mesh-dark relative section-pad text-white">
       <div className="grain pointer-events-none absolute inset-0" />
       <div className="container-main relative">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
           <Reveal>
             <div className="accent-rule bg-brand-light" />
             <p className="label label-light mt-4">Contact</p>
             <h2 className="display-lg mt-3 text-white">
-              Get your free<br />
-              <span className="text-gradient">estimate.</span>
+              Get your free <span className="text-gradient">estimate.</span>
             </h2>
             <p className="mt-5 text-[15px] leading-relaxed text-zinc-400">
               Fill out the form — we&apos;ll copy your details and open Instagram so you can paste them

@@ -63,24 +63,24 @@ export function Header() {
             <Link
               key={l.href}
               href={l.href}
-              className={`relative text-[13px] font-medium tracking-wide transition hover:text-white ${
+              className={`relative pb-0.5 text-[13px] font-medium tracking-wide transition hover:text-white ${
                 active === l.id ? "text-white" : "text-zinc-400"
               }`}
             >
               {l.label}
               {active === l.id && (
-                <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-brand-light" />
+                <span className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-brand-light" />
               )}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <a
             href={site.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-[13px] font-medium text-zinc-500 transition hover:text-white md:block"
+            className="hidden text-[13px] font-medium text-zinc-500 transition hover:text-white lg:block"
           >
             {site.instagramHandle}
           </a>
