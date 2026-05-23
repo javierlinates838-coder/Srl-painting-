@@ -83,42 +83,36 @@ export const services = [
 export const beforeAfterProjects = [
   {
     id: "exterior",
-    title: "Exterior Repaint",
+    title: "Exterior Transformation",
     category: "Exterior",
-    location: "Bakersfield, CA",
-    scope: "Body, trim, garage door · Full prep & prime",
+    location: "Kern County, CA",
+    scope: "Off-white body · Bold trim · Full prep & prime",
     description:
-      "Weather-worn siding and faded trim replaced with a crisp, coordinated color scheme — sealed for Central Valley heat and sun exposure.",
-    before:
-      "/projects/exterior-before.jpg",
-    after:
-      "/projects/exterior-after.jpg",
+      "We revitalized this home with a sleek off-white exterior and bold trim accents — full surface prep, prime, and a finish built for Central Valley sun.",
+    before: "/projects/exterior-before.jpg",
+    after: "/projects/exterior-after.jpg",
   },
   {
     id: "cabinets",
-    title: "Cabinet Refinishing",
+    title: "Kitchen Cabinet Refinishing",
     category: "Cabinets",
     location: "Kern County, CA",
-    scope: "Oak cabinets · Spray finish · New hardware",
+    scope: "Existing cabinets · Spray finish · Hardware refresh",
     description:
-      "Dated oak cabinets transformed with a durable white spray finish and updated pulls — full kitchen refresh without a six-figure remodel.",
-    before:
-      "/projects/cabinets-before.jpg",
-    after:
-      "/projects/cabinets-after.jpg",
+      "This kitchen was refinished from dated wood tones to a bright, durable spray finish — same layout, completely transformed without a full remodel.",
+    before: "/projects/cabinets-before.jpg",
+    after: "/projects/cabinets-after.jpg",
   },
   {
     id: "interior",
-    title: "Interior Repaint",
+    title: "Living Space Refresh",
     category: "Interior",
-    location: "Los Angeles, CA",
-    scope: "Living areas · Walls, trim, ceiling",
+    location: "Kern County, CA",
+    scope: "Walls & trim · New color scheme · Clean finish",
     description:
-      "Scuffed walls and dated trim brought back to life with smooth coverage, repaired surfaces, and a modern neutral palette throughout.",
-    before:
-      "/projects/interior-before.jpg",
-    after:
-      "/projects/interior-after.jpg",
+      "A fresh color scheme and smooth second-coat finish brought this living space back to life — clean lines, even coverage, and move-in ready results.",
+    before: "/projects/interior-before.jpg",
+    after: "/projects/interior-after.jpg",
   },
 ] as const;
 
