@@ -31,11 +31,6 @@ export function Footer() {
                   {site.instagramHandle}
                 </a>
               </li>
-              <li>
-                <a href={site.licenseVerifyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                  CSLB License Lookup
-                </a>
-              </li>
             </ul>
           </div>
         </div>

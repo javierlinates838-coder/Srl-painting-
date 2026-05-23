@@ -69,14 +69,6 @@ export function ContactSection() {
                 </div>
               </a>
 
-              <a
-                href={site.licenseVerifyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-[13px] font-medium text-zinc-500 hover:text-white"
-              >
-                Verify license #{site.license} on CSLB →
-              </a>
             </div>
 
             <div className="mt-10 hidden lg:flex lg:justify-center">

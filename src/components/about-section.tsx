@@ -10,7 +10,7 @@ export function AboutSection() {
             <div className="accent-rule bg-brand-light" />
             <p className="label mt-4 text-brand-light">About SRL Painting</p>
             <h2 className="display-lg mt-3 text-white">
-              A local contractor you can actually verify
+              A local contractor you can trust
             </h2>
             <p className="mt-5 text-[15px] leading-relaxed text-zinc-400">
               SRL Painting is a California-licensed painting contractor serving homeowners and businesses
@@ -19,20 +19,11 @@ export function AboutSection() {
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-zinc-400">
               License #{site.license} · {site.licenseClass} · Licensed &amp; bonded.
-              Look us up on the CSLB before you hire — we want you to.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8">
               <Link href="#contact" className="btn btn-brand">
                 Request Estimate
               </Link>
-              <a
-                href={site.licenseVerifyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-outline"
-              >
-                Verify on CSLB
-              </a>
             </div>
           </div>
 
