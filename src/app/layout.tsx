@@ -26,13 +26,13 @@ export const metadata: Metadata = {
     "commercial painting Los Angeles",
     "SRL Painting",
   ],
-  icons: { icon: "/logo.svg", apple: "/logo.svg" },
+  icons: { icon: "/logo.png", apple: "/logo.png" },
   openGraph: {
     title: site.name,
     description: site.description,
     type: "website",
     locale: "en_US",
-    images: [{ url: "/logo.svg", width: 400, height: 460, alt: site.name }],
+    images: [{ url: "/logo.png", width: 400, height: 460, alt: site.name }],
   },
 };
 

@@ -15,6 +15,8 @@ export function BrandLogo({ className, priority = false }: BrandLogoProps) {
     <img
       src={src}
       alt="SRL Painting"
+      width={400}
+      height={440}
       className={className}
       fetchPriority={priority ? "high" : "auto"}
       loading={priority ? "eager" : "lazy"}
