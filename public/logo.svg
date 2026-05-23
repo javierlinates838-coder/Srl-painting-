@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" role="img" aria-label="SRL Painting">
+  <defs>
+    <filter id="shadow" x="-4%" y="-2%" width="108%" height="104%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path
+      d="M100 12 L178 58 L178 188 L22 188 L22 58 Z"
+      fill="#fff"
+      stroke="#111"
+      stroke-width="4"
+    />
+    <path
+      d="M100 24 L166 64 L166 176 L34 176 L34 64 Z"
+      fill="#7B1E32"
+      stroke="#111"
+      stroke-width="2"
+    />
+    <path
+      d="M34 72 L58 58 L58 48 L72 40 L100 28 L128 40 L142 48 L142 58 L166 72 L166 64 L100 32 L34 64 Z"
+      fill="#7B1E32"
+      stroke="#111"
+      stroke-width="1.5"
+    />
+    <text
+      x="100"
+      y="108"
+      text-anchor="middle"
+      fill="#fff"
+      stroke="#111"
+      stroke-width="0.6"
+      font-family="Georgia, 'Times New Roman', serif"
+      font-size="42"
+      font-weight="700"
+    >SRL</text>
+    <text
+      x="100"
+      y="138"
+      text-anchor="middle"
+      fill="#fff"
+      stroke="#111"
+      stroke-width="0.4"
+      font-family="Georgia, 'Times New Roman', serif"
+      font-size="18"
+      font-weight="600"
+    >Painting</text>
+    <text
+      x="100"
+      y="162"
+      text-anchor="middle"
+      fill="#111"
+      font-family="Georgia, 'Times New Roman', serif"
+      font-size="9"
+      font-weight="600"
+    >Lic. 1108313</text>
+  </g>
+</svg>
