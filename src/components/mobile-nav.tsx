@@ -5,9 +5,10 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 
 const links = [
+  { href: "#work", label: "Before & After" },
   { href: "#services", label: "Services" },
-  { href: "#work", label: "Work" },
   { href: "#process", label: "Process" },
+  { href: "#faq", label: "FAQ" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -18,7 +19,7 @@ export function MobileNav() {
     <>
       <button
         type="button"
-        className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 text-white md:hidden"
+        className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 text-white lg:hidden"
         aria-expanded={open}
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen(!open)}
@@ -35,7 +36,7 @@ export function MobileNav() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 top-[4.5rem] z-40 bg-ink/95 backdrop-blur-xl md:hidden">
+        <div className="fixed inset-0 top-[4.5rem] z-40 bg-ink/95 backdrop-blur-xl lg:hidden">
           <nav className="flex flex-col gap-1 px-6 py-8" aria-label="Mobile navigation">
             {links.map((link) => (
               <Link
@@ -51,7 +52,7 @@ export function MobileNav() {
               href={site.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 rounded-lg px-4 py-3 text-lg font-medium text-white/80"
+              className="rounded-lg px-4 py-3 text-lg font-medium text-white/80"
             >
               {site.instagramHandle}
             </a>

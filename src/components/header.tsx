@@ -4,9 +4,10 @@ import { BrandLogo } from "./brand-logo";
 import { MobileNav } from "./mobile-nav";
 
 const links = [
+  { href: "#work", label: "Before & After" },
   { href: "#services", label: "Services" },
-  { href: "#work", label: "Work" },
   { href: "#process", label: "Process" },
+  { href: "#faq", label: "FAQ" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -21,7 +22,7 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-10 md:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -38,7 +39,7 @@ export function Header() {
             href={site.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-sm font-medium text-white/70 transition hover:text-white sm:block"
+            className="hidden text-sm font-medium text-white/70 transition hover:text-white md:block"
           >
             {site.instagramHandle}
           </a>

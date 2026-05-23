@@ -1,6 +1,18 @@
-import { reviews, serviceAreas } from "@/lib/site";
+"use client";
+
+import { useEffect, useState } from "react";
+import { reviews } from "@/lib/site";
 
 export function ReviewsSection() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActive((prev) => (prev + 1) % reviews.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="bg-cream py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -12,11 +24,15 @@ export function ReviewsSection() {
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-ink-muted">
               Based in Kern County with projects across Central and Southern California.
-              Not sure if we cover your area? Reach out—we respond quickly.
             </p>
 
             <ul className="mt-10 grid gap-3 sm:grid-cols-2">
-              {serviceAreas.map((area) => (
+              {[
+                { city: "Bakersfield", region: "Kern County" },
+                { city: "Shafter", region: "Kern County" },
+                { city: "Tehachapi", region: "Kern County" },
+                { city: "Los Angeles", region: "LA County" },
+              ].map((area) => (
                 <li
                   key={area.city}
                   className="rounded-xl border border-ink/8 bg-white px-5 py-4"
@@ -34,11 +50,17 @@ export function ReviewsSection() {
               Trusted by homeowners &amp; businesses
             </h2>
 
-            <ul className="mt-10 space-y-5">
-              {reviews.map((review) => (
-                <li
+            <div className="relative mt-10 min-h-[220px] overflow-hidden">
+              {reviews.map((review, index) => (
+                <article
                   key={review.quote}
-                  className="rounded-2xl border border-ink/8 bg-white p-7 shadow-sm"
+                  className={`absolute inset-0 rounded-2xl border border-ink/8 bg-white p-8 shadow-sm transition-all duration-500 ${
+                    index === active
+                      ? "translate-x-0 opacity-100"
+                      : index < active
+                        ? "-translate-x-8 opacity-0"
+                        : "translate-x-8 opacity-0"
+                  }`}
                 >
                   <div className="mb-4 flex gap-1 text-maroon" aria-label="5 out of 5 stars">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -47,15 +69,29 @@ export function ReviewsSection() {
                       </svg>
                     ))}
                   </div>
-                  <blockquote className="text-base leading-relaxed text-ink">
+                  <blockquote className="text-lg leading-relaxed text-ink">
                     &ldquo;{review.quote}&rdquo;
                   </blockquote>
-                  <footer className="mt-4 text-sm text-ink-muted">
+                  <footer className="mt-5 text-sm text-ink-muted">
                     — {review.author}, {review.location}
                   </footer>
-                </li>
+                </article>
               ))}
-            </ul>
+            </div>
+
+            <div className="mt-6 flex gap-2">
+              {reviews.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  aria-label={`Show review ${i + 1}`}
+                  onClick={() => setActive(i)}
+                  className={`h-2 rounded-full transition-all ${
+                    i === active ? "w-8 bg-maroon" : "w-2 bg-ink/15 hover:bg-ink/25"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

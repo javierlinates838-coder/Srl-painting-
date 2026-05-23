@@ -133,3 +133,16 @@ body {
   border-color: var(--maroon);
   background: var(--white);
 }
+
+.ba-slider {
+  touch-action: pan-y;
+}
+
+.ba-handle {
+  transition: left 0.05s linear;
+}
+
+.ba-slider:active .ba-handle,
+.ba-slider:focus-within .ba-handle {
+  transition: none;
+}
