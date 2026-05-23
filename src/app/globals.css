@@ -80,7 +80,7 @@ body {
 
 .display-xl {
   font-family: var(--font-display);
-  font-size: clamp(2.35rem, 5.5vw, 4rem);
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
   font-weight: 800;
   line-height: 1.02;
   letter-spacing: -0.035em;
@@ -250,12 +250,40 @@ body {
 .reveal-d1 { animation-delay: 0.12s; }
 .reveal-d2 { animation-delay: 0.22s; }
 .reveal-d3 { animation-delay: 0.38s; }
+.reveal-d4 { animation-delay: 0.52s; }
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-on-scroll.reveal-d1 { transition-delay: 0.08s; }
+.reveal-on-scroll.reveal-d2 { transition-delay: 0.16s; }
+.reveal-on-scroll.reveal-d3 { transition-delay: 0.24s; }
+.reveal-on-scroll.reveal-d4 { transition-delay: 0.32s; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
 .float { animation: float 5s ease-in-out infinite; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
 
 .accent-rule {
   width: 2.75rem;
@@ -301,4 +329,33 @@ body {
   color: #fda4af;
   box-shadow: none;
   border: 1px solid rgba(255,255,255,.08);
+}
+
+.process-line {
+  position: absolute;
+  top: 2.5rem;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(127, 29, 58, 0.15), rgba(127, 29, 58, 0.15), transparent);
+  display: none;
+}
+@media (min-width: 1024px) {
+  .process-line { display: block; }
+}
+
+.thumb-split {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+.thumb-split::after {
+  content: "";
+  position: absolute;
+  inset-y: 0;
+  left: 50%;
+  width: 2px;
+  background: white;
+  box-shadow: 0 0 8px rgba(0,0,0,.3);
+  z-index: 1;
 }

@@ -1,6 +1,7 @@
 import { AboutSection } from "@/components/about-section";
 import { BeforeAfterGallery } from "@/components/before-after-gallery";
 import { ContactSection } from "@/components/contact-section";
+import { CtaBand } from "@/components/cta-band";
 import { FaqSection } from "@/components/faq-section";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -25,6 +26,7 @@ export default function Home() {
         <ReviewsSection />
         <FaqSection />
         <ContactSection />
+        <CtaBand />
       </main>
       <Footer />
       <StickyCta />

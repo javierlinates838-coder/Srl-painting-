@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { site } from "@/lib/site";
 import { BrandLogo } from "./brand-logo";
+import { Reveal } from "./reveal";
 
 const serviceOptions = [
   "Exterior painting",
@@ -41,7 +42,7 @@ export function ContactSection() {
       <div className="grain pointer-events-none absolute inset-0" />
       <div className="container-main relative">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-          <div>
+          <Reveal>
             <div className="accent-rule bg-brand-light" />
             <p className="label label-light mt-4">Contact</p>
             <h2 className="display-lg mt-3 text-white">
@@ -75,9 +76,10 @@ export function ContactSection() {
             <div className="mt-10 hidden opacity-90 lg:block">
               <BrandLogo className="h-auto w-[130px]" />
             </div>
-          </div>
+          </Reveal>
 
-          <div className="relative">
+          <Reveal delay={2}>
+            <div className="relative">
             <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-brand/50 via-brand-light/30 to-transparent blur-sm" aria-hidden />
             <div className="surface-dark relative p-6 sm:p-8">
               {sent ? (
@@ -134,6 +136,7 @@ export function ContactSection() {
               )}
             </div>
           </div>
+          </Reveal>
         </div>
       </div>
     </section>

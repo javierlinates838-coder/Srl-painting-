@@ -7,20 +7,42 @@ import { BrandLogo } from "./brand-logo";
 import { MobileNav } from "./mobile-nav";
 
 const nav = [
-  { href: "#work", label: "Our Work" },
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "#work", label: "Our Work", id: "work" },
+  { href: "#services", label: "Services", id: "services" },
+  { href: "#about", label: "About", id: "about" },
+  { href: "#contact", label: "Contact", id: "contact" },
 ];
+
+const sectionIds = nav.map((n) => n.id);
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]?.target.id) setActive(visible[0].target.id);
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5] },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -41,9 +63,14 @@ export function Header() {
             <Link
               key={l.href}
               href={l.href}
-              className="text-[13px] font-medium tracking-wide text-zinc-400 transition hover:text-white"
+              className={`relative text-[13px] font-medium tracking-wide transition hover:text-white ${
+                active === l.id ? "text-white" : "text-zinc-400"
+              }`}
             >
               {l.label}
+              {active === l.id && (
+                <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-brand-light" />
+              )}
             </Link>
           ))}
         </nav>
@@ -53,7 +80,7 @@ export function Header() {
             href={site.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-[13px] font-medium text-zinc-500 hover:text-white md:block"
+            className="hidden text-[13px] font-medium text-zinc-500 transition hover:text-white md:block"
           >
             {site.instagramHandle}
           </a>

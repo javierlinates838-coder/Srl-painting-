@@ -29,7 +29,7 @@ export const pillars = [
   },
   {
     title: "Clear scope & pricing upfront",
-    text: "You know what's included before we start. No surprise add-ons, no vague quotes — just honest work from a contractor you can verify.",
+    text: "You know what's included before we start. No surprise add-ons, no vague quotes — just honest work from a licensed crew you can trust.",
   },
 ] as const;
 
@@ -163,7 +163,7 @@ export const reviews = [
   },
   {
     quote:
-      "Had our office repainted over a weekend so we didn't lose business days. Professional crew, fair price, and they verified their license when I asked.",
+      "Had our office repainted over a weekend so we didn't lose business days. Professional crew, fair price, and the finish still looks sharp months later.",
     name: "David R.",
     detail: "Commercial interior · Los Angeles",
     rating: 5,
