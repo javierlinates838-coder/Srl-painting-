@@ -20,7 +20,7 @@ export function AboutSection() {
     <section id="about" className="mesh-dark relative section-pad text-white">
       <div className="grain pointer-events-none absolute inset-0" />
       <div className="container-main relative">
-        <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
+        <div className="grid items-start gap-14 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <SectionHead
               light
@@ -54,19 +54,22 @@ export function AboutSection() {
             </Link>
           </Reveal>
 
-          <ul className="space-y-4">
+          {/* Do NOT use display:contents here — it breaks list spacing and card layout */}
+          <ul className="flex flex-col gap-4">
             {pillars.map((p, i) => (
-              <Reveal key={p.title} as="li" delay={(i + 1) as 1 | 2 | 3} layout="contents">
-                <div className="surface-dark card-lift h-full p-6 transition hover:border-white/20">
-                  <div className="flex items-start gap-4">
-                    <span className="icon-box-dark flex h-12 w-12 shrink-0">{pillarIcons[i]}</span>
-                    <div>
-                      <h3 className="font-display text-lg font-bold text-white">{p.title}</h3>
-                      <p className="mt-2 text-[14px] leading-relaxed text-zinc-400">{p.text}</p>
+              <li key={p.title} className="list-none">
+                <Reveal delay={(i + 1) as 1 | 2 | 3}>
+                  <div className="surface-dark card-lift p-6 transition hover:border-white/20 sm:p-7">
+                    <div className="flex items-start gap-4">
+                      <span className="icon-box-dark flex h-12 w-12 shrink-0">{pillarIcons[i]}</span>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-display text-lg font-bold leading-snug text-white">{p.title}</h3>
+                        <p className="mt-2 text-[14px] leading-relaxed text-zinc-400">{p.text}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Reveal>
+                </Reveal>
+              </li>
             ))}
           </ul>
         </div>
