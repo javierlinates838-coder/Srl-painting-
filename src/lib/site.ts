@@ -177,7 +177,7 @@ export const faqs = [
   },
   {
     q: "Are you a licensed contractor?",
-    a: "Yes. SRL Painting holds California C-33 (Painting & Decorating) license #1108313. We are licensed and bonded. You can verify our license anytime on the CSLB website — we encourage it.",
+    a: "Yes. SRL Painting holds California C-33 (Painting & Decorating) license #1108313. We are licensed and bonded.",
   },
   {
     q: "What cities do you serve?",
