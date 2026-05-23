@@ -2,7 +2,7 @@ export const site = {
   name: "SRL Painting",
   tagline: "Licensed painting contractor · Kern County & Los Angeles",
   description:
-    "Interior, exterior, commercial, and cabinet painting for homeowners and businesses across Bakersfield, Shafter, Tehachapi, and Los Angeles. Licensed, bonded, and built on prep work that lasts.",
+    "Interior, exterior, commercial, and cabinet painting for homeowners and businesses across Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. Licensed, bonded, and built on prep work that lasts.",
   license: "1108313",
   licenseClass: "C-33 Painting & Decorating",
   licenseVerifyUrl:
@@ -206,7 +206,7 @@ export const faqs = [
   },
   {
     q: "What cities do you serve?",
-    a: "Our primary service areas are Bakersfield, Shafter, Tehachapi, and Los Angeles. For larger commercial or multi-property projects, we may travel elsewhere in Kern County or Southern California. Just ask.",
+    a: "Our primary service areas are Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. For larger commercial or multi-property projects, we may travel elsewhere in Kern County or Southern California. Just ask.",
   },
   {
     q: "Do you handle both interior and exterior work?",

@@ -359,3 +359,36 @@ body {
   box-shadow: 0 0 8px rgba(0,0,0,.3);
   z-index: 1;
 }
+
+.input-dark {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.05);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: white;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-dark::placeholder { color: rgba(255,255,255,.35); }
+.input-dark:focus {
+  border-color: rgba(127,29,58,.5);
+  box-shadow: 0 0 0 3px rgba(127,29,58,.25);
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+:focus-visible {
+  outline: 2px solid var(--brand-light);
+  outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+}

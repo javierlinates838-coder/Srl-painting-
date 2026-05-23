@@ -9,32 +9,37 @@ import { BeforeAfterSlider } from "./before-after-slider";
 export function BeforeAfterGallery() {
   const [active, setActive] = useState(0);
   const [fade, setFade] = useState(false);
+  const [paused, setPaused] = useState(false);
   const project = beforeAfterProjects[active];
+  const total = beforeAfterProjects.length;
 
   const go = useCallback(
     (i: number) => {
-      if (i === active) return;
+      const next = ((i % total) + total) % total;
+      if (next === active) return;
       setFade(true);
       setTimeout(() => {
-        setActive(i);
+        setActive(next);
         setFade(false);
       }, 220);
     },
-    [active],
+    [active, total],
   );
 
-  const next = useCallback(() => go((active + 1) % beforeAfterProjects.length), [active, go]);
+  const next = useCallback(() => go(active + 1), [active, go]);
+  const prev = useCallback(() => go(active - 1), [active, go]);
 
   useEffect(() => {
+    if (paused) return;
     const t = setInterval(next, 9000);
     return () => clearInterval(t);
-  }, [next]);
+  }, [next, paused]);
 
   return (
     <section id="work" className="mesh-light section-pad">
       <div className="container-main">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-start lg:gap-16">
-          <div>
+          <div className="hidden lg:block">
             <Reveal>
               <div className="accent-rule" />
               <p className="label mt-4">Our Work</p>
@@ -51,7 +56,7 @@ export function BeforeAfterGallery() {
 
             <div className="mt-8 flex flex-col gap-2.5">
               {beforeAfterProjects.map((p, i) => (
-                <Reveal key={p.id} delay={(i + 1) as 1 | 2 | 3}>
+                <Reveal key={p.id} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4}>
                   <button
                     type="button"
                     onClick={() => go(i)}
@@ -85,28 +90,95 @@ export function BeforeAfterGallery() {
             </div>
           </div>
 
-          <Reveal delay={2}>
-            <div
-              className={`transition-all duration-300 ${fade ? "scale-[0.98] opacity-40" : "scale-100 opacity-100"}`}
-            >
-              <BeforeAfterSlider
-                key={project.id}
-                beforeSrc={project.before}
-                afterSrc={project.after}
-                beforeAlt={`Before — ${project.title}`}
-                afterAlt={`After — ${project.title}`}
-                autoSlide
-                className="shadow-2xl shadow-black/15 ring-1 ring-black/5"
-              />
-              <div className="surface mt-5 p-6">
-                <p className="font-display text-xl font-bold text-black">{project.title}</p>
-                <p className="mt-2 text-[14px] leading-relaxed text-zinc-600">{project.description}</p>
-                <Link href="#contact" className="btn btn-brand mt-5 !text-[13px]">
-                  Get a quote like this →
-                </Link>
-              </div>
+          <div>
+            <Reveal className="lg:hidden">
+              <div className="accent-rule" />
+              <p className="label mt-4">Our Work</p>
+              <h2 className="display-lg mt-3 text-black">
+                Before &amp; after.
+                <br />
+                <span className="text-gradient-dark">Real results.</span>
+              </h2>
+            </Reveal>
+
+            <div className="scrollbar-hide -mx-1 mt-6 flex gap-2 overflow-x-auto px-1 pb-2 lg:hidden">
+              {beforeAfterProjects.map((p, i) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => go(i)}
+                  className={`shrink-0 rounded-full border px-4 py-2 text-[12px] font-semibold transition ${
+                    i === active
+                      ? "border-brand bg-brand text-white shadow-md shadow-brand/20"
+                      : "border-black/10 bg-white text-zinc-600"
+                  }`}
+                >
+                  {p.title}
+                </button>
+              ))}
             </div>
-          </Reveal>
+
+            <Reveal delay={2}>
+              <div
+                className="relative mt-6 lg:mt-0"
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
+              >
+                <div
+                  className={`transition-all duration-300 ${fade ? "scale-[0.98] opacity-40" : "scale-100 opacity-100"}`}
+                >
+                  <BeforeAfterSlider
+                    key={project.id}
+                    beforeSrc={project.before}
+                    afterSrc={project.after}
+                    beforeAlt={`Before — ${project.title}`}
+                    afterAlt={`After — ${project.title}`}
+                    autoSlide
+                    className="shadow-2xl shadow-black/15 ring-1 ring-black/5"
+                  />
+                  <div className="surface mt-5 p-6">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="font-display text-xl font-bold text-black">{project.title}</p>
+                        <p className="mt-1 text-[12px] font-medium text-brand">{project.category} · {project.location}</p>
+                      </div>
+                      <span className="shrink-0 rounded-full bg-paper-2 px-3 py-1 text-[11px] font-bold text-zinc-500">
+                        {active + 1} / {total}
+                      </span>
+                    </div>
+                    <p className="mt-3 text-[14px] leading-relaxed text-zinc-600">{project.description}</p>
+                    <div className="mt-5 flex flex-wrap items-center gap-3">
+                      <Link href="#contact" className="btn btn-brand !text-[13px]">
+                        Get a quote like this →
+                      </Link>
+                      <div className="flex gap-1.5">
+                        <button
+                          type="button"
+                          aria-label="Previous project"
+                          onClick={prev}
+                          className="flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 bg-white text-zinc-600 transition hover:border-brand hover:text-brand"
+                        >
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Next project"
+                          onClick={next}
+                          className="flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 bg-white text-zinc-600 transition hover:border-brand hover:text-brand"
+                        >
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
 
         <Reveal delay={1}>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { site } from "@/lib/site";
 
@@ -14,12 +14,20 @@ const links = [
 export function MobileNav() {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <>
       <button
         type="button"
         onClick={() => setOpen(!open)}
         aria-label={open ? "Close menu" : "Open menu"}
+        aria-expanded={open}
         className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-white lg:hidden"
       >
         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -44,6 +52,15 @@ export function MobileNav() {
                 {l.label}
               </Link>
             ))}
+            <a
+              href={site.instagramDm}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-4 py-3.5 text-[15px] font-medium text-zinc-400 hover:text-white"
+            >
+              {site.instagramHandle}
+            </a>
             <Link href="#contact" onClick={() => setOpen(false)} className="btn btn-brand mt-4 w-full">
               Free Estimate
             </Link>

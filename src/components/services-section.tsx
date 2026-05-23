@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { services } from "@/lib/site";
 import { Reveal } from "./reveal";
@@ -97,6 +98,9 @@ export function ServicesSection() {
                     </li>
                   ))}
                 </ul>
+                <Link href="#contact" className="btn btn-brand mt-8 !text-[13px]">
+                  Get a {current.title.toLowerCase()} estimate →
+                </Link>
               </div>
             </div>
           </Reveal>
