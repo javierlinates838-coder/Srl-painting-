@@ -9,6 +9,7 @@ import { ProcessSection } from "@/components/process-section";
 import { ReviewsSection } from "@/components/reviews-section";
 import { ServicesSection } from "@/components/services-section";
 import { StickyCta } from "@/components/sticky-cta";
+import { TrustStrip } from "@/components/trust-strip";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Header />
       <main className="pb-[4.5rem] sm:pb-0">
         <Hero />
+        <TrustStrip />
         <BeforeAfterGallery />
         <ServicesSection />
         <AboutSection />
