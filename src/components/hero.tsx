@@ -6,20 +6,23 @@ export function Hero() {
   const project = beforeAfterProjects[0];
 
   return (
-    <section className="relative overflow-hidden bg-charcoal pt-16 text-white">
+    <section className="relative overflow-hidden bg-charcoal pt-[4.5rem] text-white">
       <div className="grain pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_-10%,rgba(127,29,58,.45),transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_-10%,rgba(127,29,58,.4),transparent_55%)]" />
 
-      <div className="container-main section-pad relative !pt-12">
+      <div className="container-main section-pad relative !pt-14 md:!pt-16">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <p className="reveal text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-light">
-              C-33 Licensed · Bonded · Lic. {site.license}
-            </p>
+            <div className="reveal inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-light" aria-hidden />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-zinc-300">
+                C-33 Licensed · Bonded · Lic. {site.license}
+              </span>
+            </div>
 
-            <h1 className="reveal reveal-d1 display-xl mt-4 text-white">
+            <h1 className="reveal reveal-d1 display-xl mt-6 text-white">
               Painting done right.
-              <span className="mt-1 block text-zinc-400">Prep, precision, and finishes that last.</span>
+              <span className="mt-2 block text-zinc-400">Prep, precision, and finishes that last.</span>
             </h1>
 
             <p className="reveal reveal-d2 body-lg mt-6 max-w-lg !text-zinc-400">

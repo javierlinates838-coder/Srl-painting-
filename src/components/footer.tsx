@@ -8,13 +8,8 @@ export function Footer() {
       <div className="container-main">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="sm:col-span-2">
-            <div className="flex items-center gap-3">
-              <BrandLogo className="h-11 w-auto min-h-[44px] object-contain" />
-              <div>
-                <p className="font-display font-bold text-white">{site.name}</p>
-                <p className="text-[12px]">{site.licenseClass} · #{site.license}</p>
-              </div>
-            </div>
+            <BrandLogo className="h-12 w-auto object-contain" />
+            <p className="mt-3 text-[12px] text-zinc-400">{site.licenseClass} · #{site.license}</p>
             <p className="mt-4 max-w-sm text-[13px] leading-relaxed">{site.description}</p>
           </div>
 

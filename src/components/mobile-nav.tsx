@@ -32,7 +32,7 @@ export function MobileNav() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 top-16 z-40 bg-charcoal/98 backdrop-blur-xl lg:hidden">
+        <div className="fixed inset-0 top-[4.5rem] z-40 bg-charcoal/98 backdrop-blur-xl lg:hidden">
           <nav className="container-main flex flex-col gap-1 py-6">
             {links.map((l) => (
               <Link
