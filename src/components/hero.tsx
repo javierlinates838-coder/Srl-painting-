@@ -1,76 +1,73 @@
 import Image from "next/image";
 import Link from "next/link";
-import { site, trustPoints } from "@/lib/site";
-import { IconCheck, IconInstagram } from "./icons";
+import { site } from "@/lib/site";
+import { BrandLogo } from "./brand-logo";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-brand-950 text-white">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            "radial-gradient(ellipse 80% 60% at 70% 0%, rgba(123, 30, 50, 0.55), transparent), radial-gradient(circle at 10% 90%, rgba(255,255,255,0.06), transparent)",
-        }}
+    <section className="relative min-h-screen overflow-hidden bg-ink">
+      <Image
+        src="https://images.unsplash.com/photo-1589939705382-71804b6921c9?auto=format&fit=crop&w=2400&q=80"
+        alt=""
+        fill
+        priority
+        className="object-cover opacity-50"
+        sizes="100vw"
       />
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-2 lg:items-center lg:py-24">
-        <div className="flex flex-col gap-6">
-          <p className="inline-flex w-fit items-center gap-2 rounded-full border border-brand-500/40 bg-brand-900/50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-200">
-            Licensed &amp; bonded · C-33 Painting
-          </p>
-          <h1 className="font-serif text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-            Quality paint work for homes &amp; businesses
-          </h1>
-          <p className="max-w-xl text-lg leading-relaxed text-stone-300">{site.tagline}</p>
-          <ul className="flex flex-col gap-2">
-            {trustPoints.slice(0, 3).map((point) => (
-              <li key={point} className="flex items-start gap-2 text-sm text-stone-300">
-                <IconCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-400" />
-                {point}
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-wrap gap-3 pt-2">
-            <Link
-              href="#contact"
-              className="inline-flex rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-black/30 transition hover:bg-brand-500"
-            >
-              Request a free estimate
-            </Link>
-            <a
-              href={site.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold transition hover:bg-white/10"
-            >
-              <IconInstagram className="h-4 w-4" />
-              Message on Instagram
-            </a>
-          </div>
-        </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/60 to-ink/90" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(124,24,49,0.35),transparent)]" />
 
-        <div className="relative flex justify-center lg:justify-end">
-          <div className="relative w-full max-w-md">
-            <div className="absolute -inset-4 rounded-3xl bg-brand-600/20 blur-2xl" />
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-brand-900/50 p-8 shadow-2xl">
-              <Image
-                src="/logo.svg"
-                alt={`${site.name} — residential and commercial painting`}
-                width={280}
-                height={308}
-                className="mx-auto h-auto w-full max-w-[220px]"
-                priority
-              />
-              <dl className="mt-8 grid grid-cols-2 gap-4 border-t border-white/10 pt-6 text-center text-sm">
-                <div>
-                  <dt className="text-stone-500">License</dt>
-                  <dd className="font-semibold text-white">#{site.license}</dd>
+      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pb-20 pt-32 lg:px-10 lg:pt-36">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <div className="animate-fade-up">
+            <p className="section-label !text-maroon-light before:!bg-maroon-light mb-6 text-white/90">
+              California C-33 · Lic. {site.license}
+            </p>
+            <h1 className="font-display text-[clamp(2.75rem,6vw,5rem)] font-semibold leading-[1.05] tracking-tight text-white">
+              Transform your space with expert painting
+            </h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75">
+              {site.description}
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link href="#contact" className="btn-primary">
+                Get a free estimate
+              </Link>
+              <a
+                href={site.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary !border-white/20 !bg-white/10 !text-white backdrop-blur-sm hover:!border-white/40 hover:!bg-white/15"
+              >
+                View our work
+              </a>
+            </div>
+
+            <dl className="mt-14 grid grid-cols-3 gap-6 border-t border-white/10 pt-10">
+              {[
+                { label: "Licensed", value: "CSLB #1108313" },
+                { label: "Services", value: "4 specialties" },
+                { label: "Areas", value: "4 cities" },
+              ].map((item) => (
+                <div key={item.label}>
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-white/45">
+                    {item.label}
+                  </dt>
+                  <dd className="mt-1 text-sm font-semibold text-white">{item.value}</dd>
                 </div>
-                <div>
-                  <dt className="text-stone-500">Follow</dt>
-                  <dd className="font-semibold text-white">{site.instagramHandle}</dd>
-                </div>
-              </dl>
+              ))}
+            </dl>
+          </div>
+
+          <div className="animate-fade-up delay-200 flex justify-center lg:justify-end">
+            <div className="relative">
+              <div className="absolute -inset-6 rounded-[2rem] bg-maroon/30 blur-3xl" />
+              <div className="relative overflow-hidden rounded-[1.75rem] border border-white/15 bg-white/5 p-10 shadow-2xl backdrop-blur-sm lg:p-12">
+                <BrandLogo className="mx-auto h-auto w-full max-w-[280px] drop-shadow-2xl" />
+                <p className="mt-8 text-center text-sm font-medium text-white/60">
+                  Licensed &amp; bonded · Serving Central &amp; Southern CA
+                </p>
+              </div>
             </div>
           </div>
         </div>

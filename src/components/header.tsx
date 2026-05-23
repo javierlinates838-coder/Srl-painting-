@@ -1,61 +1,51 @@
-import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
-import { IconInstagram } from "./icons";
+import { BrandLogo } from "./brand-logo";
+import { MobileNav } from "./mobile-nav";
 
-const nav = [
+const links = [
   { href: "#services", label: "Services" },
-  { href: "#areas", label: "Service Areas" },
-  { href: "#about", label: "About" },
+  { href: "#work", label: "Work" },
+  { href: "#process", label: "Process" },
   { href: "#contact", label: "Contact" },
-] as const;
+];
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-brand-950/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 sm:px-8">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-6 lg:px-10">
         <Link href="#" className="flex items-center gap-3">
-          <Image
-            src="/logo.svg"
-            alt={`${site.name} logo`}
-            width={48}
-            height={52}
-            className="h-11 w-auto"
-            priority
-          />
-          <span className="hidden font-serif text-lg font-semibold tracking-tight text-white sm:block">
+          <BrandLogo className="h-11 w-auto drop-shadow-sm" />
+          <span className="hidden font-display text-xl font-semibold tracking-tight text-white sm:block">
             {site.name}
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
-          {nav.map((item) => (
+        <nav className="hidden items-center gap-10 md:flex" aria-label="Main navigation">
+          {links.map((link) => (
             <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm font-medium text-stone-300 transition hover:text-white"
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-white/70 transition hover:text-white"
             >
-              {item.label}
+              {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <a
             href={site.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+            className="hidden text-sm font-medium text-white/70 transition hover:text-white sm:block"
           >
-            <IconInstagram className="h-4 w-4" />
-            <span className="hidden sm:inline">Instagram</span>
+            {site.instagramHandle}
           </a>
-          <Link
-            href="#contact"
-            className="inline-flex rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-brand-900/40 transition hover:bg-brand-500"
-          >
+          <Link href="#contact" className="btn-primary hidden !py-2.5 !px-5 !text-sm sm:inline-flex">
             Free estimate
           </Link>
+          <MobileNav />
         </div>
       </div>
     </header>

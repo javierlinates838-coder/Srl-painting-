@@ -1,56 +1,62 @@
-import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
-import { IconInstagram } from "./icons";
+import { BrandLogo } from "./brand-logo";
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 bg-brand-950 text-stone-400">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 sm:px-8 md:flex-row md:items-start md:justify-between">
+    <footer className="border-t border-ink/8 bg-ink text-white/60">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-14 lg:flex-row lg:justify-between lg:px-10">
         <div className="flex max-w-sm flex-col gap-4">
           <div className="flex items-center gap-3">
-            <Image src="/logo.svg" alt="" width={40} height={44} className="h-10 w-auto" />
-            <div>
-              <p className="font-serif text-lg font-semibold text-white">{site.name}</p>
-              <p className="text-sm">Lic. {site.license}</p>
-            </div>
+            <BrandLogo className="h-10 w-auto" />
+            <span className="font-display text-xl font-semibold text-white">{site.name}</span>
           </div>
           <p className="text-sm leading-relaxed">{site.description}</p>
         </div>
 
-        <div className="flex flex-col gap-3 text-sm">
-          <p className="font-semibold text-white">Quick links</p>
-          <Link href="#services" className="hover:text-white">
-            Services
-          </Link>
-          <Link href="#areas" className="hover:text-white">
-            Service areas
-          </Link>
-          <a
-            href={site.licenseVerifyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white"
-          >
-            Verify license (CSLB)
-          </a>
-          <a
-            href={site.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 hover:text-white"
-          >
-            <IconInstagram className="h-4 w-4" />
-            {site.instagramHandle}
-          </a>
+        <div className="grid grid-cols-2 gap-10 text-sm sm:grid-cols-3">
+          <div>
+            <p className="mb-3 font-semibold text-white">Navigate</p>
+            <ul className="space-y-2">
+              <li><Link href="#services" className="hover:text-white">Services</Link></li>
+              <li><Link href="#work" className="hover:text-white">Work</Link></li>
+              <li><Link href="#process" className="hover:text-white">Process</Link></li>
+              <li><Link href="#contact" className="hover:text-white">Contact</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="mb-3 font-semibold text-white">Connect</p>
+            <ul className="space-y-2">
+              <li>
+                <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  {site.instagramHandle}
+                </a>
+              </li>
+              <li>
+                <a href={site.licenseVerifyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  CSLB license lookup
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="col-span-2 sm:col-span-1">
+            <p className="mb-3 font-semibold text-white">License</p>
+            <p className="leading-relaxed">
+              C-33 Painting &amp; Decorating
+              <br />
+              #{site.license}
+              <br />
+              Licensed &amp; bonded
+            </p>
+          </div>
         </div>
       </div>
 
       <div className="border-t border-white/10">
-        <p className="mx-auto max-w-6xl px-5 py-6 text-center text-xs sm:px-8">
-          © {year} {site.name}. All rights reserved. California contractor license #{site.license}.
+        <p className="mx-auto max-w-7xl px-6 py-6 text-center text-xs lg:px-10">
+          © {year} {site.name}. All rights reserved.
         </p>
       </div>
     </footer>
