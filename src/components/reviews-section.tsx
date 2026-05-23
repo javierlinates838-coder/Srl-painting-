@@ -1,97 +1,82 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { reviews } from "@/lib/site";
+import { reviews, serviceAreas } from "@/lib/site";
 
 export function ReviewsSection() {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActive((prev) => (prev + 1) % reviews.length);
-    }, 6000);
-    return () => clearInterval(timer);
+    const t = setInterval(() => setActive((p) => (p + 1) % reviews.length), 6000);
+    return () => clearInterval(t);
   }, []);
 
   return (
-    <section className="bg-cream py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid gap-16 lg:grid-cols-2">
+    <section id="reviews" className="py-20 lg:py-28">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Reviews */}
           <div>
-            <p className="section-label">Service areas</p>
-            <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-              Proudly serving California
-            </h2>
-            <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-              Based in Kern County with projects across Central and Southern California.
-            </p>
+            <p className="eyebrow">Reviews</p>
+            <h2 className="font-heading mt-2 text-3xl font-bold text-ink">What clients say</h2>
 
-            <ul className="mt-10 grid gap-3 sm:grid-cols-2">
-              {[
-                { city: "Bakersfield", region: "Kern County" },
-                { city: "Shafter", region: "Kern County" },
-                { city: "Tehachapi", region: "Kern County" },
-                { city: "Los Angeles", region: "LA County" },
-              ].map((area) => (
-                <li
-                  key={area.city}
-                  className="rounded-xl border border-ink/8 bg-white px-5 py-4"
-                >
-                  <p className="font-semibold text-ink">{area.city}</p>
-                  <p className="text-sm text-ink-muted">{area.region}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="section-label">Reviews</p>
-            <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-ink">
-              Trusted by homeowners &amp; businesses
-            </h2>
-
-            <div className="relative mt-10 min-h-[220px] overflow-hidden">
-              {reviews.map((review, index) => (
-                <article
-                  key={review.quote}
-                  className={`absolute inset-0 rounded-2xl border border-ink/8 bg-white p-8 shadow-sm transition-all duration-500 ${
-                    index === active
-                      ? "translate-x-0 opacity-100"
-                      : index < active
-                        ? "-translate-x-8 opacity-0"
-                        : "translate-x-8 opacity-0"
+            <div className="relative mt-8 min-h-[180px]">
+              {reviews.map((r, i) => (
+                <blockquote
+                  key={r.quote}
+                  className={`absolute inset-0 transition-all duration-500 ${
+                    i === active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                   }`}
                 >
-                  <div className="mb-4 flex gap-1 text-maroon" aria-label="5 out of 5 stars">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <svg key={i} className="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                  <div className="flex gap-0.5 text-maroon">
+                    {Array.from({ length: r.rating }).map((_, j) => (
+                      <svg key={j} className="h-4 w-4 fill-current" viewBox="0 0 20 20">
                         <path d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.5L10 14.77l-4.94 2.94.94-5.5-4-3.9 5.53-.8L10 1.5z" />
                       </svg>
                     ))}
                   </div>
-                  <blockquote className="text-lg leading-relaxed text-ink">
-                    &ldquo;{review.quote}&rdquo;
-                  </blockquote>
-                  <footer className="mt-5 text-sm text-ink-muted">
-                    — {review.author}, {review.location}
+                  <p className="mt-4 text-[17px] leading-relaxed text-ink">&ldquo;{r.quote}&rdquo;</p>
+                  <footer className="mt-4 text-[13px] text-ink-muted">
+                    {r.author} · {r.location}
                   </footer>
-                </article>
+                </blockquote>
               ))}
             </div>
 
-            <div className="mt-6 flex gap-2">
+            <div className="mt-4 flex gap-1.5">
               {reviews.map((_, i) => (
                 <button
                   key={i}
                   type="button"
-                  aria-label={`Show review ${i + 1}`}
+                  aria-label={`Review ${i + 1}`}
                   onClick={() => setActive(i)}
-                  className={`h-2 rounded-full transition-all ${
-                    i === active ? "w-8 bg-maroon" : "w-2 bg-ink/15 hover:bg-ink/25"
+                  className={`h-1.5 rounded-full transition-all ${
+                    i === active ? "w-6 bg-maroon" : "w-1.5 bg-border hover:bg-ink-muted"
                   }`}
                 />
               ))}
             </div>
+          </div>
+
+          {/* Areas */}
+          <div>
+            <p className="eyebrow">Coverage</p>
+            <h2 className="font-heading mt-2 text-3xl font-bold text-ink">Where we work</h2>
+            <p className="mt-3 text-[15px] text-ink-muted">
+              Central and Southern California. Not sure if we cover you? Just ask.
+            </p>
+
+            <ul className="mt-8 grid grid-cols-2 gap-3">
+              {serviceAreas.map((city) => (
+                <li
+                  key={city}
+                  className="card flex items-center gap-3 px-4 py-3.5 text-[14px] font-semibold text-ink"
+                >
+                  <span className="flex h-2 w-2 rounded-full bg-maroon" />
+                  {city}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

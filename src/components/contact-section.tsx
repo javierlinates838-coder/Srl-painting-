@@ -4,26 +4,25 @@ import { BrandLogo } from "./brand-logo";
 
 export function ContactSection() {
   return (
-    <section id="contact" className="relative overflow-hidden bg-maroon-dark py-24 lg:py-32">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(155,34,66,0.4),transparent_50%)]" />
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <div className="text-white">
-            <p className="section-label !text-maroon-light before:!bg-maroon-light">Contact</p>
-            <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-              Ready for a free estimate?
+    <section id="contact" className="bg-dark py-20 lg:py-28">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <p className="eyebrow text-maroon-hover">Get started</p>
+            <h2 className="font-heading mt-2 text-3xl font-bold text-white sm:text-4xl">
+              Ready for your free estimate?
             </h2>
-            <p className="mt-5 max-w-md text-lg leading-relaxed text-white/75">
-              The fastest way to reach us is a direct message on Instagram. Tell us about
-              your project—location, scope, and timeline—and we&apos;ll get back to you.
+            <p className="mt-4 max-w-md text-[15px] leading-relaxed text-zinc-400">
+              Message us on Instagram with photos and a description of your project.
+              We&apos;ll get back to you with scope and pricing — no obligation.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={site.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary !bg-white !text-maroon !shadow-none hover:!bg-cream"
+                className="btn btn-primary"
               >
                 Message on Instagram
               </a>
@@ -31,28 +30,23 @@ export function ContactSection() {
                 href={site.licenseVerifyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary !border-white/25 !bg-transparent !text-white hover:!border-white/50"
+                className="btn btn-ghost-light"
               >
                 Verify license
               </a>
             </div>
 
-            <p className="mt-8 text-sm text-white/50">
-              California contractor license #{site.license} · Licensed &amp; bonded
+            <p className="mt-6 text-[12px] text-zinc-600">
+              C-33 · License #{site.license} · Licensed &amp; bonded
             </p>
           </div>
 
-          <div className="flex flex-col items-center rounded-2xl border border-white/10 bg-white/5 p-10 backdrop-blur-sm lg:p-14">
-            <BrandLogo className="h-auto w-full max-w-[220px]" />
-            <p className="mt-8 text-center font-display text-2xl font-semibold text-white">
-              {site.name}
-            </p>
-            <p className="mt-2 text-center text-white/60">{site.instagramHandle}</p>
-            <Link
-              href="#services"
-              className="mt-8 text-sm font-semibold text-white/80 underline-offset-4 hover:text-white hover:underline"
-            >
-              Browse our services →
+          <div className="card-dark flex flex-col items-center p-10 text-center lg:p-12">
+            <BrandLogo className="h-auto w-[160px]" />
+            <p className="font-heading mt-6 text-xl font-bold text-white">{site.name}</p>
+            <p className="mt-1 text-[14px] text-zinc-500">{site.instagramHandle}</p>
+            <Link href="#work" className="mt-6 text-[13px] font-semibold text-zinc-400 hover:text-white">
+              View before &amp; after →
             </Link>
           </div>
         </div>

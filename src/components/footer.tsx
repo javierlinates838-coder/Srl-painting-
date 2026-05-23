@@ -3,60 +3,26 @@ import { site } from "@/lib/site";
 import { BrandLogo } from "./brand-logo";
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-ink/8 bg-ink text-white/60">
-      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-14 lg:flex-row lg:justify-between lg:px-10">
-        <div className="flex max-w-sm flex-col gap-4">
-          <div className="flex items-center gap-3">
-            <BrandLogo className="h-10 w-auto" />
-            <span className="font-display text-xl font-semibold text-white">{site.name}</span>
-          </div>
-          <p className="text-sm leading-relaxed">{site.description}</p>
+    <footer className="border-t border-white/[0.06] bg-dark py-12">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 sm:flex-row sm:justify-between lg:px-8">
+        <div className="flex items-center gap-2.5">
+          <BrandLogo className="h-8 w-auto" />
+          <span className="font-heading text-[14px] font-semibold text-white">{site.name}</span>
         </div>
 
-        <div className="grid grid-cols-2 gap-10 text-sm sm:grid-cols-3">
-          <div>
-            <p className="mb-3 font-semibold text-white">Navigate</p>
-            <ul className="space-y-2">
-              <li><Link href="#services" className="hover:text-white">Services</Link></li>
-              <li><Link href="#work" className="hover:text-white">Work</Link></li>
-              <li><Link href="#process" className="hover:text-white">Process</Link></li>
-              <li><Link href="#contact" className="hover:text-white">Contact</Link></li>
-            </ul>
-          </div>
-          <div>
-            <p className="mb-3 font-semibold text-white">Connect</p>
-            <ul className="space-y-2">
-              <li>
-                <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                  {site.instagramHandle}
-                </a>
-              </li>
-              <li>
-                <a href={site.licenseVerifyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                  CSLB license lookup
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="col-span-2 sm:col-span-1">
-            <p className="mb-3 font-semibold text-white">License</p>
-            <p className="leading-relaxed">
-              C-33 Painting &amp; Decorating
-              <br />
-              #{site.license}
-              <br />
-              Licensed &amp; bonded
-            </p>
-          </div>
-        </div>
-      </div>
+        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-zinc-500">
+          <Link href="#work" className="hover:text-white">Work</Link>
+          <Link href="#services" className="hover:text-white">Services</Link>
+          <Link href="#faq" className="hover:text-white">FAQ</Link>
+          <Link href="#contact" className="hover:text-white">Contact</Link>
+          <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+            Instagram
+          </a>
+        </nav>
 
-      <div className="border-t border-white/10">
-        <p className="mx-auto max-w-7xl px-6 py-6 text-center text-xs lg:px-10">
-          © {year} {site.name}. All rights reserved.
+        <p className="text-[12px] text-zinc-600">
+          © {new Date().getFullYear()} · Lic. {site.license}
         </p>
       </div>
     </footer>

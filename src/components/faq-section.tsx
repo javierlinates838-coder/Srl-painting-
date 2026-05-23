@@ -4,46 +4,41 @@ import { useState } from "react";
 import { faqs } from "@/lib/site";
 
 export function FaqSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="border-t border-ink/8 bg-white py-24 lg:py-32">
-      <div className="mx-auto max-w-3xl px-6 lg:px-10">
+    <section id="faq" className="border-t border-border bg-surface py-20 lg:py-28">
+      <div className="mx-auto max-w-2xl px-5 lg:px-8">
         <div className="text-center">
-          <p className="section-label justify-center before:hidden">FAQ</p>
-          <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-ink">
-            Common questions
-          </h2>
-          <p className="mt-4 text-ink-muted">
-            Everything you need to know before starting your project.
-          </p>
+          <p className="eyebrow">FAQ</p>
+          <h2 className="font-heading mt-2 text-3xl font-bold text-ink">Questions?</h2>
         </div>
 
-        <ul className="mt-12 divide-y divide-ink/8">
-          {faqs.map((faq, index) => {
-            const isOpen = openIndex === index;
+        <ul className="mt-10 space-y-2">
+          {faqs.map((faq, i) => {
+            const isOpen = open === i;
             return (
-              <li key={faq.question}>
+              <li key={faq.q} className="card overflow-hidden">
                 <button
                   type="button"
-                  className="flex w-full items-center justify-between gap-4 py-5 text-left"
                   aria-expanded={isOpen}
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
                 >
-                  <span className="font-semibold text-ink">{faq.question}</span>
+                  <span className="text-[14px] font-semibold text-ink">{faq.q}</span>
                   <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-ink/10 text-ink-muted transition ${isOpen ? "rotate-45 bg-maroon/5 text-maroon" : ""}`}
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-surface-2 text-ink-muted transition ${isOpen ? "rotate-45" : ""}`}
                   >
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" d="M12 5v14M5 12h14" />
                     </svg>
                   </span>
                 </button>
                 <div
-                  className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] pb-5 opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                  className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-base leading-relaxed text-ink-muted">{faq.answer}</p>
+                    <p className="px-5 pb-4 text-[14px] leading-relaxed text-ink-muted">{faq.a}</p>
                   </div>
                 </div>
               </li>
