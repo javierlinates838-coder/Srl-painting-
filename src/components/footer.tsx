@@ -2,11 +2,13 @@ import Link from "next/link";
 import { services, site } from "@/lib/site";
 import { BrandLogo } from "./brand-logo";
 
+const footerLinkClass =
+  "inline-flex w-full max-w-xs items-center justify-center rounded-[var(--radius)] px-5 py-3.5 text-[13px] font-semibold leading-tight no-underline transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black";
+
 export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black py-14 text-zinc-500 sm:py-16">
       <div className="container-main">
-        {/* Brand — always full width, never beside nav links */}
         <div className="border-b border-white/10 pb-10">
           <BrandLogo className="h-12 w-auto object-contain sm:h-14" />
           <p className="mt-4 text-[13px] leading-relaxed text-zinc-400">
@@ -14,13 +16,12 @@ export function Footer() {
           </p>
           <p className="mt-2 max-w-md text-[13px] leading-relaxed text-zinc-500">{site.tagline}</p>
 
-          {/* Always stacked — no side-by-side, no overlap, no glow */}
-          <div className="mt-6 flex flex-col items-start gap-3">
+          <div className="mt-6 flex w-full max-w-xs flex-col gap-3">
             <a
               href={site.instagramDm}
               target="_blank"
               rel="noopener noreferrer"
-              className="footer-btn footer-btn-primary"
+              className={`${footerLinkClass} bg-gradient-to-br from-brand to-brand-light text-white shadow-none hover:opacity-90`}
             >
               Message on Instagram
             </a>
@@ -28,14 +29,13 @@ export function Footer() {
               href={site.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="footer-btn footer-btn-secondary"
+              className={`${footerLinkClass} border border-white/25 bg-white/5 text-white hover:border-white/40 hover:bg-white/10`}
             >
               Follow us
             </a>
           </div>
         </div>
 
-        {/* Link columns — below brand, never beside it */}
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-10 md:grid-cols-3">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Navigate</p>

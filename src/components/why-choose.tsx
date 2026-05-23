@@ -53,7 +53,7 @@ export function WhyChoose() {
 
         <div className="mt-10 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {reasons.map((r, i) => (
-            <Reveal key={r.title} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} className="h-full">
+            <Reveal key={r.title} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} layout="contents">
               <div className="card-lift flex h-full flex-col rounded-2xl border border-black/6 bg-paper p-6">
                 <span className="icon-box h-11 w-11">{r.icon}</span>
                 <h3 className="font-display mt-4 text-[15px] font-bold text-black">{r.title}</h3>

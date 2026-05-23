@@ -54,7 +54,7 @@ export function AboutSection() {
 
           <ul className="space-y-4">
             {pillars.map((p, i) => (
-              <Reveal key={p.title} as="li" delay={(i + 1) as 1 | 2 | 3} className="h-full">
+              <Reveal key={p.title} as="li" delay={(i + 1) as 1 | 2 | 3} layout="contents">
                 <div className="surface-dark card-lift h-full p-6">
                   <div className="flex items-start gap-4">
                     <span className="icon-box-dark flex h-12 w-12 shrink-0">{pillarIcons[i]}</span>

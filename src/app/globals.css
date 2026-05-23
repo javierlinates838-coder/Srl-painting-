@@ -252,19 +252,24 @@ body {
 .reveal-d3 { animation-delay: 0.38s; }
 .reveal-d4 { animation-delay: 0.52s; }
 
+/* Visible by default — only animate hide/reveal when JS is active */
 .reveal-on-scroll {
+  opacity: 1;
+  transform: none;
+}
+.js .reveal-on-scroll:not(.is-visible) {
   opacity: 0;
   transform: translateY(28px);
+}
+.js .reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: none;
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.reveal-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.reveal-on-scroll.reveal-d1 { transition-delay: 0.08s; }
-.reveal-on-scroll.reveal-d2 { transition-delay: 0.16s; }
-.reveal-on-scroll.reveal-d3 { transition-delay: 0.24s; }
-.reveal-on-scroll.reveal-d4 { transition-delay: 0.32s; }
+.js .reveal-on-scroll.is-visible.reveal-d1 { transition-delay: 0.08s; }
+.js .reveal-on-scroll.is-visible.reveal-d2 { transition-delay: 0.16s; }
+.js .reveal-on-scroll.is-visible.reveal-d3 { transition-delay: 0.24s; }
+.js .reveal-on-scroll.is-visible.reveal-d4 { transition-delay: 0.32s; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
@@ -400,6 +405,7 @@ a:focus:not(:focus-visible) {
 
 @media (prefers-reduced-motion: reduce) {
   .reveal-on-scroll,
+  .js .reveal-on-scroll:not(.is-visible),
   .reveal,
   .float,
   .marquee-track {
@@ -408,41 +414,4 @@ a:focus:not(:focus-visible) {
     opacity: 1 !important;
     transform: none !important;
   }
-}
-
-.footer-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 16rem;
-  padding: 0.8125rem 1.25rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  line-height: 1.2;
-  border-radius: var(--radius);
-  text-decoration: none;
-  white-space: nowrap;
-  box-shadow: none;
-  transform: none;
-  transition: background 0.2s, border-color 0.2s, opacity 0.2s;
-}
-
-.footer-btn-primary {
-  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
-  color: white;
-  border: none;
-}
-.footer-btn-primary:hover {
-  opacity: 0.92;
-}
-
-.footer-btn-secondary {
-  background: rgba(255, 255, 255, 0.07);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-}
-.footer-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.35);
 }

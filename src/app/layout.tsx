@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { site } from "@/lib/site";
@@ -49,6 +50,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
+        <Script id="enable-js-reveal" strategy="beforeInteractive">
+          {`document.documentElement.classList.add("js")`}
+        </Script>
         <LocalBusinessSchema siteUrl={siteUrl} />
         {children}
       </body>

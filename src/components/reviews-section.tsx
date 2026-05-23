@@ -18,7 +18,7 @@ function ReviewCard({ quote, name, detail, rating }: (typeof reviews)[number]) {
         ))}
       </div>
       <p className="relative mt-4 flex-1 text-[15px] leading-relaxed text-zinc-800">&ldquo;{quote}&rdquo;</p>
-      <footer className="relative mt-5 flex items-center gap-3 border-t border-black/6 pt-4">
+      <div className="relative mt-5 flex items-center gap-3 border-t border-black/6 pt-4">
         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand font-display text-sm font-bold text-white">
           {name.charAt(0)}
         </span>
@@ -26,14 +26,14 @@ function ReviewCard({ quote, name, detail, rating }: (typeof reviews)[number]) {
           <p className="font-display text-[14px] font-bold text-black">{name}</p>
           <p className="text-[12px] text-zinc-500">{detail}</p>
         </div>
-      </footer>
+      </div>
     </div>
   );
 }
 
 export function ReviewsSection() {
   const [active, setActive] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1023px)");
@@ -58,40 +58,50 @@ export function ReviewsSection() {
           <h2 className="display-lg mt-3 text-black">Clients who hired us again</h2>
         </Reveal>
 
-        {/* Desktop grid */}
-        <div className="mt-10 hidden items-stretch gap-5 lg:grid lg:grid-cols-3">
-          {reviews.map((r, i) => (
-            <Reveal key={r.name} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} className="h-full">
-              <ReviewCard {...r} />
-            </Reveal>
-          ))}
-        </div>
-
-        {/* Mobile carousel */}
-        <div className="mt-10 lg:hidden">
-          <div className="relative min-h-[280px]">
-            {reviews.map((r, i) => (
-              <blockquote
-                key={r.name}
-                className={`absolute inset-0 transition-all duration-500 ${
-                  i === active ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-8 opacity-0"
-                }`}
-              >
-                <ReviewCard {...r} />
-              </blockquote>
-            ))}
-          </div>
-          <div className="mt-6 flex justify-center gap-2">
-            {reviews.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                aria-label={`Review ${i + 1}`}
-                onClick={() => setActive(i)}
-                className={`h-2 rounded-full transition-all ${i === active ? "w-10 bg-brand" : "w-2 bg-black/10 hover:bg-black/25"}`}
-              />
-            ))}
-          </div>
+        <div className="mt-10">
+          {isMobile === null ? (
+            <div className="grid items-stretch gap-5 lg:grid-cols-3">
+              {reviews.map((r, i) => (
+                <Reveal key={r.name} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} layout="contents">
+                  <ReviewCard {...r} />
+                </Reveal>
+              ))}
+            </div>
+          ) : isMobile ? (
+            <>
+              <div className="relative min-h-[280px]">
+                {reviews.map((r, i) => (
+                  <blockquote
+                    key={r.name}
+                    className={`absolute inset-0 transition-all duration-500 ${
+                      i === active ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-8 opacity-0"
+                    }`}
+                  >
+                    <ReviewCard {...r} />
+                  </blockquote>
+                ))}
+              </div>
+              <div className="mt-6 flex justify-center gap-2">
+                {reviews.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={`Review ${i + 1}`}
+                    onClick={() => setActive(i)}
+                    className={`h-2 rounded-full transition-all ${i === active ? "w-10 bg-brand" : "w-2 bg-black/10 hover:bg-black/25"}`}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="grid items-stretch gap-5 lg:grid-cols-3">
+              {reviews.map((r, i) => (
+                <Reveal key={r.name} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} layout="contents">
+                  <ReviewCard {...r} />
+                </Reveal>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="mt-14 border-t border-black/6 pt-14">
