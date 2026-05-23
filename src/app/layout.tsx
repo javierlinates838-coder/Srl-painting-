@@ -15,8 +15,12 @@ const body = Inter({
   weight: ["400", "500", "600"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://srl-painting.vercel.app"),
+  metadataBase: new URL(siteUrl),
   title: `${site.name} | Licensed Painter in Bakersfield & Los Angeles`,
   description: site.description,
   keywords: [
