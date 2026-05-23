@@ -20,7 +20,7 @@ export function CtaBand() {
             Request Free Estimate
           </Link>
           <a
-            href={site.instagram}
+            href={site.instagramDm}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-outline"

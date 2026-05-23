@@ -1,13 +1,17 @@
 import { site, serviceAreas } from "@/lib/site";
 
-export function LocalBusinessSchema() {
+type Props = {
+  siteUrl: string;
+};
+
+export function LocalBusinessSchema({ siteUrl }: Props) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "HousePainter",
     name: site.name,
     description: site.description,
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://srl-painting.vercel.app",
-    image: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://srl-painting.vercel.app"}/logo.png`,
+    url: siteUrl,
+    image: `${siteUrl}/logo.png`,
     sameAs: [site.instagram],
     areaServed: serviceAreas.map((a) => ({
       "@type": "City",

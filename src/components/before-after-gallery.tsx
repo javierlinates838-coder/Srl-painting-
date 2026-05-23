@@ -110,7 +110,7 @@ export function BeforeAfterGallery() {
         </div>
 
         <Reveal delay={1}>
-          <div className="mt-12 grid gap-3 sm:grid-cols-3">
+          <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {beforeAfterProjects.map((p, i) => (
               <button
                 key={p.id}

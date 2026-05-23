@@ -9,6 +9,8 @@ export const site = {
     "https://www.cslb.ca.gov/onlineservices/checklicenseII/checklicense.aspx",
   instagram: "https://www.instagram.com/srl_painting/",
   instagramHandle: "@srl_painting",
+  instagramDm: "https://ig.me/m/srl_painting",
+  siteUrl: "https://srl-painting.vercel.app",
 } as const;
 
 export const credentials = [
@@ -114,6 +116,28 @@ export const beforeAfterProjects = [
     before: "/projects/interior-before.jpg",
     after: "/projects/interior-after.jpg",
   },
+  {
+    id: "lake-isabella",
+    title: "Lake Isabella Full Exterior",
+    category: "Exterior",
+    location: "Lake Isabella, CA",
+    scope: "Full exterior · Two-tone color · Stucco repair",
+    description:
+      "This mountain home got a full exterior makeover — two-tone color scheme, minor stucco repair, and a durable finish built for high-elevation weather.",
+    before: "/projects/lake-before.jpg",
+    after: "/projects/lake-after.jpg",
+  },
+  {
+    id: "gazebo",
+    title: "Gazebo Stain & Seal",
+    category: "Exterior",
+    location: "Kern County, CA",
+    scope: "Sherwin-Williams SuperDeck · Semi-transparent stain",
+    description:
+      "We restored this gazebo with Sherwin-Williams SuperDeck semi-transparent stain — protected from sun and moisture while keeping the natural wood character.",
+    before: "/projects/gazebo-before.jpg",
+    after: "/projects/gazebo-after.jpg",
+  },
 ] as const;
 
 export const serviceAreas = [
@@ -121,6 +145,7 @@ export const serviceAreas = [
   { city: "Shafter", note: "Residential & ag properties" },
   { city: "Tehachapi", note: "Mountain homes & cabins" },
   { city: "Los Angeles", note: "Commercial & residential" },
+  { city: "Lake Isabella", note: "Mountain & lake homes" },
 ] as const;
 
 export const process = [

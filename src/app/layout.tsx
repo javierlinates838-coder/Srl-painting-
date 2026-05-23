@@ -18,7 +18,7 @@ const body = Inter({
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : site.siteUrl);
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -37,7 +37,11 @@ export const metadata: Metadata = {
     description: site.description,
     type: "website",
     locale: "en_US",
+    url: siteUrl,
     images: [{ url: "/logo.png", width: 400, height: 460, alt: site.name }],
+  },
+  alternates: {
+    canonical: siteUrl,
   },
 };
 
@@ -45,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
-        <LocalBusinessSchema />
+        <LocalBusinessSchema siteUrl={siteUrl} />
         {children}
       </body>
     </html>

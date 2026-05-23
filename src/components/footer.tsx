@@ -12,7 +12,7 @@ export function Footer() {
             <p className="mt-4 text-[13px] text-zinc-400">{site.licenseClass} · Lic. {site.license}</p>
             <p className="mt-3 max-w-sm text-[13px] leading-relaxed">{site.tagline}</p>
             <a
-              href={site.instagram}
+              href={site.instagramDm}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-brand mt-6 !text-[13px]"
@@ -41,6 +41,11 @@ export function Footer() {
               <li>
                 <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white">
                   {site.instagramHandle}
+                </a>
+              </li>
+              <li>
+                <a href={site.instagramDm} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  DM for free estimate
                 </a>
               </li>
               <li className="text-zinc-600">Bakersfield · LA · Kern County</li>

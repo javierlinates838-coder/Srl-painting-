@@ -45,8 +45,8 @@ export function Hero() {
 
             <div className="reveal reveal-d3 mt-10 grid grid-cols-3 gap-3">
               {[
-                { n: "4", l: "Services" },
-                { n: "4", l: "Cities" },
+                { n: String(beforeAfterProjects.length), l: "Projects" },
+                { n: String(serviceAreas.length), l: "Cities" },
                 { n: "Free", l: "Estimates" },
               ].map((s) => (
                 <div key={s.l} className="stat-card text-center">

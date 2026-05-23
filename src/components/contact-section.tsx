@@ -33,7 +33,7 @@ export function ContactSection() {
     ].join("\n");
 
     navigator.clipboard?.writeText(message);
-    window.open(site.instagram, "_blank", "noopener,noreferrer");
+    window.open(site.instagramDm, "_blank", "noopener,noreferrer");
     setSent(true);
   }
 
@@ -55,7 +55,7 @@ export function ContactSection() {
             </p>
 
             <a
-              href={site.instagram}
+              href={site.instagramDm}
               target="_blank"
               rel="noopener noreferrer"
               className="surface-dark card-lift mt-8 flex items-center gap-4 p-5"
