@@ -6,21 +6,18 @@ export function Hero() {
   const project = beforeAfterProjects[0];
 
   return (
-    <section className="relative overflow-hidden bg-charcoal text-white">
+    <section className="relative overflow-hidden bg-charcoal pt-16 text-white">
       <div className="grain pointer-events-none absolute inset-0" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_-10%,rgba(127,29,58,.45),transparent_55%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(127,29,58,.12),transparent_40%)]" />
 
-      <div className="container-main section-pad relative">
+      <div className="container-main section-pad relative !pt-12">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <div className="reveal flex flex-wrap items-center gap-3">
-              <span className="label text-brand-light">California Licensed Contractor</span>
-              <span className="h-1 w-1 rounded-full bg-zinc-600" />
-              <span className="text-[12px] font-medium text-zinc-500">C-33 · Lic. {site.license}</span>
-            </div>
+            <p className="reveal text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-light">
+              C-33 Licensed · Bonded · Lic. {site.license}
+            </p>
 
-            <h1 className="reveal reveal-d1 display-xl mt-5 text-white">
+            <h1 className="reveal reveal-d1 display-xl mt-4 text-white">
               Painting done right.
               <span className="mt-1 block text-zinc-400">Prep, precision, and finishes that last.</span>
             </h1>
@@ -42,7 +39,7 @@ export function Hero() {
               {[
                 { n: "4", l: "Core services" },
                 { n: "4", l: "Cities served" },
-                { n: "C-33", l: "State license" },
+                { n: "Free", l: "Estimates" },
               ].map((s) => (
                 <div key={s.l}>
                   <p className="font-display text-2xl font-bold text-white">{s.n}</p>
@@ -61,9 +58,8 @@ export function Hero() {
               autoSlide
               className="shadow-2xl shadow-black/40 ring-1 ring-white/10"
             />
-            <p className="mt-3 flex items-center justify-between text-[12px] text-zinc-500">
-              <span>{project.title} · {project.location}</span>
-              <span className="text-zinc-600">Drag slider to compare</span>
+            <p className="mt-3 text-[12px] text-zinc-500">
+              {project.title} · {project.location} · drag slider to compare
             </p>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { BeforeAfterGallery } from "@/components/before-after-gallery";
 import { ContactSection } from "@/components/contact-section";
 import { FaqSection } from "@/components/faq-section";
 import { Footer } from "@/components/footer";
-import { CredentialsBar, Header } from "@/components/header";
+import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { ProcessSection } from "@/components/process-section";
 import { ReviewsSection } from "@/components/reviews-section";
@@ -14,7 +14,6 @@ export default function Home() {
   return (
     <>
       <Header />
-      <CredentialsBar />
       <main className="pb-[4.5rem] sm:pb-0">
         <Hero />
         <BeforeAfterGallery />
