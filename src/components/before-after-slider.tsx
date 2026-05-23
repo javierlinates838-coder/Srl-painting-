@@ -139,7 +139,7 @@ export function BeforeAfterSlider({
         </span>
 
         {!touched && autoSlide && (
-          <span className="absolute bottom-4 left-1/2 z-20 -translate-x-1/2 rounded-full bg-white/95 px-4 py-1.5 text-[11px] font-semibold text-black shadow-lg backdrop-blur-sm">
+          <span className="absolute bottom-4 left-1/2 z-20 max-w-[90%] -translate-x-1/2 rounded-full bg-white/95 px-4 py-2 text-center text-[12px] font-semibold text-black shadow-lg backdrop-blur-sm sm:text-[11px]">
             Drag to compare
           </span>
         )}

@@ -7,7 +7,7 @@ const footerLinkClass =
 
 export function Footer() {
   return (
-    <footer className="footer-glow relative border-t border-white/10 bg-black py-14 text-zinc-500 sm:py-16">
+    <footer className="footer-glow relative border-t border-white/10 bg-black py-14 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px)+3.5rem)] text-zinc-500 sm:py-16 sm:pb-16">
       <div className="container-main">
         <div className="border-b border-white/10 pb-10">
           <BrandLogo className="h-12 w-auto object-contain sm:h-14" />

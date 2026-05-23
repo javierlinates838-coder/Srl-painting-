@@ -81,7 +81,7 @@ export function Header() {
           >
             {site.instagramHandle}
           </a>
-          <Link href="#contact" className="btn btn-brand hidden !px-5 !py-2.5 !text-[13px] sm:inline-flex">
+          <Link href="#contact" className="btn btn-brand hidden !px-5 !py-2.5 !text-[13px] md:inline-flex">
             Free Estimate
           </Link>
           <MobileNav />

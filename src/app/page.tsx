@@ -20,7 +20,7 @@ export default function Home() {
     <>
       <ScrollProgress />
       <Header />
-      <main className="pb-[4.5rem] sm:pb-0">
+      <main className="pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
         <Hero />
         <TrustStrip />
         <BeforeAfterGallery />
