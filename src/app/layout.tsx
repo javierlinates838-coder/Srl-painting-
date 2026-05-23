@@ -18,11 +18,15 @@ const body = Inter({
 export const metadata: Metadata = {
   title: `${site.name} | Licensed Painting Contractor in California`,
   description: site.description,
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
     title: site.name,
     description: site.description,
     type: "website",
-    images: ["/logo.svg"],
+    images: ["/logo.png"],
   },
 };
 
