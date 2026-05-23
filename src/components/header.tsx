@@ -47,30 +47,27 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "border-b border-white/10 bg-charcoal/95 shadow-lg shadow-black/40 backdrop-blur-xl"
-          : "border-b border-white/5 bg-charcoal/90 backdrop-blur-md"
+          ? "border-b border-white/10 bg-charcoal/95 shadow-lg shadow-black/50 backdrop-blur-xl"
+          : "border-b border-white/5 bg-charcoal/85 backdrop-blur-md"
       }`}
     >
       <div className="container-main flex h-[4.5rem] items-center justify-between gap-4">
-        <Link href="#" className="shrink-0" aria-label={site.name}>
-          <BrandLogo className="h-[3.25rem] w-auto object-contain drop-shadow-sm" priority />
+        <Link href="#" className="shrink-0 transition-transform duration-300 hover:scale-[1.02]" aria-label={site.name}>
+          <BrandLogo className="h-[3.25rem] w-auto object-contain drop-shadow-md" priority />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
           {nav.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`relative pb-0.5 text-[13px] font-medium tracking-wide transition hover:text-white ${
-                active === l.id ? "text-white" : "text-zinc-400"
+              className={`nav-link text-[13px] font-medium tracking-wide transition hover:text-white ${
+                active === l.id ? "is-active text-white" : "text-zinc-400"
               }`}
             >
               {l.label}
-              {active === l.id && (
-                <span className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-brand-light" />
-              )}
             </Link>
           ))}
         </nav>

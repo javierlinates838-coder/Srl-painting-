@@ -3,11 +3,11 @@ import { services, site } from "@/lib/site";
 import { BrandLogo } from "./brand-logo";
 
 const footerLinkClass =
-  "inline-flex w-full max-w-xs items-center justify-center rounded-[var(--radius)] px-5 py-3.5 text-[13px] font-semibold leading-tight no-underline transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black";
+  "inline-flex w-full max-w-xs items-center justify-center rounded-[var(--radius)] px-5 py-3.5 text-[13px] font-semibold leading-tight no-underline transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black py-14 text-zinc-500 sm:py-16">
+    <footer className="footer-glow relative border-t border-white/10 bg-black py-14 text-zinc-500 sm:py-16">
       <div className="container-main">
         <div className="border-b border-white/10 pb-10">
           <BrandLogo className="h-12 w-auto object-contain sm:h-14" />
@@ -44,7 +44,7 @@ export function Footer() {
                 const [id, label] = l.split(":");
                 return (
                   <li key={id}>
-                    <Link href={`#${id}`} className="text-zinc-400 transition hover:text-white">
+                    <Link href={`#${id}`} className="link-fade text-zinc-400">
                       {label}
                     </Link>
                   </li>
@@ -58,7 +58,7 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-[13px]">
               {services.map((s) => (
                 <li key={s.id}>
-                  <Link href="#services" className="text-zinc-400 transition hover:text-white">
+                  <Link href="#services" className="link-fade text-zinc-400">
                     {s.title}
                   </Link>
                 </li>
@@ -70,22 +70,12 @@ export function Footer() {
             <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Connect</p>
             <ul className="mt-4 space-y-2.5 text-[13px]">
               <li>
-                <a
-                  href={site.instagramDm}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-400 transition hover:text-white"
-                >
+                <a href={site.instagramDm} target="_blank" rel="noopener noreferrer" className="link-fade text-zinc-400">
                   {site.instagramHandle}
                 </a>
               </li>
               <li>
-                <a
-                  href={site.instagramDm}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-400 transition hover:text-white"
-                >
+                <a href={site.instagramDm} target="_blank" rel="noopener noreferrer" className="link-fade text-zinc-400">
                   DM for free estimate
                 </a>
               </li>

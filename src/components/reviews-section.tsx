@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { reviews, serviceAreas } from "@/lib/site";
 import { Reveal } from "./reveal";
+import { SectionHead } from "./section-head";
 
 function ReviewCard({ quote, name, detail, rating }: (typeof reviews)[number]) {
   return (
-    <div className="surface relative flex h-full flex-col overflow-hidden p-7">
+    <div className="surface-premium review-card-accent relative flex h-full flex-col overflow-hidden py-7 pl-8 pr-7">
       <span className="font-display absolute -right-2 -top-4 text-7xl leading-none text-brand/10" aria-hidden>
         &ldquo;
       </span>
@@ -19,7 +20,7 @@ function ReviewCard({ quote, name, detail, rating }: (typeof reviews)[number]) {
       </div>
       <p className="relative mt-4 flex-1 text-[15px] leading-relaxed text-zinc-800">&ldquo;{quote}&rdquo;</p>
       <div className="relative mt-5 flex items-center gap-3 border-t border-black/6 pt-4">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand font-display text-sm font-bold text-white">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand to-brand-light font-display text-sm font-bold text-white shadow-md shadow-brand/20">
           {name.charAt(0)}
         </span>
         <div className="min-w-0">
@@ -50,12 +51,10 @@ export function ReviewsSection() {
   }, [isMobile]);
 
   return (
-    <section id="reviews" className="section-pad bg-white">
+    <section id="reviews" className="section-pad bg-gradient-to-b from-white via-brand-tint/15 to-white">
       <div className="container-main">
         <Reveal>
-          <div className="accent-rule" />
-          <p className="label mt-4">Reviews</p>
-          <h2 className="display-lg mt-3 text-black">Clients who hired us again</h2>
+          <SectionHead label="Reviews" title="Clients who hired us again" />
         </Reveal>
 
         <div className="mt-10">
@@ -69,12 +68,12 @@ export function ReviewsSection() {
             </div>
           ) : isMobile ? (
             <>
-              <div className="relative min-h-[280px]">
+              <div className="relative min-h-[300px]">
                 {reviews.map((r, i) => (
                   <blockquote
                     key={r.name}
-                    className={`absolute inset-0 transition-all duration-500 ${
-                      i === active ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-8 opacity-0"
+                    className={`absolute inset-0 transition-all duration-500 ease-out ${
+                      i === active ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
                     }`}
                   >
                     <ReviewCard {...r} />
@@ -88,7 +87,7 @@ export function ReviewsSection() {
                     type="button"
                     aria-label={`Review ${i + 1}`}
                     onClick={() => setActive(i)}
-                    className={`h-2 rounded-full transition-all ${i === active ? "w-10 bg-brand" : "w-2 bg-black/10 hover:bg-black/25"}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${i === active ? "w-10 bg-brand" : "w-2 bg-black/10 hover:bg-black/25"}`}
                   />
                 ))}
               </div>
@@ -105,14 +104,15 @@ export function ReviewsSection() {
         </div>
 
         <div className="mt-14 border-t border-black/6 pt-14">
-          <p className="label">Service areas</p>
+          <div className="accent-rule" />
+          <p className="label mt-4">Service areas</p>
           <h3 className="font-display mt-2 text-2xl font-bold text-black">Where we work</h3>
           <p className="mt-2 text-[14px] text-zinc-600">
             Kern County and Southern California — ask about your project.
           </p>
           <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {serviceAreas.map((a) => (
-              <li key={a.city} className="card-lift surface flex items-center gap-4 px-5 py-4">
+              <li key={a.city} className="premium-card flex items-center gap-4 px-5 py-4">
                 <span className="icon-box h-10 w-10 shrink-0">
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" d="M12 21s6-5.2 6-10a6 6 0 10-12 0c0 4.8 6 10 6 10z" />

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { services } from "@/lib/site";
 import { Reveal } from "./reveal";
+import { SectionHead } from "./section-head";
 
 const icons: Record<string, ReactNode> = {
   residential: (
@@ -38,15 +39,12 @@ export function ServicesSection() {
     <section id="services" className="section-pad bg-white">
       <div className="container-main">
         <Reveal>
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="accent-rule mx-auto" />
-            <p className="label mt-4">Services</p>
-            <h2 className="display-lg mt-3 text-black">What we paint</h2>
-            <p className="body-lg mt-4">
-              Four specialties. Same standard on every job — thorough prep, quality products, and a crew
-              that respects your property.
-            </p>
-          </div>
+          <SectionHead
+            align="center"
+            label="Services"
+            title="What we paint"
+            description="Four specialties. Same standard on every job — thorough prep, quality products, and a crew that respects your property."
+          />
         </Reveal>
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] lg:items-start">
@@ -56,14 +54,14 @@ export function ServicesSection() {
                 key={s.id}
                 type="button"
                 onClick={() => setActive(i)}
-                className={`card-lift flex w-[240px] shrink-0 items-center gap-3 rounded-2xl border px-4 py-4 text-left transition sm:w-[260px] lg:w-full ${
+                className={`card-lift flex w-[240px] shrink-0 items-center gap-3 rounded-2xl border px-4 py-4 text-left transition duration-300 sm:w-[260px] lg:w-full ${
                   i === active
                     ? "border-brand bg-brand text-white shadow-lg shadow-brand/25"
                     : "border-black/6 bg-paper hover:border-brand/25 hover:bg-white"
                 }`}
               >
                 <span
-                  className={`icon-box h-11 w-11 shrink-0 ${i === active ? "!bg-white/15 !text-white !shadow-none" : ""}`}
+                  className={`icon-box h-11 w-11 shrink-0 transition ${i === active ? "!bg-white/15 !text-white !shadow-none" : ""}`}
                 >
                   {icons[s.id]}
                 </span>
@@ -80,9 +78,9 @@ export function ServicesSection() {
           </div>
 
           <Reveal delay={1}>
-            <div className="relative min-w-0 overflow-hidden rounded-2xl border border-black/6 bg-paper p-6 shadow-lg shadow-black/5 sm:p-8 lg:p-10">
+            <div className="surface-premium relative min-w-0 overflow-hidden p-6 sm:p-8 lg:p-10">
               <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand/10 blur-3xl" aria-hidden />
-              <div className="relative">
+              <div key={current.id} className="fade-in-up relative">
                 <span className="icon-box mb-5 h-14 w-14">{icons[current.id]}</span>
                 <h3 className="font-display text-2xl font-bold text-black">{current.title}</h3>
                 <p className="mt-2 text-[15px] text-zinc-600">{current.summary}</p>
@@ -90,7 +88,7 @@ export function ServicesSection() {
                   {current.details.map((d) => (
                     <li
                       key={d}
-                      className="flex gap-3 rounded-xl bg-white p-3.5 text-[13px] leading-relaxed text-zinc-700 shadow-sm"
+                      className="flex gap-3 rounded-xl border border-black/4 bg-white p-3.5 text-[13px] leading-relaxed text-zinc-700 shadow-sm transition hover:border-brand/15 hover:shadow-md"
                     >
                       <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand" />
                       {d}

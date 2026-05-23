@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { pillars, site } from "@/lib/site";
 import { Reveal } from "./reveal";
+import { SectionHead } from "./section-head";
 
 const pillarIcons = [
   <svg key="0" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -21,15 +22,16 @@ export function AboutSection() {
       <div className="container-main relative">
         <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
           <Reveal>
-            <div className="accent-rule bg-brand-light" />
-            <p className="label label-light mt-4">About</p>
-            <h2 className="display-lg mt-3 text-white">
-              Local crew. <span className="text-gradient">Licensed work.</span>
-            </h2>
-            <p className="mt-5 text-[15px] leading-relaxed text-zinc-400">
-              SRL Painting is a California-licensed contractor serving Kern County and Los Angeles.
-              When you hire us, you get a real crew that shows up, preps properly, and stands behind the work.
-            </p>
+            <SectionHead
+              light
+              label="About"
+              title={
+                <>
+                  Local crew. <span className="text-gradient">Licensed work.</span>
+                </>
+              }
+              description="SRL Painting is a California-licensed contractor serving Kern County and Los Angeles. When you hire us, you get a real crew that shows up, preps properly, and stands behind the work."
+            />
 
             <div className="mt-8 grid grid-cols-2 gap-3">
               {[
@@ -38,7 +40,7 @@ export function AboutSection() {
                 { v: "Bonded", l: "Fully insured" },
                 { v: "Free", l: "Estimates" },
               ].map((s) => (
-                <div key={s.l} className="stat-card">
+                <div key={s.l} className="stat-card transition hover:border-white/20 hover:bg-white/8">
                   <p className="font-display text-lg font-bold text-white">{s.v}</p>
                   <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                     {s.l}
@@ -55,7 +57,7 @@ export function AboutSection() {
           <ul className="space-y-4">
             {pillars.map((p, i) => (
               <Reveal key={p.title} as="li" delay={(i + 1) as 1 | 2 | 3} layout="contents">
-                <div className="surface-dark card-lift h-full p-6">
+                <div className="surface-dark card-lift h-full p-6 transition hover:border-white/20">
                   <div className="flex items-start gap-4">
                     <span className="icon-box-dark flex h-12 w-12 shrink-0">{pillarIcons[i]}</span>
                     <div>

@@ -1,19 +1,22 @@
 import { process } from "@/lib/site";
 import { Reveal } from "./reveal";
+import { SectionHead } from "./section-head";
 
 export function ProcessSection() {
   return (
     <section className="section-pad bg-paper">
       <div className="container-main">
         <Reveal>
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="accent-rule mx-auto" />
-            <p className="label mt-4">How it works</p>
-            <h2 className="display-lg mt-3 text-black">
-              Simple process. <span className="text-gradient-dark">Serious results.</span>
-            </h2>
-            <p className="body-lg mt-4">From first DM to final walkthrough — no surprises, no runaround.</p>
-          </div>
+          <SectionHead
+            align="center"
+            label="How it works"
+            title={
+              <>
+                Simple process. <span className="text-gradient-dark">Serious results.</span>
+              </>
+            }
+            description="From first DM to final walkthrough — no surprises, no runaround."
+          />
         </Reveal>
 
         <div className="relative mt-14">
@@ -21,12 +24,12 @@ export function ProcessSection() {
           <ol className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {process.map((step, i) => (
               <Reveal key={step.num} as="li" delay={(i + 1) as 1 | 2 | 3 | 4} layout="contents">
-                <div className="card-lift group relative h-full overflow-hidden rounded-2xl border border-black/6 bg-white p-7 shadow-sm">
+                <div className="premium-card group relative h-full overflow-hidden p-7">
                   <div
-                    className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-brand/5 transition group-hover:bg-brand/10"
+                    className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-brand/5 transition duration-500 group-hover:bg-brand/12"
                     aria-hidden
                   />
-                  <span className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-sm font-bold text-white shadow-lg shadow-brand/25">
+                  <span className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-sm font-bold text-white shadow-lg shadow-brand/30">
                     {step.num}
                   </span>
                   <h3 className="font-display relative mt-4 text-[16px] font-bold text-black">{step.title}</h3>

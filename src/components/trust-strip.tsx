@@ -32,9 +32,9 @@ export function TrustStrip() {
           {credentials.map((c, i) => (
             <div
               key={c.label}
-              className="flex flex-col items-center justify-center bg-white px-4 py-5 text-center sm:py-6"
+              className="group flex flex-col items-center justify-center bg-white px-4 py-5 text-center transition hover:bg-brand-tint/30 sm:py-6"
             >
-              <span className="icon-box mb-2 h-8 w-8 !shadow-none">{icons[i]}</span>
+              <span className="icon-box mb-2 h-8 w-8 !shadow-none transition group-hover:scale-105">{icons[i]}</span>
               <p className="font-display text-sm font-bold text-brand sm:text-base">{c.value}</p>
               <p className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-zinc-500 sm:text-[11px]">
                 {c.label}
@@ -44,8 +44,8 @@ export function TrustStrip() {
         </div>
       </div>
 
-      <div className="border-t border-black/6 bg-paper py-3">
-        <div className="overflow-hidden">
+      <div className="border-t border-black/6 bg-paper py-3.5">
+        <div className="marquee-wrap">
           <div className="marquee-track items-center gap-10 px-4">
             {doubled.map((item, i) => (
               <span
@@ -53,7 +53,7 @@ export function TrustStrip() {
                 className="flex shrink-0 items-center gap-10 text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500"
               >
                 {item}
-                <span className="h-1 w-1 rounded-full bg-brand/40" aria-hidden />
+                <span className="h-1 w-1 rounded-full bg-brand/50" aria-hidden />
               </span>
             ))}
           </div>

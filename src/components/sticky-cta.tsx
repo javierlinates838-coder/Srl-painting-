@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 export function StickyCta() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-brand/20 bg-white/95 p-3 shadow-[0_-8px_32px_rgba(0,0,0,.12)] backdrop-blur-xl sm:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-brand/15 bg-white/90 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-12px_40px_rgba(0,0,0,.12)] backdrop-blur-2xl sm:hidden">
       <div className="flex gap-2">
         <a
           href={site.instagramDm}
