@@ -21,6 +21,7 @@ export const navLinks = [
   { href: "#process", label: "Process", id: "process" },
   { href: "#reviews", label: "Reviews", id: "reviews" },
   { href: "#about", label: "About", id: "about" },
+  { href: "#faq", label: "FAQ", id: "faq" },
   { href: "#contact", label: "Contact", id: "contact" },
 ] as const;
 
@@ -215,7 +216,7 @@ export const reviews = [
 export const faqs = [
   {
     q: "How do I get a free estimate?",
-    a: "Message us on Instagram at @srl_painting with photos of the areas you want painted and a brief description. Include your city and whether it's interior, exterior, or cabinets. We typically respond within one business day.",
+    a: `Message us on Instagram at ${site.instagramHandle} with photos of the areas you want painted and a brief description. Include your city and whether it's interior, exterior, or cabinets. We typically respond within one business day.`,
   },
   {
     q: "Are you a licensed contractor?",

@@ -7,6 +7,7 @@ import { FaqSection } from "@/components/faq-section";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
+import { NavProvider } from "@/components/nav-provider";
 import { ProcessSection } from "@/components/process-section";
 import { ReviewsSection } from "@/components/reviews-section";
 import { ServicesSection } from "@/components/services-section";
@@ -16,7 +17,7 @@ import { WhyChoose } from "@/components/why-choose";
 
 export default function Home() {
   return (
-    <>
+    <NavProvider>
       <Header />
       <main id="main-content" className="pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
         <Hero />
@@ -34,6 +35,6 @@ export default function Home() {
       <Footer />
       <StickyCta />
       <BackToTop />
-    </>
+    </NavProvider>
   );
 }

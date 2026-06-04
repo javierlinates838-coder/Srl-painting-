@@ -36,11 +36,6 @@ export function BeforeAfterSlider({
   }, []);
 
   useEffect(() => {
-    setPos(50);
-    setHint(true);
-  }, [beforeSrc, afterSrc]);
-
-  useEffect(() => {
     if (!dragging) return;
     const mm = (e: MouseEvent | TouchEvent) =>
       move("touches" in e ? e.touches[0].clientX : e.clientX);
@@ -57,14 +52,18 @@ export function BeforeAfterSlider({
     };
   }, [dragging, move]);
 
+  const valueText = `${Math.round(pos)}% before visible, ${Math.round(100 - pos)}% after visible`;
+
   return (
     <div
       ref={ref}
       role="slider"
       aria-label="Before and after comparison"
+      aria-orientation="horizontal"
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(pos)}
+      aria-valuetext={valueText}
       tabIndex={0}
       className={`ba-slider group relative select-none overflow-hidden rounded-[calc(var(--radius)+2px)] bg-zinc-800 ${dragging ? "is-dragging" : ""} ${className}`}
       onMouseDown={(e) => {
@@ -84,6 +83,16 @@ export function BeforeAfterSlider({
         if (e.key === "ArrowRight") {
           e.preventDefault();
           setPos((p) => clamp(p + 5));
+          setHint(false);
+        }
+        if (e.key === "Home") {
+          e.preventDefault();
+          setPos(4);
+          setHint(false);
+        }
+        if (e.key === "End") {
+          e.preventDefault();
+          setPos(96);
           setHint(false);
         }
       }}
@@ -108,10 +117,11 @@ export function BeforeAfterSlider({
             className="object-cover brightness-[0.9] saturate-[0.85]"
             draggable={false}
             priority={priority}
+            aria-hidden
           />
         </div>
 
-        <div className="ba-handle absolute inset-y-0 z-10 -translate-x-1/2 cursor-ew-resize" style={{ left: `${pos}%` }}>
+        <div className="ba-handle absolute inset-y-0 z-10 -translate-x-1/2 cursor-ew-resize" style={{ left: `${pos}%` }} aria-hidden>
           <div className="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_12px_rgba(0,0,0,.35)]" />
           <div
             className={`absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-brand shadow-lg ${dragging ? "scale-105" : ""}`}

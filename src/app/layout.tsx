@@ -21,9 +21,12 @@ const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : site.siteUrl);
 
+const pageTitle = `${site.name} | Licensed Painter in Bakersfield & Los Angeles`;
+const ogImage = "/projects/exterior-after.jpg";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: `${site.name} | Licensed Painter in Bakersfield & Los Angeles`,
+  title: pageTitle,
   description: site.description,
   keywords: [
     "painter Bakersfield",
@@ -31,23 +34,30 @@ export const metadata: Metadata = {
     "cabinet refinishing California",
     "commercial painting Los Angeles",
     "SRL Painting",
+    "licensed painter California",
   ],
   icons: { icon: "/logo.png", apple: "/logo.png" },
+  robots: { index: true, follow: true },
   openGraph: {
-    title: site.name,
+    title: pageTitle,
     description: site.description,
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    images: [{ url: "/logo.png", width: 400, height: 460, alt: site.name }],
+    siteName: site.name,
+    images: [{ url: ogImage, width: 1200, height: 800, alt: `${site.name} exterior project` }],
   },
-  alternates: {
-    canonical: siteUrl,
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: site.description,
+    images: [ogImage],
   },
+  alternates: { canonical: siteUrl },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#141416",
+  themeColor: "#161618",
   width: "device-width",
   initialScale: 1,
 };
@@ -56,10 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
-        >
+        <a href="#main-content" className="skip-link">
           Skip to content
         </a>
         <Script id="enable-js-reveal" strategy="beforeInteractive">

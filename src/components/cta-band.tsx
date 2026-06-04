@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 export function CtaBand() {
   return (
-    <section className="bg-brand-band py-14 sm:py-16">
+    <section className="bg-brand-band section-pad">
       <div className="container-main text-center">
         <p className="label label-light">Ready to start?</p>
         <h2 className="display-lg mx-auto mt-3 max-w-xl text-balance text-white">

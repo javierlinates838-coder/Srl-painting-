@@ -32,11 +32,14 @@ export function BeforeAfterGallery() {
         </Reveal>
 
         {/* Project tabs — mobile */}
-        <div className="scrollbar-hide -mx-1 mt-8 flex gap-2 overflow-x-auto px-1 pb-1 lg:hidden">
+        <div className="scrollbar-hide -mx-1 mt-8 flex gap-2 overflow-x-auto px-1 pb-1 lg:hidden" role="tablist" aria-label="Projects">
           {beforeAfterProjects.map((p, i) => (
             <button
               key={p.id}
               type="button"
+              role="tab"
+              aria-selected={i === active}
+              aria-controls="gallery-panel"
               onClick={() => setActive(i)}
               className={`shrink-0 rounded-full border px-3.5 py-2 text-[12px] font-semibold ${
                 i === active
@@ -51,11 +54,14 @@ export function BeforeAfterGallery() {
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
           {/* Project list — desktop */}
-          <div className="hidden flex-col gap-2 lg:flex">
+          <div className="hidden flex-col gap-2 lg:flex" role="tablist" aria-label="Projects">
             {beforeAfterProjects.map((p, i) => (
               <button
                 key={p.id}
                 type="button"
+                role="tab"
+                aria-selected={i === active}
+                aria-controls="gallery-panel"
                 onClick={() => setActive(i)}
                 className={`card flex w-full items-start gap-3 p-4 text-left ${
                   i === active ? "border-brand/40 ring-1 ring-brand/20" : ""
@@ -79,7 +85,7 @@ export function BeforeAfterGallery() {
           </div>
 
           {/* Active project */}
-          <div className="min-w-0">
+          <div className="min-w-0" id="gallery-panel" role="tabpanel">
             <BeforeAfterSlider
               key={project.id}
               beforeSrc={project.before}
@@ -139,6 +145,8 @@ export function BeforeAfterGallery() {
             <button
               key={p.id}
               type="button"
+              aria-label={`View project: ${p.title}`}
+              aria-current={i === active ? "true" : undefined}
               onClick={() => setActive(i)}
               className={`relative overflow-hidden rounded-lg border-2 ${
                 i === active ? "border-brand" : "border-transparent opacity-70 hover:opacity-100"
@@ -163,7 +171,7 @@ export function BeforeAfterGallery() {
             </p>
           </div>
           <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-light shrink-0">
-            Follow @srl_painting
+            Follow {site.instagramHandle}
           </a>
         </div>
       </div>

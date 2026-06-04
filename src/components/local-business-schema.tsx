@@ -1,17 +1,17 @@
-import { site, serviceAreas } from "@/lib/site";
+import { faqs, site, serviceAreas } from "@/lib/site";
 
 type Props = {
   siteUrl: string;
 };
 
 export function LocalBusinessSchema({ siteUrl }: Props) {
-  const schema = {
+  const business = {
     "@context": "https://schema.org",
     "@type": "HousePainter",
     name: site.name,
     description: site.description,
     url: siteUrl,
-    image: `${siteUrl}/logo.png`,
+    image: [`${siteUrl}/logo.png`, `${siteUrl}/projects/exterior-after.jpg`],
     sameAs: [site.instagram],
     areaServed: serviceAreas.map((a) => ({
       "@type": "City",
@@ -36,10 +36,20 @@ export function LocalBusinessSchema({ siteUrl }: Props) {
     },
   };
 
+  const faqPage = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(business) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }} />
+    </>
   );
 }

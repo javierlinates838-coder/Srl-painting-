@@ -18,9 +18,14 @@ const serviceOptions = [
 export function ContactSection() {
   const [sent, setSent] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [popupBlocked, setPopupBlocked] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [draftMessage, setDraftMessage] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setSubmitting(true);
+
     const fd = new FormData(e.currentTarget);
     const message = [
       `Hi SRL Painting — I'd like a free estimate.`,
@@ -34,9 +39,29 @@ export function ContactSection() {
       `${fd.get("details")}`,
     ].join("\n");
 
-    navigator.clipboard?.writeText(message).then(() => setCopied(true));
-    window.open(site.instagramDm, "_blank", "noopener,noreferrer");
+    setDraftMessage(message);
+
+    let didCopy = false;
+    try {
+      await navigator.clipboard.writeText(message);
+      didCopy = true;
+    } catch {
+      didCopy = false;
+    }
+    setCopied(didCopy);
+
+    const popup = window.open(site.instagramDm, "_blank", "noopener,noreferrer");
+    setPopupBlocked(!popup);
+
     setSent(true);
+    setSubmitting(false);
+  }
+
+  function resetForm() {
+    setSent(false);
+    setCopied(false);
+    setPopupBlocked(false);
+    setDraftMessage("");
   }
 
   return (
@@ -59,9 +84,10 @@ export function ContactSection() {
               href={site.instagramDm}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`Open Instagram DM to ${site.instagramHandle}`}
               className="surface-dark mt-8 flex items-center gap-4 p-5 hover:border-brand/30"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-white">
+              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-white" aria-hidden>
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <rect x="3" y="3" width="18" height="18" rx="5" />
                   <circle cx="12" cy="12" r="4" />
@@ -72,7 +98,7 @@ export function ContactSection() {
                 <p className="font-display text-lg font-bold">{site.instagramHandle}</p>
                 <p className="text-[12px] text-zinc-500">DM us — we reply within 1 business day</p>
               </div>
-              <svg className="h-5 w-5 shrink-0 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="h-5 w-5 shrink-0 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
                 <path strokeLinecap="round" d="M9 5l7 7-7 7" />
               </svg>
             </a>
@@ -85,25 +111,44 @@ export function ContactSection() {
           <Reveal delay={2}>
             <div className="surface-dark p-6 sm:p-8">
               {sent ? (
-                <div className="py-10 text-center">
+                <div className="py-6 text-center sm:py-8">
                   <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand/20 text-brand-light">
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden>
                       <path strokeLinecap="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </span>
                   <p className="font-display mt-4 text-2xl font-bold">You&apos;re all set</p>
                   <p className="mt-3 text-[14px] text-zinc-400">
-                    {copied ? "Your message was copied." : "Your details are ready."} Paste into a DM to{" "}
-                    {site.instagramHandle}.
+                    {copied
+                      ? "Your message was copied to the clipboard."
+                      : "Copy your message below, then paste it into Instagram."}
                   </p>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSent(false);
-                      setCopied(false);
-                    }}
-                    className="btn btn-outline mt-6"
-                  >
+
+                  {!copied && (
+                    <label className="mt-5 block text-left">
+                      <span className="mb-1.5 block text-[12px] font-semibold text-zinc-400">Your message</span>
+                      <textarea
+                        readOnly
+                        value={draftMessage}
+                        rows={8}
+                        className="input-dark resize-y text-[13px]"
+                        onFocus={(e) => e.target.select()}
+                      />
+                    </label>
+                  )}
+
+                  {popupBlocked && (
+                    <a
+                      href={site.instagramDm}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-brand mt-5 w-full"
+                    >
+                      Open Instagram DM
+                    </a>
+                  )}
+
+                  <button type="button" onClick={resetForm} className="btn btn-outline mt-4">
                     Send another inquiry
                   </button>
                 </div>
@@ -116,7 +161,13 @@ export function ContactSection() {
                     </label>
                     <label className="block">
                       <span className="mb-1.5 block text-[12px] font-semibold text-zinc-400">City *</span>
-                      <input name="city" required className="input-dark" placeholder="Bakersfield, LA, etc." />
+                      <input
+                        name="city"
+                        required
+                        autoComplete="address-level2"
+                        className="input-dark"
+                        placeholder="Bakersfield, LA, etc."
+                      />
                     </label>
                   </div>
                   <label className="block">
@@ -146,8 +197,8 @@ export function ContactSection() {
                       placeholder="What needs painting? Timeline? Share photos on IG too."
                     />
                   </label>
-                  <button type="submit" className="btn btn-brand w-full !py-3.5">
-                    Continue to Instagram DM
+                  <button type="submit" disabled={submitting} className="btn btn-brand w-full !py-3.5 disabled:opacity-60">
+                    {submitting ? "Preparing…" : "Continue to Instagram DM"}
                   </button>
                   <p className="text-center text-[11px] text-zinc-600">
                     Free estimate · No obligation · Lic. {site.license}

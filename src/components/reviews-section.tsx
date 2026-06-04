@@ -31,7 +31,7 @@ export function ReviewsSection() {
     <section id="reviews" className="section-pad bg-white">
       <div className="container-main">
         <Reveal>
-          <SectionHead align="center" label="Reviews" title="Clients who hired us again" />
+          <SectionHead align="center" label="Reviews" title="What our clients say" />
         </Reveal>
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
