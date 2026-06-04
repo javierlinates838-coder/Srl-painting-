@@ -161,6 +161,16 @@ body {
   background: var(--brand-tint);
 }
 
+.btn-ghost {
+  background: var(--paper);
+  color: var(--black);
+  border: 1px solid var(--line);
+}
+.btn-ghost:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
 .surface {
   background: var(--white);
   border: 1px solid var(--line);
@@ -223,6 +233,29 @@ body {
   border: 1px solid rgba(255,255,255,.1);
   background: rgba(255,255,255,.04);
   padding: 1rem 1.125rem;
+}
+
+.pillar-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  border-radius: calc(var(--radius) + 2px);
+  border: 1px solid rgba(255,255,255,.1);
+  border-left: 3px solid var(--brand-light);
+  background: rgba(255,255,255,.04);
+  padding: 1.25rem 1.25rem 1.25rem 1rem;
+}
+
+.pillar-num {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--brand-light);
+  padding-top: 0.2rem;
+  min-width: 1.5rem;
 }
 
 .icon-box {
