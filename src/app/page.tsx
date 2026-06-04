@@ -9,7 +9,6 @@ import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { ProcessSection } from "@/components/process-section";
 import { ReviewsSection } from "@/components/reviews-section";
-import { ScrollProgress } from "@/components/scroll-progress";
 import { ServicesSection } from "@/components/services-section";
 import { StickyCta } from "@/components/sticky-cta";
 import { TrustStrip } from "@/components/trust-strip";
@@ -18,17 +17,16 @@ import { WhyChoose } from "@/components/why-choose";
 export default function Home() {
   return (
     <>
-      <ScrollProgress />
       <Header />
       <main id="main-content" className="pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
         <Hero />
         <TrustStrip />
-        <BeforeAfterGallery />
         <ServicesSection />
+        <BeforeAfterGallery />
         <WhyChoose />
-        <AboutSection />
         <ProcessSection />
         <ReviewsSection />
+        <AboutSection />
         <FaqSection />
         <ContactSection />
         <CtaBand />

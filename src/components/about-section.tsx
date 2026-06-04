@@ -17,10 +17,9 @@ const pillarIcons = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="mesh-dark relative section-pad text-white">
-      <div className="grain pointer-events-none absolute inset-0" />
-      <div className="container-main relative">
-        <div className="grid items-start gap-14 lg:grid-cols-2 lg:gap-20">
+    <section id="about" className="bg-dark section-pad text-white">
+      <div className="container-main">
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <SectionHead
               light
@@ -40,42 +39,37 @@ export function AboutSection() {
                 { v: "Bonded", l: "Fully insured" },
                 { v: "Free", l: "Estimates" },
               ].map((s) => (
-                <div key={s.l} className="stat-card transition hover:border-white/20 hover:bg-white/8">
+                <div key={s.l} className="stat-card">
                   <p className="font-display text-lg font-bold text-white">{s.v}</p>
-                  <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
-                    {s.l}
-                  </p>
+                  <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{s.l}</p>
                 </div>
               ))}
             </div>
 
-            <Link href="#contact" className="btn btn-brand mt-8">
-              Request Estimate
-            </Link>
-
-            <a
-              href={site.licenseVerifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 text-[13px] font-medium text-zinc-400 transition hover:text-white"
-            >
-              Verify our CSLB license #{site.license}
-              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="#contact" className="btn btn-brand">
+                Request Estimate
+              </Link>
+              <a
+                href={site.licenseVerifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+              >
+                Verify license
+              </a>
+            </div>
           </Reveal>
 
-          {/* Do NOT use display:contents here — it breaks list spacing and card layout */}
           <ul className="flex flex-col gap-4">
             {pillars.map((p, i) => (
               <li key={p.title} className="list-none">
                 <Reveal delay={(i + 1) as 1 | 2 | 3}>
-                  <div className="surface-dark card-lift p-6 transition hover:border-white/20 sm:p-7">
+                  <div className="surface-dark p-6 sm:p-7">
                     <div className="flex items-start gap-4">
-                      <span className="icon-box-dark flex h-12 w-12 shrink-0">{pillarIcons[i]}</span>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-display text-lg font-bold leading-snug text-white">{p.title}</h3>
+                      <span className="icon-box-dark flex h-11 w-11 shrink-0">{pillarIcons[i]}</span>
+                      <div>
+                        <h3 className="font-display text-lg font-bold text-white">{p.title}</h3>
                         <p className="mt-2 text-[14px] leading-relaxed text-zinc-400">{p.text}</p>
                       </div>
                     </div>

@@ -40,24 +40,24 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 ${
         scrolled
-          ? "border-b border-white/10 bg-charcoal/95 shadow-lg shadow-black/50 backdrop-blur-xl"
-          : "border-b border-white/5 bg-charcoal/85 backdrop-blur-md"
+          ? "border-white/10 bg-charcoal/95 backdrop-blur-lg"
+          : "border-white/5 bg-charcoal/90 backdrop-blur-md"
       }`}
     >
       <div className="container-main flex h-[4.5rem] items-center justify-between gap-4">
-        <Link href="/" className="shrink-0 transition-transform duration-300 hover:scale-[1.02]" aria-label={site.name}>
-          <BrandLogo className="h-[3.25rem] w-auto object-contain drop-shadow-md" priority />
+        <Link href="/" className="shrink-0" aria-label={site.name}>
+          <BrandLogo className="h-[3rem] w-auto object-contain sm:h-[3.25rem]" priority />
         </Link>
 
-        <nav className="hidden items-center gap-5 xl:gap-7 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-6" aria-label="Primary">
           {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`nav-link text-[12px] font-medium tracking-wide transition hover:text-white xl:text-[13px] ${
-                active === l.id ? "is-active text-white" : "text-zinc-400"
+              className={`nav-link text-[12px] font-medium xl:text-[13px] ${
+                active === l.id ? "is-active text-white" : "text-zinc-400 hover:text-white"
               }`}
             >
               {l.label}
@@ -70,19 +70,11 @@ export function Header() {
             href={site.licenseVerifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-[12px] font-medium text-zinc-500 transition hover:text-white xl:block"
+            className="hidden text-[12px] text-zinc-500 hover:text-white xl:block"
           >
             Verify license
           </a>
-          <a
-            href={site.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden text-[12px] font-medium text-zinc-500 transition hover:text-white lg:block xl:text-[13px]"
-          >
-            {site.instagramHandle}
-          </a>
-          <Link href="#contact" className="btn btn-brand hidden !px-5 !py-2.5 !text-[13px] md:inline-flex">
+          <Link href="#contact" className="btn btn-brand hidden !px-4 !py-2.5 !text-[13px] md:inline-flex">
             Free Estimate
           </Link>
           <MobileNav />
