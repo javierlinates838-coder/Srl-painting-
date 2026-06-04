@@ -43,7 +43,7 @@ const reasons = [
 
 export function WhyChoose() {
   return (
-    <section className="border-y border-black/6 bg-paper py-14 sm:py-16">
+    <section className="border-y border-black/6 bg-paper section-pad">
       <div className="container-main">
         <Reveal>
           <SectionHead align="center" label="Why SRL" title="Built on trust, not shortcuts" />

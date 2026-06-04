@@ -329,6 +329,36 @@ a:focus:not(:focus-visible) { outline: none; }
 }
 .sr-only:focus { position: fixed; }
 
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+.skip-link:focus {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  border-radius: var(--radius);
+  background: var(--brand);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
 .text-balance { text-wrap: balance; }
 
 .nav-link {
@@ -389,6 +419,15 @@ a:focus:not(:focus-visible) { outline: none; }
   transform: none;
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
+.js .reveal-on-scroll.is-visible.reveal-d1 { transition-delay: 0.06s; }
+.js .reveal-on-scroll.is-visible.reveal-d2 { transition-delay: 0.12s; }
+.js .reveal-on-scroll.is-visible.reveal-d3 { transition-delay: 0.18s; }
+.js .reveal-on-scroll.is-visible.reveal-d4 { transition-delay: 0.24s; }
+
+.reveal-d1 { transition-delay: 0.06s; }
+.reveal-d2 { transition-delay: 0.12s; }
+.reveal-d3 { transition-delay: 0.18s; }
+.reveal-d4 { transition-delay: 0.24s; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
