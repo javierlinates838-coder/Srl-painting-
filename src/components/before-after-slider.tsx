@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type Props = {
@@ -8,7 +9,9 @@ type Props = {
   beforeAlt: string;
   afterAlt: string;
   autoSlide?: boolean;
+  priority?: boolean;
   className?: string;
+  onInteraction?: () => void;
 };
 
 export function BeforeAfterSlider({
@@ -17,7 +20,9 @@ export function BeforeAfterSlider({
   beforeAlt,
   afterAlt,
   autoSlide = false,
+  priority = false,
   className = "",
+  onInteraction,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState(50);
@@ -26,13 +31,21 @@ export function BeforeAfterSlider({
 
   const clamp = (v: number) => Math.max(3, Math.min(97, v));
 
-  const move = useCallback((x: number) => {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    setPos(clamp(((x - r.left) / r.width) * 100));
+  const markInteraction = useCallback(() => {
     setTouched(true);
-  }, []);
+    onInteraction?.();
+  }, [onInteraction]);
+
+  const move = useCallback(
+    (x: number) => {
+      const el = ref.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      setPos(clamp(((x - r.left) / r.width) * 100));
+      markInteraction();
+    },
+    [markInteraction],
+  );
 
   useEffect(() => {
     if (!autoSlide || dragging || touched) return;
@@ -87,35 +100,37 @@ export function BeforeAfterSlider({
         if (e.key === "ArrowLeft") {
           e.preventDefault();
           setPos((p) => clamp(p - 4));
-          setTouched(true);
+          markInteraction();
         }
         if (e.key === "ArrowRight") {
           e.preventDefault();
           setPos((p) => clamp(p + 4));
-          setTouched(true);
+          markInteraction();
         }
       }}
     >
       <div className="relative aspect-[5/3] w-full min-h-[200px] sm:aspect-[16/10]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={afterSrc}
           alt={afterAlt}
-          className="absolute inset-0 h-full w-full object-cover"
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover"
           draggable={false}
-          loading="eager"
-          decoding="async"
+          priority={priority}
+          loading={priority ? "eager" : "lazy"}
         />
 
         <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={beforeSrc}
             alt={beforeAlt}
-            className="absolute inset-0 h-full w-full object-cover brightness-[0.88] saturate-[0.82] contrast-[1.05]"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover brightness-[0.88] saturate-[0.82] contrast-[1.05]"
             draggable={false}
-            loading="eager"
-            decoding="async"
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
           />
           <div className="absolute inset-0 bg-black/10" aria-hidden />
         </div>

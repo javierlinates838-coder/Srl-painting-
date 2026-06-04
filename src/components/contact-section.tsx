@@ -53,7 +53,7 @@ export function ContactSection() {
                   Get your free <span className="text-gradient">estimate.</span>
                 </>
               }
-              description="Fill out the form — we'll copy your details and open Instagram so you can paste them into a DM. Add photos of the areas you want painted for the fastest quote."
+              description="Fill out the form below. We copy your details to the clipboard and open Instagram — paste them into a DM and attach photos for the fastest quote."
             />
 
             <a
@@ -127,7 +127,7 @@ export function ContactSection() {
                     </div>
                     <label className="block">
                       <span className="mb-1.5 block text-[12px] font-semibold text-zinc-400">Phone</span>
-                      <input name="phone" type="tel" autoComplete="tel" className="input-dark" placeholder="(661) 555-0100" />
+                      <input name="phone" type="tel" autoComplete="tel" className="input-dark" placeholder="Optional — for a callback" />
                     </label>
                     <label className="block">
                       <span className="mb-1.5 block text-[12px] font-semibold text-zinc-400">Service *</span>

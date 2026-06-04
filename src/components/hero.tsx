@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { beforeAfterProjects, site, serviceAreas } from "@/lib/site";
+import { beforeAfterProjects, heroStats, site, serviceAreas } from "@/lib/site";
 import { BeforeAfterSlider } from "./before-after-slider";
 
 export function Hero() {
@@ -35,7 +35,7 @@ export function Hero() {
             </h1>
 
             <p className="reveal reveal-d2 mt-4 max-w-lg text-[1rem] leading-relaxed text-zinc-400 sm:mt-5 sm:text-[1.0625rem]">
-              {site.description}
+              {site.heroDescription}
             </p>
 
             <div className="reveal reveal-d3 mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
@@ -49,11 +49,7 @@ export function Hero() {
 
             {/* Stack on narrow phones — no cramped 3-column squeeze */}
             <div className="reveal reveal-d3 mt-6 grid grid-cols-1 gap-2 min-[420px]:grid-cols-3 min-[420px]:gap-3 sm:mt-10">
-              {[
-                { n: String(beforeAfterProjects.length), l: "Projects" },
-                { n: String(serviceAreas.length), l: "Cities" },
-                { n: "Free", l: "Estimates" },
-              ].map((s) => (
+              {heroStats.map((s) => (
                 <div
                   key={s.l}
                   className="stat-card flex items-center justify-between gap-3 px-4 py-3 min-[420px]:block min-[420px]:px-5 min-[420px]:py-4 min-[420px]:text-center"
@@ -90,6 +86,7 @@ export function Hero() {
                 beforeAlt={`Before — ${project.title}`}
                 afterAlt={`After — ${project.title}`}
                 autoSlide
+                priority
                 className="relative shadow-2xl shadow-black/50 ring-1 ring-white/20"
               />
             </div>

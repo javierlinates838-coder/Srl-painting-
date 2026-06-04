@@ -2,18 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { site } from "@/lib/site";
+import { navLinks, site } from "@/lib/site";
 import { BrandLogo } from "./brand-logo";
 import { MobileNav } from "./mobile-nav";
 
-const nav = [
-  { href: "#work", label: "Our Work", id: "work" },
-  { href: "#services", label: "Services", id: "services" },
-  { href: "#about", label: "About", id: "about" },
-  { href: "#contact", label: "Contact", id: "contact" },
-];
-
-const sectionIds = nav.map((n) => n.id);
+const sectionIds = navLinks.map((n) => n.id);
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -54,16 +47,16 @@ export function Header() {
       }`}
     >
       <div className="container-main flex h-[4.5rem] items-center justify-between gap-4">
-        <Link href="#" className="shrink-0 transition-transform duration-300 hover:scale-[1.02]" aria-label={site.name}>
+        <Link href="/" className="shrink-0 transition-transform duration-300 hover:scale-[1.02]" aria-label={site.name}>
           <BrandLogo className="h-[3.25rem] w-auto object-contain drop-shadow-md" priority />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-          {nav.map((l) => (
+        <nav className="hidden items-center gap-5 xl:gap-7 lg:flex" aria-label="Primary">
+          {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`nav-link text-[13px] font-medium tracking-wide transition hover:text-white ${
+              className={`nav-link text-[12px] font-medium tracking-wide transition hover:text-white xl:text-[13px] ${
                 active === l.id ? "is-active text-white" : "text-zinc-400"
               }`}
             >
@@ -74,10 +67,18 @@ export function Header() {
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <a
+            href={site.licenseVerifyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden text-[12px] font-medium text-zinc-500 transition hover:text-white xl:block"
+          >
+            Verify license
+          </a>
+          <a
             href={site.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-[13px] font-medium text-zinc-500 transition hover:text-white lg:block"
+            className="hidden text-[12px] font-medium text-zinc-500 transition hover:text-white lg:block xl:text-[13px]"
           >
             {site.instagramHandle}
           </a>

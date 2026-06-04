@@ -3,6 +3,8 @@ export const site = {
   tagline: "Licensed painting contractor · Kern County & Los Angeles",
   description:
     "Interior, exterior, commercial, and cabinet painting for homeowners and businesses across Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. Licensed, bonded, and built on prep work that lasts.",
+  heroDescription:
+    "Licensed interior, exterior, commercial, and cabinet painting across Kern County and Los Angeles — prep-first work that holds up to California sun.",
   license: "1108313",
   licenseClass: "C-33 Painting & Decorating",
   licenseVerifyUrl:
@@ -12,6 +14,15 @@ export const site = {
   instagramDm: "https://ig.me/m/srl_painting",
   siteUrl: "https://srl-painting.vercel.app",
 } as const;
+
+export const navLinks = [
+  { href: "#work", label: "Our Work", id: "work" },
+  { href: "#services", label: "Services", id: "services" },
+  { href: "#process", label: "Process", id: "process" },
+  { href: "#reviews", label: "Reviews", id: "reviews" },
+  { href: "#about", label: "About", id: "about" },
+  { href: "#contact", label: "Contact", id: "contact" },
+] as const;
 
 export const credentials = [
   { label: "License", value: "CSLB #1108313" },
@@ -148,6 +159,12 @@ export const serviceAreas = [
   { city: "Lake Isabella", note: "Mountain & lake homes" },
 ] as const;
 
+export const heroStats = [
+  { n: "C-33", l: "Licensed & bonded" },
+  { n: String(serviceAreas.length), l: "Cities served" },
+  { n: "Free", l: "Estimates" },
+] as const;
+
 export const process = [
   {
     num: "01",
@@ -202,7 +219,7 @@ export const faqs = [
   },
   {
     q: "Are you a licensed contractor?",
-    a: "Yes. SRL Painting holds California C-33 (Painting & Decorating) license #1108313. We are licensed and bonded.",
+    a: "Yes. SRL Painting holds California C-33 (Painting & Decorating) license #1108313. We are licensed and bonded. You can verify our license anytime on the California CSLB website.",
   },
   {
     q: "What cities do you serve?",

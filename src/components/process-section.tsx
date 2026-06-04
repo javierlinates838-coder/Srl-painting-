@@ -4,7 +4,7 @@ import { SectionHead } from "./section-head";
 
 export function ProcessSection() {
   return (
-    <section className="section-pad bg-paper">
+    <section id="process" className="section-pad bg-paper">
       <div className="container-main">
         <Reveal>
           <SectionHead

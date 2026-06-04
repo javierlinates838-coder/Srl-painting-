@@ -2,14 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { site } from "@/lib/site";
-
-const links = [
-  { href: "#work", label: "Our Work" },
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
-];
+import { navLinks, site } from "@/lib/site";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -42,7 +35,7 @@ export function MobileNav() {
       {open && (
         <div className="mobile-nav-panel fixed inset-0 top-[4.5rem] z-40 bg-charcoal/98 backdrop-blur-xl lg:hidden">
           <nav className="container-main flex flex-col gap-1 py-6" aria-label="Mobile">
-            {links.map((l, i) => (
+            {navLinks.map((l, i) => (
               <Link
                 key={l.href}
                 href={l.href}
@@ -54,12 +47,22 @@ export function MobileNav() {
               </Link>
             ))}
             <a
+              href={site.licenseVerifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="fade-in-up rounded-lg px-4 py-3.5 text-[15px] font-medium text-zinc-400 transition hover:text-white"
+              style={{ animationDelay: "0.3s" }}
+            >
+              Verify CSLB license
+            </a>
+            <a
               href={site.instagramDm}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="fade-in-up rounded-lg px-4 py-3.5 text-[15px] font-medium text-zinc-400 transition hover:text-white"
-              style={{ animationDelay: "0.2s" }}
+              style={{ animationDelay: "0.35s" }}
             >
               {site.instagramHandle}
             </a>
@@ -67,7 +70,7 @@ export function MobileNav() {
               href="#contact"
               onClick={() => setOpen(false)}
               className="btn btn-brand fade-in-up mt-4 w-full"
-              style={{ animationDelay: "0.25s" }}
+              style={{ animationDelay: "0.4s" }}
             >
               Free Estimate
             </Link>

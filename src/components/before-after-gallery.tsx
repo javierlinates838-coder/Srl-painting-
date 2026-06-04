@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { beforeAfterProjects, site } from "@/lib/site";
 import { Reveal } from "./reveal";
@@ -35,7 +36,7 @@ export function BeforeAfterGallery() {
   useEffect(() => {
     if (paused) return;
     const start = Date.now();
-    const duration = 9000;
+    const duration = 12000;
     const tick = setInterval(() => {
       const elapsed = Date.now() - start;
       setProgress(Math.min(100, (elapsed / duration) * 100));
@@ -115,7 +116,13 @@ export function BeforeAfterGallery() {
           </div>
 
           <div className="min-w-0">
-            <div className="relative" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+            <div
+              className="relative"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              onTouchStart={() => setPaused(true)}
+              onTouchEnd={() => setTimeout(() => setPaused(false), 4000)}
+            >
               <div className="progress-track mb-4 lg:hidden">
                 <div className="progress-fill transition-[width] duration-100 ease-linear" style={{ width: `${progress}%` }} />
               </div>
@@ -130,6 +137,7 @@ export function BeforeAfterGallery() {
                   beforeAlt={`Before — ${project.title}`}
                   afterAlt={`After — ${project.title}`}
                   autoSlide
+                  onInteraction={() => setPaused(true)}
                   className="shadow-2xl shadow-black/15 ring-1 ring-black/5"
                 />
                 <div className="surface-premium mt-5 p-5 sm:p-6">
@@ -178,7 +186,7 @@ export function BeforeAfterGallery() {
           </div>
         </div>
 
-        <div className="mt-12 hidden gap-3 sm:grid sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-12 hidden gap-3 lg:grid lg:grid-cols-5">
           {beforeAfterProjects.map((p, i) => (
             <button
               key={p.id}
@@ -189,10 +197,24 @@ export function BeforeAfterGallery() {
               }`}
             >
               <div className="grid grid-cols-2 transition duration-500 group-hover:scale-105">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.before} alt="" className="aspect-[4/3] w-full object-cover brightness-90 saturate-75" />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.after} alt="" className="aspect-[4/3] w-full object-cover" />
+                <Image
+                  src={p.before}
+                  alt=""
+                  width={320}
+                  height={240}
+                  sizes="160px"
+                  loading="lazy"
+                  className="aspect-[4/3] w-full object-cover brightness-90 saturate-75"
+                />
+                <Image
+                  src={p.after}
+                  alt=""
+                  width={320}
+                  height={240}
+                  sizes="160px"
+                  loading="lazy"
+                  className="aspect-[4/3] w-full object-cover"
+                />
               </div>
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-3">
                 <p className="truncate text-left text-[11px] font-bold text-white">{p.title}</p>

@@ -35,7 +35,18 @@ export function TrustStrip() {
               className="group flex flex-col items-center justify-center bg-white px-4 py-5 text-center transition hover:bg-brand-tint/30 sm:py-6"
             >
               <span className="icon-box mb-2 h-8 w-8 !shadow-none transition group-hover:scale-105">{icons[i]}</span>
-              <p className="font-display text-sm font-bold text-brand sm:text-base">{c.value}</p>
+              {c.label === "License" ? (
+                <a
+                  href={site.licenseVerifyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-display text-sm font-bold text-brand underline-offset-2 transition hover:underline sm:text-base"
+                >
+                  {c.value}
+                </a>
+              ) : (
+                <p className="font-display text-sm font-bold text-brand sm:text-base">{c.value}</p>
+              )}
               <p className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-zinc-500 sm:text-[11px]">
                 {c.label}
               </p>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { services, site } from "@/lib/site";
+import { navLinks, services, site } from "@/lib/site";
 import { BrandLogo } from "./brand-logo";
 
 const footerLinkClass =
@@ -26,12 +26,12 @@ export function Footer() {
               Message on Instagram
             </a>
             <a
-              href={site.instagram}
+              href={site.licenseVerifyUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={`${footerLinkClass} border border-white/25 bg-white/5 text-white hover:border-white/40 hover:bg-white/10`}
             >
-              Follow us
+              Verify CSLB license
             </a>
           </div>
         </div>
@@ -40,16 +40,18 @@ export function Footer() {
           <div>
             <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Navigate</p>
             <ul className="mt-4 space-y-2.5 text-[13px]">
-              {["work:Our Work", "services:Services", "about:About", "contact:Contact"].map((l) => {
-                const [id, label] = l.split(":");
-                return (
-                  <li key={id}>
-                    <Link href={`#${id}`} className="link-fade text-zinc-400">
-                      {label}
-                    </Link>
-                  </li>
-                );
-              })}
+              {navLinks.map((l) => (
+                <li key={l.id}>
+                  <Link href={l.href} className="link-fade text-zinc-400">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="#faq" className="link-fade text-zinc-400">
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -75,8 +77,13 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href={site.instagramDm} target="_blank" rel="noopener noreferrer" className="link-fade text-zinc-400">
-                  DM for free estimate
+                <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="link-fade text-zinc-400">
+                  Follow on Instagram
+                </a>
+              </li>
+              <li>
+                <a href={site.licenseVerifyUrl} target="_blank" rel="noopener noreferrer" className="link-fade text-zinc-400">
+                  CSLB #{site.license}
                 </a>
               </li>
               <li className="text-zinc-600">Kern County · Southern CA</li>

@@ -32,24 +32,44 @@ function ReviewCard({ quote, name, detail, rating }: (typeof reviews)[number]) {
   );
 }
 
-export function ReviewsSection() {
+function MobileReviewCarousel() {
   const [active, setActive] = useState(0);
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
-  useEffect(() => {
-    if (!isMobile) return;
     const t = setInterval(() => setActive((p) => (p + 1) % reviews.length), 7000);
     return () => clearInterval(t);
-  }, [isMobile]);
+  }, []);
 
+  return (
+    <>
+      <div className="relative min-h-[300px]">
+        {reviews.map((r, i) => (
+          <blockquote
+            key={r.name}
+            className={`absolute inset-0 transition-all duration-500 ease-out ${
+              i === active ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
+            }`}
+          >
+            <ReviewCard {...r} />
+          </blockquote>
+        ))}
+      </div>
+      <div className="mt-6 flex justify-center gap-2">
+        {reviews.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            aria-label={`Review ${i + 1}`}
+            onClick={() => setActive(i)}
+            className={`h-2 rounded-full transition-all duration-300 ${i === active ? "w-10 bg-brand" : "w-2 bg-black/10 hover:bg-black/25"}`}
+          />
+        ))}
+      </div>
+    </>
+  );
+}
+
+export function ReviewsSection() {
   return (
     <section id="reviews" className="section-pad bg-gradient-to-b from-white via-brand-tint/15 to-white">
       <div className="container-main">
@@ -58,49 +78,17 @@ export function ReviewsSection() {
         </Reveal>
 
         <div className="mt-10">
-          {isMobile === null ? (
-            <div className="grid items-stretch gap-5 lg:grid-cols-3">
-              {reviews.map((r, i) => (
-                <Reveal key={r.name} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} layout="contents">
-                  <ReviewCard {...r} />
-                </Reveal>
-              ))}
-            </div>
-          ) : isMobile ? (
-            <>
-              <div className="relative min-h-[300px]">
-                {reviews.map((r, i) => (
-                  <blockquote
-                    key={r.name}
-                    className={`absolute inset-0 transition-all duration-500 ease-out ${
-                      i === active ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
-                    }`}
-                  >
-                    <ReviewCard {...r} />
-                  </blockquote>
-                ))}
-              </div>
-              <div className="mt-6 flex justify-center gap-2">
-                {reviews.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    aria-label={`Review ${i + 1}`}
-                    onClick={() => setActive(i)}
-                    className={`h-2 rounded-full transition-all duration-300 ${i === active ? "w-10 bg-brand" : "w-2 bg-black/10 hover:bg-black/25"}`}
-                  />
-                ))}
-              </div>
-            </>
-          ) : (
-            <div className="grid items-stretch gap-5 lg:grid-cols-3">
-              {reviews.map((r, i) => (
-                <Reveal key={r.name} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} layout="contents">
-                  <ReviewCard {...r} />
-                </Reveal>
-              ))}
-            </div>
-          )}
+          <div className="lg:hidden">
+            <MobileReviewCarousel />
+          </div>
+
+          <div className="hidden items-stretch gap-5 lg:grid lg:grid-cols-3">
+            {reviews.map((r, i) => (
+              <Reveal key={r.name} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} layout="contents">
+                <ReviewCard {...r} />
+              </Reveal>
+            ))}
+          </div>
         </div>
 
         <div className="mt-14 border-t border-black/6 pt-14">
