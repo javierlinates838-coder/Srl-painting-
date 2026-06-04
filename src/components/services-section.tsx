@@ -1,30 +1,28 @@
-"use client";
-
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { services } from "@/lib/site";
 import { Reveal } from "./reveal";
 import { SectionHead } from "./section-head";
 
 const icons: Record<string, ReactNode> = {
   residential: (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path strokeLinecap="round" d="M3 12l9-9 9 9M5 10v10h14V10" />
     </svg>
   ),
   commercial: (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path strokeLinecap="round" d="M4 21V8l8-4 8 4v13M9 21v-6h6v6" />
     </svg>
   ),
   cabinets: (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <rect x="4" y="4" width="16" height="16" rx="1" />
       <path strokeLinecap="round" d="M4 12h16M12 4v16" />
     </svg>
   ),
   "new-cabinets": (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path strokeLinecap="round" d="M12 3v18M8 7h8M8 17h8" />
       <rect x="6" y="9" width="12" height="6" rx="1" />
     </svg>
@@ -32,9 +30,6 @@ const icons: Record<string, ReactNode> = {
 };
 
 export function ServicesSection() {
-  const [active, setActive] = useState(0);
-  const current = services[active];
-
   return (
     <section id="services" className="section-pad bg-white">
       <div className="container-main">
@@ -47,60 +42,27 @@ export function ServicesSection() {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] lg:items-start">
-          <div className="scrollbar-hide -mx-1 flex flex-row gap-2 overflow-x-auto px-1 pb-2 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0">
-            {services.map((s, i) => (
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => setActive(i)}
-                className={`card-lift flex w-[240px] shrink-0 items-center gap-3 rounded-2xl border px-4 py-4 text-left transition duration-300 sm:w-[260px] lg:w-full ${
-                  i === active
-                    ? "border-brand bg-brand text-white shadow-lg shadow-brand/25"
-                    : "border-black/6 bg-paper hover:border-brand/25 hover:bg-white"
-                }`}
-              >
-                <span
-                  className={`icon-box h-11 w-11 shrink-0 transition ${i === active ? "!bg-white/15 !text-white !shadow-none" : ""}`}
-                >
-                  {icons[s.id]}
-                </span>
-                <div className="min-w-0">
-                  <p className={`font-display text-[14px] font-bold ${i === active ? "text-white" : "text-black"}`}>
-                    {s.title}
-                  </p>
-                  <p className={`mt-0.5 text-[12px] ${i === active ? "text-white/70" : "text-zinc-500"}`}>
-                    {s.summary}
-                  </p>
-                </div>
-              </button>
-            ))}
-          </div>
-
-          <Reveal delay={1}>
-            <div className="surface-premium relative min-w-0 overflow-hidden p-6 sm:p-8 lg:p-10">
-              <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand/10 blur-3xl" aria-hidden />
-              <div key={current.id} className="fade-in-up relative">
-                <span className="icon-box mb-5 h-14 w-14">{icons[current.id]}</span>
-                <h3 className="font-display text-2xl font-bold text-black">{current.title}</h3>
-                <p className="mt-2 text-[15px] text-zinc-600">{current.summary}</p>
-                <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-                  {current.details.map((d) => (
-                    <li
-                      key={d}
-                      className="flex gap-3 rounded-xl border border-black/4 bg-white p-3.5 text-[13px] leading-relaxed text-zinc-700 shadow-sm transition hover:border-brand/15 hover:shadow-md"
-                    >
-                      <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand" />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+          {services.map((s, i) => (
+            <Reveal key={s.id} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} layout="contents">
+              <article className="card flex h-full flex-col p-6 sm:p-7">
+                <span className="icon-box h-11 w-11">{icons[s.id]}</span>
+                <h3 className="font-display mt-4 text-lg font-bold text-black">{s.title}</h3>
+                <p className="mt-1.5 text-[14px] text-zinc-600">{s.summary}</p>
+                <ul className="mt-5 flex-1 space-y-2">
+                  {s.details.map((d) => (
+                    <li key={d} className="flex gap-2.5 text-[13px] leading-relaxed text-zinc-700">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
                       {d}
                     </li>
                   ))}
                 </ul>
-                <Link href="#contact" className="btn btn-brand mt-8 !text-[13px]">
-                  Get a {current.title.toLowerCase()} estimate →
+                <Link href="#contact" className="btn btn-brand mt-6 w-full !text-[13px] sm:w-auto">
+                  Get an estimate
                 </Link>
-              </div>
-            </div>
-          </Reveal>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

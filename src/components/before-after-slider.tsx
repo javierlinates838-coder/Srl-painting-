@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
   afterSrc: string;
   beforeAlt: string;
   afterAlt: string;
-  autoSlide?: boolean;
+  priority?: boolean;
   className?: string;
 };
 
@@ -16,37 +17,28 @@ export function BeforeAfterSlider({
   afterSrc,
   beforeAlt,
   afterAlt,
-  autoSlide = false,
+  priority = false,
   className = "",
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState(50);
   const [dragging, setDragging] = useState(false);
-  const [touched, setTouched] = useState(false);
+  const [hint, setHint] = useState(true);
 
-  const clamp = (v: number) => Math.max(3, Math.min(97, v));
+  const clamp = (v: number) => Math.max(4, Math.min(96, v));
 
   const move = useCallback((x: number) => {
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
     setPos(clamp(((x - r.left) / r.width) * 100));
-    setTouched(true);
+    setHint(false);
   }, []);
 
   useEffect(() => {
-    if (!autoSlide || dragging || touched) return;
-    let f: number;
-    let s: number | null = null;
-    const loop = (t: number) => {
-      if (!s) s = t;
-      const p = ((t - s) % 4500) / 4500;
-      setPos(12 + (0.5 - Math.cos(p * Math.PI * 2) * 0.5) * 76);
-      f = requestAnimationFrame(loop);
-    };
-    f = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(f);
-  }, [autoSlide, dragging, touched]);
+    setPos(50);
+    setHint(true);
+  }, [beforeSrc, afterSrc]);
 
   useEffect(() => {
     if (!dragging) return;
@@ -74,7 +66,7 @@ export function BeforeAfterSlider({
       aria-valuemax={100}
       aria-valuenow={Math.round(pos)}
       tabIndex={0}
-      className={`ba-slider group relative select-none overflow-hidden rounded-[calc(var(--radius)+4px)] bg-zinc-800 ${className}`}
+      className={`ba-slider group relative select-none overflow-hidden rounded-[calc(var(--radius)+2px)] bg-zinc-800 ${dragging ? "is-dragging" : ""} ${className}`}
       onMouseDown={(e) => {
         setDragging(true);
         move(e.clientX);
@@ -86,44 +78,43 @@ export function BeforeAfterSlider({
       onKeyDown={(e) => {
         if (e.key === "ArrowLeft") {
           e.preventDefault();
-          setPos((p) => clamp(p - 4));
-          setTouched(true);
+          setPos((p) => clamp(p - 5));
+          setHint(false);
         }
         if (e.key === "ArrowRight") {
           e.preventDefault();
-          setPos((p) => clamp(p + 4));
-          setTouched(true);
+          setPos((p) => clamp(p + 5));
+          setHint(false);
         }
       }}
     >
-      <div className="relative aspect-[5/3] w-full min-h-[200px] sm:aspect-[16/10]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+      <div className="relative aspect-[4/3] w-full sm:aspect-[16/10]">
+        <Image
           src={afterSrc}
           alt={afterAlt}
-          className="absolute inset-0 h-full w-full object-cover"
+          fill
+          sizes="(max-width: 1024px) 100vw, 640px"
+          className="object-cover"
           draggable={false}
-          loading="eager"
-          decoding="async"
+          priority={priority}
         />
 
         <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={beforeSrc}
             alt={beforeAlt}
-            className="absolute inset-0 h-full w-full object-cover brightness-[0.88] saturate-[0.82] contrast-[1.05]"
+            fill
+            sizes="(max-width: 1024px) 100vw, 640px"
+            className="object-cover brightness-[0.9] saturate-[0.85]"
             draggable={false}
-            loading="eager"
-            decoding="async"
+            priority={priority}
           />
-          <div className="absolute inset-0 bg-black/10" aria-hidden />
         </div>
 
         <div className="ba-handle absolute inset-y-0 z-10 -translate-x-1/2 cursor-ew-resize" style={{ left: `${pos}%` }}>
-          <div className="absolute inset-y-0 left-1/2 w-[2px] -translate-x-1/2 bg-white shadow-[0_0_24px_rgba(0,0,0,.45)]" />
+          <div className="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_12px_rgba(0,0,0,.35)]" />
           <div
-            className={`absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[3px] border-white bg-brand shadow-2xl transition duration-200 ${dragging ? "scale-110 ring-4 ring-white/20" : "group-hover:scale-105"}`}
+            className={`absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-brand shadow-lg ${dragging ? "scale-105" : ""}`}
           >
             <svg className="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
@@ -131,15 +122,15 @@ export function BeforeAfterSlider({
           </div>
         </div>
 
-        <span className="absolute left-4 top-4 z-20 rounded-md bg-black/75 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-md">
+        <span className="absolute left-3 top-3 z-20 rounded bg-black/70 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
           Before
         </span>
-        <span className="absolute right-4 top-4 z-20 rounded-md bg-brand px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white shadow-lg shadow-brand/30">
+        <span className="absolute right-3 top-3 z-20 rounded bg-brand px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
           After
         </span>
 
-        {!touched && autoSlide && (
-          <span className="absolute bottom-4 left-1/2 z-20 max-w-[90%] -translate-x-1/2 rounded-full bg-white/95 px-4 py-2 text-center text-[12px] font-semibold text-black shadow-lg backdrop-blur-sm sm:text-[11px]">
+        {hint && (
+          <span className="pointer-events-none absolute bottom-3 left-1/2 z-20 -translate-x-1/2 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-semibold text-black shadow-md">
             Drag to compare
           </span>
         )}

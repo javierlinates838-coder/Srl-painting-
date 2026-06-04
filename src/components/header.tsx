@@ -2,18 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { site } from "@/lib/site";
+import { navLinks, site } from "@/lib/site";
 import { BrandLogo } from "./brand-logo";
 import { MobileNav } from "./mobile-nav";
 
-const nav = [
-  { href: "#work", label: "Our Work", id: "work" },
-  { href: "#services", label: "Services", id: "services" },
-  { href: "#about", label: "About", id: "about" },
-  { href: "#contact", label: "Contact", id: "contact" },
-];
-
-const sectionIds = nav.map((n) => n.id);
+const sectionIds = navLinks.map((n) => n.id);
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -47,24 +40,24 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 ${
         scrolled
-          ? "border-b border-white/10 bg-charcoal/95 shadow-lg shadow-black/50 backdrop-blur-xl"
-          : "border-b border-white/5 bg-charcoal/85 backdrop-blur-md"
+          ? "border-white/10 bg-charcoal/95 backdrop-blur-lg"
+          : "border-white/5 bg-charcoal/90 backdrop-blur-md"
       }`}
     >
       <div className="container-main flex h-[4.5rem] items-center justify-between gap-4">
-        <Link href="#" className="shrink-0 transition-transform duration-300 hover:scale-[1.02]" aria-label={site.name}>
-          <BrandLogo className="h-[3.25rem] w-auto object-contain drop-shadow-md" priority />
+        <Link href="/" className="shrink-0" aria-label={site.name}>
+          <BrandLogo className="h-[3rem] w-auto object-contain sm:h-[3.25rem]" priority />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-          {nav.map((l) => (
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-6" aria-label="Primary">
+          {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`nav-link text-[13px] font-medium tracking-wide transition hover:text-white ${
-                active === l.id ? "is-active text-white" : "text-zinc-400"
+              className={`nav-link text-[12px] font-medium xl:text-[13px] ${
+                active === l.id ? "is-active text-white" : "text-zinc-400 hover:text-white"
               }`}
             >
               {l.label}
@@ -74,14 +67,14 @@ export function Header() {
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <a
-            href={site.instagram}
+            href={site.licenseVerifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-[13px] font-medium text-zinc-500 transition hover:text-white lg:block"
+            className="hidden text-[12px] text-zinc-500 hover:text-white xl:block"
           >
-            {site.instagramHandle}
+            Verify license
           </a>
-          <Link href="#contact" className="btn btn-brand hidden !px-5 !py-2.5 !text-[13px] md:inline-flex">
+          <Link href="#contact" className="btn btn-brand hidden !px-4 !py-2.5 !text-[13px] md:inline-flex">
             Free Estimate
           </Link>
           <MobileNav />

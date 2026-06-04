@@ -24,6 +24,16 @@ export function LocalBusinessSchema({ siteUrl }: Props) {
       "Cabinet refinishing",
       "Commercial painting",
     ],
+    hasCredential: {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: site.licenseClass,
+      recognizedBy: {
+        "@type": "Organization",
+        name: "California Contractors State License Board",
+        url: "https://www.cslb.ca.gov",
+      },
+      identifier: site.license,
+    },
   };
 
   return (
