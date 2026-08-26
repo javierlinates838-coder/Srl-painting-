@@ -1,71 +1,57 @@
+import Image from "next/image";
 import Link from "next/link";
-import { beforeAfterProjects, heroStats, site, serviceAreas } from "@/lib/site";
-import { BeforeAfterSlider } from "./before-after-slider";
+import { beforeAfterProjects, site } from "@/lib/site";
 
 export function Hero() {
   const project = beforeAfterProjects[0];
 
   return (
-    <section className="bg-dark relative overflow-hidden pt-[4.5rem] text-white">
-      <div className="container-main relative py-12 sm:py-16 lg:py-20">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <p className="pill text-zinc-300">
-              C-33 Licensed · Bonded · Lic. {site.license}
-            </p>
+    <section className="relative min-h-[100svh] overflow-hidden bg-ink text-white">
+      <div className="absolute inset-0">
+        <Image
+          src={project.after}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="hero-media object-cover"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/30"
+          aria-hidden
+        />
+      </div>
 
-            <h1 className="display-xl mt-6 text-balance">
-              <span className="text-white">Quality painting, </span>
-              <span className="text-gradient">done right.</span>
-            </h1>
+      <div className="container-main relative flex min-h-[100svh] flex-col justify-end pb-16 pt-28 sm:pb-20 sm:pt-32 lg:justify-center lg:pb-28 lg:pt-36">
+        <div className="hero-copy max-w-4xl">
+          <h1 className="display-hero text-balance text-white">{site.name}</h1>
 
-            <p className="mt-5 max-w-lg text-[1.0625rem] leading-relaxed text-zinc-400">
-              {site.heroDescription}
-            </p>
+          <p className="mt-6 max-w-2xl font-display text-[1.65rem] leading-tight font-semibold tracking-[-0.03em] text-white sm:text-[2rem]">
+            {site.heroHeadline}
+          </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="#contact" className="btn btn-brand w-full sm:w-auto">
-                Request Free Estimate
-              </Link>
-              <Link href="#work" className="btn btn-outline w-full sm:w-auto">
-                View Our Work
-              </Link>
-            </div>
+          <p className="mt-4 max-w-lg text-[1.05rem] leading-relaxed text-white/75 sm:text-[1.125rem]">
+            {site.heroDescription}
+          </p>
 
-            <div className="mt-8 grid grid-cols-3 gap-3">
-              {heroStats.map((s) => (
-                <div key={s.l} className="stat-card text-center">
-                  <p className="font-display text-xl font-bold text-white">{s.n}</p>
-                  <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{s.l}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-2">
-              {serviceAreas.map((a) => (
-                <span
-                  key={a.city}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-zinc-400"
-                >
-                  {a.city}
-                </span>
-              ))}
-            </div>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link href="#contact" className="btn btn-brand w-full sm:w-auto">
+              Request Free Estimate
+            </Link>
+            <Link href="#work" className="btn btn-outline w-full sm:w-auto">
+              See the work
+            </Link>
           </div>
+        </div>
 
-          <div>
-            <BeforeAfterSlider
-              beforeSrc={project.before}
-              afterSrc={project.after}
-              beforeAlt={`Before — ${project.title}`}
-              afterAlt={`After — ${project.title}`}
-              priority
-              className="shadow-2xl shadow-black/40 ring-1 ring-white/15"
-            />
-            <p className="mt-3 text-[13px] text-zinc-500">
-              {project.title} · {project.location}
-            </p>
-          </div>
+        <div className="scroll-hint absolute bottom-8 left-[clamp(1.25rem,4vw,2.25rem)] hidden items-center gap-3 text-[11px] font-medium tracking-[0.16em] text-white/50 uppercase lg:flex">
+          <span className="h-px w-8 bg-white/35" aria-hidden />
+          Scroll
         </div>
       </div>
     </section>

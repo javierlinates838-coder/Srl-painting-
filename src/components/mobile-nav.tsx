@@ -5,7 +5,11 @@ import Link from "next/link";
 import { navLinks, site } from "@/lib/site";
 import { useNav } from "./nav-provider";
 
-export function MobileNav() {
+type MobileNavProps = {
+  light?: boolean;
+};
+
+export function MobileNav({ light = false }: MobileNavProps) {
   const { mobileOpen, setMobileOpen } = useNav();
   const panelId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -49,7 +53,11 @@ export function MobileNav() {
         aria-label={mobileOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileOpen}
         aria-controls={panelId}
-        className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-white lg:hidden"
+        className={`flex h-9 w-9 items-center justify-center border lg:hidden ${
+          light
+            ? "border-white/25 text-white"
+            : "border-black/12 text-ink"
+        }`}
       >
         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
           {mobileOpen ? (
@@ -64,24 +72,19 @@ export function MobileNav() {
         <div
           ref={panelRef}
           id={panelId}
-          className="fixed inset-0 top-[4.5rem] z-[60] bg-charcoal/98 backdrop-blur-xl lg:hidden"
+          className="fixed inset-0 top-[4.75rem] z-[60] bg-canvas lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"
         >
-          <button
-            type="button"
-            aria-label="Close menu"
-            className="absolute inset-0 -z-10"
-            onClick={close}
-          />
+          <button type="button" aria-label="Close menu" className="absolute inset-0 -z-10" onClick={close} />
           <nav className="container-main relative flex flex-col gap-1 py-6" aria-label="Mobile">
             {navLinks.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={close}
-                className="rounded-lg px-4 py-3.5 font-display text-lg font-semibold text-zinc-300 hover:bg-white/5 hover:text-white"
+                className="rounded-sm px-2 py-3.5 font-display text-xl font-semibold text-ink hover:text-brand"
               >
                 {l.label}
               </Link>
@@ -91,7 +94,7 @@ export function MobileNav() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={close}
-              className="rounded-lg px-4 py-3.5 text-[15px] text-zinc-400 hover:text-white"
+              className="px-2 py-3.5 text-[15px] text-muted hover:text-ink"
             >
               Verify CSLB license
             </a>

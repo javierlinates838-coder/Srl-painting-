@@ -13,7 +13,7 @@ export function Header() {
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -40,24 +40,35 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-white/10 bg-charcoal/95 backdrop-blur-lg"
-          : "border-white/5 bg-charcoal/90 backdrop-blur-md"
+          ? "border-b border-black/8 bg-canvas/95 text-ink shadow-[0_8px_30px_rgba(0,0,0,.06)] backdrop-blur-lg"
+          : "border-b border-transparent bg-transparent text-white"
       }`}
     >
-      <div className="container-main flex h-[4.5rem] items-center justify-between gap-4">
+      <div className="container-main flex h-[4.75rem] items-center justify-between gap-4">
         <Link href="/" className="shrink-0" aria-label={site.name}>
-          <BrandLogo className="h-[3rem] w-auto object-contain sm:h-[3.25rem]" priority />
+          <BrandLogo
+            className={`h-[2.85rem] w-auto object-contain transition sm:h-[3.1rem] ${
+              scrolled ? "" : "brightness-0 invert"
+            }`}
+            priority
+          />
         </Link>
 
-        <nav className="hidden items-center gap-5 lg:flex xl:gap-6" aria-label="Primary">
+        <nav className="hidden items-center gap-6 lg:flex xl:gap-7" aria-label="Primary">
           {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`nav-link text-[12px] font-medium xl:text-[13px] ${
-                active === l.id ? "is-active text-white" : "text-zinc-400 hover:text-white"
+              className={`nav-link text-[13px] font-medium ${
+                scrolled
+                  ? active === l.id
+                    ? "is-active text-ink"
+                    : "text-muted hover:text-ink"
+                  : active === l.id
+                    ? "is-active text-white"
+                    : "text-white/70 hover:text-white"
               }`}
             >
               {l.label}
@@ -70,14 +81,21 @@ export function Header() {
             href={site.licenseVerifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-[12px] text-zinc-500 hover:text-white xl:block"
+            className={`hidden text-[12px] xl:block ${
+              scrolled ? "text-muted hover:text-ink" : "text-white/55 hover:text-white"
+            }`}
           >
             Verify license
           </a>
-          <Link href="#contact" className="btn btn-brand hidden !px-4 !py-2.5 !text-[13px] md:inline-flex">
+          <Link
+            href="#contact"
+            className={`btn hidden !px-4 !py-2.5 !text-[13px] md:inline-flex ${
+              scrolled ? "btn-brand" : "btn-light"
+            }`}
+          >
             Free Estimate
           </Link>
-          <MobileNav />
+          <MobileNav light={!scrolled} />
         </div>
       </div>
     </header>

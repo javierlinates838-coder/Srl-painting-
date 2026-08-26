@@ -3,8 +3,9 @@ export const site = {
   tagline: "Licensed painting contractor · Kern County & Los Angeles",
   description:
     "Interior, exterior, commercial, and cabinet painting for homeowners and businesses across Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. Licensed, bonded, and built on prep work that lasts.",
+  heroHeadline: "Color that lasts under California sun.",
   heroDescription:
-    "Licensed interior, exterior, commercial, and cabinet painting across Kern County and Los Angeles — prep-first work that holds up to California sun.",
+    "Interior, exterior, commercial, and cabinet work — licensed C-33 craft across Kern County and Los Angeles.",
   license: "1108313",
   licenseClass: "C-33 Painting & Decorating",
   licenseVerifyUrl:

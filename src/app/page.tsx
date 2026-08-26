@@ -22,8 +22,8 @@ export default function Home() {
       <main id="main-content" className="pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
         <Hero />
         <TrustStrip />
-        <ServicesSection />
         <BeforeAfterGallery />
+        <ServicesSection />
         <WhyChoose />
         <ProcessSection />
         <ReviewsSection />

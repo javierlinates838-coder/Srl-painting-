@@ -1,42 +1,42 @@
+import Image from "next/image";
 import Link from "next/link";
 import { pillars, site } from "@/lib/site";
 import { Reveal } from "./reveal";
 import { SectionHead } from "./section-head";
 
-const stats = [
-  { v: `#${site.license}`, l: "CSLB License" },
-  { v: "C-33", l: "Classification" },
-  { v: "Bonded", l: "Fully insured" },
-  { v: "Free", l: "Estimates" },
-];
-
 export function AboutSection() {
   return (
-    <section id="about" className="bg-dark section-pad text-white">
+    <section id="about" className="section-pad overflow-hidden bg-ink text-white">
       <div className="container-main">
-        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <SectionHead
               light
               label="About"
-              title={
-                <>
-                  Local crew. <span className="text-gradient">Licensed work.</span>
-                </>
-              }
-              description="SRL Painting is a California-licensed contractor serving Kern County and Los Angeles. When you hire us, you get a real crew that shows up, preps properly, and stands behind the work."
+              title="Local crew. Licensed work."
+              description="SRL Painting is a California-licensed contractor serving Kern County and Los Angeles. When you hire us, you get a real crew that shows up, preps properly, and stands behind the finish."
             />
 
-            <div className="mt-8 grid grid-cols-2 gap-3">
-              {stats.map((s) => (
-                <div key={s.l} className="stat-card">
-                  <p className="font-display text-lg font-bold text-white">{s.v}</p>
-                  <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{s.l}</p>
-                </div>
-              ))}
-            </div>
+            <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-white/15 pt-8">
+              <div>
+                <dt className="text-[11px] font-semibold tracking-[0.14em] text-white/50 uppercase">License</dt>
+                <dd className="font-display mt-1 text-lg font-bold">#{site.license}</dd>
+              </div>
+              <div>
+                <dt className="text-[11px] font-semibold tracking-[0.14em] text-white/50 uppercase">Class</dt>
+                <dd className="font-display mt-1 text-lg font-bold">C-33</dd>
+              </div>
+              <div>
+                <dt className="text-[11px] font-semibold tracking-[0.14em] text-white/50 uppercase">Status</dt>
+                <dd className="font-display mt-1 text-lg font-bold">Bonded</dd>
+              </div>
+              <div>
+                <dt className="text-[11px] font-semibold tracking-[0.14em] text-white/50 uppercase">Estimates</dt>
+                <dd className="font-display mt-1 text-lg font-bold">Always free</dd>
+              </div>
+            </dl>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="#contact" className="btn btn-brand w-full sm:w-auto">
                 Request Estimate
               </Link>
@@ -51,23 +51,30 @@ export function AboutSection() {
             </div>
           </Reveal>
 
-          <ul className="flex flex-col gap-4">
-            {pillars.map((p, i) => (
-              <li key={p.title} className="list-none">
-                <article className="pillar-card">
-                  <span className="pillar-num" aria-hidden>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-display text-[17px] font-bold leading-snug text-white sm:text-lg">
+          <Reveal delay={2}>
+            <div className="relative">
+              <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[5/6]">
+                <Image
+                  src="/projects/cabinets-after.jpg"
+                  alt="Kitchen cabinet refinishing by SRL Painting"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              <ul className="mt-8 space-y-6">
+                {pillars.map((p, i) => (
+                  <li key={p.title} className="border-l-2 border-brand pl-4">
+                    <h3 className="font-display text-[17px] font-bold text-white">
+                      <span className="mr-2 text-brand-bright">{String(i + 1).padStart(2, "0")}</span>
                       {p.title}
                     </h3>
-                    <p className="mt-2 text-[14px] leading-relaxed text-zinc-400">{p.text}</p>
-                  </div>
-                </article>
-              </li>
-            ))}
-          </ul>
+                    <p className="mt-1.5 text-[14px] leading-relaxed text-white/65">{p.text}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
