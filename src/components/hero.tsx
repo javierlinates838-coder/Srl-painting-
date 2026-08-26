@@ -18,11 +18,11 @@ export function Hero() {
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20"
+          className="absolute inset-0 bg-gradient-to-r from-black/72 via-black/45 to-black/15"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/30"
+          className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/25"
           aria-hidden
         />
       </div>
