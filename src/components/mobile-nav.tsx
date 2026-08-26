@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { navLinks, site } from "@/lib/site";
 import { useNav } from "./nav-provider";
@@ -40,6 +41,43 @@ export function MobileNav() {
     focusable[0]?.focus();
   }, [mobileOpen]);
 
+  const panel = mobileOpen ? (
+    <div
+      ref={panelRef}
+      id={panelId}
+      className="fixed inset-0 top-[4.75rem] z-[60] bg-charcoal/98 backdrop-blur-xl lg:hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site navigation"
+    >
+        <button type="button" aria-label="Close menu" className="absolute inset-0 -z-10" onClick={close} />
+        <nav className="container-main relative flex flex-col gap-1 py-6" aria-label="Mobile">
+          {navLinks.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={close}
+              className="rounded-lg px-4 py-3.5 font-display text-lg font-semibold text-zinc-300 hover:bg-white/5 hover:text-white"
+            >
+              {l.label}
+            </Link>
+          ))}
+          <a
+            href={site.licenseVerifyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={close}
+            className="rounded-lg px-4 py-3.5 text-[15px] text-zinc-400 hover:text-white"
+          >
+            Verify CSLB license
+          </a>
+          <Link href="#contact" onClick={close} className="btn btn-brand mt-4 w-full">
+            Get a written estimate
+          </Link>
+        </nav>
+      </div>
+    ) : null;
+
   return (
     <>
       <button
@@ -59,48 +97,7 @@ export function MobileNav() {
           )}
         </svg>
       </button>
-
-      {mobileOpen && (
-        <div
-          ref={panelRef}
-          id={panelId}
-          className="fixed inset-0 top-[4.75rem] z-[60] bg-charcoal/98 backdrop-blur-xl lg:hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Site navigation"
-        >
-          <button
-            type="button"
-            aria-label="Close menu"
-            className="absolute inset-0 -z-10"
-            onClick={close}
-          />
-          <nav className="container-main relative flex flex-col gap-1 py-6" aria-label="Mobile">
-            {navLinks.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={close}
-                className="rounded-lg px-4 py-3.5 font-display text-lg font-semibold text-zinc-300 hover:bg-white/5 hover:text-white"
-              >
-                {l.label}
-              </Link>
-            ))}
-            <a
-              href={site.licenseVerifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={close}
-              className="rounded-lg px-4 py-3.5 text-[15px] text-zinc-400 hover:text-white"
-            >
-              Verify CSLB license
-            </a>
-            <Link href="#contact" onClick={close} className="btn btn-brand mt-4 w-full">
-              Get a written estimate
-            </Link>
-          </nav>
-        </div>
-      )}
+      {panel ? createPortal(panel, document.body) : null}
     </>
   );
 }
