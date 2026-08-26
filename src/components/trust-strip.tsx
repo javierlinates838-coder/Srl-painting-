@@ -23,7 +23,7 @@ export function TrustStrip() {
           {credentials.map((c, i) => (
             <div key={c.label} className="flex flex-col items-center justify-center bg-white px-4 py-5 text-center sm:py-6">
               <span className="icon-box mb-2 h-8 w-8">{icons[i]}</span>
-              {c.label === "License" ? (
+              {i === 0 ? (
                 <a
                   href={site.licenseVerifyUrl}
                   target="_blank"
