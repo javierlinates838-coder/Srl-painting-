@@ -1,27 +1,27 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { DM_Sans, Syne } from "next/font/google";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = Plus_Jakarta_Sans({
+const display = Syne({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["600", "700", "800"],
 });
 
-const body = Inter({
+const body = DM_Sans({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : site.siteUrl);
 
-const pageTitle = `${site.name} | Licensed Painter in Bakersfield & Los Angeles`;
+const pageTitle = `${site.name} | Premium Licensed Painter · Bakersfield & Los Angeles`;
 const ogImage = "/projects/exterior-after.jpg";
 
 export const metadata: Metadata = {

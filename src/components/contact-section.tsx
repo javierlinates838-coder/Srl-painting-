@@ -65,7 +65,7 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="bg-dark section-pad text-white">
+    <section id="contact" className="bg-dark noise-overlay relative section-pad text-white">
       <div className="container-main">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
@@ -77,7 +77,7 @@ export function ContactSection() {
                   Get your free <span className="text-gradient">estimate.</span>
                 </>
               }
-              description="Fill out the form below. We copy your details and open Instagram — paste them into a DM and attach photos for the fastest quote."
+              description="Fill out the form below — we'll copy your details and open Instagram. Paste them into a DM and attach photos for the fastest quote."
             />
 
             <a

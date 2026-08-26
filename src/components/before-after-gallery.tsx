@@ -24,10 +24,10 @@ export function BeforeAfterGallery() {
             label="Our Work"
             title={
               <>
-                Before &amp; after. <span className="text-gradient-dark">Real results.</span>
+                Before &amp; after. <span className="text-gradient-dark">Real transformations.</span>
               </>
             }
-            description="Select a project and drag the slider to compare. Every job starts with prep and ends with a walkthrough you're happy with."
+            description="Select a project and drag the slider to compare. Every job starts with meticulous prep and ends with a walkthrough you're proud of."
           />
         </Reveal>
 
@@ -163,11 +163,11 @@ export function BeforeAfterGallery() {
           ))}
         </div>
 
-        <div className="bg-brand-band mt-14 flex flex-col items-center justify-between gap-5 rounded-2xl px-6 py-8 sm:flex-row sm:px-8">
+        <div className="bg-brand-band relative mt-16 flex flex-col items-center justify-between gap-5 overflow-hidden rounded-2xl px-6 py-10 sm:flex-row sm:px-10">
           <div className="text-center sm:text-left">
             <p className="font-display text-xl font-bold text-white">More on Instagram</p>
-            <p className="mt-1 text-[14px] text-white/80">
-              Latest projects from {site.instagramHandle}
+            <p className="mt-1.5 text-[14px] text-white/80">
+              Latest projects, behind-the-scenes, and fresh finishes from {site.instagramHandle}
             </p>
           </div>
           <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-light shrink-0">

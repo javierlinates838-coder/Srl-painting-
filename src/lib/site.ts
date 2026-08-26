@@ -1,10 +1,12 @@
 export const site = {
   name: "SRL Painting",
-  tagline: "Licensed painting contractor · Kern County & Los Angeles",
+  tagline: "Licensed C-33 contractor · Kern County & Los Angeles",
   description:
-    "Interior, exterior, commercial, and cabinet painting for homeowners and businesses across Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. Licensed, bonded, and built on prep work that lasts.",
+    "Premium interior, exterior, commercial, and cabinet painting across Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. Licensed, bonded, and obsessed with prep work that lasts decades — not just until the warranty expires.",
   heroDescription:
-    "Licensed interior, exterior, commercial, and cabinet painting across Kern County and Los Angeles — prep-first work that holds up to California sun.",
+    "We don't just slap on a coat of paint. Every project starts with meticulous surface prep, premium coatings, and a crew that treats your home like their own — from Bakersfield to LA.",
+  heroHeadline: "Finishes that",
+  heroHeadlineAccent: "last a lifetime.",
   license: "1108313",
   licenseClass: "C-33 Painting & Decorating",
   licenseVerifyUrl:
@@ -34,16 +36,16 @@ export const credentials = [
 
 export const pillars = [
   {
-    title: "Prep before paint",
-    text: "We fix cracks, sand surfaces, prime properly, and mask everything that shouldn't get color. That's why our finishes hold up to California sun and daily wear.",
+    title: "Prep before paint — always",
+    text: "Cracks repaired, surfaces sanded, primed properly, and everything masked before a single drop of color. That's why our finishes survive Central Valley heat, mountain winters, and years of daily wear.",
   },
   {
-    title: "Clean, protected job sites",
-    text: "Floors covered, landscaping protected, tools organized. When we leave, your space is ready to use — not a mess to clean up.",
+    title: "Your space, protected",
+    text: "Floors covered, landscaping shielded, furniture moved with care. When we pack up, your home is move-in ready — not a disaster zone waiting for you to clean.",
   },
   {
-    title: "Clear scope & pricing upfront",
-    text: "You know what's included before we start. No surprise add-ons, no vague quotes — just honest work from a licensed crew you can trust.",
+    title: "Honest quotes, zero surprises",
+    text: "Written scope. Clear pricing. No hidden fees, no vague ballparks. You'll know exactly what you're getting before we pick up a brush.",
   },
 ] as const;
 
@@ -51,45 +53,45 @@ export const services = [
   {
     id: "residential",
     title: "Residential Painting",
-    summary: "Homes that look fresh inside and out.",
+    summary: "Homes that turn heads — inside and out.",
     details: [
-      "Full exterior repaints with trim, fascia, and garage doors",
-      "Interior walls, ceilings, and baseboards",
-      "Drywall repair and surface prep included",
-      "Color consultation to match your vision",
+      "Full exterior repaints: stucco, trim, fascia, garage doors",
+      "Interior walls, ceilings, baseboards, and accent walls",
+      "Drywall repair and surface prep included in every job",
+      "Color consultation to nail your vision the first time",
     ],
   },
   {
     id: "commercial",
     title: "Commercial Painting",
-    summary: "Minimal downtime for your business.",
+    summary: "Professional finishes without shutting down your business.",
     details: [
-      "Retail, office, and industrial spaces",
-      "After-hours and weekend scheduling available",
-      "Low-VOC options for occupied buildings",
-      "Phased work plans for multi-unit properties",
+      "Retail storefronts, offices, warehouses, and industrial",
+      "After-hours and weekend scheduling to minimize downtime",
+      "Low-VOC coatings for occupied buildings",
+      "Phased work plans for multi-unit and multi-floor properties",
     ],
   },
   {
     id: "cabinets",
     title: "Cabinet Refurbishing",
-    summary: "New-kitchen look without the demolition.",
+    summary: "A brand-new kitchen for a fraction of the cost.",
     details: [
-      "Spray-finish on existing cabinet boxes and doors",
-      "Hardware updates and minor repairs",
-      "Durable coatings built for kitchens and baths",
-      "Fraction of the cost of full replacement",
+      "Factory-smooth spray finish on existing boxes and doors",
+      "Hardware updates, hinge adjustments, and minor repairs",
+      "Durable coatings engineered for kitchens and bathrooms",
+      "Save thousands vs. full cabinet replacement",
     ],
   },
   {
     id: "new-cabinets",
     title: "New Cabinet Finishing",
-    summary: "Factory-smooth results on new installs.",
+    summary: "Showroom-quality finish on day one.",
     details: [
-      "Finish work on new cabinet installations",
-      "Even coverage on doors, frames, and panels",
-      "Coordinated with your contractor or builder",
-      "Built-in quality from day one",
+      "Finish work on new cabinet installations and builds",
+      "Even, flawless coverage on doors, frames, and panels",
+      "Coordinated with your contractor or builder timeline",
+      "Built-in quality from the very first coat",
     ],
   },
 ] as const;
@@ -102,7 +104,7 @@ export const beforeAfterProjects = [
     location: "Kern County, CA",
     scope: "Off-white body · Bold trim · Full prep & prime",
     description:
-      "We revitalized this home with a sleek off-white exterior and bold trim accents — full surface prep, prime, and a finish built for Central Valley sun.",
+      "A complete exterior revitalization — off-white body with bold trim accents. Full surface prep, prime, and a finish engineered to withstand Central Valley sun for years.",
     before: "/projects/exterior-before.jpg",
     after: "/projects/exterior-after.jpg",
   },
@@ -113,7 +115,7 @@ export const beforeAfterProjects = [
     location: "Kern County, CA",
     scope: "Existing cabinets · Spray finish · Hardware refresh",
     description:
-      "This kitchen was refinished from dated wood tones to a bright, durable spray finish — same layout, completely transformed without a full remodel.",
+      "Dated wood tones transformed into a bright, durable spray finish. Same kitchen layout — completely different feel. No demolition required.",
     before: "/projects/cabinets-before.jpg",
     after: "/projects/cabinets-after.jpg",
   },
@@ -124,7 +126,7 @@ export const beforeAfterProjects = [
     location: "Kern County, CA",
     scope: "Walls & trim · New color scheme · Clean finish",
     description:
-      "A fresh color scheme and smooth second-coat finish brought this living space back to life — clean lines, even coverage, and move-in ready results.",
+      "A fresh color palette and flawless second-coat finish brought this living space back to life. Clean lines, even coverage, move-in ready.",
     before: "/projects/interior-before.jpg",
     after: "/projects/interior-after.jpg",
   },
@@ -135,7 +137,7 @@ export const beforeAfterProjects = [
     location: "Lake Isabella, CA",
     scope: "Full exterior · Two-tone color · Stucco repair",
     description:
-      "This mountain home got a full exterior makeover — two-tone color scheme, minor stucco repair, and a durable finish built for high-elevation weather.",
+      "A mountain home makeover — two-tone color scheme, minor stucco repair, and a durable finish built for high-elevation weather swings.",
     before: "/projects/lake-before.jpg",
     after: "/projects/lake-after.jpg",
   },
@@ -146,7 +148,7 @@ export const beforeAfterProjects = [
     location: "Kern County, CA",
     scope: "Sherwin-Williams SuperDeck · Semi-transparent stain",
     description:
-      "We restored this gazebo with Sherwin-Williams SuperDeck semi-transparent stain — protected from sun and moisture while keeping the natural wood character.",
+      "Restored with Sherwin-Williams SuperDeck semi-transparent stain — protected from sun and moisture while preserving the natural wood character.",
     before: "/projects/gazebo-before.jpg",
     after: "/projects/gazebo-after.jpg",
   },
@@ -169,44 +171,44 @@ export const heroStats = [
 export const process = [
   {
     num: "01",
-    title: "Tell us about the project",
-    text: "Send photos and details on Instagram. We ask the right questions so your estimate reflects the real scope — not a ballpark guess.",
+    title: "Tell us about your project",
+    text: "DM us on Instagram with photos and details. We ask the right questions so your estimate reflects real scope — not a guess.",
   },
   {
     num: "02",
-    title: "On-site or virtual walkthrough",
-    text: "We assess surfaces, prep needs, and timeline. You get a written scope and price before any work begins.",
+    title: "On-site walkthrough",
+    text: "We assess surfaces, prep needs, and timeline. You get a written scope and firm price before any work begins.",
   },
   {
     num: "03",
     title: "Prep, paint, perfect",
-    text: "Our crew handles masking, repairs, priming, and application. We use quality coatings selected for your specific surfaces.",
+    text: "Masking, repairs, priming, and application — using coatings selected specifically for your surfaces and climate.",
   },
   {
     num: "04",
     title: "Final walk & cleanup",
-    text: "We walk the job with you, touch up anything needed, and leave the site clean. Your satisfaction is the last step.",
+    text: "We walk the job with you, touch up anything needed, and leave the site spotless. Your satisfaction is the last step.",
   },
 ] as const;
 
 export const reviews = [
   {
     quote:
-      "They repainted our entire exterior in Bakersfield — trim, stucco, everything. Showed up when they said they would, kept the yard clean, and the house looks brand new.",
+      "They repainted our entire exterior in Bakersfield — trim, stucco, everything. Showed up on time, kept the yard immaculate, and the house looks brand new. Neighbors keep asking who we hired.",
     name: "Maria G.",
     detail: "Exterior repaint · Bakersfield",
     rating: 5,
   },
   {
     quote:
-      "Our kitchen cabinets were stuck in the 90s. SRL refinished them white and they look like a completely different kitchen. Saved us thousands vs. replacing.",
+      "Our kitchen cabinets were stuck in the 90s. SRL refinished them white and they look like a completely different kitchen. Saved us thousands versus replacing everything.",
     name: "James T.",
     detail: "Cabinet refinishing · Shafter",
     rating: 5,
   },
   {
     quote:
-      "Had our office repainted over a weekend so we didn't lose business days. Professional crew, fair price, and the finish still looks sharp months later.",
+      "Had our office repainted over a weekend so we didn't lose a single business day. Professional crew, fair price, and the finish still looks sharp months later.",
     name: "David R.",
     detail: "Commercial interior · Los Angeles",
     rating: 5,
@@ -216,22 +218,22 @@ export const reviews = [
 export const faqs = [
   {
     q: "How do I get a free estimate?",
-    a: `Message us on Instagram at ${site.instagramHandle} with photos of the areas you want painted and a brief description. Include your city and whether it's interior, exterior, or cabinets. We typically respond within one business day.`,
+    a: `Message us on Instagram at ${site.instagramHandle} with photos of the areas you want painted and a brief description. Include your city and whether it's interior, exterior, or cabinets. We typically respond within one business day with next steps.`,
   },
   {
     q: "Are you a licensed contractor?",
-    a: "Yes. SRL Painting holds California C-33 (Painting & Decorating) license #1108313. We are licensed and bonded. You can verify our license anytime on the California CSLB website.",
+    a: "Yes. SRL Painting holds California C-33 (Painting & Decorating) license #1108313. We are fully licensed and bonded. You can verify our license anytime on the California CSLB website — link in our footer.",
   },
   {
     q: "What cities do you serve?",
-    a: "Our primary service areas are Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. For larger commercial or multi-property projects, we may travel elsewhere in Kern County or Southern California. Just ask.",
+    a: "Our primary service areas are Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. For larger commercial or multi-property projects, we travel throughout Kern County and Southern California. Just ask.",
   },
   {
     q: "Do you handle both interior and exterior work?",
-    a: "Yes. We do full interior repaints, exterior repaints, commercial projects, and cabinet refinishing. Many clients hire us for one project and come back for others.",
+    a: "Absolutely. Full interior repaints, exterior repaints, commercial projects, and cabinet refinishing — all with the same prep-first standard. Many clients hire us for one project and come back for the rest.",
   },
   {
     q: "How long does a typical project take?",
-    a: "It depends on scope. A single room might take a day or two. A full exterior usually runs several days with prep. We give you a realistic timeline in your estimate — and we stick to it.",
+    a: "It depends on scope. A single room might take a day or two. A full exterior usually runs several days with proper prep. We give you a realistic timeline in your estimate — and we stick to it.",
   },
 ] as const;

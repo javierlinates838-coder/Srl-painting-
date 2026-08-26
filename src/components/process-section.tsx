@@ -15,19 +15,19 @@ export function ProcessSection() {
                 Simple process. <span className="text-gradient-dark">Serious results.</span>
               </>
             }
-            description="From first message to final walkthrough — no surprises, no runaround."
+            description="From first DM to final walkthrough — no surprises, no runaround, no shortcuts."
           />
         </Reveal>
 
-        <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="process-timeline mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {process.map((step, i) => (
             <Reveal key={step.num} as="li" delay={(i + 1) as 1 | 2 | 3 | 4} layout="contents">
-              <div className="card h-full p-6">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-sm font-bold text-white">
+              <div className="card relative h-full p-7">
+                <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-light text-sm font-bold text-white shadow-brand">
                   {step.num}
                 </span>
-                <h3 className="font-display mt-4 text-[15px] font-bold text-black">{step.title}</h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-zinc-600">{step.text}</p>
+                <h3 className="font-display mt-5 text-[16px] font-bold text-black">{step.title}</h3>
+                <p className="mt-2.5 text-[13px] leading-relaxed text-zinc-600">{step.text}</p>
               </div>
             </Reveal>
           ))}

@@ -12,31 +12,30 @@ const stats = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="bg-dark section-pad text-white">
+    <section id="about" className="bg-light section-pad">
       <div className="container-main">
-        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <SectionHead
-              light
               label="About"
               title={
                 <>
-                  Local crew. <span className="text-gradient">Licensed work.</span>
+                  Local crew. <span className="text-gradient-dark">Licensed work.</span>
                 </>
               }
-              description="SRL Painting is a California-licensed contractor serving Kern County and Los Angeles. When you hire us, you get a real crew that shows up, preps properly, and stands behind the work."
+              description="SRL Painting is a California-licensed C-33 contractor serving Kern County and Los Angeles. When you hire us, you get a real crew that shows up on time, preps properly, and stands behind every brushstroke."
             />
 
-            <div className="mt-8 grid grid-cols-2 gap-3">
+            <div className="mt-10 grid grid-cols-2 gap-4">
               {stats.map((s) => (
-                <div key={s.l} className="stat-card">
-                  <p className="font-display text-lg font-bold text-white">{s.v}</p>
-                  <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{s.l}</p>
+                <div key={s.l} className="card p-5 text-center">
+                  <p className="font-display text-xl font-bold text-brand">{s.v}</p>
+                  <p className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{s.l}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="#contact" className="btn btn-brand w-full sm:w-auto">
                 Request Estimate
               </Link>
@@ -44,7 +43,7 @@ export function AboutSection() {
                 href={site.licenseVerifyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline w-full sm:w-auto"
+                className="btn btn-outline-dark w-full sm:w-auto"
               >
                 Verify CSLB license
               </a>
@@ -54,17 +53,19 @@ export function AboutSection() {
           <ul className="flex flex-col gap-4">
             {pillars.map((p, i) => (
               <li key={p.title} className="list-none">
-                <article className="pillar-card">
-                  <span className="pillar-num" aria-hidden>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-display text-[17px] font-bold leading-snug text-white sm:text-lg">
-                      {p.title}
-                    </h3>
-                    <p className="mt-2 text-[14px] leading-relaxed text-zinc-400">{p.text}</p>
-                  </div>
-                </article>
+                <Reveal delay={Math.min(i + 1, 3) as 1 | 2 | 3}>
+                  <article className="card flex items-start gap-4 border-l-[3px] border-l-brand p-6 sm:p-7">
+                    <span className="font-display text-sm font-extrabold text-brand" aria-hidden>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-display text-[17px] font-bold leading-snug text-black sm:text-lg">
+                        {p.title}
+                      </h3>
+                      <p className="mt-2 text-[14px] leading-relaxed text-zinc-600">{p.text}</p>
+                    </div>
+                  </article>
+                </Reveal>
               </li>
             ))}
           </ul>

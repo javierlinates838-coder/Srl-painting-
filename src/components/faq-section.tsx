@@ -16,12 +16,12 @@ export function FaqSection() {
           <SectionHead
             align="center"
             label="FAQ"
-            title="Got questions?"
-            description="Quick answers before you reach out."
+            title="Questions? We've got answers."
+            description="Everything you need to know before reaching out."
           />
         </Reveal>
 
-        <ul className="mt-10 space-y-3">
+        <ul className="mt-12 space-y-3">
           {faqs.map((faq, i) => {
             const isOpen = open === i;
             const panelId = `${baseId}-panel-${i}`;
@@ -29,30 +29,37 @@ export function FaqSection() {
 
             return (
               <Reveal key={faq.q} as="li" delay={(i % 4) as 0 | 1 | 2 | 3}>
-                <div className={`card overflow-hidden ${isOpen ? "border-brand/25" : ""}`}>
+                <div className={`card overflow-hidden transition-colors ${isOpen ? "border-brand/30 shadow-md" : ""}`}>
                   <button
                     id={buttonId}
                     type="button"
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => setOpen(isOpen ? null : i)}
-                    className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left"
+                    className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left"
                   >
                     <span className="font-display text-[15px] font-bold text-black">{faq.q}</span>
                     <span
                       aria-hidden
-                      className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-lg leading-none ${
-                        isOpen ? "bg-brand text-white" : "bg-paper-2 text-zinc-500"
+                      className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-lg leading-none transition-colors ${
+                        isOpen ? "bg-gradient-to-br from-brand to-brand-light text-white" : "bg-paper-2 text-zinc-500"
                       }`}
                     >
                       {isOpen ? "−" : "+"}
                     </span>
                   </button>
-                  {isOpen && (
-                    <div id={panelId} role="region" aria-labelledby={buttonId} className="border-t border-black/5 px-5 pb-4 pt-3">
-                      <p className="text-[14px] leading-relaxed text-zinc-600">{faq.a}</p>
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
+                    className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="border-t border-black/5 px-6 pb-5 pt-4">
+                        <p className="text-[14px] leading-relaxed text-zinc-600">{faq.a}</p>
+                      </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               </Reveal>
             );

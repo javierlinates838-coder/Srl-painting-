@@ -13,7 +13,7 @@ export function Header() {
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -40,10 +40,10 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-white/10 bg-charcoal/95 backdrop-blur-lg"
-          : "border-white/5 bg-charcoal/90 backdrop-blur-md"
+          ? "border-b border-white/10 bg-charcoal/95 shadow-lg shadow-black/20 backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
       <div className="container-main flex h-[4.5rem] items-center justify-between gap-4">
@@ -51,7 +51,7 @@ export function Header() {
           <BrandLogo className="h-[3rem] w-auto object-contain sm:h-[3.25rem]" priority />
         </Link>
 
-        <nav className="hidden items-center gap-5 lg:flex xl:gap-6" aria-label="Primary">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Primary">
           {navLinks.map((l) => (
             <Link
               key={l.href}
@@ -70,11 +70,11 @@ export function Header() {
             href={site.licenseVerifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-[12px] text-zinc-500 hover:text-white xl:block"
+            className="hidden text-[12px] text-zinc-500 transition-colors hover:text-white xl:block"
           >
             Verify license
           </a>
-          <Link href="#contact" className="btn btn-brand hidden !px-4 !py-2.5 !text-[13px] md:inline-flex">
+          <Link href="#contact" className="btn btn-brand hidden !px-5 !py-2.5 !text-[13px] md:inline-flex">
             Free Estimate
           </Link>
           <MobileNav />
