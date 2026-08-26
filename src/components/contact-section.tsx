@@ -65,19 +65,19 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="bg-dark section-pad text-white">
+    <section id="contact" className="contact-shell section-pad text-white">
       <div className="container-main">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <SectionHead
               light
-              label="Contact"
+              label="Start a project"
               title={
                 <>
-                  Get your free <span className="text-gradient">estimate.</span>
+                  Let&apos;s make your space <span className="text-gold">feel new.</span>
                 </>
               }
-              description="Fill out the form below. We copy your details and open Instagram — paste them into a DM and attach photos for the fastest quote."
+              description="Tell us what you’re painting, where the project is, and what you want to change. We’ll turn it into a clear, no-obligation estimate."
             />
 
             <a
@@ -85,7 +85,7 @@ export function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Open Instagram DM to ${site.instagramHandle}`}
-              className="surface-dark mt-8 flex items-center gap-4 p-5 hover:border-brand/30"
+              className="mt-8 flex items-center gap-4 border-y border-white/15 py-5 transition hover:border-gold/50"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-white" aria-hidden>
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -95,8 +95,8 @@ export function ContactSection() {
                 </svg>
               </span>
               <div className="min-w-0 flex-1">
-                <p className="font-display text-lg font-bold">{site.instagramHandle}</p>
-                <p className="text-[12px] text-zinc-500">DM us — we reply within 1 business day</p>
+                <p className="font-display text-xl">{site.instagramHandle}</p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-stone-500">DM us · Reply within 1 business day</p>
               </div>
               <svg className="h-5 w-5 shrink-0 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
                 <path strokeLinecap="round" d="M9 5l7 7-7 7" />
@@ -109,7 +109,7 @@ export function ContactSection() {
           </Reveal>
 
           <Reveal delay={2}>
-            <div className="surface-dark p-6 sm:p-8">
+            <div className="contact-panel p-6 sm:p-9">
               {sent ? (
                 <div className="py-6 text-center sm:py-8">
                   <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand/20 text-brand-light">
@@ -117,7 +117,7 @@ export function ContactSection() {
                       <path strokeLinecap="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </span>
-                  <p className="font-display mt-4 text-2xl font-bold">You&apos;re all set</p>
+                  <p className="font-display mt-4 text-3xl">You&apos;re all set</p>
                   <p className="mt-3 text-[14px] text-zinc-400">
                     {copied
                       ? "Your message was copied to the clipboard."
@@ -198,7 +198,7 @@ export function ContactSection() {
                     />
                   </label>
                   <button type="submit" disabled={submitting} className="btn btn-brand w-full !py-3.5 disabled:opacity-60">
-                    {submitting ? "Preparing…" : "Continue to Instagram DM"}
+                    {submitting ? "Preparing…" : "Prepare my estimate request"}
                   </button>
                   <p className="text-center text-[11px] text-zinc-600">
                     Free estimate · No obligation · Lic. {site.license}

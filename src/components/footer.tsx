@@ -7,25 +7,23 @@ const footerLinkClass =
 
 export function Footer() {
   return (
-    <footer className="footer-glow relative border-t border-white/10 bg-black py-14 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] text-zinc-500 sm:py-16 sm:pb-16">
+    <footer className="footer-glow relative border-t border-white/10 bg-black py-14 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] text-stone-500 sm:py-16 sm:pb-16">
       <div className="container-main">
-        <div className="border-b border-white/10 pb-10">
-          <Link href="/" aria-label={`${site.name} home`}>
-            <BrandLogo className="h-12 w-auto object-contain sm:h-14" />
-          </Link>
-          <p className="mt-4 text-[13px] leading-relaxed text-zinc-400">
-            {site.licenseClass} · Lic. {site.license}
-          </p>
-          <p className="mt-2 max-w-md text-[13px] leading-relaxed text-zinc-500">{site.tagline}</p>
-
-          <div className="mt-6 flex w-full max-w-xs flex-col gap-3">
+        <div className="grid gap-8 border-b border-white/10 pb-12 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-gold">Ready when you are</p>
+            <p className="font-display mt-3 max-w-2xl text-4xl leading-tight text-white sm:text-5xl">
+              A better finish starts with a better conversation.
+            </p>
+          </div>
+          <div className="flex w-full max-w-xs flex-col gap-3">
             <a
               href={site.instagramDm}
               target="_blank"
               rel="noopener noreferrer"
               className={`${footerLinkClass} bg-gradient-to-br from-brand to-brand-light text-white shadow-none hover:opacity-90`}
             >
-              Message on Instagram
+              Start on Instagram <span aria-hidden>↗</span>
             </a>
             <a
               href={site.licenseVerifyUrl}
@@ -38,7 +36,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-10 md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-10 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
+          <div className="col-span-2 md:col-span-1">
+            <Link href="/" aria-label={`${site.name} home`}>
+              <BrandLogo className="h-14 w-auto object-contain" />
+            </Link>
+            <p className="mt-4 max-w-xs text-[12px] leading-6 text-stone-500">{site.tagline}</p>
+            <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.12em] text-stone-600">
+              {site.licenseClass} · #{site.license}
+            </p>
+          </div>
           <div>
             <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Navigate</p>
             <ul className="mt-4 space-y-2.5 text-[13px]">
@@ -65,7 +72,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="col-span-2 md:col-span-1">
+          <div>
             <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Connect</p>
             <ul className="mt-4 space-y-2.5 text-[13px]">
               <li>
@@ -88,7 +95,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 border-t border-white/10 pt-8 text-center text-[12px] text-zinc-500 sm:flex-row sm:justify-between sm:text-left">
+        <div className="flex flex-col gap-2 border-t border-white/10 pt-8 text-center text-[11px] text-stone-600 sm:flex-row sm:justify-between sm:text-left">
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>

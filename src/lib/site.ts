@@ -1,10 +1,10 @@
 export const site = {
   name: "SRL Painting",
-  tagline: "Licensed painting contractor · Kern County & Los Angeles",
+  tagline: "Meticulous painting for California homes and businesses.",
   description:
-    "Interior, exterior, commercial, and cabinet painting for homeowners and businesses across Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. Licensed, bonded, and built on prep work that lasts.",
+    "Prep-first interior, exterior, commercial, and cabinet painting across Kern County and Los Angeles. California C-33 licensed and bonded.",
   heroDescription:
-    "Licensed interior, exterior, commercial, and cabinet painting across Kern County and Los Angeles — prep-first work that holds up to California sun.",
+    "Interior, exterior, commercial, and cabinet finishes—meticulously prepped, cleanly delivered, and made to stand up to California life.",
   license: "1108313",
   licenseClass: "C-33 Painting & Decorating",
   licenseVerifyUrl:
@@ -26,10 +26,10 @@ export const navLinks = [
 ] as const;
 
 export const credentials = [
-  { label: "License", value: "CSLB #1108313" },
-  { label: "Classification", value: "C-33 Painting" },
-  { label: "Status", value: "Licensed & Bonded" },
-  { label: "Estimates", value: "Always Free" },
+  { label: "California license", value: "CSLB #1108313" },
+  { label: "Trade classification", value: "C-33 Painting" },
+  { label: "For peace of mind", value: "Licensed & Bonded" },
+  { label: "Start here", value: "Free Estimates" },
 ] as const;
 
 export const pillars = [
@@ -51,7 +51,7 @@ export const services = [
   {
     id: "residential",
     title: "Residential Painting",
-    summary: "Homes that look fresh inside and out.",
+    summary: "A cleaner, sharper home—inside and out.",
     details: [
       "Full exterior repaints with trim, fascia, and garage doors",
       "Interior walls, ceilings, and baseboards",
@@ -62,7 +62,7 @@ export const services = [
   {
     id: "commercial",
     title: "Commercial Painting",
-    summary: "Minimal downtime for your business.",
+    summary: "Professional finishes with minimal disruption.",
     details: [
       "Retail, office, and industrial spaces",
       "After-hours and weekend scheduling available",
@@ -72,8 +72,8 @@ export const services = [
   },
   {
     id: "cabinets",
-    title: "Cabinet Refurbishing",
-    summary: "New-kitchen look without the demolition.",
+    title: "Cabinet Refinishing",
+    summary: "The new-kitchen feeling, without the demolition.",
     details: [
       "Spray-finish on existing cabinet boxes and doors",
       "Hardware updates and minor repairs",
@@ -84,7 +84,7 @@ export const services = [
   {
     id: "new-cabinets",
     title: "New Cabinet Finishing",
-    summary: "Factory-smooth results on new installs.",
+    summary: "A smooth, durable finish from day one.",
     details: [
       "Finish work on new cabinet installations",
       "Even coverage on doors, frames, and panels",

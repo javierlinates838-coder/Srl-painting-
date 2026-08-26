@@ -8,7 +8,7 @@ type Props = {
   afterSrc: string;
   beforeAlt: string;
   afterAlt: string;
-  priority?: boolean;
+  preload?: boolean;
   className?: string;
 };
 
@@ -17,7 +17,7 @@ export function BeforeAfterSlider({
   afterSrc,
   beforeAlt,
   afterAlt,
-  priority = false,
+  preload = false,
   className = "",
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
@@ -105,7 +105,7 @@ export function BeforeAfterSlider({
           sizes="(max-width: 1024px) 100vw, 640px"
           className="object-cover"
           draggable={false}
-          priority={priority}
+          preload={preload}
         />
 
         <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
@@ -116,7 +116,6 @@ export function BeforeAfterSlider({
             sizes="(max-width: 1024px) 100vw, 640px"
             className="object-cover brightness-[0.9] saturate-[0.85]"
             draggable={false}
-            priority={priority}
             aria-hidden
           />
         </div>

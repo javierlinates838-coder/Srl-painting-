@@ -3,10 +3,10 @@ import srlLogo from "@/assets/srl-logo.png";
 
 type BrandLogoProps = {
   className?: string;
-  priority?: boolean;
+  preload?: boolean;
 };
 
-export function BrandLogo({ className = "h-11 w-auto object-contain", priority = false }: BrandLogoProps) {
+export function BrandLogo({ className = "h-11 w-auto object-contain", preload = false }: BrandLogoProps) {
   return (
     <Image
       src={srlLogo}
@@ -14,7 +14,7 @@ export function BrandLogo({ className = "h-11 w-auto object-contain", priority =
       width={srlLogo.width}
       height={srlLogo.height}
       className={className}
-      priority={priority}
+      preload={preload}
       sizes="(max-width: 768px) 120px, 160px"
     />
   );

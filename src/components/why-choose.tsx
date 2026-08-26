@@ -43,22 +43,30 @@ const reasons = [
 
 export function WhyChoose() {
   return (
-    <section className="border-y border-black/6 bg-paper section-pad">
+    <section className="section-pad bg-paper">
       <div className="container-main">
-        <Reveal>
-          <SectionHead align="center" label="Why SRL" title="Built on trust, not shortcuts" />
-        </Reveal>
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <Reveal>
+            <SectionHead
+              label="Why SRL"
+              title={<>The details you don&apos;t see are the ones that make it <span className="text-brand">last.</span></>}
+              description="A polished finish begins before the can opens. We make the process clear, protect what matters, and leave the space ready to enjoy."
+            />
+          </Reveal>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {reasons.map((r, i) => (
-            <Reveal key={r.title} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} layout="contents">
-              <div className="card h-full p-6">
-                <span className="icon-box h-10 w-10">{r.icon}</span>
-                <h3 className="font-display mt-4 text-[15px] font-bold text-black">{r.title}</h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-zinc-600">{r.text}</p>
-              </div>
-            </Reveal>
-          ))}
+          <div className="border-t border-ink/15">
+            {reasons.map((r, i) => (
+              <Reveal key={r.title} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4}>
+                <article className="group grid grid-cols-[auto_1fr] gap-5 border-b border-ink/15 py-6 sm:grid-cols-[auto_0.55fr_1fr] sm:items-center">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-brand/20 text-brand">
+                    {r.icon}
+                  </span>
+                  <h3 className="font-display text-2xl leading-tight text-ink">{r.title}</h3>
+                  <p className="col-start-2 text-[13px] leading-6 text-stone-600 sm:col-start-auto">{r.text}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
