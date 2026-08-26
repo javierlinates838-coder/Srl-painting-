@@ -13,7 +13,7 @@ export function Header() {
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -40,42 +40,30 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-white/10 bg-charcoal/95 shadow-lg shadow-black/20 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled ? "border-b border-[var(--line)] bg-chalk/95 backdrop-blur-sm" : "bg-chalk/80 backdrop-blur-sm"
       }`}
     >
-      <div className="container-main flex h-[4.5rem] items-center justify-between gap-4">
+      <div className="container-main flex h-[4.5rem] items-center justify-between gap-6">
         <Link href="/" className="shrink-0" aria-label={site.name}>
-          <BrandLogo className="h-[3rem] w-auto object-contain sm:h-[3.25rem]" priority />
+          <BrandLogo className="h-[2.75rem] w-auto object-contain sm:h-[3rem]" priority />
         </Link>
 
-        <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Primary">
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
           {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`nav-link text-[12px] font-medium xl:text-[13px] ${
-                active === l.id ? "is-active text-white" : "text-zinc-400 hover:text-white"
-              }`}
+              className={`nav-link ${active === l.id ? "is-active" : ""}`}
             >
               {l.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-          <a
-            href={site.licenseVerifyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden text-[12px] text-zinc-500 transition-colors hover:text-white xl:block"
-          >
-            Verify license
-          </a>
-          <Link href="#contact" className="btn btn-brand hidden !px-5 !py-2.5 !text-[13px] md:inline-flex">
-            Free Estimate
+        <div className="flex shrink-0 items-center gap-4">
+          <Link href="#contact" className="btn btn-fill hidden !px-5 !py-2.5 !text-[0.75rem] md:inline-flex">
+            Inquire
           </Link>
           <MobileNav />
         </div>

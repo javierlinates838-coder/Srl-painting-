@@ -49,9 +49,9 @@ export function MobileNav() {
         aria-label={mobileOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileOpen}
         aria-controls={panelId}
-        className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-white lg:hidden"
+        className="flex h-9 w-9 items-center justify-center border border-[var(--line)] text-ink lg:hidden"
       >
-        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden>
           {mobileOpen ? (
             <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
           ) : (
@@ -64,24 +64,19 @@ export function MobileNav() {
         <div
           ref={panelRef}
           id={panelId}
-          className="fixed inset-0 top-[4.5rem] z-[60] bg-charcoal/98 backdrop-blur-xl lg:hidden"
+          className="fixed inset-0 top-[4.5rem] z-[60] bg-chalk lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"
         >
-          <button
-            type="button"
-            aria-label="Close menu"
-            className="absolute inset-0 -z-10"
-            onClick={close}
-          />
-          <nav className="container-main relative flex flex-col gap-1 py-6" aria-label="Mobile">
+          <button type="button" aria-label="Close menu" className="absolute inset-0 -z-10" onClick={close} />
+          <nav className="container-main flex flex-col border-t border-[var(--line)] py-8" aria-label="Mobile">
             {navLinks.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={close}
-                className="rounded-lg px-4 py-3.5 font-display text-lg font-semibold text-zinc-300 hover:bg-white/5 hover:text-white"
+                className="border-b border-[var(--line-faint)] py-4 font-display text-[1.375rem] text-ink"
               >
                 {l.label}
               </Link>
@@ -91,12 +86,12 @@ export function MobileNav() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={close}
-              className="rounded-lg px-4 py-3.5 text-[15px] text-zinc-400 hover:text-white"
+              className="py-4 text-[0.875rem] text-umber link-underline"
             >
-              Verify CSLB license
+              Verify license
             </a>
-            <Link href="#contact" onClick={close} className="btn btn-brand mt-4 w-full">
-              Free Estimate
+            <Link href="#contact" onClick={close} className="btn btn-fill mt-6 w-full">
+              Inquire
             </Link>
           </nav>
         </div>

@@ -17,22 +17,17 @@ export function BeforeAfterGallery() {
   const next = () => setActive((i) => (i + 1) % total);
 
   return (
-    <section id="work" className="bg-light section-pad">
+    <section id="work" className="section-pad bg-stone">
       <div className="container-main">
         <Reveal>
           <SectionHead
-            label="Our Work"
-            title={
-              <>
-                Before &amp; after. <span className="text-gradient-dark">Real transformations.</span>
-              </>
-            }
-            description="Select a project and drag the slider to compare. Every job starts with meticulous prep and ends with a walkthrough you're proud of."
+            overline="Selected work"
+            title="Before and after."
+            description="Drag the handle to compare. These are real jobs — same prep, same crew, same attention to the parts you won't see."
           />
         </Reveal>
 
-        {/* Project tabs — mobile */}
-        <div className="scrollbar-hide -mx-1 mt-8 flex gap-2 overflow-x-auto px-1 pb-1 lg:hidden" role="tablist" aria-label="Projects">
+        <div className="scrollbar-hide -mx-1 mt-10 flex gap-6 overflow-x-auto px-1 pb-2 lg:hidden" role="tablist" aria-label="Projects">
           {beforeAfterProjects.map((p, i) => (
             <button
               key={p.id}
@@ -41,10 +36,8 @@ export function BeforeAfterGallery() {
               aria-selected={i === active}
               aria-controls="gallery-panel"
               onClick={() => setActive(i)}
-              className={`shrink-0 rounded-full border px-3.5 py-2 text-[12px] font-semibold ${
-                i === active
-                  ? "border-brand bg-brand text-white"
-                  : "border-black/10 bg-white text-zinc-600"
+              className={`shrink-0 border-b-2 pb-1 text-[0.8125rem] font-medium ${
+                i === active ? "border-oxide text-oxide" : "border-transparent text-umber"
               }`}
             >
               {p.title}
@@ -52,9 +45,8 @@ export function BeforeAfterGallery() {
           ))}
         </div>
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
-          {/* Project list — desktop */}
-          <div className="hidden flex-col gap-2 lg:flex" role="tablist" aria-label="Projects">
+        <div className="mt-10 grid gap-12 lg:grid-cols-[14rem_1fr] lg:gap-16">
+          <div className="hidden lg:block" role="tablist" aria-label="Projects">
             {beforeAfterProjects.map((p, i) => (
               <button
                 key={p.id}
@@ -63,28 +55,16 @@ export function BeforeAfterGallery() {
                 aria-selected={i === active}
                 aria-controls="gallery-panel"
                 onClick={() => setActive(i)}
-                className={`card flex w-full items-start gap-3 p-4 text-left ${
-                  i === active ? "border-brand/40 ring-1 ring-brand/20" : ""
-                }`}
+                className="project-index-btn font-display text-[1.0625rem]"
               >
-                <span
-                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-[11px] font-bold ${
-                    i === active ? "bg-brand text-white" : "bg-paper-2 text-zinc-500"
-                  }`}
-                >
-                  {i + 1}
+                <span className="block text-[0.6875rem] font-normal not-italic text-umber-light">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                <div className="min-w-0">
-                  <p className="font-display text-[14px] font-bold text-black">{p.title}</p>
-                  <p className="mt-0.5 text-[12px] text-zinc-500">
-                    {p.category} · {p.location}
-                  </p>
-                </div>
+                {p.title}
               </button>
             ))}
           </div>
 
-          {/* Active project */}
           <div className="min-w-0" id="gallery-panel" role="tabpanel">
             <BeforeAfterSlider
               key={project.id}
@@ -92,55 +72,38 @@ export function BeforeAfterGallery() {
               afterSrc={project.after}
               beforeAlt={`Before — ${project.title}`}
               afterAlt={`After — ${project.title}`}
-              className="shadow-lg ring-1 ring-black/5"
+              className="frame bg-parchment"
             />
 
-            <div className="card mt-5 p-5 sm:p-6">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="font-display text-xl font-bold text-black">{project.title}</h3>
-                  <p className="mt-1 text-[13px] font-medium text-brand">
-                    {project.category} · {project.location}
-                  </p>
-                </div>
-                <span className="shrink-0 rounded-full bg-paper-2 px-3 py-1 text-[11px] font-bold tabular-nums text-zinc-500">
+            <div className="mt-8 grid gap-6 border-t border-[var(--line)] pt-8 sm:grid-cols-[1fr_auto] sm:items-end">
+              <div>
+                <p className="overline">{project.category} · {project.location}</p>
+                <h3 className="headline-md mt-3">{project.title}</h3>
+                <p className="prose-body-sm mt-3 max-w-xl">{project.description}</p>
+                <p className="mt-2 text-[0.8125rem] text-umber-light">{project.scope}</p>
+              </div>
+              <div className="flex items-center gap-6">
+                <span className="font-display text-[0.875rem] tabular-nums text-umber-light">
                   {active + 1} / {total}
                 </span>
-              </div>
-              <p className="mt-3 text-[14px] leading-relaxed text-zinc-600">{project.description}</p>
-              <div className="mt-5 flex flex-wrap items-center gap-3">
-                <Link href="#contact" className="btn btn-brand !text-[13px]">
-                  Get a quote like this
-                </Link>
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    aria-label="Previous project"
-                    onClick={prev}
-                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-black/10 bg-white text-zinc-600 hover:border-brand hover:text-brand"
-                  >
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" d="M15 19l-7-7 7-7" />
-                    </svg>
+                <div className="flex gap-4">
+                  <button type="button" aria-label="Previous project" onClick={prev} className="link-underline text-[0.8125rem]">
+                    Prev
                   </button>
-                  <button
-                    type="button"
-                    aria-label="Next project"
-                    onClick={next}
-                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-black/10 bg-white text-zinc-600 hover:border-brand hover:text-brand"
-                  >
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" d="M9 5l7 7-7 7" />
-                    </svg>
+                  <button type="button" aria-label="Next project" onClick={next} className="link-underline text-[0.8125rem]">
+                    Next
                   </button>
                 </div>
               </div>
             </div>
+
+            <Link href="#contact" className="btn btn-fill mt-8">
+              Inquire about a project like this
+            </Link>
           </div>
         </div>
 
-        {/* Thumbnail strip — desktop only, manual pick */}
-        <div className="mt-10 hidden gap-2 lg:grid lg:grid-cols-5">
+        <div className="mt-16 hidden gap-px bg-[var(--line)] lg:grid lg:grid-cols-5">
           {beforeAfterProjects.map((p, i) => (
             <button
               key={p.id}
@@ -148,30 +111,23 @@ export function BeforeAfterGallery() {
               aria-label={`View project: ${p.title}`}
               aria-current={i === active ? "true" : undefined}
               onClick={() => setActive(i)}
-              className={`relative overflow-hidden rounded-lg border-2 ${
-                i === active ? "border-brand" : "border-transparent opacity-70 hover:opacity-100"
-              }`}
+              className={`relative overflow-hidden bg-parchment ${i === active ? "ring-2 ring-inset ring-oxide" : "opacity-80 hover:opacity-100"}`}
             >
               <div className="grid grid-cols-2">
-                <Image src={p.before} alt="" width={160} height={120} sizes="80px" loading="lazy" className="aspect-[4/3] object-cover brightness-90" />
+                <Image src={p.before} alt="" width={160} height={120} sizes="80px" loading="lazy" className="aspect-[4/3] object-cover grayscale-[30%]" />
                 <Image src={p.after} alt="" width={160} height={120} sizes="80px" loading="lazy" className="aspect-[4/3] object-cover" />
               </div>
-              <p className="absolute inset-x-0 bottom-0 truncate bg-black/75 px-2 py-1.5 text-left text-[10px] font-bold text-white">
-                {p.title}
-              </p>
             </button>
           ))}
         </div>
 
-        <div className="bg-brand-band relative mt-16 flex flex-col items-center justify-between gap-5 overflow-hidden rounded-2xl px-6 py-10 sm:flex-row sm:px-10">
-          <div className="text-center sm:text-left">
-            <p className="font-display text-xl font-bold text-white">More on Instagram</p>
-            <p className="mt-1.5 text-[14px] text-white/80">
-              Latest projects, behind-the-scenes, and fresh finishes from {site.instagramHandle}
-            </p>
+        <div className="mt-20 flex flex-col items-start justify-between gap-6 border-t border-[var(--line)] pt-10 sm:flex-row sm:items-center">
+          <div>
+            <p className="headline-md">More on Instagram</p>
+            <p className="prose-body-sm mt-2">Recent jobs at {site.instagramHandle}</p>
           </div>
-          <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-light shrink-0">
-            Follow {site.instagramHandle}
+          <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-line">
+            Follow
           </a>
         </div>
       </div>

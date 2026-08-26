@@ -13,7 +13,6 @@ import { ReviewsSection } from "@/components/reviews-section";
 import { ServicesSection } from "@/components/services-section";
 import { StickyCta } from "@/components/sticky-cta";
 import { TrustStrip } from "@/components/trust-strip";
-import { WhyChoose } from "@/components/why-choose";
 
 export default function Home() {
   return (
@@ -24,7 +23,6 @@ export default function Home() {
         <TrustStrip />
         <ServicesSection />
         <BeforeAfterGallery />
-        <WhyChoose />
         <ProcessSection />
         <ReviewsSection />
         <AboutSection />

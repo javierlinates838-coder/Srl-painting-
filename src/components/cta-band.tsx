@@ -3,24 +3,20 @@ import { site } from "@/lib/site";
 
 export function CtaBand() {
   return (
-    <section className="bg-brand-band noise-overlay relative section-pad">
-      <div className="container-main relative text-center">
-        <p className="label label-light label-center justify-center">Ready to transform your space?</p>
-        <h2 className="display-lg mx-auto mt-5 max-w-2xl text-balance text-white">
-          Your next project starts with one conversation.
-        </h2>
-        <p className="mx-auto mt-5 max-w-lg text-[1.0625rem] leading-relaxed text-white/85">
-          Message us on Instagram with photos and your city. We&apos;ll reply within one business day with next steps.
-        </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Link href="#contact" className="btn btn-light">
-            Request Free Estimate
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
-              <path strokeLinecap="round" d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
+    <section className="border-t border-[var(--line)] bg-parchment py-16 sm:py-20">
+      <div className="container-main flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
+        <div className="max-w-lg">
+          <p className="headline-md">Ready when you are.</p>
+          <p className="prose-body-sm mt-3">
+            Send photos and your city to {site.instagramHandle}. We&apos;ll take it from there.
+          </p>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Link href="#contact" className="btn btn-fill">
+            Inquire
           </Link>
-          <a href={site.instagramDm} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-            {site.instagramHandle}
+          <a href={site.instagramDm} target="_blank" rel="noopener noreferrer" className="btn btn-line">
+            Instagram
           </a>
         </div>
       </div>
