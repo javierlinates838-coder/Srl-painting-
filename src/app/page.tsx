@@ -7,9 +7,11 @@ import { FaqSection } from "@/components/faq-section";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
+import { IncludedSection } from "@/components/included-section";
 import { NavProvider } from "@/components/nav-provider";
 import { ProcessSection } from "@/components/process-section";
 import { ReviewsSection } from "@/components/reviews-section";
+import { ScrollProgress } from "@/components/scroll-progress";
 import { ServicesSection } from "@/components/services-section";
 import { StickyCta } from "@/components/sticky-cta";
 import { TrustStrip } from "@/components/trust-strip";
@@ -18,12 +20,14 @@ import { WhyChoose } from "@/components/why-choose";
 export default function Home() {
   return (
     <NavProvider>
+      <ScrollProgress />
       <Header />
       <main id="main-content" className="pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
         <Hero />
         <TrustStrip />
-        <ServicesSection />
         <BeforeAfterGallery />
+        <ServicesSection />
+        <IncludedSection />
         <WhyChoose />
         <ProcessSection />
         <ReviewsSection />

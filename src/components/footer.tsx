@@ -3,22 +3,28 @@ import { navLinks, services, site } from "@/lib/site";
 import { BrandLogo } from "./brand-logo";
 
 const footerLinkClass =
-  "inline-flex w-full max-w-xs items-center justify-center rounded-[var(--radius)] px-5 py-3.5 text-[13px] font-semibold leading-tight no-underline transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black";
+  "inline-flex w-full max-w-xs items-center justify-center rounded-full px-5 py-3.5 text-[13px] font-semibold leading-tight no-underline transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black";
 
 export function Footer() {
   return (
-    <footer className="footer-glow relative border-t border-white/10 bg-black py-14 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] text-zinc-500 sm:py-16 sm:pb-16">
+    <footer className="footer-glow relative border-t border-white/10 bg-black py-16 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] text-zinc-500 sm:py-20 sm:pb-20">
       <div className="container-main">
-        <div className="border-b border-white/10 pb-10">
-          <Link href="/" aria-label={`${site.name} home`}>
-            <BrandLogo className="h-12 w-auto object-contain sm:h-14" />
-          </Link>
-          <p className="mt-4 text-[13px] leading-relaxed text-zinc-400">
-            {site.licenseClass} · Lic. {site.license}
-          </p>
-          <p className="mt-2 max-w-md text-[13px] leading-relaxed text-zinc-500">{site.tagline}</p>
+        <div className="grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-[1.3fr_0.9fr] lg:items-end">
+          <div>
+            <Link href="/" aria-label={`${site.name} home`}>
+              <BrandLogo className="h-14 w-auto object-contain sm:h-16" />
+            </Link>
+            <p className="font-display mt-6 max-w-md text-2xl font-medium leading-snug text-white">
+              Prepared like it has to last.
+            </p>
+            <p className="mt-3 max-w-md text-[14px] leading-relaxed text-zinc-500">
+              {site.licenseClass} · Lic. {site.license}
+              <br />
+              {site.tagline}
+            </p>
+          </div>
 
-          <div className="mt-6 flex w-full max-w-xs flex-col gap-3">
+          <div className="flex w-full max-w-xs flex-col gap-3 lg:justify-self-end">
             <a
               href={site.instagramDm}
               target="_blank"
@@ -38,10 +44,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-10 md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-12 md:grid-cols-3">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Navigate</p>
-            <ul className="mt-4 space-y-2.5 text-[13px]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-zinc-400">Navigate</p>
+            <ul className="mt-4 space-y-2.5 text-[14px]">
               {navLinks.map((l) => (
                 <li key={l.id}>
                   <Link href={l.href} className="link-fade text-zinc-400">
@@ -53,12 +59,12 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Services</p>
-            <ul className="mt-4 space-y-2.5 text-[13px]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-zinc-400">Services</p>
+            <ul className="mt-4 space-y-2.5 text-[14px]">
               {services.map((s) => (
                 <li key={s.id}>
                   <Link href="#services" className="link-fade text-zinc-400">
-                    {s.title}
+                    {s.kicker}
                   </Link>
                 </li>
               ))}
@@ -66,8 +72,8 @@ export function Footer() {
           </div>
 
           <div className="col-span-2 md:col-span-1">
-            <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">Connect</p>
-            <ul className="mt-4 space-y-2.5 text-[13px]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-zinc-400">Connect</p>
+            <ul className="mt-4 space-y-2.5 text-[14px]">
               <li>
                 <a href={site.instagramDm} target="_blank" rel="noopener noreferrer" className="link-fade text-zinc-400">
                   {site.instagramHandle}
@@ -83,7 +89,7 @@ export function Footer() {
                   CSLB #{site.license}
                 </a>
               </li>
-              <li className="text-zinc-600">Kern County · Southern CA</li>
+              <li className="text-zinc-600">Kern County · Southern California</li>
             </ul>
           </div>
         </div>

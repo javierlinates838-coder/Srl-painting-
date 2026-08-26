@@ -71,13 +71,13 @@ export function ContactSection() {
           <Reveal>
             <SectionHead
               light
-              label="Contact"
+              label="Start here"
               title={
                 <>
-                  Get your free <span className="text-gradient">estimate.</span>
+                  Send photos. Get a <span className="text-gradient">real scope.</span>
                 </>
               }
-              description="Fill out the form below. We copy your details and open Instagram — paste them into a DM and attach photos for the fastest quote."
+              description="Fill this in and we copy it to your clipboard, then open Instagram. Paste the message, attach pictures, and we will reply within one business day."
             />
 
             <a
@@ -85,7 +85,7 @@ export function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Open Instagram DM to ${site.instagramHandle}`}
-              className="surface-dark mt-8 flex items-center gap-4 p-5 hover:border-brand/30"
+              className="surface-dark mt-8 flex items-center gap-4 p-5 hover:border-gold/40"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-white" aria-hidden>
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -95,13 +95,28 @@ export function ContactSection() {
                 </svg>
               </span>
               <div className="min-w-0 flex-1">
-                <p className="font-display text-lg font-bold">{site.instagramHandle}</p>
-                <p className="text-[12px] text-zinc-500">DM us — we reply within 1 business day</p>
+                <p className="font-display text-lg font-medium">{site.instagramHandle}</p>
+                <p className="text-[12px] text-zinc-500">DM us — typically within one business day</p>
               </div>
               <svg className="h-5 w-5 shrink-0 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
                 <path strokeLinecap="round" d="M9 5l7 7-7 7" />
               </svg>
             </a>
+
+            <ul className="mt-8 space-y-3 text-[14px] text-zinc-400">
+              <li className="flex gap-3">
+                <span className="text-gold">01</span>
+                Photos of the surfaces — peeling, height, and rooms all help.
+              </li>
+              <li className="flex gap-3">
+                <span className="text-gold">02</span>
+                Your city so we know if we already work there.
+              </li>
+              <li className="flex gap-3">
+                <span className="text-gold">03</span>
+                A timeline if you have one. We will tell you if the weather will not allow it.
+              </li>
+            </ul>
 
             <div className="mt-10 hidden lg:block">
               <BrandLogo className="h-auto w-[120px]" />
@@ -112,16 +127,16 @@ export function ContactSection() {
             <div className="surface-dark p-6 sm:p-8">
               {sent ? (
                 <div className="py-6 text-center sm:py-8">
-                  <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand/20 text-brand-light">
+                  <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand/20 text-gold">
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden>
                       <path strokeLinecap="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </span>
-                  <p className="font-display mt-4 text-2xl font-bold">You&apos;re all set</p>
-                  <p className="mt-3 text-[14px] text-zinc-400">
+                  <p className="font-display mt-4 text-3xl font-medium">You&apos;re set</p>
+                  <p className="mt-3 text-[15px] text-zinc-400">
                     {copied
-                      ? "Your message was copied to the clipboard."
-                      : "Copy your message below, then paste it into Instagram."}
+                      ? "Your message is on the clipboard. Paste it into the Instagram DM and attach photos."
+                      : "Copy your message below, then paste it into Instagram and attach photos."}
                   </p>
 
                   {!copied && (
@@ -166,7 +181,7 @@ export function ContactSection() {
                         required
                         autoComplete="address-level2"
                         className="input-dark"
-                        placeholder="Bakersfield, LA, etc."
+                        placeholder="Bakersfield, LA, Tehachapi…"
                       />
                     </label>
                   </div>
@@ -178,7 +193,7 @@ export function ContactSection() {
                     <span className="mb-1.5 block text-[12px] font-semibold text-zinc-400">Service *</span>
                     <select name="service" required defaultValue="" className="input-dark">
                       <option value="" disabled className="text-black">
-                        Select a service
+                        What needs painting?
                       </option>
                       {serviceOptions.map((o) => (
                         <option key={o} value={o} className="text-black">
@@ -194,14 +209,14 @@ export function ContactSection() {
                       required
                       rows={4}
                       className="input-dark resize-y"
-                      placeholder="What needs painting? Timeline? Share photos on IG too."
+                      placeholder="Rooms, peeling, height, timeline — and send photos on Instagram."
                     />
                   </label>
                   <button type="submit" disabled={submitting} className="btn btn-brand w-full !py-3.5 disabled:opacity-60">
                     {submitting ? "Preparing…" : "Continue to Instagram DM"}
                   </button>
-                  <p className="text-center text-[11px] text-zinc-600">
-                    Free estimate · No obligation · Lic. {site.license}
+                  <p className="text-center text-[11px] tracking-wide text-zinc-500">
+                    Free written estimate · No obligation · Lic. {site.license}
                   </p>
                 </form>
               )}

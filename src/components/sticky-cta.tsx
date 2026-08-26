@@ -25,10 +25,10 @@ export function StickyCta() {
           </svg>
         </a>
         <Link href="#work" className="btn btn-ghost flex-1 !py-3 !text-[13px]">
-          Our Work
+          See the work
         </Link>
         <Link href="#contact" className="btn btn-brand flex-1 !py-3 !text-[13px]">
-          Free Estimate
+          Free estimate
         </Link>
       </div>
     </div>

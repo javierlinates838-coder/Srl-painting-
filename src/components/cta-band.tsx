@@ -5,16 +5,16 @@ export function CtaBand() {
   return (
     <section className="bg-brand-band section-pad">
       <div className="container-main text-center">
-        <p className="label label-light">Ready to start?</p>
-        <h2 className="display-lg mx-auto mt-3 max-w-xl text-balance text-white">
-          Your next project starts with one free estimate.
+        <p className="label label-light">Ready when you are</p>
+        <h2 className="display-lg mx-auto mt-4 max-w-2xl text-balance text-white">
+          The next coat starts with a free written estimate.
         </h2>
-        <p className="mx-auto mt-4 max-w-md text-[15px] text-white/80">
-          Message us on Instagram with photos and your city. We&apos;ll reply within one business day.
+        <p className="mx-auto mt-4 max-w-lg text-[16px] leading-relaxed text-white/80">
+          Send photos and your city on Instagram. We will tell you what the job actually is — and what it costs — before anyone shows up.
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <Link href="#contact" className="btn btn-light">
-            Request Free Estimate
+            Get a written estimate
           </Link>
           <a href={site.instagramDm} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
             {site.instagramHandle}

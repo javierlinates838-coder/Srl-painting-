@@ -22,7 +22,10 @@ export function LocalBusinessSchema({ siteUrl }: Props) {
       "Interior painting",
       "Exterior painting",
       "Cabinet refinishing",
+      "New cabinet finishing",
       "Commercial painting",
+      "Stucco painting",
+      "Wood staining",
     ],
     hasCredential: {
       "@type": "EducationalOccupationalCredential",

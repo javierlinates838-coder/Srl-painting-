@@ -1,27 +1,27 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Figtree, Fraunces } from "next/font/google";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = Plus_Jakarta_Sans({
+const display = Fraunces({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  axes: ["SOFT", "opsz"],
 });
 
-const body = Inter({
+const body = Figtree({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : site.siteUrl);
 
-const pageTitle = `${site.name} | Licensed Painter in Bakersfield & Los Angeles`;
+const pageTitle = `${site.name} | Prep-first painting in Bakersfield & Los Angeles`;
 const ogImage = "/projects/exterior-after.jpg";
 
 export const metadata: Metadata = {
@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     "commercial painting Los Angeles",
     "SRL Painting",
     "licensed painter California",
+    "C-33 painting contractor",
+    "Tehachapi painter",
+    "Lake Isabella house painter",
   ],
   icons: { icon: "/logo.png", apple: "/logo.png" },
   robots: { index: true, follow: true },
@@ -45,7 +48,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: site.name,
-    images: [{ url: ogImage, width: 1200, height: 800, alt: `${site.name} exterior project` }],
+    images: [{ url: ogImage, width: 1200, height: 800, alt: `${site.name} exterior project in Kern County` }],
   },
   twitter: {
     card: "summary_large_image",
@@ -57,7 +60,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#161618",
+  themeColor: "#1a1614",
   width: "device-width",
   initialScale: 1,
 };

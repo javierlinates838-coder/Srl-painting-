@@ -42,21 +42,21 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 ${
         scrolled
-          ? "border-white/10 bg-charcoal/95 backdrop-blur-lg"
-          : "border-white/5 bg-charcoal/90 backdrop-blur-md"
+          ? "border-white/10 bg-charcoal/96 backdrop-blur-lg"
+          : "border-white/5 bg-charcoal/88 backdrop-blur-md"
       }`}
     >
-      <div className="container-main flex h-[4.5rem] items-center justify-between gap-4">
+      <div className="container-main flex h-[4.75rem] items-center justify-between gap-4">
         <Link href="/" className="shrink-0" aria-label={site.name}>
-          <BrandLogo className="h-[3rem] w-auto object-contain sm:h-[3.25rem]" priority />
+          <BrandLogo className="h-[3.1rem] w-auto object-contain sm:h-[3.35rem]" preload />
         </Link>
 
-        <nav className="hidden items-center gap-5 lg:flex xl:gap-6" aria-label="Primary">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Primary">
           {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`nav-link text-[12px] font-medium xl:text-[13px] ${
+              className={`nav-link text-[12px] font-semibold tracking-wide xl:text-[13px] ${
                 active === l.id ? "is-active text-white" : "text-zinc-400 hover:text-white"
               }`}
             >
@@ -70,12 +70,12 @@ export function Header() {
             href={site.licenseVerifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-[12px] text-zinc-500 hover:text-white xl:block"
+            className="hidden text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500 hover:text-gold xl:block"
           >
-            Verify license
+            Verify CSLB
           </a>
           <Link href="#contact" className="btn btn-brand hidden !px-4 !py-2.5 !text-[13px] md:inline-flex">
-            Free Estimate
+            Free estimate
           </Link>
           <MobileNav />
         </div>

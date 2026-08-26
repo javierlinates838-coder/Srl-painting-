@@ -96,7 +96,7 @@ export function MobileNav() {
               Verify CSLB license
             </a>
             <Link href="#contact" onClick={close} className="btn btn-brand mt-4 w-full">
-              Free Estimate
+              Get a written estimate
             </Link>
           </nav>
         </div>

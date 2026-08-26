@@ -4,41 +4,41 @@ import { Reveal } from "./reveal";
 import { SectionHead } from "./section-head";
 
 const stats = [
-  { v: `#${site.license}`, l: "CSLB License" },
-  { v: "C-33", l: "Classification" },
-  { v: "Bonded", l: "Fully insured" },
-  { v: "Free", l: "Estimates" },
+  { v: `#${site.license}`, l: "CSLB license" },
+  { v: "C-33", l: "Painting & decorating" },
+  { v: "Bonded", l: "Licensed contractor" },
+  { v: "Free", l: "Written estimates" },
 ];
 
 export function AboutSection() {
   return (
     <section id="about" className="bg-dark section-pad text-white">
       <div className="container-main">
-        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <SectionHead
               light
-              label="About"
+              label="The crew"
               title={
                 <>
-                  Local crew. <span className="text-gradient">Licensed work.</span>
+                  Local hands. <span className="text-gradient">Licensed work.</span>
                 </>
               }
-              description="SRL Painting is a California-licensed contractor serving Kern County and Los Angeles. When you hire us, you get a real crew that shows up, preps properly, and stands behind the work."
+              description="SRL Painting is a California C-33 contractor serving Kern County and Los Angeles. When you hire us, you get a real crew that shows up, preps properly, and stands at the door for the walkthrough."
             />
 
-            <div className="mt-8 grid grid-cols-2 gap-3">
+            <div className="mt-9 grid grid-cols-2 gap-3">
               {stats.map((s) => (
                 <div key={s.l} className="stat-card">
-                  <p className="font-display text-lg font-bold text-white">{s.v}</p>
-                  <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{s.l}</p>
+                  <p className="font-display text-xl font-medium text-white">{s.v}</p>
+                  <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">{s.l}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="#contact" className="btn btn-brand w-full sm:w-auto">
-                Request Estimate
+                Request an estimate
               </Link>
               <a
                 href={site.licenseVerifyUrl}
@@ -59,7 +59,7 @@ export function AboutSection() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-display text-[17px] font-bold leading-snug text-white sm:text-lg">
+                    <h3 className="font-display text-[1.2rem] font-medium leading-snug text-white">
                       {p.title}
                     </h3>
                     <p className="mt-2 text-[14px] leading-relaxed text-zinc-400">{p.text}</p>

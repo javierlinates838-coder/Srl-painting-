@@ -17,25 +17,25 @@ const icons = [
 
 export function TrustStrip() {
   return (
-    <div className="border-y border-black/6 bg-white">
+    <div className="border-y border-black/8 bg-white">
       <div className="container-main">
-        <div className="grid grid-cols-2 gap-px bg-black/6 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-px bg-black/8 md:grid-cols-4">
           {credentials.map((c, i) => (
-            <div key={c.label} className="flex flex-col items-center justify-center bg-white px-4 py-5 text-center sm:py-6">
-              <span className="icon-box mb-2 h-8 w-8">{icons[i]}</span>
+            <div key={c.label} className="flex flex-col items-center justify-center bg-white px-4 py-6 text-center sm:py-7">
+              <span className="icon-box mb-2.5 h-8 w-8">{icons[i]}</span>
               {c.label === "License" ? (
                 <a
                   href={site.licenseVerifyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-display text-sm font-bold text-brand underline-offset-2 hover:underline sm:text-base"
+                  className="font-display text-[1.05rem] font-medium text-brand underline-offset-4 hover:underline sm:text-lg"
                 >
                   {c.value}
                 </a>
               ) : (
-                <p className="font-display text-sm font-bold text-brand sm:text-base">{c.value}</p>
+                <p className="font-display text-[1.05rem] font-medium text-brand sm:text-lg">{c.value}</p>
               )}
-              <p className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-zinc-500 sm:text-[11px]">
+              <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-500 sm:text-[11px]">
                 {c.label}
               </p>
             </div>

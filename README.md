@@ -4,9 +4,9 @@ A Next.js marketing site for **SRL Painting**, a licensed California painting co
 
 ## Features
 
-- Brand-aligned design (burgundy / maroon palette)
-- Services, before/after gallery, reviews, FAQ, and contact sections
-- Instagram-first contact flow with estimate request form
+- Editorial craft design (serif headlines, burgundy / gold palette)
+- Work-first layout: before/after gallery, services, what's included, reviews, FAQ, contact
+- Instagram-first estimate flow
 - CSLB license verification links
 - SEO: sitemap, robots.txt, Open Graph, Twitter cards, JSON-LD
 
@@ -42,6 +42,7 @@ Set `NEXT_PUBLIC_SITE_URL` to your production domain in Vercel environment varia
 | Path | Purpose |
 |------|---------|
 | `src/app/page.tsx` | Single-page layout |
-| `src/components/before-after-gallery.tsx` | Project gallery |
-| `src/components/brand-logo.tsx` | Logo component |
 | `src/lib/site.ts` | All site content & nav |
+| `src/components/before-after-gallery.tsx` | Project gallery |
+| `src/components/included-section.tsx` | What's included on every job |
+| `src/components/brand-logo.tsx` | Logo component |
