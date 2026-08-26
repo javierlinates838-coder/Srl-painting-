@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container-main">
         <div className="border-b border-white/10 pb-10">
           <Link href="/" aria-label={`${site.name} home`}>
-            <BrandLogo className="h-12 w-auto object-contain brightness-0 invert sm:h-14" />
+            <BrandLogo className="h-12 w-auto object-contain sm:h-14" />
           </Link>
           <p className="mt-5 text-[14px] leading-relaxed text-white/70">
             {site.licenseClass} · Lic. {site.license}

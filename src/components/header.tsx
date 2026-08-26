@@ -47,13 +47,8 @@ export function Header() {
       }`}
     >
       <div className="container-main flex h-[4.75rem] items-center justify-between gap-4">
-        <Link href="/" className="shrink-0" aria-label={site.name}>
-          <BrandLogo
-            className={`h-[2.85rem] w-auto object-contain transition sm:h-[3.1rem] ${
-              scrolled ? "" : "brightness-0 invert"
-            }`}
-            priority
-          />
+        <Link href="/" className="shrink-0 drop-shadow-md" aria-label={site.name}>
+          <BrandLogo className="h-[2.85rem] w-auto object-contain sm:h-[3.1rem]" priority />
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex xl:gap-7" aria-label="Primary">
