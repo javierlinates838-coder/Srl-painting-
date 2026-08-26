@@ -40,7 +40,7 @@ export function Hero() {
             </div>
 
             <div className="mt-10 flex items-center gap-3">
-              <div className="flex -space-x-1.5" aria-hidden>
+              <div className="flex gap-1.5" aria-hidden>
                 {paintChips.map((c) => (
                   <span key={c.name} className="chip" style={{ background: c.hex }} title={c.name} />
                 ))}

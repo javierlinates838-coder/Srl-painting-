@@ -107,8 +107,8 @@ export const services = [
     title: "Factory-smooth on new installs",
     kicker: "New cabinet finishing",
     summary: "Even, durable color on new cabinets — coordinated with your builder, not fighting them.",
-    image: "/projects/gazebo-after.jpg",
-    imageAlt: "Precision finish work on outdoor wood structure",
+    image: "/projects/cabinets-after.jpg",
+    imageAlt: "Spray-smooth white cabinet finish on a kitchen install",
     details: [
       "Finish work on new cabinet installations",
       "Even coverage on doors, frames, panels, and interiors",

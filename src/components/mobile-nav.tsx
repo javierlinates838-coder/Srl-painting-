@@ -64,7 +64,7 @@ export function MobileNav() {
         <div
           ref={panelRef}
           id={panelId}
-          className="fixed inset-0 top-[4.5rem] z-[60] bg-charcoal/98 backdrop-blur-xl lg:hidden"
+          className="fixed inset-0 top-[4.75rem] z-[60] bg-charcoal/98 backdrop-blur-xl lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"

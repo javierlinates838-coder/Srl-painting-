@@ -74,7 +74,7 @@ export function Header() {
           >
             Verify CSLB
           </a>
-          <Link href="#contact" className="btn btn-brand hidden !px-4 !py-2.5 !text-[13px] md:inline-flex">
+          <Link href="#contact" className="btn btn-brand !hidden !px-4 !py-2.5 !text-[13px] md:!inline-flex">
             Free estimate
           </Link>
           <MobileNav />
