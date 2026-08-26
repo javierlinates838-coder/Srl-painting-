@@ -1,47 +1,54 @@
 import Link from "next/link";
 import { services } from "@/lib/site";
 import { Reveal } from "./reveal";
+import { IosGroup, IosRow } from "./ios-group";
 import { SectionHead } from "./section-head";
 
 export function ServicesSection() {
   return (
-    <section id="services" className="section-pad bg-chalk">
-      <div className="container-main">
+    <section id="services" className="section-pad">
+      <div className="container-main space-y-3">
         <Reveal>
           <SectionHead
-            overline="What we do"
-            title="Four kinds of work. Same standard on each."
-            description="Residential, commercial, cabinets — the surfaces change, the approach doesn't."
+            overline="Services"
+            title="What we paint"
+            description="Residential, commercial, and cabinets — same crew, same standard."
           />
         </Reveal>
 
-        <div className="mt-16">
-          {services.map((s, i) => (
-            <Reveal key={s.id} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} layout="contents">
-              <article className="service-row lg:grid-cols-[3rem_1fr_1.5fr_auto] lg:items-start">
-                <span className="service-roman" aria-hidden>
-                  {s.roman}
+        <Reveal delay={1}>
+          <IosGroup className="mt-2">
+            {services.map((s) => (
+              <IosRow key={s.id} href="#contact" chevron>
+                <span className="ios-row-content">
+                  <span className="ios-headline block">
+                    <span className="ios-caption mr-2 text-ios-brand">{s.roman}</span>
+                    {s.title}
+                  </span>
+                  <span className="ios-footnote mt-0.5 block">{s.summary}</span>
                 </span>
-                <div>
-                  <h3 className="headline-md">{s.title}</h3>
-                  <p className="prose-body-sm mt-2">{s.summary}</p>
-                </div>
-                <ul className="space-y-1.5">
-                  {s.details.map((d) => (
-                    <li key={d} className="text-[0.875rem] leading-relaxed text-umber">
-                      — {d}
-                    </li>
-                  ))}
-                </ul>
-                <div className="lg:pt-1">
-                  <Link href="#contact" className="link-underline text-[0.8125rem] font-medium uppercase tracking-wider">
-                    Inquire
-                  </Link>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+              </IosRow>
+            ))}
+          </IosGroup>
+        </Reveal>
+
+        {services.map((s, i) => (
+          <Reveal key={`${s.id}-detail`} delay={Math.min(i + 2, 4) as 1 | 2 | 3 | 4}>
+            <div className="mt-4">
+              <p className="ios-section-header">{s.title}</p>
+              <IosGroup>
+                {s.details.map((d) => (
+                  <IosRow key={d}>
+                    <span className="ios-subhead">{d}</span>
+                  </IosRow>
+                ))}
+                <IosRow href="#contact" chevron>
+                  <span className="ios-body text-ios-tint">Request estimate</span>
+                </IosRow>
+              </IosGroup>
+            </div>
+          </Reveal>
+        ))}
       </div>
     </section>
   );

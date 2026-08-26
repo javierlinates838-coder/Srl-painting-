@@ -1,65 +1,61 @@
 import Link from "next/link";
 import { pillars, site } from "@/lib/site";
 import { Reveal } from "./reveal";
+import { IosGroup, IosRow } from "./ios-group";
 import { SectionHead } from "./section-head";
 
 export function AboutSection() {
   return (
-    <section id="about" className="section-pad bg-stone">
-      <div className="container-main">
-        <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
-          <Reveal>
-            <SectionHead
-              overline="About"
-              title="A local crew. A state license."
-              description="SRL Painting holds C-33 license #1108313 — bonded, insured, based in Kern County. We show up, prep the surface right, and leave when the job is done."
-            />
+    <section id="about" className="section-pad">
+      <div className="container-main space-y-3">
+        <Reveal>
+          <SectionHead
+            overline="About"
+            title={site.name}
+            description="Licensed C-33 contractor based in Kern County. We show up, prep right, and leave clean."
+          />
+        </Reveal>
 
-            <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-[var(--line)] pt-8">
-              <div>
-                <dt className="overline text-[0.625rem]">License</dt>
-                <dd className="font-display mt-2 text-[1.25rem]">#{site.license}</dd>
-              </div>
-              <div>
-                <dt className="overline text-[0.625rem]">Class</dt>
-                <dd className="font-display mt-2 text-[1.25rem]">C-33</dd>
-              </div>
-              <div>
-                <dt className="overline text-[0.625rem]">Estimates</dt>
-                <dd className="font-display mt-2 text-[1.25rem]">Free</dd>
-              </div>
-              <div>
-                <dt className="overline text-[0.625rem]">Bonded</dt>
-                <dd className="font-display mt-2 text-[1.25rem]">Yes</dd>
-              </div>
-            </dl>
+        <Reveal delay={1}>
+          <IosGroup className="mt-2">
+            <IosRow>
+              <span className="ios-row-content flex justify-between">
+                <span className="ios-body">License</span>
+                <span className="ios-subhead">#{site.license}</span>
+              </span>
+            </IosRow>
+            <IosRow>
+              <span className="ios-row-content flex justify-between">
+                <span className="ios-body">Classification</span>
+                <span className="ios-subhead">C-33</span>
+              </span>
+            </IosRow>
+            <IosRow href={site.licenseVerifyUrl} chevron>
+              <span className="ios-body text-ios-tint">Verify on CSLB</span>
+            </IosRow>
+          </IosGroup>
+        </Reveal>
 
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link href="#contact" className="btn btn-fill w-full sm:w-auto">
-                Inquire
-              </Link>
-              <a
-                href={site.licenseVerifyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-line w-full sm:w-auto"
-              >
-                Verify license
-              </a>
-            </div>
-          </Reveal>
-
-          <div className="space-y-10">
+        <Reveal delay={2}>
+          <p className="ios-section-header mt-4">Our approach</p>
+          <IosGroup>
             {pillars.map((p, i) => (
-              <Reveal key={p.title} delay={Math.min(i + 1, 3) as 1 | 2 | 3}>
-                <article className="border-t border-[var(--line)] pt-8 first:border-t-0 first:pt-0">
-                  <h3 className="headline-md">{p.title}</h3>
-                  <p className="prose-body-sm mt-4">{p.text}</p>
-                </article>
-              </Reveal>
+              <IosRow key={p.title}>
+                <span className="ios-row-content flex gap-3">
+                  <span className="ios-caption font-semibold text-ios-brand">{String(i + 1).padStart(2, "0")}</span>
+                  <span>
+                    <span className="ios-headline block">{p.title}</span>
+                    <span className="ios-footnote mt-1 block leading-relaxed">{p.text}</span>
+                  </span>
+                </span>
+              </IosRow>
             ))}
-          </div>
-        </div>
+          </IosGroup>
+        </Reveal>
+
+        <Link href="#contact" className="ios-btn ios-btn-brand mt-4 w-full">
+          Get Estimate
+        </Link>
       </div>
     </section>
   );

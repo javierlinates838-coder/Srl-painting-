@@ -1,43 +1,45 @@
 import { reviews, serviceAreas } from "@/lib/site";
 import { Reveal } from "./reveal";
+import { IosGroup, IosRow } from "./ios-group";
 import { SectionHead } from "./section-head";
 
 export function ReviewsSection() {
   return (
-    <section id="reviews" className="section-pad bg-parchment">
-      <div className="container-main">
+    <section id="reviews" className="section-pad">
+      <div className="container-main space-y-3">
         <Reveal>
-          <SectionHead
-            overline="Clients"
-            title="In their words."
-          />
+          <SectionHead overline="Clients" title="Reviews" />
         </Reveal>
 
-        <div className="mt-16 grid gap-16 lg:grid-cols-3">
-          {reviews.map((r, i) => (
-            <Reveal key={r.name} delay={Math.min(i + 1, 3) as 1 | 2 | 3} layout="contents">
-              <figure>
-                <blockquote className="pull-quote">&ldquo;{r.quote}&rdquo;</blockquote>
-                <figcaption className="mt-6 border-t border-[var(--line)] pt-4">
-                  <p className="text-[0.875rem] font-medium text-ink">{r.name}</p>
-                  <p className="mt-0.5 text-[0.8125rem] text-umber-light">{r.detail}</p>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
+        {reviews.map((r, i) => (
+          <Reveal key={r.name} delay={Math.min(i + 1, 3) as 1 | 2 | 3}>
+            <IosGroup className="mt-2">
+              <IosRow>
+                <span className="ios-row-content">
+                  <span className="ios-body block leading-relaxed">&ldquo;{r.quote}&rdquo;</span>
+                  <span className="ios-headline mt-3 block">{r.name}</span>
+                  <span className="ios-footnote">{r.detail}</span>
+                </span>
+              </IosRow>
+            </IosGroup>
+          </Reveal>
+        ))}
 
-        <div className="mt-24 border-t border-[var(--line)] pt-16">
-          <SectionHead overline="Coverage" title="Where we work." />
-          <ul className="mt-10 grid gap-px bg-[var(--line)] sm:grid-cols-2 lg:grid-cols-5">
-            {serviceAreas.map((a) => (
-              <li key={a.city} className="bg-parchment px-5 py-6">
-                <p className="font-display text-[1.125rem] text-ink">{a.city}</p>
-                <p className="mt-1 text-[0.8125rem] text-umber-light">{a.note}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Reveal delay={2}>
+          <div className="mt-6">
+            <p className="ios-section-header">Service areas</p>
+            <IosGroup>
+              {serviceAreas.map((a) => (
+                <IosRow key={a.city}>
+                  <span className="ios-row-content flex items-center justify-between">
+                    <span className="ios-body">{a.city}</span>
+                    <span className="ios-footnote">{a.note}</span>
+                  </span>
+                </IosRow>
+              ))}
+            </IosGroup>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

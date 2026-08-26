@@ -1,31 +1,24 @@
 import { credentials, site } from "@/lib/site";
+import { IosGroup, IosRow } from "./ios-group";
 
 export function TrustStrip() {
   return (
-    <div className="border-b border-[var(--line)] bg-parchment">
-      <div className="container-main">
-        <dl className="grid grid-cols-2 divide-x divide-[var(--line-faint)] md:grid-cols-4">
-          {credentials.map((c) => (
-            <div key={c.label} className="px-4 py-6 text-center sm:py-7">
-              <dt className="overline text-[0.625rem]">{c.label}</dt>
-              <dd className="font-display mt-2 text-[1.0625rem] text-ink">
-                {c.label === "State license" ? (
-                  <a
-                    href={site.licenseVerifyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-underline"
-                  >
-                    {c.value}
-                  </a>
-                ) : (
-                  c.value
-                )}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </div>
+    <div className="container-main pb-2">
+      <p className="ios-section-header">Credentials</p>
+      <IosGroup>
+        {credentials.map((c) => (
+          <IosRow
+            key={c.label}
+            href={c.label === "State license" ? site.licenseVerifyUrl : undefined}
+            chevron={c.label === "State license"}
+          >
+            <span className="ios-row-content flex items-center justify-between gap-4">
+              <span className="ios-body">{c.label}</span>
+              <span className="ios-subhead">{c.value}</span>
+            </span>
+          </IosRow>
+        ))}
+      </IosGroup>
     </div>
   );
 }

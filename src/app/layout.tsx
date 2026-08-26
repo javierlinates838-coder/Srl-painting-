@@ -1,27 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Instrument_Serif, Libre_Franklin } from "next/font/google";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { site } from "@/lib/site";
 import "./globals.css";
-
-const display = Instrument_Serif({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
-const body = Libre_Franklin({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : site.siteUrl);
 
-const pageTitle = `${site.name} — Licensed Painter, Kern County & Los Angeles`;
+const pageTitle = `${site.name}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -37,6 +24,11 @@ export const metadata: Metadata = {
   ],
   icons: { icon: "/logo.png", apple: "/logo.png" },
   robots: { index: true, follow: true },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: site.name,
+  },
   openGraph: {
     title: pageTitle,
     description: site.description,
@@ -56,14 +48,15 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1a1714",
+  themeColor: "#f2f2f7",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
+    <html lang="en">
       <body>
         <a href="#main-content" className="skip-link">
           Skip to content
@@ -72,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {`document.documentElement.classList.add("js")`}
         </Script>
         <LocalBusinessSchema siteUrl={siteUrl} />
-        {children}
+        <div className="ios-app-shell">{children}</div>
       </body>
     </html>
   );

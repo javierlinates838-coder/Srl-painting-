@@ -1,5 +1,4 @@
 import { AboutSection } from "@/components/about-section";
-import { BackToTop } from "@/components/back-to-top";
 import { BeforeAfterGallery } from "@/components/before-after-gallery";
 import { ContactSection } from "@/components/contact-section";
 import { CtaBand } from "@/components/cta-band";
@@ -18,7 +17,7 @@ export default function Home() {
   return (
     <NavProvider>
       <Header />
-      <main id="main-content" className="pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
+      <main id="main-content" className="pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))]">
         <Hero />
         <TrustStrip />
         <ServicesSection />
@@ -32,7 +31,6 @@ export default function Home() {
       </main>
       <Footer />
       <StickyCta />
-      <BackToTop />
     </NavProvider>
   );
 }

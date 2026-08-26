@@ -1,31 +1,18 @@
 import type { ReactNode } from "react";
 
 type SectionHeadProps = {
-  overline: string;
+  overline?: string;
   title: ReactNode;
   description?: ReactNode;
-  align?: "left" | "center";
-  light?: boolean;
   className?: string;
 };
 
-export function SectionHead({
-  overline,
-  title,
-  description,
-  align = "left",
-  light = false,
-  className = "",
-}: SectionHeadProps) {
-  const centered = align === "center";
-
+export function SectionHead({ overline, title, description, className = "" }: SectionHeadProps) {
   return (
-    <div className={[centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl", className].filter(Boolean).join(" ")}>
-      <p className={`overline ${light ? "!text-umber-light" : ""}`}>{overline}</p>
-      <h2 className={`headline-lg mt-5 text-balance ${light ? "!text-chalk" : ""}`}>{title}</h2>
-      {description ? (
-        <div className={`mt-5 ${light ? "prose-body-sm !text-umber-light" : "prose-body"}`}>{description}</div>
-      ) : null}
+    <div className={["px-1", className].filter(Boolean).join(" ")}>
+      {overline ? <p className="ios-section-header !px-0">{overline}</p> : null}
+      <h2 className={`ios-title-1 text-balance ${overline ? "mt-1" : ""}`}>{title}</h2>
+      {description ? <p className="ios-callout mt-2">{description}</p> : null}
     </div>
   );
 }

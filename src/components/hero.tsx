@@ -1,61 +1,68 @@
 import Link from "next/link";
-import { beforeAfterProjects, site, serviceAreas } from "@/lib/site";
+import { beforeAfterProjects, credentials, site, serviceAreas } from "@/lib/site";
 import { BeforeAfterSlider } from "./before-after-slider";
+import { IosGroup, IosRow } from "./ios-group";
 
 export function Hero() {
   const project = beforeAfterProjects[0];
 
   return (
-    <section className="bg-chalk border-b border-[var(--line)] pt-[4.5rem]">
-      <div className="container-main grid items-end gap-12 py-16 sm:py-20 lg:grid-cols-[1fr_1.1fr] lg:gap-20 lg:py-28">
-        <div className="max-w-xl">
-          <p className="overline">{site.tagline}</p>
-
-          <h1 className="headline-xl mt-8 text-balance">
+    <section className="pt-[3.25rem]">
+      <div className="container-main space-y-5 pb-6 pt-4">
+        <div>
+          <p className="ios-footnote">{site.tagline}</p>
+          <h1 className="ios-large-title mt-1 text-balance">
             {site.heroHeadline}
             <br />
-            <span className="font-serif-italic text-oxide">{site.heroHeadlineAccent}</span>
+            <span className="text-ios-brand">{site.heroHeadlineAccent}</span>
           </h1>
-
-          <p className="prose-body mt-8 max-w-md">{site.heroDescription}</p>
-
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link href="#contact" className="btn btn-fill w-full sm:w-auto">
-              Request estimate
-            </Link>
-            <Link href="#work" className="btn btn-line w-full sm:w-auto">
-              View work
-            </Link>
-          </div>
-
-          <hr className="hairline mt-12" />
-
-          <p className="mt-6 text-[0.8125rem] leading-relaxed text-umber">
-            Serving{" "}
-            {serviceAreas.map((a, i) => (
-              <span key={a.city}>
-                {i > 0 && (i === serviceAreas.length - 1 ? ", and " : ", ")}
-                {a.city}
-              </span>
-            ))}
-            .
-          </p>
+          <p className="ios-callout mt-3">{site.heroDescription}</p>
         </div>
 
-        <div>
+        <div className="ios-hero-card">
           <BeforeAfterSlider
             beforeSrc={project.before}
             afterSrc={project.after}
             beforeAlt={`Before — ${project.title}`}
             afterAlt={`After — ${project.title}`}
             priority
-            className="frame"
           />
-          <figcaption className="mt-4 flex items-baseline justify-between gap-4 text-[0.8125rem] text-umber">
-            <span className="font-display text-[1rem] text-ink">{project.title}</span>
-            <span>{project.scope}</span>
-          </figcaption>
+          <div className="px-4 py-3">
+            <p className="ios-headline">{project.title}</p>
+            <p className="ios-footnote mt-0.5">{project.scope}</p>
+          </div>
         </div>
+
+        <div className="flex flex-wrap gap-2">
+          {credentials.slice(0, 3).map((c) => (
+            <span key={c.label} className="ios-stat-pill">
+              {c.value}
+            </span>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-2 gap-2.5">
+          <Link href="#contact" className="ios-btn ios-btn-brand col-span-2">
+            Get Estimate
+          </Link>
+          <Link href="#work" className="ios-btn ios-btn-gray">
+            Our Work
+          </Link>
+          <Link href="#services" className="ios-btn ios-btn-gray">
+            Services
+          </Link>
+        </div>
+
+        <IosGroup>
+          <IosRow>
+            <span className="ios-row-content">
+              <span className="ios-footnote block">Service areas</span>
+              <span className="ios-subhead mt-0.5 block">
+                {serviceAreas.map((a) => a.city).join(" · ")}
+              </span>
+            </span>
+          </IosRow>
+        </IosGroup>
       </div>
     </section>
   );
