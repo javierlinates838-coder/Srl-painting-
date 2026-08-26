@@ -26,9 +26,21 @@ npm run build
 npm start
 ```
 
-Deploy to [Vercel](https://vercel.com) or any Node host that supports Next.js.
+### Vercel (recommended)
 
-Set `NEXT_PUBLIC_SITE_URL` to your production domain in Vercel environment variables.
+This is a standard Next.js App Router project — Vercel auto-detects the framework.
+
+1. Import the GitHub repo at [vercel.com/new](https://vercel.com/new)
+2. Use the default settings (framework: **Next.js**, build: `npm run build`)
+3. Add an environment variable in the Vercel dashboard:
+
+| Variable | Value |
+|----------|-------|
+| `NEXT_PUBLIC_SITE_URL` | `https://srl-painting.vercel.app` (or your custom domain) |
+
+`VERCEL_URL` is set automatically on each deployment for preview URLs. Production SEO (sitemap, Open Graph, JSON-LD) uses `NEXT_PUBLIC_SITE_URL` when set.
+
+A `vercel.json` is included to pin the build/install commands.
 
 ## Customization
 
