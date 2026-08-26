@@ -10,7 +10,7 @@ export function StickyCta() {
   if (mobileOpen) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-black/8 bg-white p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-4px_24px_rgba(0,0,0,.1)] sm:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--line)] bg-white p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:hidden">
       <div className="flex gap-2">
         <a
           href={site.instagramDm}

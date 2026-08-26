@@ -1,20 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Figtree, Syne } from "next/font/google";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = Plus_Jakarta_Sans({
+const display = Syne({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["600", "700", "800"],
 });
 
-const body = Inter({
+const body = Figtree({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const siteUrl =
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#161618",
+  themeColor: "#141316",
   width: "device-width",
   initialScale: 1,
 };

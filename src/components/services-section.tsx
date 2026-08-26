@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { services } from "@/lib/site";
@@ -30,39 +33,74 @@ const icons: Record<string, ReactNode> = {
 };
 
 export function ServicesSection() {
+  const [active, setActive] = useState(0);
+  const service = services[active];
+
   return (
     <section id="services" className="section-pad bg-white">
       <div className="container-main">
         <Reveal>
           <SectionHead
-            align="center"
             label="Services"
             title="What we paint"
-            description="Four specialties. Same standard on every job — thorough prep, quality products, and a crew that respects your property."
+            description="Four specialties. One standard — thorough prep, quality coatings, and a crew that respects your property."
           />
         </Reveal>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2">
-          {services.map((s, i) => (
-            <Reveal key={s.id} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} layout="contents">
-              <article className="card flex h-full flex-col p-6 sm:p-7">
-                <span className="icon-box h-11 w-11">{icons[s.id]}</span>
-                <h3 className="font-display mt-4 text-lg font-bold text-black">{s.title}</h3>
-                <p className="mt-1.5 text-[14px] text-zinc-600">{s.summary}</p>
-                <ul className="mt-5 flex-1 space-y-2">
-                  {s.details.map((d) => (
-                    <li key={d} className="flex gap-2.5 text-[13px] leading-relaxed text-zinc-700">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
-                      {d}
-                    </li>
-                  ))}
-                </ul>
-                <Link href="#contact" className="btn btn-brand mt-6 w-full !text-[13px] sm:w-auto">
-                  Get an estimate
-                </Link>
-              </article>
-            </Reveal>
-          ))}
+        <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
+          <Reveal>
+            <ul className="flex flex-col border-t border-[var(--line)]" role="tablist" aria-label="Services">
+              {services.map((s, i) => {
+                const isActive = i === active;
+                return (
+                  <li key={s.id} className="border-b border-[var(--line)]">
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      aria-controls="service-panel"
+                      onClick={() => setActive(i)}
+                      className={`flex w-full items-center gap-4 py-5 text-left transition-colors ${
+                        isActive ? "text-brand" : "text-ink hover:text-brand"
+                      }`}
+                    >
+                      <span className="font-display text-sm font-bold tabular-nums text-muted/70">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="font-display flex-1 text-xl font-bold tracking-tight sm:text-2xl">
+                        {s.title}
+                      </span>
+                      <span
+                        className={`flex h-9 w-9 items-center justify-center transition-colors ${
+                          isActive ? "bg-brand text-white" : "bg-canvas text-muted"
+                        }`}
+                        aria-hidden
+                      >
+                        {icons[s.id]}
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </Reveal>
+
+          <Reveal delay={2}>
+            <div id="service-panel" role="tabpanel" className="lg:pt-2">
+              <p className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">{service.summary}</p>
+              <ul className="mt-8 space-y-4">
+                {service.details.map((d) => (
+                  <li key={d} className="flex gap-3 border-b border-[var(--line-soft)] pb-4 text-[15px] leading-relaxed text-muted last:border-0">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-brand" aria-hidden />
+                    {d}
+                  </li>
+                ))}
+              </ul>
+              <Link href="#contact" className="btn btn-brand mt-8">
+                Get an estimate for {service.title.toLowerCase()}
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

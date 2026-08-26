@@ -1,72 +1,68 @@
+import Image from "next/image";
 import Link from "next/link";
-import { beforeAfterProjects, heroStats, site, serviceAreas } from "@/lib/site";
-import { BeforeAfterSlider } from "./before-after-slider";
+import { beforeAfterProjects, site } from "@/lib/site";
 
 export function Hero() {
   const project = beforeAfterProjects[0];
 
   return (
-    <section className="bg-dark relative overflow-hidden pt-[4.5rem] text-white">
-      <div className="container-main relative py-12 sm:py-16 lg:py-20">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <p className="pill text-zinc-300">
-              C-33 Licensed · Bonded · Lic. {site.license}
-            </p>
+    <section className="relative min-h-[100svh] overflow-hidden text-white">
+      {/* Full-bleed project photo */}
+      <div className="absolute inset-0">
+        <Image
+          src={project.after}
+          alt={`${project.title} — ${project.location}`}
+          fill
+          priority
+          sizes="100vw"
+          className="hero-media object-cover object-[center_40%]"
+        />
+        <div
+          className="absolute inset-0 bg-[linear-gradient(105deg,rgba(12,10,12,0.88)_0%,rgba(12,10,12,0.62)_42%,rgba(12,10,12,0.28)_68%,rgba(12,10,12,0.45)_100%)]"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-[linear-gradient(to_top,rgba(12,10,12,0.75)_0%,transparent_42%)]"
+          aria-hidden
+        />
+      </div>
 
-            <h1 className="display-xl mt-6 text-balance">
-              <span className="text-white">Quality painting, </span>
-              <span className="text-gradient">done right.</span>
-            </h1>
+      <div className="container-main relative flex min-h-[100svh] flex-col justify-end pb-16 pt-[7.5rem] sm:pb-20 lg:justify-center lg:pb-24 lg:pt-28">
+        <div className="max-w-3xl">
+          <p className="hero-rise label-on-dark label">
+            C-33 Licensed · Bonded · #{site.license}
+          </p>
 
-            <p className="mt-5 max-w-lg text-[1.0625rem] leading-relaxed text-zinc-400">
-              {site.heroDescription}
-            </p>
+          <h1 className="hero-rise hero-rise-d1 display-hero mt-5 text-white">
+            {site.name}
+          </h1>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="#contact" className="btn btn-brand w-full sm:w-auto">
-                Request Free Estimate
-              </Link>
-              <Link href="#work" className="btn btn-outline w-full sm:w-auto">
-                View Our Work
-              </Link>
-            </div>
+          <p className="hero-rise hero-rise-d2 mt-6 max-w-xl text-balance text-[1.35rem] font-medium leading-snug tracking-tight text-white sm:text-[1.65rem]">
+            <span className="brush-underline">{site.heroHeadline}</span>
+          </p>
 
-            <div className="mt-8 grid grid-cols-3 gap-3">
-              {heroStats.map((s) => (
-                <div key={s.l} className="stat-card text-center">
-                  <p className="font-display text-xl font-bold text-white">{s.n}</p>
-                  <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{s.l}</p>
-                </div>
-              ))}
-            </div>
+          <p className="hero-rise hero-rise-d3 mt-5 max-w-md text-[1.02rem] leading-relaxed text-white/75">
+            {site.heroDescription}
+          </p>
 
-            <div className="mt-6 flex flex-wrap gap-2">
-              {serviceAreas.map((a) => (
-                <span
-                  key={a.city}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-zinc-400"
-                >
-                  {a.city}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <BeforeAfterSlider
-              beforeSrc={project.before}
-              afterSrc={project.after}
-              beforeAlt={`Before — ${project.title}`}
-              afterAlt={`After — ${project.title}`}
-              priority
-              className="shadow-2xl shadow-black/40 ring-1 ring-white/15"
-            />
-            <p className="mt-3 text-[13px] text-zinc-500">
-              {project.title} · {project.location}
-            </p>
+          <div className="hero-rise hero-rise-d4 mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link href="#contact" className="btn btn-brand w-full sm:w-auto">
+              Request Free Estimate
+            </Link>
+            <Link href="#work" className="btn btn-outline w-full sm:w-auto">
+              View Our Work
+            </Link>
           </div>
         </div>
+
+        <a
+          href="#services"
+          className="scroll-cue absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55 lg:flex"
+          aria-label="Scroll to services"
+        >
+          <span>Explore</span>
+          <span className="h-8 w-px bg-white/40" aria-hidden />
+        </a>
       </div>
     </section>
   );

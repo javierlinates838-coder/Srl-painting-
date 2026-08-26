@@ -65,7 +65,7 @@ export function BeforeAfterSlider({
       aria-valuenow={Math.round(pos)}
       aria-valuetext={valueText}
       tabIndex={0}
-      className={`ba-slider group relative select-none overflow-hidden rounded-[calc(var(--radius)+2px)] bg-zinc-800 ${dragging ? "is-dragging" : ""} ${className}`}
+      className={`ba-slider group relative select-none overflow-hidden rounded-[var(--radius-lg)] bg-ink-2 ${dragging ? "is-dragging" : ""} ${className}`}
       onMouseDown={(e) => {
         setDragging(true);
         move(e.clientX);

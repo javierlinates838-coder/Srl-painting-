@@ -65,19 +65,15 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="bg-dark section-pad text-white">
+    <section id="contact" className="section-pad bg-ink text-white">
       <div className="container-main">
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <SectionHead
               light
               label="Contact"
-              title={
-                <>
-                  Get your free <span className="text-gradient">estimate.</span>
-                </>
-              }
-              description="Fill out the form below. We copy your details and open Instagram — paste them into a DM and attach photos for the fastest quote."
+              title="Get your free estimate."
+              description="Fill out the form. We copy your details and open Instagram — paste them into a DM and attach photos for the fastest quote."
             />
 
             <a
@@ -85,9 +81,9 @@ export function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Open Instagram DM to ${site.instagramHandle}`}
-              className="surface-dark mt-8 flex items-center gap-4 p-5 hover:border-brand/30"
+              className="mt-10 flex items-center gap-4 border border-white/15 px-5 py-5 transition-colors hover:border-brand-bright/50"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-white" aria-hidden>
+              <span className="flex h-11 w-11 items-center justify-center bg-brand text-white" aria-hidden>
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <rect x="3" y="3" width="18" height="18" rx="5" />
                   <circle cx="12" cy="12" r="4" />
@@ -96,29 +92,29 @@ export function ContactSection() {
               </span>
               <div className="min-w-0 flex-1">
                 <p className="font-display text-lg font-bold">{site.instagramHandle}</p>
-                <p className="text-[12px] text-zinc-500">DM us — we reply within 1 business day</p>
+                <p className="text-[12px] text-white/45">DM us — we reply within 1 business day</p>
               </div>
-              <svg className="h-5 w-5 shrink-0 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+              <svg className="h-5 w-5 shrink-0 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
                 <path strokeLinecap="round" d="M9 5l7 7-7 7" />
               </svg>
             </a>
 
-            <div className="mt-10 hidden lg:block">
+            <div className="mt-12 hidden lg:block">
               <BrandLogo className="h-auto w-[120px]" />
             </div>
           </Reveal>
 
           <Reveal delay={2}>
-            <div className="surface-dark p-6 sm:p-8">
+            <div className="border border-white/12 bg-white/[0.03] p-6 sm:p-8">
               {sent ? (
                 <div className="py-6 text-center sm:py-8">
-                  <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand/20 text-brand-light">
+                  <span className="mx-auto flex h-12 w-12 items-center justify-center bg-brand/25 text-[var(--brand-bright)]">
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden>
                       <path strokeLinecap="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </span>
                   <p className="font-display mt-4 text-2xl font-bold">You&apos;re all set</p>
-                  <p className="mt-3 text-[14px] text-zinc-400">
+                  <p className="mt-3 text-[14px] text-white/55">
                     {copied
                       ? "Your message was copied to the clipboard."
                       : "Copy your message below, then paste it into Instagram."}
@@ -126,7 +122,7 @@ export function ContactSection() {
 
                   {!copied && (
                     <label className="mt-5 block text-left">
-                      <span className="mb-1.5 block text-[12px] font-semibold text-zinc-400">Your message</span>
+                      <span className="mb-1.5 block text-[12px] font-semibold text-white/45">Your message</span>
                       <textarea
                         readOnly
                         value={draftMessage}
@@ -156,11 +152,11 @@ export function ContactSection() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="block">
-                      <span className="mb-1.5 block text-[12px] font-semibold text-zinc-400">Name *</span>
+                      <span className="mb-1.5 block text-[12px] font-semibold text-white/45">Name *</span>
                       <input name="name" required autoComplete="name" className="input-dark" placeholder="Your name" />
                     </label>
                     <label className="block">
-                      <span className="mb-1.5 block text-[12px] font-semibold text-zinc-400">City *</span>
+                      <span className="mb-1.5 block text-[12px] font-semibold text-white/45">City *</span>
                       <input
                         name="city"
                         required
@@ -171,11 +167,11 @@ export function ContactSection() {
                     </label>
                   </div>
                   <label className="block">
-                    <span className="mb-1.5 block text-[12px] font-semibold text-zinc-400">Phone</span>
+                    <span className="mb-1.5 block text-[12px] font-semibold text-white/45">Phone</span>
                     <input name="phone" type="tel" autoComplete="tel" className="input-dark" placeholder="Optional — for a callback" />
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-[12px] font-semibold text-zinc-400">Service *</span>
+                    <span className="mb-1.5 block text-[12px] font-semibold text-white/45">Service *</span>
                     <select name="service" required defaultValue="" className="input-dark">
                       <option value="" disabled className="text-black">
                         Select a service
@@ -188,7 +184,7 @@ export function ContactSection() {
                     </select>
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-[12px] font-semibold text-zinc-400">Project details *</span>
+                    <span className="mb-1.5 block text-[12px] font-semibold text-white/45">Project details *</span>
                     <textarea
                       name="details"
                       required
@@ -200,7 +196,7 @@ export function ContactSection() {
                   <button type="submit" disabled={submitting} className="btn btn-brand w-full !py-3.5 disabled:opacity-60">
                     {submitting ? "Preparing…" : "Continue to Instagram DM"}
                   </button>
-                  <p className="text-center text-[11px] text-zinc-600">
+                  <p className="text-center text-[11px] text-white/35">
                     Free estimate · No obligation · Lic. {site.license}
                   </p>
                 </form>

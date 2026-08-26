@@ -64,7 +64,7 @@ export function MobileNav() {
         <div
           ref={panelRef}
           id={panelId}
-          className="fixed inset-0 top-[4.5rem] z-[60] bg-charcoal/98 backdrop-blur-xl lg:hidden"
+          className="fixed inset-0 top-[4.5rem] z-[60] bg-ink/98 backdrop-blur-xl lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"
@@ -81,7 +81,7 @@ export function MobileNav() {
                 key={l.href}
                 href={l.href}
                 onClick={close}
-                className="rounded-lg px-4 py-3.5 font-display text-lg font-semibold text-zinc-300 hover:bg-white/5 hover:text-white"
+                className="rounded-lg px-4 py-3.5 font-display text-lg font-semibold text-white/70 hover:bg-white/5 hover:text-white"
               >
                 {l.label}
               </Link>
@@ -91,7 +91,7 @@ export function MobileNav() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={close}
-              className="rounded-lg px-4 py-3.5 text-[15px] text-zinc-400 hover:text-white"
+              className="rounded-lg px-4 py-3.5 text-[15px] text-white/50 hover:text-white"
             >
               Verify CSLB license
             </a>

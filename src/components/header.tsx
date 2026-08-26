@@ -13,7 +13,7 @@ export function Header() {
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -40,15 +40,15 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-[background,border-color,backdrop-filter] duration-300 ${
         scrolled
-          ? "border-white/10 bg-charcoal/95 backdrop-blur-lg"
-          : "border-white/5 bg-charcoal/90 backdrop-blur-md"
+          ? "border-b border-white/10 bg-ink/90 backdrop-blur-lg"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
       <div className="container-main flex h-[4.5rem] items-center justify-between gap-4">
         <Link href="/" className="shrink-0" aria-label={site.name}>
-          <BrandLogo className="h-[3rem] w-auto object-contain sm:h-[3.25rem]" priority />
+          <BrandLogo className="h-[2.85rem] w-auto object-contain sm:h-[3.1rem]" priority />
         </Link>
 
         <nav className="hidden items-center gap-5 lg:flex xl:gap-6" aria-label="Primary">
@@ -57,7 +57,7 @@ export function Header() {
               key={l.href}
               href={l.href}
               className={`nav-link text-[12px] font-medium xl:text-[13px] ${
-                active === l.id ? "is-active text-white" : "text-zinc-400 hover:text-white"
+                active === l.id ? "is-active text-white" : "text-white/65 hover:text-white"
               }`}
             >
               {l.label}
@@ -70,7 +70,7 @@ export function Header() {
             href={site.licenseVerifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-[12px] text-zinc-500 hover:text-white xl:block"
+            className="hidden text-[12px] text-white/50 hover:text-white xl:block"
           >
             Verify license
           </a>
