@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {`document.documentElement.classList.add("js")`}
         </Script>
         <LocalBusinessSchema siteUrl={siteUrl} />
-        <div className="ios-app-shell">{children}</div>
+        {children}
       </body>
     </html>
   );

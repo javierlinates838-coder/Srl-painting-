@@ -38,7 +38,11 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 3.5rem;
+  scroll-padding-top: 4.5rem;
+}
+
+@media (min-width: 1024px) {
+  html { scroll-padding-top: 5rem; }
 }
 
 body {
@@ -58,21 +62,17 @@ body {
 
 .container-main {
   width: 100%;
-  max-width: 40rem;
+  max-width: 72rem;
   margin-inline: auto;
-  padding-inline: 1rem;
-}
-
-@media (min-width: 768px) {
-  .container-main { max-width: 44rem; padding-inline: 1.25rem; }
+  padding-inline: clamp(1rem, 4vw, 2rem);
 }
 
 .section-pad {
-  padding-block: 1.5rem;
+  padding-block: clamp(3.5rem, 8vw, 5.5rem);
 }
 
 .section-pad-lg {
-  padding-block: 2rem;
+  padding-block: clamp(4rem, 9vw, 6rem);
 }
 
 /* ── iOS Typography ── */
@@ -317,6 +317,11 @@ body {
   border-bottom: 0.5px solid var(--ios-separator);
 }
 
+@media (min-width: 1024px) {
+  .ios-nav-bar { height: 4rem; }
+  .ios-nav-bar-inner { height: 4rem; }
+}
+
 .ios-nav-bar-inner {
   display: flex;
   height: 3.25rem;
@@ -340,6 +345,10 @@ body {
   -webkit-backdrop-filter: var(--ios-blur);
   border-top: 0.5px solid var(--ios-separator);
   padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (min-width: 640px) {
+  .ios-tab-bar { display: none; }
 }
 
 .ios-tab-bar-inner {
@@ -452,6 +461,34 @@ body {
   color: var(--ios-label-secondary);
 }
 
+.site-card {
+  background: var(--ios-bg-elevated);
+  border-radius: var(--ios-radius);
+  box-shadow: var(--ios-shadow);
+  overflow: hidden;
+}
+
+.site-card-pad { padding: 1.25rem 1.5rem; }
+
+.bg-surface { background: var(--ios-bg-elevated); }
+.bg-muted { background: var(--ios-bg); }
+
+.display-title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.nav-link-site {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ios-label-secondary);
+  transition: color 0.15s;
+}
+.nav-link-site:hover,
+.nav-link-site.is-active { color: var(--ios-label); }
+
 /* ── Before/after ── */
 
 .ba-slider { touch-action: pan-y; border-radius: inherit; }
@@ -545,29 +582,5 @@ body {
     transform: none !important;
     transition: none !important;
     animation: none !important;
-  }
-}
-
-@media (min-width: 768px) {
-  body {
-    background: linear-gradient(180deg, #e8e8ed 0%, #f2f2f7 12rem);
-  }
-
-  .ios-app-shell {
-    margin-inline: auto;
-    max-width: 26.875rem;
-    min-height: 100dvh;
-    background: var(--ios-bg);
-    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.08), 0 8px 40px rgba(0, 0, 0, 0.12);
-    border-radius: 0;
-  }
-
-  @media (min-width: 1024px) {
-    .ios-app-shell {
-      margin-block: 1.5rem;
-      min-height: calc(100dvh - 3rem);
-      border-radius: 2.5rem;
-      overflow: hidden;
-    }
   }
 }

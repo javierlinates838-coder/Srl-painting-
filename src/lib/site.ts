@@ -18,13 +18,13 @@ export const site = {
 } as const;
 
 export const navLinks = [
-  { href: "#work", label: "Work", id: "work" },
+  { href: "#work", label: "Our Work", id: "work" },
   { href: "#services", label: "Services", id: "services" },
   { href: "#process", label: "Process", id: "process" },
-  { href: "#reviews", label: "Clients", id: "reviews" },
+  { href: "#reviews", label: "Reviews", id: "reviews" },
   { href: "#about", label: "About", id: "about" },
   { href: "#faq", label: "FAQ", id: "faq" },
-  { href: "#contact", label: "Inquire", id: "contact" },
+  { href: "#contact", label: "Contact", id: "contact" },
 ] as const;
 
 export const credentials = [

@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <NavProvider>
       <Header />
-      <main id="main-content" className="pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))]">
+      <main id="main-content" className="pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
         <Hero />
         <TrustStrip />
         <ServicesSection />

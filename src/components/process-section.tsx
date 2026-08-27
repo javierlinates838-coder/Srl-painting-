@@ -1,31 +1,26 @@
 import { process } from "@/lib/site";
 import { Reveal } from "./reveal";
-import { IosGroup, IosRow } from "./ios-group";
 import { SectionHead } from "./section-head";
 
 export function ProcessSection() {
   return (
-    <section id="process" className="section-pad">
-      <div className="container-main space-y-3">
+    <section id="process" className="section-pad bg-surface">
+      <div className="container-main">
         <Reveal>
-          <SectionHead overline="Process" title="How it works" />
+          <SectionHead align="center" overline="Process" title="How it works" />
         </Reveal>
 
-        <Reveal delay={1}>
-          <IosGroup className="mt-2">
-            {process.map((step) => (
-              <IosRow key={step.num}>
-                <span className="ios-row-content flex gap-3">
-                  <span className="ios-title-2 text-ios-tint">{step.num}</span>
-                  <span>
-                    <span className="ios-headline block">{step.title}</span>
-                    <span className="ios-footnote mt-1 block">{step.text}</span>
-                  </span>
-                </span>
-              </IosRow>
-            ))}
-          </IosGroup>
-        </Reveal>
+        <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {process.map((step, i) => (
+            <Reveal key={step.num} as="li" delay={(i + 1) as 1 | 2 | 3 | 4} layout="contents">
+              <div className="site-card site-card-pad h-full">
+                <span className="ios-title-1 text-ios-tint">{step.num}</span>
+                <h3 className="ios-headline mt-3">{step.title}</h3>
+                <p className="ios-footnote mt-2 leading-relaxed">{step.text}</p>
+              </div>
+            </Reveal>
+          ))}
+        </ol>
       </div>
     </section>
   );

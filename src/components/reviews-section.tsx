@@ -1,45 +1,40 @@
 import { reviews, serviceAreas } from "@/lib/site";
 import { Reveal } from "./reveal";
-import { IosGroup, IosRow } from "./ios-group";
 import { SectionHead } from "./section-head";
 
 export function ReviewsSection() {
   return (
-    <section id="reviews" className="section-pad">
-      <div className="container-main space-y-3">
+    <section id="reviews" className="section-pad bg-muted">
+      <div className="container-main">
         <Reveal>
-          <SectionHead overline="Clients" title="Reviews" />
+          <SectionHead align="center" overline="Reviews" title="What clients say" />
         </Reveal>
 
-        {reviews.map((r, i) => (
-          <Reveal key={r.name} delay={Math.min(i + 1, 3) as 1 | 2 | 3}>
-            <IosGroup className="mt-2">
-              <IosRow>
-                <span className="ios-row-content">
-                  <span className="ios-body block leading-relaxed">&ldquo;{r.quote}&rdquo;</span>
-                  <span className="ios-headline mt-3 block">{r.name}</span>
-                  <span className="ios-footnote">{r.detail}</span>
-                </span>
-              </IosRow>
-            </IosGroup>
-          </Reveal>
-        ))}
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {reviews.map((r, i) => (
+            <Reveal key={r.name} delay={Math.min(i + 1, 3) as 1 | 2 | 3} layout="contents">
+              <figure className="site-card site-card-pad flex h-full flex-col">
+                <blockquote className="ios-body flex-1 leading-relaxed">&ldquo;{r.quote}&rdquo;</blockquote>
+                <figcaption className="mt-5 border-t border-[var(--ios-separator)] pt-4">
+                  <p className="ios-headline">{r.name}</p>
+                  <p className="ios-footnote">{r.detail}</p>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
 
-        <Reveal delay={2}>
-          <div className="mt-6">
-            <p className="ios-section-header">Service areas</p>
-            <IosGroup>
-              {serviceAreas.map((a) => (
-                <IosRow key={a.city}>
-                  <span className="ios-row-content flex items-center justify-between">
-                    <span className="ios-body">{a.city}</span>
-                    <span className="ios-footnote">{a.note}</span>
-                  </span>
-                </IosRow>
-              ))}
-            </IosGroup>
-          </div>
-        </Reveal>
+        <div className="mt-14 border-t border-[var(--ios-separator)] pt-12">
+          <SectionHead overline="Service areas" title="Where we work" />
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            {serviceAreas.map((a) => (
+              <li key={a.city} className="site-card site-card-pad">
+                <p className="ios-headline">{a.city}</p>
+                <p className="ios-footnote mt-1">{a.note}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

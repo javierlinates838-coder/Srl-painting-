@@ -1,68 +1,54 @@
 import Link from "next/link";
-import { beforeAfterProjects, credentials, site, serviceAreas } from "@/lib/site";
+import { beforeAfterProjects, site, serviceAreas } from "@/lib/site";
 import { BeforeAfterSlider } from "./before-after-slider";
-import { IosGroup, IosRow } from "./ios-group";
 
 export function Hero() {
   const project = beforeAfterProjects[0];
 
   return (
-    <section className="pt-[3.25rem]">
-      <div className="container-main space-y-5 pb-6 pt-4">
+    <section className="bg-muted pt-[3.25rem] lg:pt-[4rem]">
+      <div className="container-main grid items-center gap-10 py-10 lg:grid-cols-2 lg:gap-16 lg:py-16">
         <div>
           <p className="ios-footnote">{site.tagline}</p>
-          <h1 className="ios-large-title mt-1 text-balance">
-            {site.heroHeadline}
-            <br />
+          <h1 className="display-title mt-3 text-balance">
+            {site.heroHeadline}{" "}
             <span className="text-ios-brand">{site.heroHeadlineAccent}</span>
           </h1>
-          <p className="ios-callout mt-3">{site.heroDescription}</p>
-        </div>
+          <p className="ios-callout mt-5 max-w-lg">{site.heroDescription}</p>
 
-        <div className="ios-hero-card">
-          <BeforeAfterSlider
-            beforeSrc={project.before}
-            afterSrc={project.after}
-            beforeAlt={`Before — ${project.title}`}
-            afterAlt={`After — ${project.title}`}
-            priority
-          />
-          <div className="px-4 py-3">
-            <p className="ios-headline">{project.title}</p>
-            <p className="ios-footnote mt-0.5">{project.scope}</p>
+          <div className="mt-8 flex flex-col gap-2.5 sm:flex-row">
+            <Link href="#contact" className="ios-btn ios-btn-brand">
+              Get Estimate
+            </Link>
+            <Link href="#work" className="ios-btn ios-btn-gray">
+              View Our Work
+            </Link>
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-2">
+            {serviceAreas.map((a) => (
+              <span key={a.city} className="ios-stat-pill">
+                {a.city}
+              </span>
+            ))}
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2">
-          {credentials.slice(0, 3).map((c) => (
-            <span key={c.label} className="ios-stat-pill">
-              {c.value}
-            </span>
-          ))}
+        <div>
+          <div className="ios-hero-card">
+            <BeforeAfterSlider
+              beforeSrc={project.before}
+              afterSrc={project.after}
+              beforeAlt={`Before — ${project.title}`}
+              afterAlt={`After — ${project.title}`}
+              priority
+            />
+            <div className="px-4 py-3">
+              <p className="ios-headline">{project.title}</p>
+              <p className="ios-footnote mt-0.5">{project.scope}</p>
+            </div>
+          </div>
         </div>
-
-        <div className="grid grid-cols-2 gap-2.5">
-          <Link href="#contact" className="ios-btn ios-btn-brand col-span-2">
-            Get Estimate
-          </Link>
-          <Link href="#work" className="ios-btn ios-btn-gray">
-            Our Work
-          </Link>
-          <Link href="#services" className="ios-btn ios-btn-gray">
-            Services
-          </Link>
-        </div>
-
-        <IosGroup>
-          <IosRow>
-            <span className="ios-row-content">
-              <span className="ios-footnote block">Service areas</span>
-              <span className="ios-subhead mt-0.5 block">
-                {serviceAreas.map((a) => a.city).join(" · ")}
-              </span>
-            </span>
-          </IosRow>
-        </IosGroup>
       </div>
     </section>
   );

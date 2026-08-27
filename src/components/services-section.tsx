@@ -1,54 +1,43 @@
 import Link from "next/link";
 import { services } from "@/lib/site";
 import { Reveal } from "./reveal";
-import { IosGroup, IosRow } from "./ios-group";
 import { SectionHead } from "./section-head";
 
 export function ServicesSection() {
   return (
-    <section id="services" className="section-pad">
-      <div className="container-main space-y-3">
+    <section id="services" className="section-pad bg-surface">
+      <div className="container-main">
         <Reveal>
           <SectionHead
+            align="center"
             overline="Services"
             title="What we paint"
             description="Residential, commercial, and cabinets — same crew, same standard."
           />
         </Reveal>
 
-        <Reveal delay={1}>
-          <IosGroup className="mt-2">
-            {services.map((s) => (
-              <IosRow key={s.id} href="#contact" chevron>
-                <span className="ios-row-content">
-                  <span className="ios-headline block">
-                    <span className="ios-caption mr-2 text-ios-brand">{s.roman}</span>
-                    {s.title}
-                  </span>
-                  <span className="ios-footnote mt-0.5 block">{s.summary}</span>
-                </span>
-              </IosRow>
-            ))}
-          </IosGroup>
-        </Reveal>
-
-        {services.map((s, i) => (
-          <Reveal key={`${s.id}-detail`} delay={Math.min(i + 2, 4) as 1 | 2 | 3 | 4}>
-            <div className="mt-4">
-              <p className="ios-section-header">{s.title}</p>
-              <IosGroup>
-                {s.details.map((d) => (
-                  <IosRow key={d}>
-                    <span className="ios-subhead">{d}</span>
-                  </IosRow>
-                ))}
-                <IosRow href="#contact" chevron>
-                  <span className="ios-body text-ios-tint">Request estimate</span>
-                </IosRow>
-              </IosGroup>
-            </div>
-          </Reveal>
-        ))}
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          {services.map((s, i) => (
+            <Reveal key={s.id} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4} layout="contents">
+              <article className="site-card site-card-pad flex h-full flex-col">
+                <p className="ios-caption font-semibold text-ios-brand">{s.roman}</p>
+                <h3 className="ios-title-3 mt-2">{s.title}</h3>
+                <p className="ios-subhead mt-1">{s.summary}</p>
+                <ul className="mt-4 flex-1 space-y-2">
+                  {s.details.map((d) => (
+                    <li key={d} className="ios-footnote flex gap-2">
+                      <span className="text-ios-tint">·</span>
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+                <Link href="#contact" className="ios-btn ios-btn-gray mt-5 w-full sm:w-auto">
+                  Get estimate
+                </Link>
+              </article>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

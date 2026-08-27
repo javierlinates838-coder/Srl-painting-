@@ -14,7 +14,7 @@ const tabs: {
 }[] = [
   {
     href: "#work",
-    label: "Work",
+    label: "Our Work",
     icon: (active: boolean) => (
       <svg className="ios-tab-icon" viewBox="0 0 24 24" fill={active ? "currentColor" : "none"} stroke="currentColor" strokeWidth={active ? 0 : 1.5}>
         {active ? (
@@ -36,7 +36,7 @@ const tabs: {
   },
   {
     href: "#contact",
-    label: "Inquire",
+    label: "Contact",
     icon: (active: boolean) => (
       <svg className="ios-tab-icon" viewBox="0 0 24 24" fill={active ? "currentColor" : "none"} stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" d="M21 15a4 4 0 01-4 4H7l-4 3V7a4 4 0 014-4h10a4 4 0 014 4v8z" />
