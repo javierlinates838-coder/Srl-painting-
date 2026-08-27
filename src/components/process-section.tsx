@@ -4,10 +4,10 @@ import { SectionHead } from "./section-head";
 
 export function ProcessSection() {
   return (
-    <section id="process" className="section-pad bg-surface">
+    <section id="process" className="section-pad bg-paper">
       <div className="container-main">
         <Reveal>
-          <SectionHead align="center" overline="Process" title="How it works" />
+          <SectionHead align="center" light overline="Process" title="How it works" />
         </Reveal>
 
         <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

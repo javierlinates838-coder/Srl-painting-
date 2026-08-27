@@ -6,13 +6,14 @@ export function Hero() {
   const project = beforeAfterProjects[0];
 
   return (
-    <section className="bg-muted pt-[3.25rem] lg:pt-[4rem]">
-      <div className="container-main grid items-center gap-10 py-10 lg:grid-cols-2 lg:gap-16 lg:py-16">
+    <section className="relative overflow-hidden bg-dark pt-[3.25rem] lg:pt-[4rem]">
+      <div className="pointer-events-none absolute inset-0 bg-hero-mesh" aria-hidden />
+      <div className="container-main relative grid items-center gap-10 py-10 lg:grid-cols-2 lg:gap-16 lg:py-16">
         <div>
-          <p className="ios-footnote">{site.tagline}</p>
-          <h1 className="display-title mt-3 text-balance">
+          <span className="pill-badge">{site.tagline}</span>
+          <h1 className="display-title mt-5 text-balance">
             {site.heroHeadline}{" "}
-            <span className="text-ios-brand">{site.heroHeadlineAccent}</span>
+            <span className="text-brand-light">{site.heroHeadlineAccent}</span>
           </h1>
           <p className="ios-callout mt-5 max-w-lg">{site.heroDescription}</p>
 
@@ -20,7 +21,7 @@ export function Hero() {
             <Link href="#contact" className="ios-btn ios-btn-brand">
               Get Estimate
             </Link>
-            <Link href="#work" className="ios-btn ios-btn-gray">
+            <Link href="#work" className="ios-btn ios-btn-outline">
               View Our Work
             </Link>
           </div>
@@ -43,9 +44,9 @@ export function Hero() {
               afterAlt={`After — ${project.title}`}
               priority
             />
-            <div className="px-4 py-3">
+            <div className="border-t border-[var(--ios-separator)] px-4 py-3">
               <p className="ios-headline">{project.title}</p>
-              <p className="ios-footnote mt-0.5">{project.scope}</p>
+              <p className="ios-footnote mt-0.5 text-brand-light">{project.scope}</p>
             </div>
           </div>
         </div>

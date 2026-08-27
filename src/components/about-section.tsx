@@ -5,11 +5,12 @@ import { SectionHead } from "./section-head";
 
 export function AboutSection() {
   return (
-    <section id="about" className="section-pad bg-surface">
+    <section id="about" className="section-pad bg-paper">
       <div className="container-main">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <SectionHead
+              light
               overline="About"
               title={site.name}
               description="Licensed C-33 contractor based in Kern County. We show up, prep right, and leave clean."

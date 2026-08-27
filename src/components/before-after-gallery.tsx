@@ -18,7 +18,7 @@ export function BeforeAfterGallery() {
   const next = () => setActive((i) => (i + 1) % total);
 
   return (
-    <section id="work" className="section-pad bg-muted">
+    <section id="work" className="section-pad bg-dark">
       <div className="container-main">
         <Reveal>
           <SectionHead

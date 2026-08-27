@@ -5,8 +5,8 @@ export const site = {
     "Interior, exterior, commercial, and cabinet painting by a licensed California crew. Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles.",
   heroDescription:
     "What you notice is the color, the sheen, the line where wall meets trim. What you don't see is the sanding, the primer, the masking — and that's the point.",
-  heroHeadline: "Good paint work",
-  heroHeadlineAccent: "is mostly invisible.",
+  heroHeadline: "Quality painting,",
+  heroHeadlineAccent: "done right.",
   license: "1108313",
   licenseClass: "C-33 Painting & Decorating",
   licenseVerifyUrl:

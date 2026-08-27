@@ -3,7 +3,7 @@ import { navLinks, services, site } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-[var(--ios-separator)] bg-[#1c1c1e] pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))] pt-12 text-[rgba(235,235,245,0.6)] sm:pb-12">
+    <footer className="border-t border-[var(--ios-separator)] bg-black pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))] pt-12 text-[rgba(235,235,245,0.6)] sm:pb-12">
       <div className="container-main">
         <div className="grid gap-10 border-b border-white/10 pb-10 lg:grid-cols-[1.2fr_2fr]">
           <div>

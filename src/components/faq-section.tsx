@@ -11,7 +11,7 @@ export function FaqSection() {
   const baseId = useId();
 
   return (
-    <section id="faq" className="section-pad">
+    <section id="faq" className="section-pad bg-charcoal">
       <div className="container-main space-y-3">
         <Reveal>
           <SectionHead overline="FAQ" title="Common questions" />

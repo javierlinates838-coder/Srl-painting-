@@ -4,7 +4,7 @@ import { SectionHead } from "./section-head";
 
 export function ReviewsSection() {
   return (
-    <section id="reviews" className="section-pad bg-muted">
+    <section id="reviews" className="section-pad bg-surface">
       <div className="container-main">
         <Reveal>
           <SectionHead align="center" overline="Reviews" title="What clients say" />

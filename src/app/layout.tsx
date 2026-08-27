@@ -1,14 +1,21 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { site } from "@/lib/site";
 import "./globals.css";
+
+const display = Plus_Jakarta_Sans({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+});
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : site.siteUrl);
 
-const pageTitle = `${site.name}`;
+const pageTitle = `${site.name} | Licensed Painter · Bakersfield & Los Angeles`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -24,11 +31,6 @@ export const metadata: Metadata = {
   ],
   icons: { icon: "/logo.png", apple: "/logo.png" },
   robots: { index: true, follow: true },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: site.name,
-  },
   openGraph: {
     title: pageTitle,
     description: site.description,
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f2f2f7",
+  themeColor: "#111114",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -56,7 +58,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={display.variable}>
       <body>
         <a href="#main-content" className="skip-link">
           Skip to content

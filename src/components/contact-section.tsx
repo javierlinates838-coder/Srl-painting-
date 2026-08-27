@@ -66,7 +66,7 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="section-pad-lg bg-muted">
+    <section id="contact" className="section-pad-lg bg-dark">
       <div className="container-main">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
           <Reveal>
