@@ -9,22 +9,28 @@ export function FinishStack() {
     const el = ref.current;
     if (!el) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      el.style.setProperty("--stack-progress", "0");
-      return;
-    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const onScroll = () => {
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
       const rect = el.getBoundingClientRect();
       const viewH = window.innerHeight;
       const progress = Math.min(1, Math.max(0, (viewH - rect.top) / (viewH * 0.9)));
       el.style.setProperty("--stack-progress", progress.toFixed(3));
     };
 
-    onScroll();
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (
