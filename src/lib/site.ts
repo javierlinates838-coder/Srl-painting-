@@ -53,45 +53,50 @@ export const businessCredentials = [
   { id: "estimates", label: "Estimates", value: "Complimentary" },
 ] as const;
 
-export const paintingOptions = [
-  { id: "exterior", label: "House Exterior", short: "Exterior" },
-  { id: "interior", label: "Interior", short: "Interior" },
-  { id: "cabinets", label: "Cabinets", short: "Cabinets" },
-  { id: "commercial", label: "Commercial", short: "Commercial" },
-  { id: "other", label: "Other", short: "Other" },
-] as const;
-
 export const services = [
   {
     id: "exterior",
     index: "01",
-    title: "Exterior Painting",
-    summary: "Stucco, trim, fascia, garage doors — built for Central Valley heat.",
+    title: "Exterior",
+    short: "Exterior",
+    statement: "Built for exposed surfaces.",
+    description:
+      "Exterior prep and painting for residential properties in the Central Valley.",
+    scopeLabel: "Surfaces",
+    scope: ["Stucco", "Trim and fascia", "Garage doors"],
     details: [
-      "Full scrape-and-prime on weathered surfaces",
-      "Body, trim, and accent color coordination",
-      "Drywall and stucco repair included in scope",
+      "Scrape-and-prime on weathered areas",
+      "Body, trim, and accent colors",
+      "Drywall and stucco repair in scope",
     ],
   },
   {
     id: "interior",
     index: "02",
-    title: "Interior Painting",
-    summary: "Rooms finished with clean lines and move-in-ready cleanup.",
+    title: "Interior",
+    short: "Interior",
+    statement: "Rooms finished, ready to move back in.",
+    description: "Interior walls, ceilings, and trim with floors and furniture protected.",
+    scopeLabel: "Areas",
+    scope: ["Walls and ceilings", "Baseboards", "Accent walls"],
     details: [
-      "Walls, ceilings, baseboards, accent walls",
-      "Furniture and floors protected throughout",
-      "Color guidance when you want a second opinion",
+      "Clean cut lines throughout",
+      "Furniture and floors covered",
+      "Color guidance on request",
     ],
   },
   {
     id: "cabinets",
     index: "03",
-    title: "Cabinet Finishing",
-    summary: "Spray refinishing on existing kitchen and bath boxes.",
+    title: "Cabinets",
+    short: "Cabinets",
+    statement: "Spray finish on existing boxes.",
+    description: "Kitchen and bath cabinet refinishing on doors and frames.",
+    scopeLabel: "Scope",
+    scope: ["Doors and drawer fronts", "Frames and boxes", "Hardware refresh"],
     details: [
-      "Factory-smooth spray on doors and frames",
-      "Hardware refresh and minor repairs",
+      "Factory-smooth spray application",
+      "Minor repairs before coating",
       "Coatings rated for kitchens and baths",
     ],
   },
@@ -99,14 +104,20 @@ export const services = [
     id: "commercial",
     index: "04",
     title: "Commercial",
-    summary: "Retail, office, and industrial — scheduled around your hours.",
+    short: "Commercial",
+    statement: "Scheduled around your operation.",
+    description: "Retail, office, and industrial painting in Kern County.",
+    scopeLabel: "Scheduling",
+    scope: ["After-hours work", "Weekend availability", "Phased multi-unit plans"],
     details: [
-      "After-hours and weekend scheduling",
       "Low-VOC options for occupied buildings",
-      "Phased plans for multi-unit properties",
+      "Work planned around business hours",
+      "Coordinated with property managers",
     ],
   },
 ] as const;
+
+export type ServiceId = (typeof services)[number]["id"];
 
 export const prepDetails = [
   { label: "Masking", text: "Floors, fixtures, and landscaping protected before work begins." },

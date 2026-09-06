@@ -6,7 +6,6 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { NavProvider } from "@/components/nav-provider";
-import { PaintingSelector } from "@/components/painting-selector";
 import { ProcessSection } from "@/components/process-section";
 import { ProjectEstimator } from "@/components/project-estimator";
 import { QuoteProvider } from "@/components/quote-context";
@@ -27,7 +26,6 @@ export default function Home() {
         <main id="main-content" className="pb-[calc(4.75rem+env(safe-area-inset-bottom))] sm:pb-0">
           <Hero />
           <TrustSection />
-          <PaintingSelector />
           <ServicesSection />
           <DetailsSection />
           <ColorExplorer />

@@ -27,6 +27,8 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 | Estimate API | `src/app/api/estimate/route.ts` |
 | SEO schema | `src/components/local-business-schema.tsx` |
 | Hero material specimen | `src/components/finish-stack.tsx` |
+| Business credentials | `src/components/trust-section.tsx` + `businessCredentials` in `site.ts` |
+| Services selector | `src/components/services-section.tsx` + `service-surface.tsx` + `services` in `site.ts` |
 
 ## Accepted Design Decisions
 
@@ -35,26 +37,26 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 - Typography-first layout (no photos)
 - Resend API with honest Instagram/copy fallback for estimates
 - Phone + Instagram as primary contact paths
-- Burgundy `#8B1A3A` as restrained accent — hero headline is monochrome; accent on CTA + specimen hairline only
+- Burgundy `#8B1A3A` as restrained accent
 - Floating glass header bar (centered, compresses on scroll)
 - Desktop nav: Services / Process / About (`#about` → craft section)
 - Mobile sheet: portaled to `body`, blur overlay, focus trap, ESC dismiss, `inert` when closed
-- **No brand reveal splash** — deleted entirely
-- **Hero headline:** “The finish / starts before / the paint.”
-- Finish specimen: single cross-section object, one caption, absolute bottom-right on desktop (≥1024)
-- Hero handoff: `#F5F5F7` → hairline `rgba(0,0,0,0.04)` → `#FFFFFF` trust section
-- Scroll motion: max 4px layer gap + 2px slice translate (rAF-throttled CSS custom property, no React state)
+- No brand reveal splash
+- Hero headline: “The finish / starts before / the paint.”
+- Finish specimen: single cross-section object, absolute bottom-right on desktop (≥1024)
+- Hero handoff: `#F5F5F7` → hairline → `#FFFFFF` credentials section
+- Credentials: specification rail — stacked rows mobile, intro + horizontal rail desktop (≥900)
+- Credentials intro: “Professional details.” + `site.tagline` — no marketing heading
+- Services: product selector — one active service dominates; premium index (not pill tabs)
+- Services intro: “Services” + “Painting, by application.”
+- Services specimen: single abstract surface system (`service-surface.tsx`) morphs per service
+- Services → quote: `setField("service", …)` on select + CTA scroll to `#contact`
+- Removed redundant `PaintingSelector` section (was between credentials and services)
 
 ## Headline Decision (Phase 3.5)
 
-Compared at final typography:
-
-| | A (rejected) | B (chosen) |
-|---|---|---|
-| Lines | Good painting / starts before / the paint. | **The finish / starts before / the paint.** |
-
-**Chose B** — stronger FinishStack tie-in, craft section echo, editorial rhythm.  
-**Rejected A** stored here only (not in `site.ts`): “Good painting / starts before / the paint.”
+**Chose B:** “The finish / starts before / the paint.”  
+**Rejected A (docs only):** “Good painting / starts before / the paint.”
 
 ## Rejected Design Patterns
 
@@ -62,6 +64,7 @@ Compared at final typography:
 - "Verified License" shields and badges
 - Fabricated stats
 - Generic card grids for services/process
+- Trust badge grids / certification tiles
 - Paint splatters, cartoon brushes, drips
 - Giant gradients and glow effects
 - Glass morphism everywhere
@@ -70,7 +73,12 @@ Compared at final typography:
 - Three floating card layers with per-layer labels
 - Burgundy accent word in headline
 - Bottom gradient hero handoff
-- Standard split-layout hero (text left + graphic right grid)
+- Standard split-layout hero
+- “Licensed. Local. Ready to work.” marketing heading
+- Pill-tab service selectors
+- Colored service panels / four equal cards
+- Hover-only service preview (`onMouseEnter` selection)
+- Separate “What are we working on?” painting selector row list
 
 ## Completed Sections
 
@@ -80,8 +88,8 @@ Compared at final typography:
 | Phase 1 foundation | ✅ | System fonts, Apple palette, spacing tokens |
 | Header + mobile nav | ✅ **FINAL** | QA 360–1920 |
 | Hero | ✅ **FINAL** | Phase 3 + 3.5 acceptance pass |
-| Trust | ⏳ Pending | Phase 4 — 360px grid overflow known |
-| Services | ⏳ Pending | Phase 5 |
+| Business credentials | ✅ **FINAL** | Specification rail, 360px overflow fixed |
+| Services | ✅ **FINAL** | Product selector + abstract specimen; two review passes |
 | Craft/details | ⏳ Pending | Phase 6 |
 | Process | ⏳ Pending | Phase 7 |
 | Estimate | ⏳ Pending | Phase 8 |
@@ -90,26 +98,23 @@ Compared at final typography:
 
 ## Remaining Work
 
-1. Trust as spec row + fix 360px overflow
-2. Services product selector polish
-3. Craft scroll story simplification
-4. Process step focus interaction
-5. Estimate as native sheet
-6. FAQ native-feel accordion
-7. Footer minimal pass
-8. Full-site rhythm review
-9. README cleanup
+1. Craft scroll story simplification
+2. Process step focus interaction
+3. Estimate as native sheet
+4. FAQ native-feel accordion
+5. Footer minimal pass
+6. Full-site rhythm review
+7. README cleanup
 
 ## Known Issues
 
 - README references deleted gallery component
-- Trust grid causes minor horizontal overflow at exactly 360px (Phase 4)
 - Quote wizard is page section, not overlay
 
 ## Business Facts Still Needed
 
 - [ ] Confirm bonded status display is acceptable
-- [ ] Confirm "Free estimates" wording
+- [ ] Confirm "Complimentary estimates" wording
 - [ ] Email address (omitted until single verified source)
 - [ ] Business hours (not displayed)
 - [ ] Owner/crew photography (future)
@@ -117,4 +122,4 @@ Compared at final typography:
 
 ---
 
-*Last updated: 2026-09-06 — Phase 3 FINAL*
+*Last updated: 2026-09-06 — Phase 5 FINAL*
