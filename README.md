@@ -6,7 +6,8 @@ A Next.js marketing site for **SRL Painting**, a licensed California painting co
 
 - Brand-aligned design (burgundy / maroon palette)
 - Services, before/after gallery, reviews, FAQ, and contact sections
-- Instagram-first contact flow with estimate request form
+- Professional estimate form with optional email delivery via Resend
+- Instagram as secondary contact channel
 - CSLB license verification links
 - SEO: sitemap, robots.txt, Open Graph, Twitter cards, JSON-LD
 
@@ -29,6 +30,18 @@ npm start
 Deploy to [Vercel](https://vercel.com) or any Node host that supports Next.js.
 
 Set `NEXT_PUBLIC_SITE_URL` to your production domain in Vercel environment variables.
+
+### Estimate form email delivery (optional)
+
+The contact form posts to `/api/estimate`. When these environment variables are set, submissions are emailed automatically:
+
+| Variable | Purpose |
+|----------|---------|
+| `RESEND_API_KEY` | Resend API key |
+| `ESTIMATE_TO_EMAIL` | Inbox that receives estimate requests |
+| `ESTIMATE_FROM_EMAIL` | Verified sender address in Resend (e.g. `estimates@yourdomain.com`) |
+
+If any are missing, the form falls back to copying the request and opening Instagram DM — no broken submit button.
 
 ## Customization
 
