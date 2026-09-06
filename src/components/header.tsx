@@ -13,7 +13,7 @@ export function Header() {
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -31,7 +31,7 @@ export function Header() {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
         if (visible[0]?.target.id) setActive(visible[0].target.id);
       },
-      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5] },
+      { rootMargin: "-35% 0px -50% 0px", threshold: [0, 0.25, 0.5] },
     );
 
     sections.forEach((s) => observer.observe(s));
@@ -39,26 +39,21 @@ export function Header() {
   }, []);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-white/10 bg-charcoal/95 shadow-lg shadow-black/20 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent"
-      }`}
-    >
-      <div className="container-main flex h-[4.5rem] items-center justify-between gap-4">
-        <Link href="/" className="shrink-0" aria-label={site.name}>
-          <BrandLogo className="h-[3rem] w-auto object-contain sm:h-[3.25rem]" priority />
+    <header className={`site-header ${scrolled ? "is-scrolled" : "bg-transparent"}`}>
+      <div className="container-main flex h-full items-center justify-between gap-6">
+        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={`${site.name} home`}>
+          <BrandLogo className="h-11 w-auto object-contain sm:h-12" priority />
+          <span className="hidden font-display text-lg leading-tight text-ink sm:block">
+            {site.name}
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Primary">
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
           {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`nav-link text-[12px] font-medium xl:text-[13px] ${
-                active === l.id ? "is-active text-white" : "text-zinc-400 hover:text-white"
-              }`}
+              className={`nav-link ${active === l.id ? "is-active" : ""}`}
             >
               {l.label}
             </Link>
@@ -66,16 +61,8 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-          <a
-            href={site.licenseVerifyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden text-[12px] text-zinc-500 transition-colors hover:text-white xl:block"
-          >
-            Verify license
-          </a>
-          <Link href="#contact" className="btn btn-brand hidden !px-5 !py-2.5 !text-[13px] md:inline-flex">
-            Free Estimate
+          <Link href="#contact" className="btn btn-brand btn-sm hidden md:inline-flex">
+            Get Free Estimate
           </Link>
           <MobileNav />
         </div>

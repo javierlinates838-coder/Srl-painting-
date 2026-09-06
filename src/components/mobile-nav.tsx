@@ -35,7 +35,7 @@ export function MobileNav() {
   useEffect(() => {
     if (!mobileOpen || !panelRef.current) return;
     const focusable = panelRef.current.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      'a[href], button:not([disabled])',
     );
     focusable[0]?.focus();
   }, [mobileOpen]);
@@ -49,9 +49,9 @@ export function MobileNav() {
         aria-label={mobileOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileOpen}
         aria-controls={panelId}
-        className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-white lg:hidden"
+        className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--line)] text-ink lg:hidden"
       >
-        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
           {mobileOpen ? (
             <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
           ) : (
@@ -61,45 +61,44 @@ export function MobileNav() {
       </button>
 
       {mobileOpen && (
-        <div
-          ref={panelRef}
-          id={panelId}
-          className="fixed inset-0 top-[4.5rem] z-[60] bg-charcoal/98 backdrop-blur-xl lg:hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Site navigation"
-        >
-          <button
-            type="button"
-            aria-label="Close menu"
-            className="absolute inset-0 -z-10"
-            onClick={close}
-          />
-          <nav className="container-main relative flex flex-col gap-1 py-6" aria-label="Mobile">
-            {navLinks.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
+        <>
+          <button type="button" className="sheet-backdrop" aria-label="Close menu" onClick={close} />
+          <div
+            ref={panelRef}
+            id={panelId}
+            className="sheet-panel lg:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation"
+          >
+            <div className="sheet-handle" aria-hidden />
+            <nav className="px-5 pb-6" aria-label="Mobile">
+              <p className="mb-2 px-1 font-display text-xl text-ink">Menu</p>
+              {navLinks.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={close}
+                  className="block rounded-lg px-3 py-3.5 text-base font-medium text-ink-muted hover:bg-paper hover:text-ink"
+                >
+                  {l.label}
+                </Link>
+              ))}
+              <a
+                href={site.licenseVerifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={close}
-                className="rounded-lg px-4 py-3.5 font-display text-lg font-semibold text-zinc-300 hover:bg-white/5 hover:text-white"
+                className="block rounded-lg px-3 py-3.5 text-sm text-ink-muted hover:text-brand"
               >
-                {l.label}
+                Verify CSLB license
+              </a>
+              <Link href="#contact" onClick={close} className="btn btn-brand mt-4 w-full">
+                Get Free Estimate
               </Link>
-            ))}
-            <a
-              href={site.licenseVerifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={close}
-              className="rounded-lg px-4 py-3.5 text-[15px] text-zinc-400 hover:text-white"
-            >
-              Verify CSLB license
-            </a>
-            <Link href="#contact" onClick={close} className="btn btn-brand mt-4 w-full">
-              Free Estimate
-            </Link>
-          </nav>
-        </div>
+            </nav>
+          </div>
+        </>
       )}
     </>
   );

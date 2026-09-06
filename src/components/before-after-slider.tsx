@@ -3,6 +3,14 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+type Aspect = "4/3" | "16/10" | "16/11";
+
+const aspectClass: Record<Aspect, string> = {
+  "4/3": "aspect-[4/3]",
+  "16/10": "aspect-[16/10]",
+  "16/11": "aspect-[16/11]",
+};
+
 type Props = {
   beforeSrc: string;
   afterSrc: string;
@@ -10,6 +18,7 @@ type Props = {
   afterAlt: string;
   priority?: boolean;
   className?: string;
+  aspect?: Aspect;
 };
 
 export function BeforeAfterSlider({
@@ -19,6 +28,7 @@ export function BeforeAfterSlider({
   afterAlt,
   priority = false,
   className = "",
+  aspect = "16/10",
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState(50);
@@ -65,7 +75,7 @@ export function BeforeAfterSlider({
       aria-valuenow={Math.round(pos)}
       aria-valuetext={valueText}
       tabIndex={0}
-      className={`ba-slider group relative select-none overflow-hidden rounded-[calc(var(--radius)+2px)] bg-zinc-800 ${dragging ? "is-dragging" : ""} ${className}`}
+      className={`ba-slider group relative select-none overflow-hidden bg-zinc-200 ${dragging ? "is-dragging" : ""} ${className}`}
       onMouseDown={(e) => {
         setDragging(true);
         move(e.clientX);
@@ -97,12 +107,12 @@ export function BeforeAfterSlider({
         }
       }}
     >
-      <div className="relative aspect-[4/3] w-full sm:aspect-[16/10]">
+      <div className={`relative w-full ${aspectClass[aspect]}`}>
         <Image
           src={afterSrc}
           alt={afterAlt}
           fill
-          sizes="(max-width: 1024px) 100vw, 640px"
+          sizes="(max-width: 1024px) 100vw, 720px"
           className="object-cover"
           draggable={false}
           priority={priority}
@@ -113,8 +123,8 @@ export function BeforeAfterSlider({
             src={beforeSrc}
             alt={beforeAlt}
             fill
-            sizes="(max-width: 1024px) 100vw, 640px"
-            className="object-cover brightness-[0.9] saturate-[0.85]"
+            sizes="(max-width: 1024px) 100vw, 720px"
+            className="object-cover brightness-[0.92]"
             draggable={false}
             priority={priority}
             aria-hidden
@@ -122,25 +132,25 @@ export function BeforeAfterSlider({
         </div>
 
         <div className="ba-handle absolute inset-y-0 z-10 -translate-x-1/2 cursor-ew-resize" style={{ left: `${pos}%` }} aria-hidden>
-          <div className="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_12px_rgba(0,0,0,.35)]" />
+          <div className="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-white shadow-sm" />
           <div
-            className={`absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-brand to-brand-light shadow-lg ${dragging ? "scale-110" : ""}`}
+            className={`absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-brand shadow-md ${dragging ? "scale-105" : ""}`}
           >
-            <svg className="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+            <svg className="h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
             </svg>
           </div>
         </div>
 
-        <span className="absolute left-3 top-3 z-20 rounded bg-black/70 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+        <span className="absolute left-3 top-3 z-20 rounded bg-black/65 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
           Before
         </span>
-        <span className="absolute right-3 top-3 z-20 rounded bg-brand px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+        <span className="absolute right-3 top-3 z-20 rounded bg-brand px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
           After
         </span>
 
         {hint && (
-          <span className="pointer-events-none absolute bottom-3 left-1/2 z-20 -translate-x-1/2 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-semibold text-black shadow-md">
+          <span className="pointer-events-none absolute bottom-3 left-1/2 z-20 -translate-x-1/2 rounded-full bg-white px-3 py-1 text-[11px] font-medium text-ink shadow-sm">
             Drag to compare
           </span>
         )}

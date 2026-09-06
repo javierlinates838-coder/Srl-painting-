@@ -4,6 +4,7 @@ import { BeforeAfterGallery } from "@/components/before-after-gallery";
 import { ContactSection } from "@/components/contact-section";
 import { CtaBand } from "@/components/cta-band";
 import { FaqSection } from "@/components/faq-section";
+import { FeaturedTransformations } from "@/components/featured-transformations";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
@@ -19,10 +20,11 @@ export default function Home() {
   return (
     <NavProvider>
       <Header />
-      <main id="main-content" className="pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
+      <main id="main-content" className="pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
         <Hero />
         <TrustStrip />
         <ServicesSection />
+        <FeaturedTransformations />
         <BeforeAfterGallery />
         <WhyChoose />
         <ProcessSection />

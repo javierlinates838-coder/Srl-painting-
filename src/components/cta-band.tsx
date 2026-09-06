@@ -3,24 +3,25 @@ import { site } from "@/lib/site";
 
 export function CtaBand() {
   return (
-    <section className="bg-brand-band noise-overlay relative section-pad">
-      <div className="container-main relative text-center">
-        <p className="label label-light label-center justify-center">Ready to transform your space?</p>
-        <h2 className="display-lg mx-auto mt-5 max-w-2xl text-balance text-white">
-          Your next project starts with one conversation.
-        </h2>
-        <p className="mx-auto mt-5 max-w-lg text-[1.0625rem] leading-relaxed text-white/85">
-          Message us on Instagram with photos and your city. We&apos;ll reply within one business day with next steps.
-        </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Link href="#contact" className="btn btn-light">
-            Request Free Estimate
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
-              <path strokeLinecap="round" d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
+    <section className="bg-brand-band section-pad" aria-label="Call to action">
+      <div className="container-main flex flex-col items-center gap-6 text-center text-white lg:flex-row lg:justify-between lg:text-left">
+        <div className="max-w-xl">
+          <h2 className="font-display text-3xl sm:text-4xl">Ready for a fresh start?</h2>
+          <p className="mt-3 text-white/85">
+            Request a free estimate for interior, exterior, cabinet, or commercial painting — or message us on Instagram with photos.
+          </p>
+        </div>
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+          <Link href="#contact" className="btn border border-white/30 bg-white text-brand hover:bg-white/95">
+            Request My Free Estimate
           </Link>
-          <a href={site.instagramDm} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-            {site.instagramHandle}
+          <a
+            href={site.instagramDm}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn border border-white/25 bg-transparent text-white hover:bg-white/10"
+          >
+            Message on Instagram
           </a>
         </div>
       </div>

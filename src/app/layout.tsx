@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { DM_Sans, Syne } from "next/font/google";
+import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = Syne({
+const display = DM_Serif_Display({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["400"],
 });
 
 const body = DM_Sans({
@@ -21,8 +21,7 @@ const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : site.siteUrl);
 
-const pageTitle = `${site.name} | Premium Licensed Painter · Bakersfield & Los Angeles`;
-const ogImage = "/projects/exterior-after.jpg";
+const pageTitle = `${site.name} | Licensed House Painter · Bakersfield & Los Angeles`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -35,6 +34,7 @@ export const metadata: Metadata = {
     "commercial painting Los Angeles",
     "SRL Painting",
     "licensed painter California",
+    "C-33 painting contractor",
   ],
   icons: { icon: "/logo.png", apple: "/logo.png" },
   robots: { index: true, follow: true },
@@ -45,21 +45,29 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: site.name,
-    images: [{ url: ogImage, width: 1200, height: 800, alt: `${site.name} exterior project` }],
+    images: [
+      {
+        url: "/projects/exterior-after.jpg",
+        width: 1200,
+        height: 800,
+        alt: `${site.name} exterior painting project in Kern County`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: pageTitle,
     description: site.description,
-    images: [ogImage],
+    images: ["/projects/exterior-after.jpg"],
   },
   alternates: { canonical: siteUrl },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#161618",
+  themeColor: "#faf8f5",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
