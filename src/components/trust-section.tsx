@@ -1,26 +1,25 @@
-import { trustFacts } from "@/lib/site";
-import { Reveal } from "./reveal";
+import { businessCredentials, site } from "@/lib/site";
 
 export function TrustSection() {
   return (
-    <section className="border-t border-[var(--line)] bg-surface" aria-label="Business credentials">
-      <div className="container-main section-pad-sm">
-        <Reveal>
-          <p className="meta-brand">SRL Painting</p>
-          <h2 className="display-md mt-3 text-ink">Licensed. Local. Ready to work.</h2>
-        </Reveal>
-      </div>
-      <div className="container-main pb-16 sm:pb-20">
-        <div className="trust-grid">
-          {trustFacts.map((fact, i) => (
-            <Reveal key={fact.label} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4}>
-              <div className="trust-cell">
-                <p className="font-display text-3xl text-ink sm:text-4xl">{fact.label}</p>
-                <p className="mt-2 text-sm uppercase tracking-wider text-ink-muted">{fact.detail}</p>
-              </div>
-            </Reveal>
-          ))}
+    <section className="credentials" aria-labelledby="credentials-heading">
+      <div className="container-main credentials-inner">
+        <div className="credentials-intro">
+          <p className="credentials-eyebrow">{site.name}</p>
+          <h2 id="credentials-heading" className="credentials-heading">
+            Professional details.
+          </h2>
+          <p className="credentials-region">{site.tagline}</p>
         </div>
+
+        <dl className="credentials-rail">
+          {businessCredentials.map((item) => (
+            <div key={item.id} className="credentials-item">
+              <dt className="credentials-key">{item.label}</dt>
+              <dd className="credentials-value">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

@@ -45,11 +45,12 @@ export const footerNavLinks = [
 /** @deprecated Use desktopNavLinks / mobileNavLinks — kept for intersection observer */
 export const navLinks = mobileNavLinks;
 
-export const trustFacts = [
-  { label: "C-33", detail: "Painting Contractor" },
-  { label: "CSLB", detail: `#${site.license}` },
-  { label: "Bonded", detail: "Yes" },
-  { label: "Estimates", detail: "Complimentary" },
+/** Verified business credentials for the credentials section */
+export const businessCredentials = [
+  { id: "class", label: "C-33", value: "Painting Contractor" },
+  { id: "cslb", label: "CSLB", value: `#${site.license}` },
+  { id: "bonded", label: "Bonded", value: "Yes" },
+  { id: "estimates", label: "Estimates", value: "Complimentary" },
 ] as const;
 
 export const paintingOptions = [
