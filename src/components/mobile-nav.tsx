@@ -5,9 +5,7 @@ import Link from "next/link";
 import { navLinks, site } from "@/lib/site";
 import { useNav } from "./nav-provider";
 
-type Props = { light?: boolean };
-
-export function MobileNav({ light = false }: Props) {
+export function MobileNav() {
   const { mobileOpen, setMobileOpen } = useNav();
   const panelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -37,7 +35,7 @@ export function MobileNav({ light = false }: Props) {
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label={mobileOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileOpen}
-        className={`flex h-10 w-10 items-center justify-center lg:hidden ${light ? "text-white" : "text-ink"}`}
+        className="flex h-10 w-10 items-center justify-center text-ink lg:hidden"
       >
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden>
           {mobileOpen ? (
@@ -56,11 +54,12 @@ export function MobileNav({ light = false }: Props) {
         aria-label="Navigation"
         aria-hidden={!mobileOpen}
       >
-        <p className="meta-brand mb-6">{site.name}</p>
+        <p className="meta-brand mb-6">Menu</p>
         <nav aria-label="Mobile">
           {navLinks.map((l) => (
             <Link key={l.href} href={l.href} onClick={close} className="mobile-menu-link">
-              {l.label}
+              <span className="mobile-menu-num">{l.num}</span>
+              <span>{l.label}</span>
             </Link>
           ))}
         </nav>
@@ -72,17 +71,8 @@ export function MobileNav({ light = false }: Props) {
             Text {site.phone}
           </a>
           <Link href="#contact" onClick={close} className="btn btn-primary w-full">
-            Request Estimate
+            Get Estimate
           </Link>
-          <a
-            href={site.instagramDm}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={close}
-            className="btn btn-line w-full"
-          >
-            {site.instagramHandle}
-          </a>
         </div>
       </div>
     </>

@@ -11,7 +11,7 @@ export function LocalBusinessSchema({ siteUrl }: Props) {
     name: site.name,
     description: site.description,
     url: siteUrl,
-    image: [`${siteUrl}/logo.png`, `${siteUrl}/projects/exterior-after.jpg`],
+    image: [`${siteUrl}/logo.png`],
     sameAs: [site.instagram],
     telephone: `+1${site.phoneTel}`,
     areaServed: serviceAreas.map((a) => ({

@@ -3,7 +3,7 @@ export const site = {
   tagline: "Bakersfield & surrounding areas",
   description:
     "Residential and commercial painting, cabinet refurbishing, and new cabinet finishing. Licensed C-33 crew serving Bakersfield, Kern County, and Los Angeles.",
-  heroHeadline: "A better finish",
+  heroHeadline: "Good painting",
   heroHeadlineAccent: "starts before the paint.",
   heroDescription:
     "Residential, commercial, and cabinet work — interior, exterior, and re-paints across Bakersfield and Southern California.",
@@ -17,80 +17,38 @@ export const site = {
   instagramHandle: "@srl_painting",
   instagramDm: "https://ig.me/m/srl_painting",
   siteUrl: "https://srl-painting.vercel.app",
-  colorExplorerEnabled: false,
 } as const;
 
 export const navLinks = [
-  { href: "#work", label: "Our Work", id: "work" },
-  { href: "#services", label: "Services", id: "services" },
-  { href: "#process", label: "Process", id: "process" },
-  { href: "#reviews", label: "Reviews", id: "reviews" },
-  { href: "#about", label: "About", id: "about" },
-  { href: "#faq", label: "FAQ", id: "faq" },
-  { href: "#contact", label: "Contact", id: "contact" },
+  { href: "#services", label: "Services", id: "services", num: "01" },
+  { href: "#process", label: "Process", id: "process", num: "02" },
+  { href: "#areas", label: "Areas", id: "areas", num: "03" },
+  { href: "#reviews", label: "Reviews", id: "reviews", num: "04" },
+  { href: "#faq", label: "FAQ", id: "faq", num: "05" },
+  { href: "#contact", label: "Contact", id: "contact", num: "06" },
 ] as const;
 
-export const pillars = [
-  {
-    title: "Surface prep before color",
-    text: "Cracks repaired, old paint scraped, primer where it belongs. We spend more time on what goes underneath than what goes on top.",
-  },
-  {
-    title: "Your house stays yours",
-    text: "Floors covered, plants protected, tools off the lawn at the end of every day. When we leave, you shouldn't be reaching for a vacuum.",
-  },
-  {
-    title: "The price you agree to",
-    text: "Written scope. Fixed number. No add-ons mid-job because we 'found something.' If the scope changes, we talk first.",
-  },
+export const trustFacts = [
+  { label: "C-33", detail: "Painting Contractor" },
+  { label: "CSLB", detail: `#${site.license}` },
+  { label: "Bonded", detail: "Yes" },
+  { label: "Estimates", detail: "Complimentary" },
 ] as const;
 
-export const craftDetails = [
-  {
-    label: "Scrape & prime",
-    caption: "Full exterior prep before a single finish coat.",
-    image: "/projects/exterior-before.jpg",
-    aspect: "tall" as const,
-  },
-  {
-    label: "Clean cut lines",
-    caption: "Walls, trim, and ceilings with even second coats.",
-    image: "/projects/interior-after.jpg",
-    aspect: "wide" as const,
-  },
-  {
-    label: "Spray cabinet finish",
-    caption: "Existing boxes refinished — no demolition.",
-    image: "/projects/cabinets-after.jpg",
-    aspect: "square" as const,
-  },
-  {
-    label: "Masked & protected",
-    caption: "Floors, landscaping, and fixtures covered throughout.",
-    image: "/projects/interior-before.jpg",
-    aspect: "wide" as const,
-  },
-  {
-    label: "Stain & seal",
-    caption: "SuperDeck semi-transparent on exterior wood.",
-    image: "/projects/gazebo-after.jpg",
-    aspect: "tall" as const,
-  },
-  {
-    label: "Mountain-ready exterior",
-    caption: "Two-tone scheme with stucco repair at elevation.",
-    image: "/projects/lake-after.jpg",
-    aspect: "square" as const,
-  },
+export const paintingOptions = [
+  { id: "exterior", label: "House Exterior", short: "Exterior" },
+  { id: "interior", label: "Interior", short: "Interior" },
+  { id: "cabinets", label: "Cabinets", short: "Cabinets" },
+  { id: "commercial", label: "Commercial", short: "Commercial" },
+  { id: "other", label: "Other", short: "Other" },
 ] as const;
 
 export const services = [
   {
     id: "exterior",
     index: "01",
-    title: "Exterior",
+    title: "Exterior Painting",
     summary: "Stucco, trim, fascia, garage doors — built for Central Valley heat.",
-    image: "/projects/exterior-after.jpg",
     details: [
       "Full scrape-and-prime on weathered surfaces",
       "Body, trim, and accent color coordination",
@@ -100,9 +58,8 @@ export const services = [
   {
     id: "interior",
     index: "02",
-    title: "Interior",
+    title: "Interior Painting",
     summary: "Rooms finished with clean lines and move-in-ready cleanup.",
-    image: "/projects/interior-after.jpg",
     details: [
       "Walls, ceilings, baseboards, accent walls",
       "Furniture and floors protected throughout",
@@ -112,9 +69,8 @@ export const services = [
   {
     id: "cabinets",
     index: "03",
-    title: "Cabinets",
+    title: "Cabinet Finishing",
     summary: "Spray refinishing on existing kitchen and bath boxes.",
-    image: "/projects/cabinets-after.jpg",
     details: [
       "Factory-smooth spray on doors and frames",
       "Hardware refresh and minor repairs",
@@ -126,7 +82,6 @@ export const services = [
     index: "04",
     title: "Commercial",
     summary: "Retail, office, and industrial — scheduled around your hours.",
-    image: "/projects/interior-after.jpg",
     details: [
       "After-hours and weekend scheduling",
       "Low-VOC options for occupied buildings",
@@ -135,88 +90,65 @@ export const services = [
   },
 ] as const;
 
-export const beforeAfterProjects = [
-  {
-    id: "exterior",
-    index: "01",
-    title: "Kern County exterior",
-    category: "Residential exterior",
-    location: "Kern County, CA",
-    scope: "Off-white body · Bold trim · Full prep & prime",
-    description: "Off-white body, bold trim, full scrape-and-prime. Built for Central Valley sun.",
-    before: "/projects/exterior-before.jpg",
-    after: "/projects/exterior-after.jpg",
-    layout: "wide" as const,
-  },
-  {
-    id: "cabinets",
-    index: "02",
-    title: "Kitchen cabinet refinishing",
-    category: "Cabinets",
-    location: "Kern County, CA",
-    scope: "Spray finish · Hardware refresh",
-    description: "Dated wood tones to a bright spray finish. Same layout, no demolition.",
-    before: "/projects/cabinets-before.jpg",
-    after: "/projects/cabinets-after.jpg",
-    layout: "offset-right" as const,
-  },
-  {
-    id: "interior",
-    index: "03",
-    title: "Living room refresh",
-    category: "Interior",
-    location: "Kern County, CA",
-    scope: "Walls & trim · New palette",
-    description: "New color throughout. Clean cut lines, even second coat.",
-    before: "/projects/interior-before.jpg",
-    after: "/projects/interior-after.jpg",
-    layout: "wide" as const,
-  },
-  {
-    id: "lake-isabella",
-    index: "04",
-    title: "Lake Isabella exterior",
-    category: "Exterior",
-    location: "Lake Isabella, CA",
-    scope: "Two-tone · Stucco repair",
-    description: "Mountain home, two-tone scheme, minor stucco work.",
-    before: "/projects/lake-before.jpg",
-    after: "/projects/lake-after.jpg",
-    layout: "offset-left" as const,
-  },
-  {
-    id: "gazebo",
-    index: "05",
-    title: "Gazebo stain",
-    category: "Exterior wood",
-    location: "Kern County, CA",
-    scope: "SuperDeck semi-transparent",
-    description: "Sherwin-Williams SuperDeck semi-transparent. Wood grain still visible.",
-    before: "/projects/gazebo-before.jpg",
-    after: "/projects/gazebo-after.jpg",
-    layout: "wide" as const,
-  },
+export const prepDetails = [
+  { label: "Masking", text: "Floors, fixtures, and landscaping protected before work begins." },
+  { label: "Priming", text: "Primer where surfaces need it — not skipped to save time." },
+  { label: "Surface prep", text: "Scraping, sanding, and repairs before any finish coat." },
+  { label: "Repairs", text: "Drywall and stucco addressed as part of scope." },
+  { label: "Clean edges", text: "Cut lines and even coverage on walls, trim, and ceilings." },
+  { label: "Coverage", text: "Second coats where the finish demands it." },
 ] as const;
 
-export const heroProject = beforeAfterProjects[0];
+export const colorDirections = [
+  {
+    id: "warm",
+    label: "Warm",
+    description: "Soft ivory and honey undertones. Welcoming without feeling dated.",
+    panels: ["#f4efe6", "#e8dcc8", "#d4c4a8", "#b8a088"],
+  },
+  {
+    id: "neutral",
+    label: "Neutral",
+    description: "Balanced stone and greige tones. Works with any architecture.",
+    panels: ["#ebe8e2", "#d5d0c8", "#b8b2a8", "#8a847c"],
+  },
+  {
+    id: "earth",
+    label: "Earth",
+    description: "Terracotta, clay, and muted olive. Grounded California warmth.",
+    panels: ["#d4c4a8", "#a89078", "#7a6b58", "#4a4238"],
+  },
+  {
+    id: "dark",
+    label: "Dark",
+    description: "Charcoal, deep navy, and near-black. Bold contrast and depth.",
+    panels: ["#3a3835", "#2a2826", "#1a1917", "#151515"],
+  },
+  {
+    id: "clean-white",
+    label: "Clean White",
+    description: "Crisp bright whites with cool undertones. Modern and airy.",
+    panels: ["#faf9f6", "#f0eeea", "#e8e6e1", "#d9d6d0"],
+  },
+] as const;
 
 export const serviceAreas = [
   { city: "Bakersfield", note: "Home base" },
   { city: "Shafter", note: "Residential & agricultural" },
   { city: "Tehachapi", note: "Mountain properties" },
-  { city: "Los Angeles", note: "Commercial & residential" },
   { city: "Lake Isabella", note: "Lake & mountain homes" },
+  { city: "Los Angeles", note: "Commercial & residential" },
 ] as const;
 
 export const process = [
   {
     num: "01",
     title: "Walkthrough",
-    text: "We assess surfaces, prep needs, and timeline. You get a written scope and firm price.",
+    text: "We understand the space and scope. You get a written scope and firm price.",
   },
   {
     num: "02",
-    title: "Prep",
+    title: "Preparation",
     text: "Masking, repairs, scraping, and primer — the work that determines how long the finish lasts.",
   },
   {
@@ -261,16 +193,16 @@ export const reviews = [
 
 export const faqs = [
   {
-    q: "How do I get an estimate?",
+    q: "How do estimates work?",
     a: `Call ${site.phone}, use the estimate form on this page, or message ${site.instagramHandle} on Instagram with photos and a short description. We usually respond within one business day.`,
+  },
+  {
+    q: "What areas do you serve?",
+    a: "Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. Larger commercial jobs elsewhere in Kern County or Southern California — ask.",
   },
   {
     q: "Are you licensed?",
     a: `Yes. C-33 Painting & Decorating, license #${site.license}, bonded. License details are available through the California CSLB.`,
-  },
-  {
-    q: "Where do you work?",
-    a: "Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. Larger commercial jobs elsewhere in Kern County or Southern California — ask.",
   },
   {
     q: "Interior and exterior?",
@@ -293,11 +225,29 @@ export const quoteServiceOptions = [
   { id: "interior", label: "Interior" },
   { id: "cabinets", label: "Cabinets" },
   { id: "commercial", label: "Commercial" },
+  { id: "other", label: "Other" },
 ] as const;
 
-export const colorMoods = [
-  { id: "warm", label: "Warm white", swatch: "#f4efe6", sample: "/projects/interior-after.jpg" },
-  { id: "natural", label: "Natural", swatch: "#d4c4a8", sample: "/projects/gazebo-after.jpg" },
-  { id: "modern", label: "Modern", swatch: "#e8e6e1", sample: "/projects/cabinets-after.jpg" },
-  { id: "bold", label: "Bold", swatch: "#8b1a3a", sample: "/projects/exterior-after.jpg" },
+export const estimatorTypes = [
+  { id: "interior", label: "Interior" },
+  { id: "exterior", label: "Exterior" },
+  { id: "cabinets", label: "Cabinets" },
+] as const;
+
+export const estimatorSizes = [
+  { id: "small", label: "Small", hint: "1–2 rooms or single elevation" },
+  { id: "medium", label: "Medium", hint: "Several rooms or full exterior" },
+  { id: "large", label: "Large", hint: "Whole home or multi-building" },
+] as const;
+
+export const estimatorConditions = [
+  { id: "good", label: "Good condition", hint: "Minor touch-ups needed" },
+  { id: "fair", label: "Fair condition", hint: "Some prep required" },
+  { id: "heavy", label: "Heavy prep", hint: "Peeling, damage, or bare surfaces" },
+] as const;
+
+export const estimatorTiming = [
+  { id: "flexible", label: "Flexible" },
+  { id: "soon", label: "Within 30 days" },
+  { id: "urgent", label: "As soon as possible" },
 ] as const;

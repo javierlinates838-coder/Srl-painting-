@@ -14,7 +14,7 @@ export function StickyCta() {
         Call
       </a>
       <Link href="#contact" className="btn btn-primary flex-1 !min-h-[2.75rem] !text-xs">
-        Free Estimate
+        Estimate
       </Link>
     </div>
   );

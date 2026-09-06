@@ -13,7 +13,7 @@ export function FaqSection() {
       <div className="container-main max-w-2xl">
         <Reveal>
           <p className="meta-brand">FAQ</p>
-          <h2 className="editorial-md mt-4 text-ink">Common questions.</h2>
+          <h2 className="display-md mt-4 text-ink">Common questions.</h2>
         </Reveal>
 
         <Reveal delay={1}>
@@ -21,6 +21,7 @@ export function FaqSection() {
             {faqs.map((faq, i) => {
               const isOpen = open === i;
               const panelId = `${baseId}-${i}`;
+              const num = (i + 1).toString().padStart(2, "0");
               return (
                 <div key={faq.q} className="faq-item">
                   <button
@@ -30,11 +31,12 @@ export function FaqSection() {
                     aria-controls={panelId}
                     onClick={() => setOpen(isOpen ? null : i)}
                   >
-                    <span className="font-display text-lg text-left text-ink">{faq.q}</span>
+                    <span className="faq-num">{num}</span>
+                    <span className="font-display text-lg text-left text-ink flex-1">{faq.q}</span>
                     <span className="shrink-0 text-brand" aria-hidden>{isOpen ? "−" : "+"}</span>
                   </button>
                   {isOpen && (
-                    <div id={panelId} className="pb-6 body-sm">
+                    <div id={panelId} className="pb-6 pl-8 body-sm">
                       {faq.a}
                     </div>
                   )}

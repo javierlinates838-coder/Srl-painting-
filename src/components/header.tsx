@@ -11,14 +11,9 @@ const sectionIds = navLinks.map((n) => n.id);
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
-  const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 24);
-      setPastHero(y > window.innerHeight * 0.5);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -39,19 +34,12 @@ export function Header() {
     return () => observer.disconnect();
   }, []);
 
-  const solid = scrolled || pastHero;
-
   return (
-    <header className={`site-header ${solid ? "is-solid" : "is-hero"}`}>
+    <header className={`site-header ${scrolled ? "is-solid" : ""}`}>
       <div className="container-main flex h-full items-center justify-between gap-6">
         <Link href="/" className="flex items-center gap-3" aria-label={`${site.name} home`}>
-          <BrandLogo
-            className={`h-10 w-auto object-contain sm:h-11 ${solid ? "" : "brightness-0 invert"}`}
-            priority
-          />
-          <span className={`hidden font-display text-xl sm:block ${solid ? "text-ink" : "text-white"}`}>
-            {site.name}
-          </span>
+          <BrandLogo className="h-10 w-auto object-contain sm:h-11" priority />
+          <span className="hidden font-display text-xl text-ink sm:block">SRL</span>
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
@@ -65,18 +53,17 @@ export function Header() {
         <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={`tel:${site.phoneTel}`}
-            className={`hidden text-sm font-medium tracking-wide lg:block ${solid ? "text-ink-muted hover:text-brand" : "text-white/80 hover:text-white"}`}
+            className="hidden text-sm font-medium tracking-wide text-ink-muted hover:text-brand lg:block"
           >
             {site.phone}
           </a>
           <Link
             href="#contact"
-            className={`btn btn-sm hidden md:inline-flex ${solid ? "btn-primary" : "btn-line-light"}`}
-            style={{ minHeight: "2.5rem", padding: "0 1.25rem", fontSize: "0.75rem" }}
+            className="btn btn-primary btn-sm hidden md:inline-flex"
           >
-            Request Estimate
+            Get Estimate
           </Link>
-          <MobileNav light={!solid} />
+          <MobileNav />
         </div>
       </div>
     </header>

@@ -43,19 +43,19 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: site.name,
-    images: [{ url: "/projects/exterior-after.jpg", width: 1200, height: 800, alt: "SRL Painting exterior project" }],
+    images: [{ url: "/logo.png", width: 512, height: 425, alt: "SRL Painting" }],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: pageTitle,
     description: site.description,
-    images: ["/projects/exterior-after.jpg"],
+    images: ["/logo.png"],
   },
   alternates: { canonical: siteUrl },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f4ef",
+  themeColor: "#f4f1ea",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
