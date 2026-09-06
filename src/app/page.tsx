@@ -26,7 +26,7 @@ export default function Home() {
         <BrandReveal />
         <ScrollProgress />
         <Header />
-        <main id="main-content" className="pb-[calc(4rem+env(safe-area-inset-bottom))] sm:pb-0">
+        <main id="main-content" className="pb-[calc(4.75rem+env(safe-area-inset-bottom))] sm:pb-0">
           <Hero />
           <TrustSection />
           <PaintingSelector />

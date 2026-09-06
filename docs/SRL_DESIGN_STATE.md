@@ -26,6 +26,7 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 | Nav state | `src/components/nav-provider.tsx` |
 | Estimate API | `src/app/api/estimate/route.ts` |
 | SEO schema | `src/components/local-business-schema.tsx` |
+| Hero material stack | `src/components/finish-stack.tsx` |
 
 ## Accepted Design Decisions
 
@@ -37,7 +38,10 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 - Burgundy `#8B1A3A` as restrained accent
 - Floating glass header bar (centered, compresses on scroll)
 - Desktop nav: Services / Process / About (`#about` → craft section)
-- Mobile sheet: full-screen blur overlay with focus trap + ESC dismiss
+- Mobile sheet: portaled to `body`, blur overlay, focus trap, ESC dismiss, `inert` when closed
+- Hero headline: existing copy “Good painting / starts before / the paint.” with single `em` accent on “before”
+- Prep/Prime/Finish CSS material stack with scroll-linked layer separation
+- Hero handoff: bottom gradient fade into trust section
 
 ## Rejected Design Patterns
 
@@ -51,6 +55,8 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 - Three+ Google font families
 - `maximum-scale=1` viewport lock
 - Fake form success without delivery
+- Hero meta chips (C-33, areas, free estimates in hero)
+- Hero fade-up reveal choreography
 
 ## Completed Sections
 
@@ -58,9 +64,9 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 |---------|--------|-------|
 | Phase 0 audit | ✅ | `docs/SRL_CODE_AUDIT.md` |
 | Phase 1 foundation | ✅ | System fonts, Apple palette, spacing tokens, button refresh |
-| Header + mobile nav | ✅ | Floating glass bar, scroll compression, premium sheet, focus trap |
-| Hero | ⏳ Pending | Phase 3 — needs FinishStack |
-| Trust | ⏳ Pending | Phase 4 |
+| Header + mobile nav | ✅ **FINAL** | QA pass at 360–1920; portal overlays; 44px touch targets; scroll compression |
+| Hero | ✅ | Phase 3 — product-launch typography + FinishStack; pending owner review |
+| Trust | ⏳ Pending | Phase 4 — 360px grid overflow known |
 | Services | ⏳ Pending | Phase 5 |
 | Craft/details | ⏳ Pending | Phase 6 |
 | Process | ⏳ Pending | Phase 7 |
@@ -70,11 +76,11 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 
 ## Remaining Work
 
-1. ~~Global design foundation (Apple palette, system fonts, spacing scale)~~ ✅ Phase 1
-2. ~~Floating glass header with scroll compression~~ ✅ Phase 2
-3. ~~Premium mobile menu sheet~~ ✅ Phase 2
-4. Hero with CSS Prep/Prime/Finish layers
-5. Trust as spec row (not cards)
+1. ~~Global design foundation~~ ✅
+2. ~~Floating glass header~~ ✅ FINAL
+3. ~~Premium mobile menu sheet~~ ✅ FINAL
+4. ~~Hero with CSS Prep/Prime/Finish layers~~ ✅ (awaiting review)
+5. Trust as spec row (not cards) + fix 360px overflow
 6. Services product selector polish
 7. Craft scroll story simplification
 8. Process step focus interaction
@@ -88,10 +94,8 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 
 - README references deleted gallery component
 - Brand reveal on every page load may feel unnecessary
-- Nav link count (6) heavier than target → **resolved Phase 2** (3 desktop / 5 mobile)
+- Trust grid causes minor horizontal overflow at exactly 360px (Phase 4)
 - Quote wizard is page section, not overlay
-- Editorial serif fonts conflict with Apple/iOS target → **resolved Phase 1** (system stack)
-- Warm ivory palette (`#F4F1EA`) vs Apple gray (`#F5F5F7`) → **resolved Phase 1** (`#F5F5F7`)
 
 ## Business Facts Still Needed
 
@@ -117,4 +121,4 @@ Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64, 96, 128 (px)
 
 ---
 
-*Last updated: 2026-09-06 — Phase 2 complete, Phase 3 next*
+*Last updated: 2026-09-06 — Phase 2 FINAL, Phase 3 hero complete (awaiting review)*

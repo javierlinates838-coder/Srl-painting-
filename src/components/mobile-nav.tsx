@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { mobileNavLinks, site } from "@/lib/site";
 import { useNav } from "./nav-provider";
@@ -12,6 +13,7 @@ export function MobileNav() {
   const { mobileOpen, setMobileOpen } = useNav();
   const panelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);
 
   const close = useCallback(() => {
     setMobileOpen(false);
@@ -62,6 +64,61 @@ export function MobileNav() {
     return () => panel.removeEventListener("keydown", onKeyDown);
   }, [mobileOpen]);
 
+  const overlay = mounted
+    ? createPortal(
+        <>
+          <div
+            className={`mobile-nav-backdrop lg:hidden ${mobileOpen ? "is-open" : ""}`}
+            onClick={close}
+            aria-hidden={!mobileOpen}
+          />
+
+          <div
+            ref={panelRef}
+            id="mobile-nav-sheet"
+            className={`mobile-nav-sheet lg:hidden ${mobileOpen ? "is-open" : ""}`}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
+            aria-hidden={!mobileOpen}
+            inert={!mobileOpen}
+          >
+            <div className="mobile-nav-sheet-header">
+              <p className="mobile-nav-sheet-title">Menu</p>
+              <button
+                type="button"
+                onClick={close}
+                className="mobile-nav-close"
+                aria-label="Close menu"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+                  <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <nav className="mobile-nav-links" aria-label="Mobile">
+              {mobileNavLinks.map((l) => (
+                <Link key={l.id} href={l.href} onClick={close} className="mobile-nav-link">
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="mobile-nav-footer">
+              <Link href="#contact" onClick={close} className="btn btn-primary w-full">
+                Get Estimate
+              </Link>
+              <a href={`tel:${site.phoneTel}`} onClick={close} className="mobile-nav-phone">
+                {site.phone}
+              </a>
+            </div>
+          </div>
+        </>,
+        document.body,
+      )
+    : null;
+
   return (
     <>
       <Link
@@ -84,52 +141,7 @@ export function MobileNav() {
         <span className="mobile-nav-trigger-label">{mobileOpen ? "Close" : "Menu"}</span>
       </button>
 
-      <div
-        className={`mobile-nav-backdrop lg:hidden ${mobileOpen ? "is-open" : ""}`}
-        onClick={close}
-        aria-hidden={!mobileOpen}
-      />
-
-      <div
-        ref={panelRef}
-        id="mobile-nav-sheet"
-        className={`mobile-nav-sheet lg:hidden ${mobileOpen ? "is-open" : ""}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Navigation menu"
-        aria-hidden={!mobileOpen}
-      >
-        <div className="mobile-nav-sheet-header">
-          <p className="mobile-nav-sheet-title">Menu</p>
-          <button
-            type="button"
-            onClick={close}
-            className="mobile-nav-close"
-            aria-label="Close menu"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
-              <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-
-        <nav className="mobile-nav-links" aria-label="Mobile">
-          {mobileNavLinks.map((l) => (
-            <Link key={l.id} href={l.href} onClick={close} className="mobile-nav-link">
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="mobile-nav-footer">
-          <Link href="#contact" onClick={close} className="btn btn-primary w-full">
-            Get Estimate
-          </Link>
-          <a href={`tel:${site.phoneTel}`} onClick={close} className="mobile-nav-phone">
-            {site.phone}
-          </a>
-        </div>
-      </div>
+      {overlay}
     </>
   );
 }

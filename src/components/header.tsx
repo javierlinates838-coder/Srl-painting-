@@ -58,7 +58,7 @@ export function Header() {
           </nav>
 
           <div className="site-header-actions">
-            <Link href="#contact" className="btn btn-primary btn-sm site-header-cta">
+            <Link href="#contact" className="btn btn-primary btn-sm site-header-cta hidden lg:inline-flex">
               Get Estimate
             </Link>
             <MobileNav />
