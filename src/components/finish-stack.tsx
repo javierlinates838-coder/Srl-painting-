@@ -2,12 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-const LAYERS = [
-  { id: "prep", label: "Prep" },
-  { id: "prime", label: "Prime" },
-  { id: "finish", label: "Finish" },
-] as const;
-
 export function FinishStack() {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -24,7 +18,7 @@ export function FinishStack() {
     const onScroll = () => {
       const rect = el.getBoundingClientRect();
       const viewH = window.innerHeight;
-      const progress = Math.min(1, Math.max(0, (viewH - rect.top) / (viewH * 0.85)));
+      const progress = Math.min(1, Math.max(0, (viewH - rect.top) / (viewH * 0.9)));
       el.style.setProperty("--stack-progress", progress.toFixed(3));
     };
 
@@ -34,13 +28,17 @@ export function FinishStack() {
   }, []);
 
   return (
-    <div ref={ref} className="finish-stack" aria-hidden>
-      {LAYERS.map((layer) => (
-        <div key={layer.id} className={`finish-layer finish-layer--${layer.id}`}>
-          <span className="finish-layer-label">{layer.label}</span>
-          {layer.id === "finish" && <span className="finish-layer-edge" />}
+    <div ref={ref} className="finish-specimen" aria-hidden>
+      <div className="finish-specimen-object">
+        <div className="finish-specimen-core">
+          <span className="finish-specimen-slice finish-specimen-slice--prep" />
+          <span className="finish-specimen-slice finish-specimen-slice--prime" />
+          <span className="finish-specimen-slice finish-specimen-slice--finish">
+            <span className="finish-specimen-accent" />
+          </span>
         </div>
-      ))}
+      </div>
+      <p className="finish-specimen-caption">Prep · Prime · Finish</p>
     </div>
   );
 }

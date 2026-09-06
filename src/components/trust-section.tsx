@@ -3,7 +3,7 @@ import { Reveal } from "./reveal";
 
 export function TrustSection() {
   return (
-    <section className="border-t border-[var(--line)] bg-stone" aria-label="Business credentials">
+    <section className="border-t border-[var(--line)] bg-surface" aria-label="Business credentials">
       <div className="container-main section-pad-sm">
         <Reveal>
           <p className="meta-brand">SRL Painting</p>

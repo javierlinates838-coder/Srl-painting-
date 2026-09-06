@@ -3,8 +3,10 @@ export const site = {
   tagline: "Bakersfield & surrounding areas",
   description:
     "Residential and commercial painting, cabinet refurbishing, and new cabinet finishing. Licensed C-33 crew serving Bakersfield, Kern County, and Los Angeles.",
-  heroHeadline: "Good painting",
-  heroHeadlineAccent: "starts before the paint.",
+  heroHeadline: "The finish",
+  heroHeadlineLine2: "starts before",
+  heroHeadlineLine3: "the paint.",
+  heroHeadlineAlt: "Good painting",
   heroDescription:
     "Residential, commercial, and cabinet work — interior, exterior, and re-paints across Bakersfield and Southern California.",
   phone: "(661) 595-7530",

@@ -1,5 +1,4 @@
 import { BackToTop } from "@/components/back-to-top";
-import { BrandReveal } from "@/components/brand-reveal";
 import { ColorExplorer } from "@/components/color-explorer";
 import { DetailsSection } from "@/components/details-section";
 import { FaqSection } from "@/components/faq-section";
@@ -23,7 +22,6 @@ export default function Home() {
   return (
     <QuoteProvider>
       <NavProvider>
-        <BrandReveal />
         <ScrollProgress />
         <Header />
         <main id="main-content" className="pb-[calc(4.75rem+env(safe-area-inset-bottom))] sm:pb-0">
