@@ -65,6 +65,12 @@ export function MobileNav({ light = false }: Props) {
           ))}
         </nav>
         <div className="mt-auto space-y-3 pt-8">
+          <a href={`tel:${site.phoneTel}`} onClick={close} className="btn btn-line w-full">
+            Call {site.phone}
+          </a>
+          <a href={`sms:${site.phoneTel}`} onClick={close} className="btn btn-line w-full">
+            Text {site.phone}
+          </a>
           <Link href="#contact" onClick={close} className="btn btn-primary w-full">
             Request Estimate
           </Link>

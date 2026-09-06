@@ -15,7 +15,21 @@ export function Footer() {
             <p className="mt-2 text-sm text-white/55">
               {site.licenseClass} · CSLB #{site.license}
             </p>
+            <p className="mt-1 text-sm text-white/55">
+              <a href={`tel:${site.phoneTel}`} className="hover:text-white">{site.phone}</a>
+            </p>
             <p className="mt-1 text-sm text-white/45">{site.tagline}</p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href={`tel:${site.phoneTel}`} className="btn btn-sm border border-white/20 bg-transparent text-white hover:bg-white/10">
+                Call
+              </a>
+              <a href={`sms:${site.phoneTel}`} className="btn btn-sm border border-white/20 bg-transparent text-white hover:bg-white/10">
+                Text
+              </a>
+              <Link href="#contact" className="btn btn-primary btn-sm">
+                Estimate
+              </Link>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-8 md:grid-cols-3">

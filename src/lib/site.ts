@@ -1,12 +1,14 @@
 export const site = {
   name: "SRL Painting",
-  tagline: "C-33 · Kern County & Los Angeles",
+  tagline: "Bakersfield & surrounding areas",
   description:
-    "Interior, exterior, commercial, and cabinet painting by a licensed California crew. Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles.",
+    "Residential and commercial painting, cabinet refurbishing, and new cabinet finishing. Licensed C-33 crew serving Bakersfield, Kern County, and Los Angeles.",
   heroHeadline: "A better finish",
   heroHeadlineAccent: "starts before the paint.",
   heroDescription:
-    "Interior, exterior, cabinets, and commercial work — scoped in writing, prepped properly, finished for California sun and mountain weather.",
+    "Residential, commercial, and cabinet work — interior, exterior, and re-paints across Bakersfield and Southern California.",
+  phone: "(661) 595-7530",
+  phoneTel: "6615957530",
   license: "1108313",
   licenseClass: "C-33 Painting & Decorating",
   licenseVerifyUrl:
@@ -232,6 +234,13 @@ export const process = [
 export const reviews = [
   {
     quote:
+      "Steven took his time on our whole interior and cabinets — degreasing, sanding, clean lines, and he helped us pick colors we actually love.",
+    name: "Michael Moreno",
+    detail: "Interior & cabinets · Bakersfield",
+    source: "Google",
+  },
+  {
+    quote:
       "Repainted the whole exterior — stucco, trim, all of it. Yard stayed clean. House looks like someone actually cared.",
     name: "Maria G.",
     detail: "Exterior · Bakersfield",
@@ -253,7 +262,7 @@ export const reviews = [
 export const faqs = [
   {
     q: "How do I get an estimate?",
-    a: `Use the estimate form on this page, or message ${site.instagramHandle} on Instagram with photos and a short description — interior, exterior, or cabinets, plus your city. We usually respond within one business day.`,
+    a: `Call ${site.phone}, use the estimate form on this page, or message ${site.instagramHandle} on Instagram with photos and a short description. We usually respond within one business day.`,
   },
   {
     q: "Are you licensed?",
@@ -274,8 +283,9 @@ export const faqs = [
 ] as const;
 
 export const contactMethods = [
+  { id: "phone", label: "Phone call" },
+  { id: "text", label: "Text message" },
   { id: "instagram", label: "Instagram DM" },
-  { id: "form", label: "Email or phone from the form" },
 ] as const;
 
 export const quoteServiceOptions = [

@@ -18,7 +18,7 @@ export function Hero() {
       <div className="container-main relative z-10 w-full pb-12 pt-[calc(var(--header-h)+2rem)] sm:pb-16 md:pb-20">
         <div className="max-w-3xl">
           <p className="meta text-white/70">
-            C-33 · Lic. {site.license} · {site.tagline}
+            Lic. {site.license} · {site.tagline}
           </p>
 
           <h1 className="editorial-xl mt-6 text-balance text-white">

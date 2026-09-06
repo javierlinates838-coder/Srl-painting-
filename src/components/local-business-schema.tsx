@@ -13,6 +13,7 @@ export function LocalBusinessSchema({ siteUrl }: Props) {
     url: siteUrl,
     image: [`${siteUrl}/logo.png`, `${siteUrl}/projects/exterior-after.jpg`],
     sameAs: [site.instagram],
+    telephone: `+1${site.phoneTel}`,
     areaServed: serviceAreas.map((a) => ({
       "@type": "City",
       name: a.city,

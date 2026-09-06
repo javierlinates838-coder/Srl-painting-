@@ -62,7 +62,13 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <a
+            href={`tel:${site.phoneTel}`}
+            className={`hidden text-sm font-medium tracking-wide lg:block ${solid ? "text-ink-muted hover:text-brand" : "text-white/80 hover:text-white"}`}
+          >
+            {site.phone}
+          </a>
           <Link
             href="#contact"
             className={`btn btn-sm hidden md:inline-flex ${solid ? "btn-primary" : "btn-line-light"}`}

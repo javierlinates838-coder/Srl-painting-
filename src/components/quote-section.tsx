@@ -120,8 +120,16 @@ export function QuoteSection() {
             <p className="body-text mt-5 max-w-sm">
               Four quick steps. We respond within one business day.
             </p>
-            <p className="mt-8 text-sm text-ink-muted">
-              Prefer Instagram?{" "}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href={`tel:${site.phoneTel}`} className="btn btn-line w-full sm:w-auto">
+                Call {site.phone}
+              </a>
+              <a href={`sms:${site.phoneTel}`} className="btn btn-line w-full sm:w-auto">
+                Text us
+              </a>
+            </div>
+            <p className="mt-6 text-sm text-ink-muted">
+              Or on Instagram:{" "}
               <a href={site.instagramDm} target="_blank" rel="noopener noreferrer" className="text-brand underline-offset-2 hover:underline">
                 {site.instagramHandle}
               </a>
