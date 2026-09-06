@@ -1,38 +1,36 @@
 import { AboutSection } from "@/components/about-section";
 import { BackToTop } from "@/components/back-to-top";
-import { BeforeAfterGallery } from "@/components/before-after-gallery";
-import { ContactSection } from "@/components/contact-section";
-import { CtaBand } from "@/components/cta-band";
+import { ColorExplorer } from "@/components/color-explorer";
+import { CraftSection } from "@/components/craft-section";
+import { EditorialPortfolio } from "@/components/editorial-portfolio";
 import { FaqSection } from "@/components/faq-section";
-import { FeaturedTransformations } from "@/components/featured-transformations";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { NavProvider } from "@/components/nav-provider";
 import { ProcessSection } from "@/components/process-section";
+import { QuoteSection } from "@/components/quote-section";
 import { ReviewsSection } from "@/components/reviews-section";
 import { ServicesSection } from "@/components/services-section";
 import { StickyCta } from "@/components/sticky-cta";
-import { TrustStrip } from "@/components/trust-strip";
-import { WhyChoose } from "@/components/why-choose";
+import { TransformationMoment } from "@/components/transformation-moment";
 
 export default function Home() {
   return (
     <NavProvider>
       <Header />
-      <main id="main-content" className="pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
+      <main id="main-content" className="pb-[calc(4rem+env(safe-area-inset-bottom))] sm:pb-0">
         <Hero />
-        <TrustStrip />
+        <TransformationMoment />
+        <EditorialPortfolio />
         <ServicesSection />
-        <FeaturedTransformations />
-        <BeforeAfterGallery />
-        <WhyChoose />
+        <CraftSection />
+        <ColorExplorer />
         <ProcessSection />
         <ReviewsSection />
         <AboutSection />
         <FaqSection />
-        <ContactSection />
-        <CtaBand />
+        <QuoteSection />
       </main>
       <Footer />
       <StickyCta />

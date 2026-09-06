@@ -1,12 +1,12 @@
 export const site = {
   name: "SRL Painting",
-  tagline: "Licensed C-33 contractor · Kern County & Los Angeles",
+  tagline: "C-33 · Kern County & Los Angeles",
   description:
     "Interior, exterior, commercial, and cabinet painting by a licensed California crew. Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles.",
+  heroHeadline: "A better finish",
+  heroHeadlineAccent: "starts before the paint.",
   heroDescription:
-    "Interior rooms, full exteriors, cabinet refinishing, and commercial spaces — scoped clearly, prepped properly, and finished with coatings chosen for California climates.",
-  heroHeadline: "Painting that makes your home",
-  heroHeadlineAccent: "feel new again.",
+    "Interior, exterior, cabinets, and commercial work — scoped in writing, prepped properly, finished for California sun and mountain weather.",
   license: "1108313",
   licenseClass: "C-33 Painting & Decorating",
   licenseVerifyUrl:
@@ -15,6 +15,7 @@ export const site = {
   instagramHandle: "@srl_painting",
   instagramDm: "https://ig.me/m/srl_painting",
   siteUrl: "https://srl-painting.vercel.app",
+  colorExplorerEnabled: false,
 } as const;
 
 export const navLinks = [
@@ -27,17 +28,10 @@ export const navLinks = [
   { href: "#contact", label: "Contact", id: "contact" },
 ] as const;
 
-export const credentials = [
-  { label: "State license", value: "CSLB #1108313" },
-  { label: "Classification", value: "C-33 Painting" },
-  { label: "Status", value: "Licensed & bonded" },
-  { label: "Estimates", value: "Always free" },
-] as const;
-
 export const pillars = [
   {
     title: "Surface prep before color",
-    text: "Cracks repaired, old paint scraped, primer where it belongs. We spend more time on what goes underneath than what goes on top — because that's what separates a finish that lasts from one that peels in two summers.",
+    text: "Cracks repaired, old paint scraped, primer where it belongs. We spend more time on what goes underneath than what goes on top.",
   },
   {
     title: "Your house stays yours",
@@ -49,53 +43,92 @@ export const pillars = [
   },
 ] as const;
 
+export const craftDetails = [
+  {
+    label: "Scrape & prime",
+    caption: "Full exterior prep before a single finish coat.",
+    image: "/projects/exterior-before.jpg",
+    aspect: "tall" as const,
+  },
+  {
+    label: "Clean cut lines",
+    caption: "Walls, trim, and ceilings with even second coats.",
+    image: "/projects/interior-after.jpg",
+    aspect: "wide" as const,
+  },
+  {
+    label: "Spray cabinet finish",
+    caption: "Existing boxes refinished — no demolition.",
+    image: "/projects/cabinets-after.jpg",
+    aspect: "square" as const,
+  },
+  {
+    label: "Masked & protected",
+    caption: "Floors, landscaping, and fixtures covered throughout.",
+    image: "/projects/interior-before.jpg",
+    aspect: "wide" as const,
+  },
+  {
+    label: "Stain & seal",
+    caption: "SuperDeck semi-transparent on exterior wood.",
+    image: "/projects/gazebo-after.jpg",
+    aspect: "tall" as const,
+  },
+  {
+    label: "Mountain-ready exterior",
+    caption: "Two-tone scheme with stucco repair at elevation.",
+    image: "/projects/lake-after.jpg",
+    aspect: "square" as const,
+  },
+] as const;
+
 export const services = [
   {
-    id: "residential",
-    title: "Residential",
-    summary: "Homes — inside and out.",
+    id: "exterior",
+    index: "01",
+    title: "Exterior",
+    summary: "Stucco, trim, fascia, garage doors — built for Central Valley heat.",
     image: "/projects/exterior-after.jpg",
     details: [
-      "Exterior: stucco, trim, fascia, garage doors",
-      "Interior: walls, ceilings, baseboards",
-      "Drywall repair and prep included",
-      "Color guidance when you want it",
+      "Full scrape-and-prime on weathered surfaces",
+      "Body, trim, and accent color coordination",
+      "Drywall and stucco repair included in scope",
     ],
   },
   {
-    id: "commercial",
-    title: "Commercial",
-    summary: "Spaces that can't close for a week.",
+    id: "interior",
+    index: "02",
+    title: "Interior",
+    summary: "Rooms finished with clean lines and move-in-ready cleanup.",
     image: "/projects/interior-after.jpg",
     details: [
-      "Retail, office, warehouse, industrial",
-      "Nights and weekends available",
-      "Low-VOC for occupied buildings",
-      "Phased plans for multi-unit work",
+      "Walls, ceilings, baseboards, accent walls",
+      "Furniture and floors protected throughout",
+      "Color guidance when you want a second opinion",
     ],
   },
   {
     id: "cabinets",
-    title: "Cabinet refinishing",
-    summary: "Same boxes. Different kitchen.",
+    index: "03",
+    title: "Cabinets",
+    summary: "Spray refinishing on existing kitchen and bath boxes.",
     image: "/projects/cabinets-after.jpg",
     details: [
-      "Spray finish on existing doors and frames",
-      "Hardware and minor repairs",
+      "Factory-smooth spray on doors and frames",
+      "Hardware refresh and minor repairs",
       "Coatings rated for kitchens and baths",
-      "A fraction of full replacement",
     ],
   },
   {
-    id: "new-cabinets",
-    title: "New cabinet finishing",
-    summary: "Fresh install, finished right.",
-    image: "/projects/cabinets-after.jpg",
+    id: "commercial",
+    index: "04",
+    title: "Commercial",
+    summary: "Retail, office, and industrial — scheduled around your hours.",
+    image: "/projects/interior-after.jpg",
     details: [
-      "Finish work on new cabinet sets",
-      "Even coverage on doors, frames, panels",
-      "Coordinated with your builder's schedule",
-      "Done once, done properly",
+      "After-hours and weekend scheduling",
+      "Low-VOC options for occupied buildings",
+      "Phased plans for multi-unit properties",
     ],
   },
 ] as const;
@@ -103,66 +136,67 @@ export const services = [
 export const beforeAfterProjects = [
   {
     id: "exterior",
-    title: "Exterior, Kern County",
-    category: "Exterior",
+    index: "01",
+    title: "Kern County exterior",
+    category: "Residential exterior",
     location: "Kern County, CA",
     scope: "Off-white body · Bold trim · Full prep & prime",
-    description:
-      "Off-white body, bold trim, full scrape-and-prime. Built for Central Valley sun.",
+    description: "Off-white body, bold trim, full scrape-and-prime. Built for Central Valley sun.",
     before: "/projects/exterior-before.jpg",
     after: "/projects/exterior-after.jpg",
+    layout: "wide" as const,
   },
   {
     id: "cabinets",
-    title: "Kitchen cabinets",
+    index: "02",
+    title: "Kitchen cabinet refinishing",
     category: "Cabinets",
     location: "Kern County, CA",
     scope: "Spray finish · Hardware refresh",
-    description:
-      "Dated wood tones to a bright spray finish. Same layout, no demolition.",
+    description: "Dated wood tones to a bright spray finish. Same layout, no demolition.",
     before: "/projects/cabinets-before.jpg",
     after: "/projects/cabinets-after.jpg",
+    layout: "offset-right" as const,
   },
   {
     id: "interior",
-    title: "Living room",
+    index: "03",
+    title: "Living room refresh",
     category: "Interior",
     location: "Kern County, CA",
     scope: "Walls & trim · New palette",
-    description:
-      "New color throughout. Clean cut lines, even second coat, ready to move back in.",
+    description: "New color throughout. Clean cut lines, even second coat.",
     before: "/projects/interior-before.jpg",
     after: "/projects/interior-after.jpg",
+    layout: "wide" as const,
   },
   {
     id: "lake-isabella",
+    index: "04",
     title: "Lake Isabella exterior",
     category: "Exterior",
     location: "Lake Isabella, CA",
     scope: "Two-tone · Stucco repair",
-    description:
-      "Mountain home, two-tone scheme, minor stucco work. Finish rated for elevation swings.",
+    description: "Mountain home, two-tone scheme, minor stucco work.",
     before: "/projects/lake-before.jpg",
     after: "/projects/lake-after.jpg",
+    layout: "offset-left" as const,
   },
   {
     id: "gazebo",
+    index: "05",
     title: "Gazebo stain",
-    category: "Exterior",
+    category: "Exterior wood",
     location: "Kern County, CA",
     scope: "SuperDeck semi-transparent",
-    description:
-      "Sherwin-Williams SuperDeck semi-transparent. Protected, wood grain still visible.",
+    description: "Sherwin-Williams SuperDeck semi-transparent. Wood grain still visible.",
     before: "/projects/gazebo-before.jpg",
     after: "/projects/gazebo-after.jpg",
+    layout: "wide" as const,
   },
 ] as const;
 
-export const featuredProjects = [
-  beforeAfterProjects[0],
-  beforeAfterProjects[1],
-  beforeAfterProjects[3],
-] as const;
+export const heroProject = beforeAfterProjects[0];
 
 export const serviceAreas = [
   { city: "Bakersfield", note: "Home base" },
@@ -172,37 +206,26 @@ export const serviceAreas = [
   { city: "Lake Isabella", note: "Lake & mountain homes" },
 ] as const;
 
-export const heroStats = [
-  { n: "C-33", l: "Licensed & bonded" },
-  { n: String(serviceAreas.length), l: "Cities served" },
-  { n: "Free", l: "Estimates" },
-] as const;
-
 export const process = [
   {
-    num: "1",
-    title: "Request your estimate",
-    text: "Tell us about your project — rooms, exterior, cabinets, or commercial space. Photos help us quote accurately.",
+    num: "01",
+    title: "Walkthrough",
+    text: "We assess surfaces, prep needs, and timeline. You get a written scope and firm price.",
   },
   {
-    num: "2",
-    title: "Walkthrough & scope",
-    text: "We assess surfaces, prep needs, and timeline. You get a written scope and firm price before work begins.",
+    num: "02",
+    title: "Prep",
+    text: "Masking, repairs, scraping, and primer — the work that determines how long the finish lasts.",
   },
   {
-    num: "3",
-    title: "Preparation",
-    text: "Masking, repairs, scraping, and primer — the work you don't see, but definitely notice when it's skipped.",
+    num: "03",
+    title: "Paint",
+    text: "Coats applied with products selected for your surfaces and climate.",
   },
   {
-    num: "4",
-    title: "Painting",
-    text: "Coats applied with products selected for your surfaces and climate — interior, exterior, or spray cabinet work.",
-  },
-  {
-    num: "5",
+    num: "04",
     title: "Final walkthrough",
-    text: "We go room by room with you, touch up what needs it, and leave the site clean.",
+    text: "Room by room with you. Touch-ups as needed. Site left clean.",
   },
 ] as const;
 
@@ -234,7 +257,7 @@ export const faqs = [
   },
   {
     q: "Are you licensed?",
-    a: "Yes. C-33 Painting & Decorating, license #1108313, bonded. Verify anytime on the CSLB website.",
+    a: `Yes. C-33 Painting & Decorating, license #${site.license}, bonded. License details are available through the California CSLB.`,
   },
   {
     q: "Where do you work?",
@@ -252,14 +275,19 @@ export const faqs = [
 
 export const contactMethods = [
   { id: "instagram", label: "Instagram DM" },
-  { id: "form", label: "This form (we'll follow up)" },
+  { id: "form", label: "Email or phone from the form" },
 ] as const;
 
-export const serviceFormOptions = [
-  "Exterior painting",
-  "Interior painting",
-  "Cabinet refinishing",
-  "New cabinet finishing",
-  "Commercial painting",
-  "Not sure yet",
+export const quoteServiceOptions = [
+  { id: "exterior", label: "Exterior" },
+  { id: "interior", label: "Interior" },
+  { id: "cabinets", label: "Cabinets" },
+  { id: "commercial", label: "Commercial" },
+] as const;
+
+export const colorMoods = [
+  { id: "warm", label: "Warm white", swatch: "#f4efe6", sample: "/projects/interior-after.jpg" },
+  { id: "natural", label: "Natural", swatch: "#d4c4a8", sample: "/projects/gazebo-after.jpg" },
+  { id: "modern", label: "Modern", swatch: "#e8e6e1", sample: "/projects/cabinets-after.jpg" },
+  { id: "bold", label: "Bold", swatch: "#8b1a3a", sample: "/projects/exterior-after.jpg" },
 ] as const;

@@ -11,9 +11,14 @@ const sectionIds = navLinks.map((n) => n.id);
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
+  const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      setPastHero(y > window.innerHeight * 0.5);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -23,48 +28,49 @@ export function Header() {
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[];
-
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
         if (visible[0]?.target.id) setActive(visible[0].target.id);
       },
-      { rootMargin: "-35% 0px -50% 0px", threshold: [0, 0.25, 0.5] },
+      { rootMargin: "-35% 0px -50% 0px", threshold: [0, 0.25] },
     );
-
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
   }, []);
 
+  const solid = scrolled || pastHero;
+
   return (
-    <header className={`site-header ${scrolled ? "is-scrolled" : "bg-transparent"}`}>
+    <header className={`site-header ${solid ? "is-solid" : "is-hero"}`}>
       <div className="container-main flex h-full items-center justify-between gap-6">
-        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={`${site.name} home`}>
-          <BrandLogo className="h-11 w-auto object-contain sm:h-12" priority />
-          <span className="hidden font-display text-lg leading-tight text-ink sm:block">
+        <Link href="/" className="flex items-center gap-3" aria-label={`${site.name} home`}>
+          <BrandLogo
+            className={`h-10 w-auto object-contain sm:h-11 ${solid ? "" : "brightness-0 invert"}`}
+            priority
+          />
+          <span className={`hidden font-display text-xl sm:block ${solid ? "text-ink" : "text-white"}`}>
             {site.name}
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
           {navLinks.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`nav-link ${active === l.id ? "is-active" : ""}`}
-            >
+            <Link key={l.href} href={l.href} className={`nav-link ${active === l.id ? "is-active" : ""}`}>
               {l.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-          <Link href="#contact" className="btn btn-brand btn-sm hidden md:inline-flex">
-            Get Free Estimate
+        <div className="flex items-center gap-3">
+          <Link
+            href="#contact"
+            className={`btn btn-sm hidden md:inline-flex ${solid ? "btn-primary" : "btn-line-light"}`}
+            style={{ minHeight: "2.5rem", padding: "0 1.25rem", fontSize: "0.75rem" }}
+          >
+            Request Estimate
           </Link>
-          <MobileNav />
+          <MobileNav light={!solid} />
         </div>
       </div>
     </header>

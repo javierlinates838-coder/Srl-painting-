@@ -17,8 +17,8 @@ type Props = {
   beforeAlt: string;
   afterAlt: string;
   priority?: boolean;
-  className?: string;
   aspect?: Aspect;
+  large?: boolean;
 };
 
 export function BeforeAfterSlider({
@@ -27,22 +27,20 @@ export function BeforeAfterSlider({
   beforeAlt,
   afterAlt,
   priority = false,
-  className = "",
   aspect = "16/10",
+  large = false,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState(50);
   const [dragging, setDragging] = useState(false);
-  const [hint, setHint] = useState(true);
 
-  const clamp = (v: number) => Math.max(4, Math.min(96, v));
+  const clamp = (v: number) => Math.max(3, Math.min(97, v));
 
   const move = useCallback((x: number) => {
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
     setPos(clamp(((x - r.left) / r.width) * 100));
-    setHint(false);
   }, []);
 
   useEffect(() => {
@@ -62,7 +60,9 @@ export function BeforeAfterSlider({
     };
   }, [dragging, move]);
 
-  const valueText = `${Math.round(pos)}% before visible, ${Math.round(100 - pos)}% after visible`;
+  const sizes = large
+    ? "(max-width: 768px) 100vw, 1400px"
+    : "(max-width: 1024px) 100vw, 720px";
 
   return (
     <div
@@ -73,87 +73,32 @@ export function BeforeAfterSlider({
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(pos)}
-      aria-valuetext={valueText}
       tabIndex={0}
-      className={`ba-slider group relative select-none overflow-hidden bg-zinc-200 ${dragging ? "is-dragging" : ""} ${className}`}
-      onMouseDown={(e) => {
-        setDragging(true);
-        move(e.clientX);
-      }}
-      onTouchStart={(e) => {
-        setDragging(true);
-        move(e.touches[0].clientX);
-      }}
+      className={`ba-slider relative select-none overflow-hidden bg-stone ${dragging ? "is-dragging" : ""}`}
+      onMouseDown={(e) => { setDragging(true); move(e.clientX); }}
+      onTouchStart={(e) => { setDragging(true); move(e.touches[0].clientX); }}
       onKeyDown={(e) => {
-        if (e.key === "ArrowLeft") {
-          e.preventDefault();
-          setPos((p) => clamp(p - 5));
-          setHint(false);
-        }
-        if (e.key === "ArrowRight") {
-          e.preventDefault();
-          setPos((p) => clamp(p + 5));
-          setHint(false);
-        }
-        if (e.key === "Home") {
-          e.preventDefault();
-          setPos(4);
-          setHint(false);
-        }
-        if (e.key === "End") {
-          e.preventDefault();
-          setPos(96);
-          setHint(false);
-        }
+        if (e.key === "ArrowLeft") { e.preventDefault(); setPos((p) => clamp(p - 4)); }
+        if (e.key === "ArrowRight") { e.preventDefault(); setPos((p) => clamp(p + 4)); }
       }}
     >
       <div className={`relative w-full ${aspectClass[aspect]}`}>
-        <Image
-          src={afterSrc}
-          alt={afterAlt}
-          fill
-          sizes="(max-width: 1024px) 100vw, 720px"
-          className="object-cover"
-          draggable={false}
-          priority={priority}
-        />
-
+        <Image src={afterSrc} alt={afterAlt} fill sizes={sizes} className="object-cover" draggable={false} priority={priority} />
         <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-          <Image
-            src={beforeSrc}
-            alt={beforeAlt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 720px"
-            className="object-cover brightness-[0.92]"
-            draggable={false}
-            priority={priority}
-            aria-hidden
-          />
+          <Image src={beforeSrc} alt={beforeAlt} fill sizes={sizes} className="object-cover" draggable={false} priority={priority} aria-hidden />
         </div>
 
         <div className="ba-handle absolute inset-y-0 z-10 -translate-x-1/2 cursor-ew-resize" style={{ left: `${pos}%` }} aria-hidden>
-          <div className="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-white shadow-sm" />
-          <div
-            className={`absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-brand shadow-md ${dragging ? "scale-105" : ""}`}
-          >
-            <svg className="h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+          <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-white/90" />
+          <div className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-brand shadow-sm sm:h-12 sm:w-12">
+            <svg className="h-3.5 w-3.5 text-white sm:h-4 sm:w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
             </svg>
           </div>
         </div>
 
-        <span className="absolute left-3 top-3 z-20 rounded bg-black/65 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
-          Before
-        </span>
-        <span className="absolute right-3 top-3 z-20 rounded bg-brand px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
-          After
-        </span>
-
-        {hint && (
-          <span className="pointer-events-none absolute bottom-3 left-1/2 z-20 -translate-x-1/2 rounded-full bg-white px-3 py-1 text-[11px] font-medium text-ink shadow-sm">
-            Drag to compare
-          </span>
-        )}
+        <span className="absolute left-4 top-4 z-20 meta text-white">Before</span>
+        <span className="absolute right-4 top-4 z-20 meta text-white">After</span>
       </div>
     </div>
   );
