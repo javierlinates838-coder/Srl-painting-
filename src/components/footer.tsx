@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { navLinks, site } from "@/lib/site";
+import { footerNavLinks, site } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -36,7 +36,7 @@ export function Footer() {
           <div>
             <p className="meta text-white/40">Navigate</p>
             <ul className="mt-4 space-y-2 text-sm text-white/55">
-              {navLinks.map((l) => (
+              {footerNavLinks.map((l) => (
                 <li key={l.id}>
                   <Link href={l.href} className="hover:text-white transition-colors">{l.label}</Link>
                 </li>

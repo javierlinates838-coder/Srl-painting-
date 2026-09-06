@@ -35,6 +35,9 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 - Resend API with honest Instagram/copy fallback for estimates
 - Phone + Instagram as primary contact paths
 - Burgundy `#8B1A3A` as restrained accent
+- Floating glass header bar (centered, compresses on scroll)
+- Desktop nav: Services / Process / About (`#about` → craft section)
+- Mobile sheet: full-screen blur overlay with focus trap + ESC dismiss
 
 ## Rejected Design Patterns
 
@@ -54,8 +57,8 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 | Section | Status | Notes |
 |---------|--------|-------|
 | Phase 0 audit | ✅ | `docs/SRL_CODE_AUDIT.md` |
-| Phase 1 foundation | 🔄 In progress | System tokens, fonts, spacing |
-| Header | ⏳ Pending | Phase 2 |
+| Phase 1 foundation | ✅ | System fonts, Apple palette, spacing tokens, button refresh |
+| Header + mobile nav | ✅ | Floating glass bar, scroll compression, premium sheet, focus trap |
 | Hero | ⏳ Pending | Phase 3 — needs FinishStack |
 | Trust | ⏳ Pending | Phase 4 |
 | Services | ⏳ Pending | Phase 5 |
@@ -67,9 +70,9 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 
 ## Remaining Work
 
-1. Global design foundation (Apple palette, system fonts, spacing scale)
-2. Floating glass header with scroll compression
-3. Premium mobile menu sheet
+1. ~~Global design foundation (Apple palette, system fonts, spacing scale)~~ ✅ Phase 1
+2. ~~Floating glass header with scroll compression~~ ✅ Phase 2
+3. ~~Premium mobile menu sheet~~ ✅ Phase 2
 4. Hero with CSS Prep/Prime/Finish layers
 5. Trust as spec row (not cards)
 6. Services product selector polish
@@ -85,10 +88,10 @@ Premium Apple/iPhone-inspired painting contractor website — precision, restrai
 
 - README references deleted gallery component
 - Brand reveal on every page load may feel unnecessary
-- Nav link count (6) heavier than target
+- Nav link count (6) heavier than target → **resolved Phase 2** (3 desktop / 5 mobile)
 - Quote wizard is page section, not overlay
-- Editorial serif fonts conflict with Apple/iOS target
-- Warm ivory palette (`#F4F1EA`) vs Apple gray (`#F5F5F7`)
+- Editorial serif fonts conflict with Apple/iOS target → **resolved Phase 1** (system stack)
+- Warm ivory palette (`#F4F1EA`) vs Apple gray (`#F5F5F7`) → **resolved Phase 1** (`#F5F5F7`)
 
 ## Business Facts Still Needed
 
@@ -114,4 +117,4 @@ Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64, 96, 128 (px)
 
 ---
 
-*Last updated: 2026-09-06 — Phase 1 started*
+*Last updated: 2026-09-06 — Phase 2 complete, Phase 3 next*

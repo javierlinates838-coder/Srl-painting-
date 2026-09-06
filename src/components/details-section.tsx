@@ -3,7 +3,7 @@ import { Reveal } from "./reveal";
 
 export function DetailsSection() {
   return (
-    <section className="section-pad bg-charcoal" aria-labelledby="details-heading">
+    <section id="about" className="section-pad bg-charcoal" aria-labelledby="details-heading">
       <div className="container-main">
         <Reveal>
           <p className="meta-brand text-white/50">Craft</p>

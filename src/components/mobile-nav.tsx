@@ -2,8 +2,11 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
-import { navLinks, site } from "@/lib/site";
+import { mobileNavLinks, site } from "@/lib/site";
 import { useNav } from "./nav-provider";
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
 export function MobileNav() {
   const { mobileOpen, setMobileOpen } = useNav();
@@ -15,64 +18,116 @@ export function MobileNav() {
     buttonRef.current?.focus();
   }, [setMobileOpen]);
 
+  const open = useCallback(() => setMobileOpen(true), [setMobileOpen]);
+
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   useEffect(() => {
     if (!mobileOpen) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [mobileOpen, close]);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    const focusable = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE));
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    first?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || focusable.length === 0) return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    };
+
+    panel.addEventListener("keydown", onKeyDown);
+    return () => panel.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
+
   return (
     <>
+      <Link
+        href="#contact"
+        className="site-header-cta-mobile btn btn-primary btn-sm lg:hidden"
+        onClick={() => setMobileOpen(false)}
+      >
+        Estimate
+      </Link>
+
       <button
         ref={buttonRef}
         type="button"
-        onClick={() => setMobileOpen(!mobileOpen)}
+        onClick={() => (mobileOpen ? close() : open())}
         aria-label={mobileOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileOpen}
-        className="flex h-10 w-10 items-center justify-center text-ink lg:hidden"
+        aria-controls="mobile-nav-sheet"
+        className="mobile-nav-trigger lg:hidden"
       >
-        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden>
-          {mobileOpen ? (
-            <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
-          ) : (
-            <path strokeLinecap="round" d="M4 7h16M4 12h16M4 17h16" />
-          )}
-        </svg>
+        <span className="mobile-nav-trigger-label">{mobileOpen ? "Close" : "Menu"}</span>
       </button>
 
       <div
+        className={`mobile-nav-backdrop lg:hidden ${mobileOpen ? "is-open" : ""}`}
+        onClick={close}
+        aria-hidden={!mobileOpen}
+      />
+
+      <div
         ref={panelRef}
-        className={`mobile-menu lg:hidden ${mobileOpen ? "is-open" : ""}`}
+        id="mobile-nav-sheet"
+        className={`mobile-nav-sheet lg:hidden ${mobileOpen ? "is-open" : ""}`}
         role="dialog"
         aria-modal="true"
-        aria-label="Navigation"
+        aria-label="Navigation menu"
         aria-hidden={!mobileOpen}
       >
-        <p className="meta-brand mb-6">Menu</p>
-        <nav aria-label="Mobile">
-          {navLinks.map((l) => (
-            <Link key={l.href} href={l.href} onClick={close} className="mobile-menu-link">
-              <span className="mobile-menu-num">{l.num}</span>
-              <span>{l.label}</span>
+        <div className="mobile-nav-sheet-header">
+          <p className="mobile-nav-sheet-title">Menu</p>
+          <button
+            type="button"
+            onClick={close}
+            className="mobile-nav-close"
+            aria-label="Close menu"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+              <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <nav className="mobile-nav-links" aria-label="Mobile">
+          {mobileNavLinks.map((l) => (
+            <Link key={l.id} href={l.href} onClick={close} className="mobile-nav-link">
+              {l.label}
             </Link>
           ))}
         </nav>
-        <div className="mt-auto space-y-3 pt-8">
-          <a href={`tel:${site.phoneTel}`} onClick={close} className="btn btn-line w-full">
-            Call {site.phone}
-          </a>
-          <a href={`sms:${site.phoneTel}`} onClick={close} className="btn btn-line w-full">
-            Text {site.phone}
-          </a>
+
+        <div className="mobile-nav-footer">
           <Link href="#contact" onClick={close} className="btn btn-primary w-full">
             Get Estimate
           </Link>
+          <a href={`tel:${site.phoneTel}`} onClick={close} className="mobile-nav-phone">
+            {site.phone}
+          </a>
         </div>
       </div>
     </>

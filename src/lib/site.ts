@@ -19,14 +19,30 @@ export const site = {
   siteUrl: "https://srl-painting.vercel.app",
 } as const;
 
-export const navLinks = [
-  { href: "#services", label: "Services", id: "services", num: "01" },
-  { href: "#process", label: "Process", id: "process", num: "02" },
-  { href: "#areas", label: "Areas", id: "areas", num: "03" },
-  { href: "#reviews", label: "Reviews", id: "reviews", num: "04" },
-  { href: "#faq", label: "FAQ", id: "faq", num: "05" },
-  { href: "#contact", label: "Contact", id: "contact", num: "06" },
+/** Desktop header — compact primary nav */
+export const desktopNavLinks = [
+  { href: "#services", label: "Services", id: "services" },
+  { href: "#process", label: "Process", id: "process" },
+  { href: "#about", label: "About", id: "about" },
 ] as const;
+
+/** Mobile sheet — primary nav + contact paths */
+export const mobileNavLinks = [
+  ...desktopNavLinks,
+  { href: "#faq", label: "FAQ", id: "faq" },
+  { href: "#contact", label: "Contact", id: "contact" },
+] as const;
+
+/** Footer navigation */
+export const footerNavLinks = [
+  { href: "#services", label: "Services", id: "services" },
+  { href: "#process", label: "Process", id: "process" },
+  { href: "#contact", label: "Contact", id: "contact" },
+  { href: "#contact", label: "Estimate", id: "estimate" },
+] as const;
+
+/** @deprecated Use desktopNavLinks / mobileNavLinks — kept for intersection observer */
+export const navLinks = mobileNavLinks;
 
 export const trustFacts = [
   { label: "C-33", detail: "Painting Contractor" },
