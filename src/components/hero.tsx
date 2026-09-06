@@ -21,7 +21,7 @@ export function Hero() {
         <h1 className={`display-hero mt-4 text-ink hero-reveal hero-reveal-d1 ${inView ? "is-visible" : ""}`}>
           {site.heroHeadline}
           <br />
-          <span className="italic text-brand">{site.heroHeadlineAccent}</span>
+          <span className="text-brand">{site.heroHeadlineAccent}</span>
         </h1>
 
         <p className={`mt-8 max-w-md body-text hero-reveal hero-reveal-d2 ${inView ? "is-visible" : ""}`}>

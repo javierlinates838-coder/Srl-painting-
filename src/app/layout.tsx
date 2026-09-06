@@ -1,21 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { DM_Sans, Instrument_Serif } from "next/font/google";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { site } from "@/lib/site";
 import "./globals.css";
-
-const display = Instrument_Serif({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
-const body = DM_Sans({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
@@ -55,7 +42,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f4f1ea",
+  themeColor: "#f5f5f7",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -63,7 +50,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
+    <html lang="en">
       <body>
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Script id="enable-js-reveal" strategy="beforeInteractive">
