@@ -4,7 +4,7 @@ Updated September 8, 2026. This is an implementation record, not a legal opinion
 
 ## Implemented
 
-- Reviews section points to the Google Maps listing supplied by the owner; no rating count, stars, or customer quotations are invented or scraped.
+- Reviews section features a short Michael Moreno testimonial excerpt and its five-star rating, transcribed from the Instagram screenshot supplied by the owner. It is labelled as a featured excerpt, not a live Google feed or aggregate score. Google Maps and Instagram links remain available. No additional testimonials or aggregate ratings are invented.
 - Instagram links have recognizable custom interface icons and meaningful accessible names.
 - Custom decorative SVG icons are hidden from assistive technology. Icon-only buttons retain text-based accessible names.
 - Slideshow begins paused, has previous/next/play controls and 44px control targets, pauses on focus, announces manually selected photos, and respects reduced-motion settings.

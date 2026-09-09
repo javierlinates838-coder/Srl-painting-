@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+.testimonial-card { margin:0; padding:36px; border:1px solid var(--line); border-top:3px solid var(--brand); border-radius:4px; background:var(--soft); }
+.testimonial-top { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+.testimonial-stars { color:var(--brand); font-size:21px; letter-spacing:4px; line-height:1; }
+.testimonial-card blockquote { margin:28px 0 32px; color:var(--ink); font-size:clamp(24px,2.5vw,34px); font-weight:500; line-height:1.5; letter-spacing:-.025em; }
+.testimonial-card figcaption { display:flex; align-items:center; gap:14px; }
+.review-avatar { display:grid; place-items:center; width:48px; height:48px; border-radius:50%; background:var(--brand); color:white; font-size:14px; font-weight:600; flex-shrink:0; }
+.testimonial-card figcaption strong { display:block; font-size:16px; font-weight:600; }
+.testimonial-card figcaption small { display:block; font-size:12px; color:var(--muted); margin-top:3px; }
+.testimonial-footer { display:flex; justify-content:space-between; gap:15px; flex-wrap:wrap; margin-top:26px; padding-top:18px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); }
+.testimonial-footer a { display:inline-flex; align-items:center; gap:8px; color:var(--brand); text-decoration:underline; text-underline-offset:4px; }
+.testimonial-footer .srl-icon { width:16px; height:16px; }
+.reviews-all-link { margin-top:25px; }
+@media(max-width:700px) { .testimonial-card { padding:26px 22px; } .testimonial-card blockquote { font-size:26px; } }
+
 /* Reviews, custom functional icons, and accessible information pages. */
 .srl-icon {
   display: inline-block;

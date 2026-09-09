@@ -398,13 +398,6 @@ export default function Home() {
         <nav className="shell legal-links" aria-label="Website information">
           <Link href="/terms">Website & estimate information</Link>
           <Link href="/accessibility">Accessibility assistance</Link>
-          <a
-            href={site.licenseVerifyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            CSLB license lookup ↗
-          </a>
         </nav>
         <div className="shell footer-main">
           <a
