@@ -1062,7 +1062,7 @@ button {
     font-size: 19px;
   }
   .brand-wordmark small {
-    font-size: 12px;
+    display: none;
   }
   .brand-link {
     gap: 10px;
@@ -1273,7 +1273,7 @@ button {
     font-size: 25px;
   }
   .form-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 18px 14px;
   }
   .estimate-card input,
@@ -1373,3 +1373,4 @@ button {
     animation: none !important;
   }
 }
+
