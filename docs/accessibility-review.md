@@ -1,13 +1,14 @@
 # SRL Painting — accessibility and publication handoff
 
-Updated September 8, 2026. This is an implementation record, not a legal opinion, compliance certification, or a guarantee against claims.
+Updated September 9, 2026. This is an implementation record, not a legal opinion, compliance certification, or a guarantee against claims.
 
 ## Implemented
 
-- Reviews section features a short Michael Moreno testimonial excerpt and its five-star rating, transcribed from the Instagram screenshot supplied by the owner. It is labelled as a featured excerpt, not a live Google feed or aggregate score. Google Maps and Instagram links remain available. No additional testimonials or aggregate ratings are invented.
+- Reviews feature four selected, attributed excerpts: Michael Moreno from the supplied Instagram screenshot, and Cynthia C., Kathleen T., and Aaron J. from SRL's Angi listing. They are not a live feed or aggregate score. Mobile carousel behavior is retained; desktop uses a wider editorial layout.
 - Instagram links have recognizable custom interface icons and meaningful accessible names.
 - Custom decorative SVG icons are hidden from assistive technology. Icon-only buttons retain text-based accessible names.
-- Slideshow begins paused, has previous/next/play controls and 44px control targets, pauses on focus, announces manually selected photos, and respects reduced-motion settings.
+- The hero slideshow is replaced by a horizontal photo divider with a vertically draggable 52px handle. Slider semantics, keyboard controls, pointer cancellation, and 44px preset buttons provide non-drag alternatives. Photos are labelled by view, not as an unverified before/after pair. There is no automatic movement.
+- One-time entrance animations progressively enhance already-visible content. Reduced-motion preferences disable them and cancel active animations. No content relies on animation to become readable.
 - Inquiry fields have labels and required-field instructions. Sending/errors are announced; successful submission moves focus to its confirmation heading.
 - Skip link, visible focus, native FAQ disclosure controls, responsive layout, and browser zoom remain available.
 - Accessibility assistance page provides phone, text, and Instagram contact choices, without claiming ADA/WCAG certification.

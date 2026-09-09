@@ -48,13 +48,14 @@ function walk(node) {
   ts.forEachChild(node, walk);
 }
 walk(tree);
-assert.match(source, /const \[playing, setPlaying\] = useState\(false\)/);
-assert.doesNotMatch(
-  source,
-  /setPlaying\(true\)/,
-  "No automatic startup rotation",
-);
-assert.match(source, /onFocusCapture=\{\(\) => setPlaying\(false\)\}/);
+const reveal = read("src/components/project-reveal.tsx");
+assert.match(reveal, /role="slider"/);
+assert.match(reveal, /aria-orientation="vertical"/);
+assert.match(reveal, /aria-valuenow=\{split\}/);
+assert.match(reveal, /onKeyDown/);
+assert.match(reveal, /onPointerCancel/);
+assert.match(reveal, /onClick=\{\(\) => setSplit\(50\)\}/);
+assert.doesNotMatch(source + reveal, /setInterval/);
 assert.match(source, /aria-live="polite"/);
 assert.match(source, /role="alert"/);
 assert.match(source, /resultHeading\.current\?\.focus\(\)/);

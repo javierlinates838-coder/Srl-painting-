@@ -31,7 +31,7 @@ export function InformationPage({
         <p className="eyebrow">SRL PAINTING / WEBSITE INFORMATION</p>
         <h1>{title}</h1>
         <p className="information-intro">{intro}</p>
-        <p className="information-date">Updated September 8, 2026</p>
+        <p className="information-date">Updated September 9, 2026</p>
         <div className="information-content">{children}</div>
       </main>
       <footer className="shell information-footer">

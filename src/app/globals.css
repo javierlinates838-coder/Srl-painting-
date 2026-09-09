@@ -1,5 +1,39 @@
 @import "tailwindcss";
 
+.project-reveal { min-width: 0; margin: 0; }
+.reveal-frame { position: relative; height: clamp(420px, 37vw, 570px); overflow: hidden; border-radius: 12px; background: var(--soft); isolation: isolate; }
+.reveal-frame img { object-fit: cover; object-position: center; pointer-events: none; user-select: none; }
+.reveal-layer { position: absolute; inset: 0; }
+.reveal-label { position: absolute; left: 20px; padding: 5px 12px; font-size: 12px; line-height: 1.4; letter-spacing: .08em; font-weight: 600; color: white; background: var(--ink); border-radius: 4px; pointer-events: none; }
+.reveal-label-top { top: 18px; }
+.reveal-label-bottom { bottom: 18px; background: var(--brand); }
+.reveal-divider { position: absolute; left: 0; right: 0; height: 3px; background: white; transform: translateY(-50%); box-shadow: 0 0 8px #0003; pointer-events: none; }
+.reveal-handle { position: absolute; left: 50%; width: 52px; height: 52px; display: grid; place-items: center; transform: translate(-50%, -50%); background: white; color: var(--ink); border: 0; border-radius: 50%; box-shadow: 0 3px 20px #0003; touch-action: none; cursor: ns-resize; transition: box-shadow 180ms; }
+.reveal-handle:hover { box-shadow: 0 3px 25px #0005; }
+.reveal-handle:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; }
+.reveal-caption { display: flex; justify-content: space-between; align-items: start; gap: 24px; padding-top: 22px; }
+.reveal-caption h2 { margin-top: 8px; font-size: clamp(22px, 1.7vw, 28px); line-height: 1.25; letter-spacing: -.025em; text-wrap: initial; }
+.reveal-caption p { max-width: 22ch; font-size: 14px; line-height: 1.65; }
+.reveal-caption .eyebrow { font-size: 12px; }
+.reveal-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.reveal-presets button { min-height: 44px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px; background: white; color: var(--muted); font-size: 14px; cursor: pointer; }
+.reveal-presets button:hover { border-color: var(--brand); color: var(--brand); }
+.reveal-presets button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: white; }
+@media (max-width: 700px) {
+  .reveal-frame { height: 400px; border-radius: 8px; }
+  .reveal-caption { display: block; padding-top: 18px; }
+  .reveal-caption p { max-width: none; margin-top: 10px; }
+  .reveal-label { left: 14px; }
+}
+@media (max-width: 380px) { .reveal-frame { height: 340px; } }
+
+/* Small finishing touches, without hiding content before scripts load. */
+.hero-copy h1 { text-wrap: balance; }
+.section-heading h2 { line-height: 1.15; }
+.service-link .srl-icon, .text-link .srl-icon { transition: transform 220ms ease; }
+.service-link:hover .srl-icon, .text-link:hover .srl-icon { transform: translateX(3px); }
+@media (hover: hover) { .service-card { transition: border-color 220ms, box-shadow 220ms; } .service-card:hover { border-color: var(--brand); box-shadow: 0 8px 24px #22252208; } }
+
 .review-carousel, .review-window, .review-source-cards { min-width: 0; }
 .review-window { overflow: hidden; border-radius: 4px; touch-action: pan-y; }
 .review-track { display: flex; align-items: stretch; transition: transform 450ms cubic-bezier(.22,.61,.36,1); }

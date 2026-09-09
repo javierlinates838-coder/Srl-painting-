@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ReviewsSection } from "@/components/reviews-section";
+import { PageMotion } from "@/components/page-motion";
 import { SrlIcon } from "@/components/srl-icon";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { BrandLogo } from "@/components/brand-logo";
@@ -42,6 +43,7 @@ export default function Home() {
   return (
     <>
       <LocalBusinessSchema siteUrl={site.siteUrl} />
+      <PageMotion />
       <div className="announcement">
         <span>Bakersfield & surrounding areas</span>
         <a href={`tel:${site.phoneTel}`}>Let’s talk about your project ↗</a>
@@ -70,8 +72,8 @@ export default function Home() {
               <span>feeling.</span>
             </h1>
             <p className="hero-description">
-              A home you’re proud to come back to. Thoughtful prep, clean lines,
-              and painting that brings your vision to life.
+              Interior, exterior, and cabinet painting in Bakersfield.
+              Careful preparation. Clean lines. A space that feels like you.
             </p>
             <div className="button-row">
               <a className="button primary" href="#contact">
@@ -120,8 +122,8 @@ export default function Home() {
               </h2>
             </div>
             <p>
-              From one room to a full exterior, we help your space feel more
-              like you. Residential, commercial, and cabinet painting.
+              One room, a refreshed kitchen, or a whole new first impression.
+              Tell us what you have in mind—we’ll help you plan the finish.
             </p>
           </div>
           <div className="service-grid">
@@ -290,8 +292,8 @@ export default function Home() {
                 </h2>
               </div>
               <p>
-                No guessing what comes next. From our first conversation to the
-                final walkthrough, here’s how we approach your project.
+                Know the scope, understand the next step, and stay involved.
+                Here’s what to expect from the first conversation to the final walkthrough.
               </p>
             </div>
             <div className="process-grid">

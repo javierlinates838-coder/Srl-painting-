@@ -49,9 +49,9 @@ export default function AccessibilityPage() {
             and descriptions for project images.
           </li>
           <li>
-            The slideshow starts paused. You can change photos or choose to play
-            it; keyboard focus pauses rotation. Reduced-motion settings disable
-            animated transitions.
+            The photo divider works with dragging, arrow keys, or the view
+            buttons beneath it. Reviews change only when you select them.
+            Reduced-motion settings disable introductory animations and transitions.
           </li>
           <li>Browser zoom and a layout that adapts to smaller screens.</li>
         </ul>
