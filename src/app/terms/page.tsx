@@ -76,6 +76,7 @@ export default function TermsPage() {
       </section>
       <section>
         <h2>Reviews, photographs, and external sites</h2>
+        <p>The interactive service-area map loads map images from OpenStreetMap when it enters view. Its provider receives standard connection information such as your IP address and the page referrer. The map does not request your device location. See <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">OpenStreetMap Foundation’s privacy policy</a>.</p>
         <p>
           Customer feedback featured on SRL’s social profile is selected by the
           business and is not a complete or independent review feed. Individual

@@ -11,7 +11,7 @@ import {
   SiteNavigation,
   EstimateForm,
 } from "@/components/site-interactions";
-import { faqs, site, process, serviceAreas } from "@/lib/site";
+import { faqs, site, process } from "@/lib/site";
 
 const services = [
   {
@@ -327,19 +327,8 @@ export default function Home() {
             <a className="text-link" href={`tel:${site.phoneTel}`}>
               Call {site.phone} ↗
             </a>
-            <ServiceAreaMap />
           </div>
-          <div className="area-list">
-            {serviceAreas.map((area, i) => (
-              <div key={area.city}>
-                <span>{String(i + 1).padStart(2, "0")}</span>
-                <h3>{area.city}</h3>
-                <small>
-                  {i === 0 ? "HOME BASE" : "ASK ABOUT AVAILABILITY"}
-                </small>
-              </div>
-            ))}
-          </div>
+          <ServiceAreaMap />
         </section>
 
         <section id="contact" className="contact-section section">

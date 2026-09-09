@@ -1,39 +1,91 @@
-// Approximate locality centers, not service boundaries or driving routes.
-// Reference: https://oriseapps.orau.gov/cedr/pdf/hist-docs/949.pdf
-// Lake Isabella locality: https://www.wikidata.org/wiki/Q2495360
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import type { Map as LeafletMap } from "leaflet";
+import "leaflet/dist/leaflet.css";
+
 const places = [
-  { name: "Bakersfield", lat: 35.358, lon: -119.019, home: true },
-  { name: "Shafter", lat: 35.489, lon: -119.287, home: false },
-  { name: "Lake Isabella", lat: 35.613, lon: -118.478, home: false },
-  { name: "Tehachapi", lat: 35.114, lon: -118.453, home: false },
+  { name: "Bakersfield", lat: 35.3733, lon: -119.0187, note: "Our home base", zoom: 11 },
+  { name: "Shafter", lat: 35.489, lon: -119.287, note: "Ask about project availability", zoom: 11 },
+  { name: "Tehachapi", lat: 35.114, lon: -118.453, note: "Ask about project availability", zoom: 11 },
+  { name: "Lake Isabella", lat: 35.613, lon: -118.478, note: "Ask about project availability", zoom: 11 },
+  { name: "Los Angeles", lat: 34.0522, lon: -118.2437, note: "Projects by arrangement", zoom: 10 },
 ];
-const point = (lat: number, lon: number) => ({
-  x: 40 + ((lon + 119.55) / 1.45) * 440,
-  y: 32 + ((35.8 - lat) / .8) * 280,
-});
+const overview: [[number, number], [number, number]] = [[35.05, -119.4], [35.7, -118.25]];
 
 export function ServiceAreaMap() {
+  const container = useRef<HTMLDivElement>(null);
+  const map = useRef<LeafletMap | null>(null);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    const element = container.current;
+    if (!element) return;
+    let disposed = false;
+    let started = false;
+    let resize: ResizeObserver | undefined;
+    async function start() {
+      if (started) return;
+      started = true;
+      try {
+        const L = await import("leaflet");
+        if (disposed) return;
+        const instance = L.map(element!, {
+          scrollWheelZoom: false, dragging: !L.Browser.mobile,
+          touchZoom: false, doubleClickZoom: false, zoomControl: false,
+          minZoom: 6, maxZoom: 16, zoomAnimation: false,
+        });
+        map.current = instance;
+        instance.fitBounds(overview, { padding: [28, 32] });
+        L.control.zoom({ position: "topright" }).addTo(instance);
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          maxZoom: 19, keepBuffer: 0, updateWhenIdle: true,
+        }).on("tileerror", () => { if (!disposed) setFailed(true); })
+          .on("tileload", () => { if (!disposed) setFailed(false); }).addTo(instance);
+        places.forEach((place, index) => {
+          L.marker([place.lat, place.lon], {
+            title: place.name + ": " + place.note, alt: place.name,
+            icon: L.divIcon({ className: index === 0 ? "srl-map-pin home-pin" : "srl-map-pin",
+              html: "<span>" + (index === 0 ? "SRL" : String(index + 1).padStart(2, "0")) + "</span>",
+              iconSize: index === 0 ? [44, 44] : [32, 32], iconAnchor: index === 0 ? [22, 22] : [16, 16],
+            }),
+          }).bindTooltip(place.name, { direction: "bottom", offset: [0, index === 0 ? 22 : 16], permanent: index === 0, className: "srl-map-tooltip" })
+            .on("click", () => setSelected(index)).addTo(instance);
+        });
+        resize = new ResizeObserver(() => instance.invalidateSize({ pan: false }));
+        resize.observe(element!);
+        setReady(true);
+      } catch { if (!disposed) setFailed(true); }
+    }
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) { observer.disconnect(); void start(); }
+    });
+    observer.observe(element);
+    return () => { disposed = true; observer.disconnect(); resize?.disconnect(); map.current?.remove(); map.current = null; };
+  }, []);
+
+  function focusPlace(index: number) {
+    setSelected(index);
+    const place = places[index];
+    map.current?.setView([place.lat, place.lon], place.zoom, { animate: false });
+  }
   return (
-    <figure className="service-area-map">
-      <div className="area-map-heading"><span className="eyebrow">BAKERSFIELD & BEYOND</span><span>Kern County, CA</span></div>
-      <svg viewBox="0 0 520 355" role="img" aria-labelledby="area-map-title area-map-description">
-        <title id="area-map-title">Bakersfield and nearby service areas</title>
-        <desc id="area-map-description">Regional locator map with Bakersfield as the home base, Shafter to the northwest, Lake Isabella to the northeast, and Tehachapi to the southeast. Locations are approximate; this is not a driving map or a service boundary.</desc>
-        <defs><pattern id="area-map-grid" width="52" height="52" patternUnits="userSpaceOnUse"><path d="M52 0H0V52" fill="none" stroke="currentColor" strokeWidth=".6" /></pattern></defs>
-        <rect width="520" height="355" fill="url(#area-map-grid)" className="area-map-grid" />
-        <g className="area-map-compass" aria-hidden="true"><path d="M466 62V29m-5 6 5-6 5 6" fill="none" stroke="currentColor" strokeWidth="1.5" /><text x="466" y="20" textAnchor="middle">N</text></g>
-        {places.map((place) => {
-          const { x, y } = point(place.lat, place.lon);
-          return <g key={place.name} className={place.home ? "map-place map-home" : "map-place"}>
-            {place.home ? <circle cx={x} cy={y} r="27" className="map-home-ring" /> : null}
-            <circle cx={x} cy={y} r={place.home ? 10 : 6} className="map-dot" />
-            <text x={x} y={y + (place.name === "Shafter" || place.name === "Lake Isabella" ? -19 : 35)} textAnchor="middle">{place.name}</text>
-            {place.home ? <text x={x} y={y + 54} textAnchor="middle" className="map-home-note">SRL HOME BASE</text> : null}
-          </g>;
-        })}
-        <text x="28" y="329" className="map-region-label">SOUTHERN SAN JOAQUIN VALLEY</text>
-      </svg>
-      <figcaption><span>Approximate locations · Ask about availability</span><a href="https://www.google.com/maps/search/?api=1&query=Bakersfield%2C%20California" target="_blank" rel="noopener noreferrer" aria-label="Explore Bakersfield in Google Maps (opens in a new tab)">Open map ↗</a></figcaption>
+    <figure className="regional-map-card">
+      <div className="regional-map-top"><div><span className="eyebrow">OUR NEIGHBORHOOD & BEYOND</span><h3>Bakersfield is home.</h3></div><span className="regional-map-tag">KERN COUNTY, CA</span></div>
+      <div className="regional-map-stage">
+        <div ref={container} className="regional-map-canvas" role="region" aria-label="Interactive service-area map. Use the city buttons or map zoom controls to explore." />
+        {!ready && !failed ? <div className="regional-map-loading" role="status">Loading the neighborhood map…</div> : null}
+        {failed ? <p className="regional-map-error" role="status">Some map details couldn’t load. You can still explore the city list below.</p> : null}
+        <button className="regional-map-reset" type="button" disabled={!ready} onClick={() => { setSelected(null); map.current?.fitBounds(overview, { padding: [28, 32], animate: false }); }}>Regional view</button>
+      </div>
+      <figcaption className="regional-map-summary" aria-live="polite"><strong>{selected === null ? "Rooted here. Ready for your project." : places[selected].name}</strong><span>{selected === null ? "Select a community to take a closer look." : places[selected].note}</span></figcaption>
+      <div className="regional-map-cities" aria-label="Explore service areas">
+        {places.map((place, index) => <button type="button" key={place.name} onClick={() => focusPlace(index)} aria-pressed={selected === index}><span className="map-city-number">{String(index + 1).padStart(2, "0")}</span><span>{place.name}</span><span aria-hidden="true">↗</span></button>)}
+      </div>
+      <div className="regional-map-foot"><span>City markers, not office locations or service boundaries.</span><a href={"https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent((selected === null ? "Bakersfield" : places[selected].name) + ", California")} target="_blank" rel="noopener noreferrer">Open full map ↗</a></div>
     </figure>
   );
 }
