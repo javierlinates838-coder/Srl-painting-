@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+.review-carousel, .review-window, .review-source-cards { min-width: 0; }
+.review-window { overflow: hidden; border-radius: 4px; touch-action: pan-y; }
+.review-track { display: flex; align-items: stretch; transition: transform 450ms cubic-bezier(.22,.61,.36,1); }
+.review-slide { flex: 0 0 100%; min-width: 0; display: flex; }
+.review-slide .testimonial-card { width: 100%; display: flex; flex-direction: column; }
+.review-slide blockquote { flex: 1; }
+.review-controls { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 14px; }
+.review-controls button { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 50%; cursor: pointer; }
+.review-controls button:hover { border-color: var(--brand); color: var(--brand); }
+.review-controls button:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+.review-pagination { display: flex; }
+.review-pagination button { border: 0; background: transparent; }
+.review-pagination button span { width: 7px; height: 7px; border-radius: 8px; background: var(--muted); transition: width 250ms; }
+.review-pagination button[aria-pressed="true"] span { width: 24px; background: var(--brand); }
+.review-position { text-align: center; color: var(--muted); font-size: .875rem; margin: 4px 0 0; }
+@media (prefers-reduced-motion: reduce) { .review-track, .review-pagination button span { transition: none; } }
+
 .testimonial-card { margin:0; padding:36px; border:1px solid var(--line); border-top:3px solid var(--brand); border-radius:4px; background:var(--soft); }
 .testimonial-top { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
 .testimonial-stars { color:var(--brand); font-size:21px; letter-spacing:4px; line-height:1; }
