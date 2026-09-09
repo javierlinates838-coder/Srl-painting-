@@ -558,12 +558,19 @@ button {
   height: clamp(420px, 38vw, 590px);
   position: relative;
   touch-action: pan-y;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
 }
+.showcase-viewport.is-dragging { cursor: grabbing; }
+.showcase-viewport:focus-visible { outline: 3px solid var(--brand); outline-offset: -4px; }
+.showcase-viewport.is-dragging .showcase-slide { transition: none; }
+@media (prefers-reduced-motion: reduce) { .showcase .showcase-slide { transition: none; } }
 .showcase-slide {
   position: absolute;
   inset: 0;
-  opacity: 0;
-  transition: opacity 0.7s ease;
+  opacity: 1;
+  transition: transform 420ms cubic-bezier(.22,.61,.36,1);
   pointer-events: none;
 }
 .showcase-slide.is-active {
@@ -1696,4 +1703,3 @@ button {
     margin-top: 0;
   }
 }
-

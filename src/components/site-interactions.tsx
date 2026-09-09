@@ -84,7 +84,14 @@ export function ProjectShowcase() {
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const touchStart = useRef<number | null>(null);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const gesture = useRef<{ id: number; x: number; y: number; width: number } | null>(null);
+  function resetDrag() {
+    gesture.current = null;
+    setDragging(false);
+    setDragOffset(0);
+  }
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const stop = () => {
@@ -117,22 +124,53 @@ export function ProjectShowcase() {
       onFocusCapture={() => setPlaying(false)}
     >
       <div
-        className="showcase-viewport"
-        onTouchStart={(e) => {
-          touchStart.current = e.touches[0].clientX;
-        }}
-        onTouchEnd={(e) => {
-          if (touchStart.current !== null) {
-            const distance = e.changedTouches[0].clientX - touchStart.current;
-            if (Math.abs(distance) > 50) move(distance < 0 ? 1 : -1);
-            touchStart.current = null;
+        className={`showcase-viewport${dragging ? " is-dragging" : ""}`}
+        tabIndex={0}
+        aria-label="Project gallery. Drag or swipe to browse, or use the left and right arrow keys."
+        onKeyDown={(e) => {
+          if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+            e.preventDefault();
+            move(e.key === "ArrowLeft" ? -1 : 1);
           }
         }}
+        onDragStart={(e) => e.preventDefault()}
+        onPointerDown={(e) => {
+          if (!e.isPrimary || e.button !== 0) return;
+          setPlaying(false);
+          gesture.current = { id: e.pointerId, x: e.clientX, y: e.clientY, width: e.currentTarget.clientWidth };
+          e.currentTarget.setPointerCapture(e.pointerId);
+          setDragging(true);
+        }}
+        onPointerMove={(e) => {
+          const start = gesture.current;
+          if (!start || start.id !== e.pointerId) return;
+          const dx = e.clientX - start.x;
+          const dy = e.clientY - start.y;
+          if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 12) {
+            resetDrag();
+            return;
+          }
+          const atEdge = (active === 0 && dx > 0) || (active === slides.length - 1 && dx < 0);
+          setDragOffset(Math.max(-start.width, Math.min(start.width, dx)) * (atEdge ? .2 : 1));
+        }}
+        onPointerUp={(e) => {
+          const start = gesture.current;
+          if (!start || start.id !== e.pointerId) return;
+          const dx = e.clientX - start.x;
+          const dy = e.clientY - start.y;
+          if (Math.abs(dx) > Math.min(90, start.width * .18) && Math.abs(dx) > Math.abs(dy)) {
+            setActive((n) => Math.max(0, Math.min(slides.length - 1, n + (dx < 0 ? 1 : -1))));
+          }
+          resetDrag();
+        }}
+        onPointerCancel={resetDrag}
+        onLostPointerCapture={resetDrag}
       >
         {slides.map((slide, i) => (
           <div
             key={slide.src}
             className={`showcase-slide ${active === i ? "is-active" : ""}`}
+            style={{ transform: `translateX(calc(${(i - active) * 100}% + ${dragOffset}px))` }}
             aria-hidden={active !== i}
             role="group"
             aria-roledescription="slide"
@@ -142,6 +180,7 @@ export function ProjectShowcase() {
               src={slide.src}
               alt={slide.alt}
               fill
+              draggable={false}
               sizes="(max-width: 900px) 100vw, 55vw"
               preload={i === 0}
             />
@@ -152,7 +191,7 @@ export function ProjectShowcase() {
             </div>
           </div>
         ))}
-        <div className="project-tag">THE SRL PORTFOLIO ↗</div>
+        <div className="project-tag">DRAG / SWIPE TO EXPLORE</div>
       </div>
       <div className="showcase-controls">
         <span
