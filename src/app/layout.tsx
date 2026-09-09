@@ -1,15 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
-import { DM_Sans, Instrument_Serif } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { site } from "@/lib/site";
 import "./globals.css";
-
-const display = Instrument_Serif({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400"],
-});
 
 const body = DM_Sans({
   variable: "--font-body",
@@ -43,7 +36,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: site.name,
-    images: [{ url: "/logo.png", width: 512, height: 425, alt: "SRL Painting" }],
+    images: [
+      { url: "/logo.png", width: 512, height: 425, alt: "SRL Painting" },
+    ],
   },
   twitter: {
     card: "summary",
@@ -55,20 +50,23 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f4f1ea",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
+    <html lang="en" className={body.variable}>
       <body>
-        <a href="#main-content" className="skip-link">Skip to content</a>
-        <Script id="enable-js-reveal" strategy="beforeInteractive">
-          {`document.documentElement.classList.add("js")`}
-        </Script>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <LocalBusinessSchema siteUrl={siteUrl} />
         {children}
       </body>
