@@ -49,10 +49,8 @@ export function ProjectShowcase() {
         <div><span className="eyebrow">THE SRL PORTFOLIO</span><h2 id="reveal-title">A closer look. Every angle.</h2></div>
         <p id="reveal-help">Pull the handle up or down to explore two project views.</p>
       </figcaption>
-      <div className="reveal-presets" aria-label="Choose a photo view">
-        <button type="button" onClick={() => setSplit(100)} aria-pressed={split === 100}>Front view</button>
-        <button type="button" onClick={() => setSplit(50)} aria-pressed={split === 50}>Split view</button>
-        <button type="button" onClick={() => setSplit(0)} aria-pressed={split === 0}>Details</button>
+      <div className="reveal-presets">
+        <button type="button" onClick={() => setSplit(50)}>Reset view</button>
       </div>
     </figure>
   );

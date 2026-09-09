@@ -49,8 +49,8 @@ export default function AccessibilityPage() {
             and descriptions for project images.
           </li>
           <li>
-            The photo divider works with dragging, arrow keys, or the view
-            buttons beneath it. Reviews change only when you select them.
+            The photo divider works with dragging or arrow keys. A single reset
+            button restores its centered position. Reviews change only when you select them.
             Reduced-motion settings disable introductory animations and transitions.
           </li>
           <li>Browser zoom and a layout that adapts to smaller screens.</li>
