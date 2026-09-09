@@ -1,4 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ReviewsSection } from "@/components/reviews-section";
+import { SrlIcon } from "@/components/srl-icon";
+import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { BrandLogo } from "@/components/brand-logo";
 import {
   ProjectShowcase,
@@ -37,6 +41,7 @@ const services = [
 export default function Home() {
   return (
     <>
+      <LocalBusinessSchema siteUrl={site.siteUrl} />
       <div className="announcement">
         <span>Bakersfield & surrounding areas</span>
         <a href={`tel:${site.phoneTel}`}>Let’s talk about your project ↗</a>
@@ -70,7 +75,7 @@ export default function Home() {
             </p>
             <div className="button-row">
               <a className="button primary" href="#contact">
-                Get a free estimate <span aria-hidden="true">↗</span>
+                Get a free estimate <SrlIcon name="arrow" />
               </a>
               <a className="text-link" href="#work">
                 Explore our work ↓
@@ -78,10 +83,10 @@ export default function Home() {
             </div>
             <div className="hero-credentials">
               <span className="seal" aria-hidden="true">
-                ✓
+                <SrlIcon name="check" />
               </span>
               <p>
-                <strong>Licensed. Bonded. Local.</strong>
+                <strong>Licensed. Local. Detail-focused.</strong>
                 <small>C-33 Painting & Decorating · #{site.license}</small>
               </p>
             </div>
@@ -92,7 +97,7 @@ export default function Home() {
           <div className="shell trust-inner">
             <span>GOOD WORK STARTS WITH TRUST</span>
             <strong>Licensed C-33</strong>
-            <strong>Bonded</strong>
+            <strong>Bakersfield-based</strong>
             <strong>Free estimates</strong>
             <a
               href={site.licenseVerifyUrl}
@@ -132,11 +137,22 @@ export default function Home() {
                   <span className="photo-index">{service.number}</span>
                 </div>
                 <div className="service-body">
-                  <h3>{service.title}</h3>
+                  <h3 className="service-title">
+                    <SrlIcon
+                      name={
+                        service.number === "01"
+                          ? "home"
+                          : service.number === "02"
+                            ? "roller"
+                            : "cabinet"
+                      }
+                    />
+                    {service.title}
+                  </h3>
                   <p>{service.text}</p>
                   <small>{service.detail}</small>
                   <a href="#contact" className="service-link">
-                    Discuss your project <span aria-hidden="true">↗</span>
+                    Discuss your project <SrlIcon name="arrow" />
                   </a>
                 </div>
               </article>
@@ -216,7 +232,8 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Follow {site.instagramHandle} ↗
+                <SrlIcon name="instagram" /> Follow {site.instagramHandle}{" "}
+                <SrlIcon name="arrow" />
               </a>
             </div>
           </div>
@@ -289,6 +306,8 @@ export default function Home() {
           </div>
         </section>
 
+        <ReviewsSection />
+
         <section className="section shell area-section" id="areas">
           <div>
             <p className="eyebrow">ROOTED IN BAKERSFIELD</p>
@@ -335,7 +354,7 @@ export default function Home() {
                 scope, timing, and a free estimate.
               </p>
               <a className="contact-phone" href={`tel:${site.phoneTel}`}>
-                {site.phone} ↗
+                <SrlIcon name="phone" /> {site.phone}
               </a>
               <div className="contact-alternatives">
                 <a href={`sms:${site.phoneTel}`}>Send a text</a>
@@ -344,10 +363,10 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Instagram DM ↗
+                  <SrlIcon name="instagram" /> Instagram DM
                 </a>
               </div>
-              <small>Licensed C-33 · #{site.license} · Bonded</small>
+              <small>California C-33 contractor · #{site.license}</small>
             </div>
             <EstimateForm />
           </div>
@@ -376,6 +395,17 @@ export default function Home() {
         </section>
       </main>
       <footer className="site-footer">
+        <nav className="shell legal-links" aria-label="Website information">
+          <Link href="/terms">Website & estimate information</Link>
+          <Link href="/accessibility">Accessibility assistance</Link>
+          <a
+            href={site.licenseVerifyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            CSLB license lookup ↗
+          </a>
+        </nav>
         <div className="shell footer-main">
           <a
             href="#top"
@@ -399,14 +429,18 @@ export default function Home() {
         <div className="shell footer-bottom">
           <span>© {new Date().getFullYear()} SRL Painting</span>
           <a href={site.instagram} target="_blank" rel="noopener noreferrer">
-            Instagram ↗
+            <SrlIcon name="instagram" /> Instagram
           </a>
           <span>California contractor license #{site.license}</span>
         </div>
       </footer>
       <div className="mobile-contact">
-        <a href={`tel:${site.phoneTel}`}>Call SRL</a>
-        <a href="#contact">Free estimate ↗</a>
+        <a href={`tel:${site.phoneTel}`}>
+          <SrlIcon name="phone" /> Call SRL
+        </a>
+        <a href="#contact">
+          Free estimate <SrlIcon name="arrow" />
+        </a>
       </div>
     </>
   );

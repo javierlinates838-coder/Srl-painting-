@@ -1,5 +1,7 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
+import { SrlIcon } from "./srl-icon";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { site } from "@/lib/site";
 
@@ -32,7 +34,7 @@ export function SiteNavigation() {
           ["#work", "Our work"],
           ["#services", "Services"],
           ["#process", "Our process"],
-          ["#faq", "FAQ"],
+          ["#reviews", "Reviews"],
         ].map(([href, label]) => (
           <a key={href} href={href} onClick={() => setOpen(false)}>
             {label}
@@ -44,6 +46,15 @@ export function SiteNavigation() {
           onClick={() => setOpen(false)}
         >
           Free estimate ↗
+        </a>
+        <a
+          href={site.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nav-instagram"
+          aria-label="SRL Painting on Instagram (opens in a new tab)"
+        >
+          <SrlIcon name="instagram" />
         </a>
       </nav>
     </>
@@ -73,29 +84,24 @@ export function ProjectShowcase() {
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
   const touchStart = useRef<number | null>(null);
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const start = setTimeout(() => {
-      if (!preference.matches) setPlaying(true);
-    }, 0);
     const stop = () => {
       if (preference.matches) setPlaying(false);
     };
     preference.addEventListener("change", stop);
     return () => {
-      clearTimeout(start);
       preference.removeEventListener("change", stop);
     };
   }, []);
   useEffect(() => {
-    if (!playing || hovered || focused) return;
+    if (!playing || hovered) return;
     const timer = setInterval(() => {
       if (!document.hidden) setActive((n) => (n + 1) % slides.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, [playing, hovered, focused]);
+  }, [playing, hovered]);
   function move(delta: number) {
     setPlaying(false);
     setActive((n) => (n + delta + slides.length) % slides.length);
@@ -108,10 +114,7 @@ export function ProjectShowcase() {
       aria-label="SRL project photos"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onFocusCapture={() => setFocused(true)}
-      onBlurCapture={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget)) setFocused(false);
-      }}
+      onFocusCapture={() => setPlaying(false)}
     >
       <div
         className="showcase-viewport"
@@ -131,6 +134,9 @@ export function ProjectShowcase() {
             key={slide.src}
             className={`showcase-slide ${active === i ? "is-active" : ""}`}
             aria-hidden={active !== i}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${slides.length}: ${slide.category}`}
           >
             <Image
               src={slide.src}
@@ -149,7 +155,14 @@ export function ProjectShowcase() {
         <div className="project-tag">THE SRL PORTFOLIO ↗</div>
       </div>
       <div className="showcase-controls">
-        <span className="slide-count" aria-live={playing ? "off" : "polite"}>
+        <span
+          className="sr-only"
+          aria-live={playing ? "off" : "polite"}
+          aria-atomic="true"
+        >
+          Photo {active + 1} of {slides.length}: {slides[active].title}
+        </span>
+        <span className="slide-count" aria-hidden="true">
           0{active + 1}
           <span> / 0{slides.length}</span>
         </span>
@@ -172,13 +185,13 @@ export function ProjectShowcase() {
             aria-label={playing ? "Pause slideshow" : "Play slideshow"}
             onClick={() => setPlaying(!playing)}
           >
-            {playing ? "Ⅱ" : "▶"}
+            <SrlIcon name={playing ? "pause" : "play"} />
           </button>
           <button aria-label="Previous photo" onClick={() => move(-1)}>
-            ←
+            <SrlIcon name="left" />
           </button>
           <button aria-label="Next photo" onClick={() => move(1)}>
-            →
+            <SrlIcon name="right" />
           </button>
         </div>
       </div>
@@ -192,6 +205,10 @@ export function EstimateForm() {
   const [message, setMessage] = useState("");
   const [copied, setCopied] = useState(false);
   const pending = useRef(false);
+  const resultHeading = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    if (status === "sent") resultHeading.current?.focus();
+  }, [status]);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (pending.current) return;
@@ -224,12 +241,20 @@ export function EstimateForm() {
       <p className="eyebrow">FREE ESTIMATE · NO OBLIGATION</p>
       <h3>Tell us about your project.</h3>
       <p className="form-intro">
-        A few details help us get the conversation started.
+        A few details help us get the conversation started. Fields marked * are
+        required.
+      </p>
+      <p className="sr-only" role="status" aria-live="polite">
+        {status === "sending"
+          ? "Sending your estimate request. Please wait."
+          : ""}
       </p>
       {status === "sent" ? (
         <div className="form-result" role="status">
           <span className="seal">✓</span>
-          <h3>Your request has been sent.</h3>
+          <h3 ref={resultHeading} tabIndex={-1}>
+            Your request has been sent.
+          </h3>
           <p>
             Thank you for reaching out. SRL Painting will follow up using your
             preferred contact method.
@@ -333,7 +358,10 @@ export function EstimateForm() {
               <span aria-hidden="true">↗</span>
             </button>
             <p className="privacy-note">
-              Your details are used only to respond to your project inquiry.
+              Submitting asks SRL Painting to contact you about this project
+              using your selected method; it does not book work or authorize
+              marketing messages. Please do not include sensitive information.{" "}
+              <Link href="/terms#inquiries">How this inquiry is handled</Link>.
             </p>
           </fieldset>
           {status === "error" && (

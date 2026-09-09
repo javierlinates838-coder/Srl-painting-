@@ -1,56 +1,72 @@
-"use client";
-
-import { useState } from "react";
-import { reviews } from "@/lib/site";
-import { Reveal } from "./reveal";
+import { site } from "@/lib/site";
+import { SrlIcon } from "./srl-icon";
 
 export function ReviewsSection() {
-  const [current, setCurrent] = useState(0);
-  const review = reviews[current];
-
-  function prev() {
-    setCurrent((c) => (c === 0 ? reviews.length - 1 : c - 1));
-  }
-
-  function next() {
-    setCurrent((c) => (c === reviews.length - 1 ? 0 : c + 1));
-  }
-
   return (
-    <section id="reviews" className="section-pad bg-ivory border-t border-[var(--line)]" aria-labelledby="reviews-heading">
-      <div className="container-main">
-        <Reveal>
-          <p className="meta-brand">Clients</p>
-          <h2 id="reviews-heading" className="display-md mt-4 text-ink">What homeowners say.</h2>
-        </Reveal>
-
-        <Reveal delay={1}>
-          <figure className="review-slide mt-12 max-w-3xl">
-            <p className="font-display text-6xl leading-none text-brand/30" aria-hidden>&ldquo;</p>
-            <blockquote className="font-display text-2xl leading-snug text-ink sm:text-3xl">
-              {review.quote}
-            </blockquote>
-            <figcaption className="mt-8">
-              <p className="text-sm font-medium text-ink">{review.name}</p>
-              <p className="text-xs text-ink-light">{review.detail}</p>
-              {"source" in review && review.source ? (
-                <p className="mt-1 text-[10px] uppercase tracking-wider text-ink-light">{review.source}</p>
-              ) : null}
-            </figcaption>
-          </figure>
-
-          <div className="mt-10 flex items-center gap-6">
-            <button type="button" onClick={prev} className="btn btn-line btn-sm" aria-label="Previous review">
-              Prev
-            </button>
-            <p className="meta tabular-nums">
-              {(current + 1).toString().padStart(2, "0")} / {reviews.length.toString().padStart(2, "0")}
+    <section
+      id="reviews"
+      className="section reviews-section"
+      aria-labelledby="reviews-heading"
+    >
+      <div className="shell reviews-grid">
+        <div>
+          <p className="eyebrow">IN OUR CUSTOMERS’ WORDS</p>
+          <h2 id="reviews-heading">
+            Good work.
+            <br />
+            Honest feedback.
+          </h2>
+          <p className="reviews-intro">
+            Choosing a painter is personal. Read customer experiences on Google,
+            explore our latest work on Instagram, and ask the questions that
+            matter to your project.
+          </p>
+          <p className="review-disclosure">
+            Reviews are hosted by Google; this website does not calculate a
+            rating or reproduce a review feed. Individual experiences are not
+            guarantees of future results.
+          </p>
+        </div>
+        <div className="review-source-cards">
+          <a
+            className="review-source"
+            href={site.googleReviews}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <SrlIcon name="message" className="review-icon" />
+            <span className="eyebrow">GOOGLE REVIEWS</span>
+            <h3>
+              Hear from our customers <SrlIcon name="arrow" />
+            </h3>
+            <p>
+              Read reviews on the SRL Painting Google listing. Worked with us?
+              You can share your honest experience there, too.
             </p>
-            <button type="button" onClick={next} className="btn btn-line btn-sm" aria-label="Next review">
-              Next
-            </button>
-          </div>
-        </Reveal>
+            <span className="review-source-label">
+              Read or leave a review · Opens Google Maps
+            </span>
+          </a>
+          <a
+            className="review-source"
+            href={site.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <SrlIcon name="instagram" className="review-icon" />
+            <span className="eyebrow">FOLLOW THE WORK</span>
+            <h3>
+              On the job with SRL <SrlIcon name="arrow" />
+            </h3>
+            <p>
+              Project updates, finishing details, and customer feedback selected
+              and shared by SRL Painting.
+            </p>
+            <span className="review-source-label">
+              {site.instagramHandle} · Opens Instagram
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );
