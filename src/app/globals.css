@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+.service-area-map { margin: 30px 0 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--soft); }
+.area-map-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+.area-map-heading .eyebrow { font-size: 12px; }
+.area-map-heading > span:last-child { font-size: 12px; color: var(--muted); }
+.service-area-map > svg { display: block; width: 100%; height: auto; }
+.area-map-grid { color: var(--line); }
+.area-map-compass { color: var(--muted); font-size: 14px; }
+.map-place text { fill: var(--ink); font-family: var(--font-body), Arial, sans-serif; font-size: 22px; font-weight: 500; paint-order: stroke; stroke: var(--soft); stroke-width: 7px; stroke-linejoin: round; }
+.map-dot { fill: var(--ink); stroke: white; stroke-width: 3px; }
+.map-home .map-dot { fill: var(--brand); }
+.map-home text { fill: var(--brand); font-weight: 600; }
+.map-home-ring { fill: var(--brand); fill-opacity: .09; stroke: var(--brand); stroke-opacity: .3; stroke-width: 1px; }
+.map-place .map-home-note { font-size: 13px; letter-spacing: 1.4px; font-weight: 500; }
+.map-region-label { fill: var(--muted); font-size: 12px; letter-spacing: 1px; }
+.service-area-map figcaption { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 20px; border-top: 1px solid var(--line); background: white; font-size: 12px; color: var(--muted); }
+.service-area-map figcaption a { display: inline-flex; align-items: center; min-height: 44px; color: var(--brand); text-decoration: underline; text-underline-offset: 4px; font-size: 14px; }
+
 .project-reveal { min-width: 0; margin: 0; }
 .reveal-frame { position: relative; height: clamp(420px, 37vw, 570px); overflow: hidden; border-radius: 12px; background: var(--soft); isolation: isolate; }
 .reveal-frame img { object-fit: cover; object-position: center; pointer-events: none; user-select: none; }

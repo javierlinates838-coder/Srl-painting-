@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ReviewsSection } from "@/components/reviews-section";
 import { PageMotion } from "@/components/page-motion";
+import { ServiceAreaMap } from "@/components/service-area-map";
 import { SrlIcon } from "@/components/srl-icon";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { BrandLogo } from "@/components/brand-logo";
@@ -326,6 +327,7 @@ export default function Home() {
             <a className="text-link" href={`tel:${site.phoneTel}`}>
               Call {site.phone} ↗
             </a>
+            <ServiceAreaMap />
           </div>
           <div className="area-list">
             {serviceAreas.map((area, i) => (
