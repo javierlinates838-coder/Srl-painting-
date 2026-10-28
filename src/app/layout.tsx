@@ -1,19 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans } from "next/font/google";
+import { Anton, DM_Sans } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
 const body = DM_Sans({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const display = Anton({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : site.siteUrl);
 
-const pageTitle = `${site.name} | California Painting Contractor`;
+const pageTitle = `${site.name} | Bakersfield Painting Contractor`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -25,6 +31,8 @@ export const metadata: Metadata = {
     "cabinet refinishing California",
     "SRL Painting",
     "licensed painter California",
+    "cabinet painting Bakersfield",
+    "commercial painting Bakersfield",
   ],
   icons: { icon: "/logo.png", apple: "/logo.png" },
   robots: { index: true, follow: true },
@@ -36,20 +44,25 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: site.name,
     images: [
-      { url: "/logo.png", width: 512, height: 425, alt: "SRL Painting" },
+      {
+        url: "/projects/exterior-after.jpg",
+        width: 1400,
+        height: 1050,
+        alt: "Exterior repaint by SRL Painting in Bakersfield",
+      },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: pageTitle,
     description: site.description,
-    images: ["/logo.png"],
+    images: ["/projects/exterior-after.jpg"],
   },
   alternates: { canonical: siteUrl },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#0d0d0e",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -61,7 +74,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={body.variable} data-scroll-behavior="smooth">
+    <html lang="en" className={`${body.variable} ${display.variable}`} data-scroll-behavior="smooth">
       <body>
         <a href="#main-content" className="skip-link">
           Skip to content

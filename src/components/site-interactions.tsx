@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { SrlIcon } from "./srl-icon";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { site } from "@/lib/site";
+import { navLinks, site } from "@/lib/site";
 
 export function SiteNavigation() {
   const [open, setOpen] = useState(false);
@@ -14,9 +14,10 @@ export function SiteNavigation() {
         className="menu-toggle"
         aria-expanded={open}
         aria-controls="primary-nav"
+        aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen(!open)}
       >
-        {open ? "Close −" : "Menu +"}
+        <span aria-hidden="true" />
       </button>
       <nav
         id="primary-nav"
@@ -29,23 +30,11 @@ export function SiteNavigation() {
           }
         }}
       >
-        {[
-          ["#work", "Our work"],
-          ["#services", "Services"],
-          ["#process", "Our process"],
-          ["#reviews", "Reviews"],
-        ].map(([href, label]) => (
-          <a key={href} href={href} onClick={() => setOpen(false)}>
-            {label}
+        {navLinks.map((link) => (
+          <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+            {link.label}
           </a>
         ))}
-        <a
-          className="button primary"
-          href="#contact"
-          onClick={() => setOpen(false)}
-        >
-          Free estimate ↗
-        </a>
         <a
           href={site.instagram}
           target="_blank"
@@ -55,11 +44,17 @@ export function SiteNavigation() {
         >
           <SrlIcon name="instagram" />
         </a>
+        <a
+          className="button primary"
+          href="#contact"
+          onClick={() => setOpen(false)}
+        >
+          Free estimate <SrlIcon name="arrow" />
+        </a>
       </nav>
     </>
   );
 }
-export { ProjectShowcase } from "./project-reveal";
 export function EstimateForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
@@ -113,7 +108,7 @@ export function EstimateForm() {
       </p>
       {status === "sent" ? (
         <div className="form-result" role="status">
-          <span className="seal">✓</span>
+          <span className="seal" aria-hidden="true">✓</span>
           <h3 ref={resultHeading} tabIndex={-1}>
             Your request has been sent.
           </h3>
@@ -183,7 +178,8 @@ export function EstimateForm() {
                   {[
                     "Exterior",
                     "Interior",
-                    "Cabinets",
+                    "Cabinet refurbishing",
+                    "New cabinets",
                     "Commercial",
                     "Other",
                   ].map((x) => (

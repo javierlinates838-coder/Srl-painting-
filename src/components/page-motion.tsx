@@ -14,14 +14,14 @@ export function PageMotion() {
         observer.unobserve(entry.target);
         if (preference.matches || entry.target.contains(document.activeElement)) continue;
         const animation = entry.target.animate(
-          [{ opacity: .65, transform: "translateY(16px)" }, { opacity: 1, transform: "translateY(0)" }],
-          { duration: 650, easing: "cubic-bezier(.22,1,.36,1)" },
+          [{ opacity: .4, transform: "translateY(24px)" }, { opacity: 1, transform: "translateY(0)" }],
+          { duration: 700, easing: "cubic-bezier(.22,1,.36,1)" },
         );
         animations.add(animation);
         animation.onfinish = () => animations.delete(animation);
       }
     }, { threshold: .12 });
-    document.querySelectorAll(".hero-copy, .project-reveal, .section-heading, .craft-copy, .process-grid, .area-section > div, .contact-copy").forEach((element) => observer.observe(element));
+    document.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element));
     function stop() { if (preference.matches) { observer.disconnect(); animations.forEach((animation) => animation.cancel()); } }
     preference.addEventListener("change", stop);
     return () => { observer.disconnect(); preference.removeEventListener("change", stop); animations.forEach((animation) => animation.cancel()); };

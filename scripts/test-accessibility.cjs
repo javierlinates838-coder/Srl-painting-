@@ -48,14 +48,13 @@ function walk(node) {
   ts.forEachChild(node, walk);
 }
 walk(tree);
-const reveal = read("src/components/project-reveal.tsx");
-assert.match(reveal, /role="slider"/);
-assert.match(reveal, /aria-orientation="vertical"/);
-assert.match(reveal, /aria-valuenow=\{split\}/);
-assert.match(reveal, /onKeyDown/);
-assert.match(reveal, /onPointerCancel/);
-assert.match(reveal, /onClick=\{\(\) => setSplit\(50\)\}/);
-assert.doesNotMatch(source + reveal, /setInterval/);
+const gallery = read("src/components/project-gallery.tsx");
+assert.match(gallery, /<dialog/);
+assert.match(gallery, /showModal\(\)/);
+assert.match(gallery, /aria-pressed=\{filter === name\}/);
+assert.match(gallery, /opener\.current\?\.focus\(\)/);
+assert.match(gallery, /ArrowRight/);
+assert.doesNotMatch(source + gallery, /setInterval/);
 assert.match(source, /aria-live="polite"/);
 assert.match(source, /role="alert"/);
 assert.match(source, /resultHeading\.current\?\.focus\(\)/);
@@ -66,7 +65,8 @@ assert.doesNotMatch(layout, /maximumScale|userScalable:\s*false/);
 assert.match(css, /prefers-reduced-motion/);
 assert.match(css, /:focus-visible/);
 assert.match(read("src/components/srl-icon.tsx"), /aria-hidden="true"/);
-assert.doesNotMatch(home, /Bonded/);
+// "Bonded" is only claimed alongside the verifiable CSLB license number.
+assert.match(home, /Licensed & bonded · CSLB/);
 assert.doesNotMatch(read("src/lib/site.ts"), /Maria G\.|James T\.|David R\./);
 assert.match(read("src/components/reviews-section.tsx"), /site.googleReviews/);
 function luminance(hex) {
@@ -77,10 +77,14 @@ function luminance(hex) {
   return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
 }
 for (const [fg, bg] of [
-  ["656963", "ffffff"],
-  ["656963", "f4f4f1"],
-  ["ffffff", "8b1a36"],
-  ["222522", "ffffff"],
+  ["5c5c62", "ffffff"], // --muted on white
+  ["5c5c62", "f5f2ec"], // --muted on --cream
+  ["ffffff", "c8102e"], // white on --red buttons
+  ["b30e29", "ffffff"], // --red-text on white
+  ["b30e29", "f5f2ec"], // --red-text on --cream
+  ["b0b0b7", "0d0d0e"], // --muted-dark on --black
+  ["ff4d5e", "151517"], // --red-bright on --char
+  ["141414", "f5f2ec"], // --ink on --cream
 ]) {
   const values = [luminance(fg), luminance(bg)].sort((a, b) => b - a);
   assert.ok(
@@ -89,5 +93,5 @@ for (const [fg, bg] of [
   );
 }
 console.log(
-  `PASS: ${controls} labelled form controls; source checks for focus, motion, feedback, zoom, decorative icons, review links, and four text-color pairs. Not a full accessibility audit.`,
+  `PASS: ${controls} labelled form controls; source checks for focus, motion, feedback, zoom, decorative icons, gallery dialog, review links, and eight text-color pairs. Not a full accessibility audit.`,
 );

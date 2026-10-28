@@ -2,11 +2,7 @@ export const site = {
   name: "SRL Painting",
   tagline: "Bakersfield & surrounding areas",
   description:
-    "Residential and commercial painting, cabinet refurbishing, and new cabinet finishing. Licensed C-33 crew serving Bakersfield, Kern County, and Los Angeles.",
-  heroHeadline: "Good painting",
-  heroHeadlineAccent: "starts before the paint.",
-  heroDescription:
-    "Residential, commercial, and cabinet work — interior, exterior, and re-paints across Bakersfield and Southern California.",
+    "Licensed & bonded painting contractor in Bakersfield, CA. Residential and commercial painting, cabinet refurbishing, and new cabinets across Kern County and Southern California.",
   phone: "(661) 595-7530",
   phoneTel: "6615957530",
   license: "1108313",
@@ -22,134 +18,66 @@ export const site = {
 } as const;
 
 export const navLinks = [
-  { href: "#services", label: "Services", id: "services", num: "01" },
-  { href: "#process", label: "Process", id: "process", num: "02" },
-  { href: "#areas", label: "Areas", id: "areas", num: "03" },
-  { href: "#reviews", label: "Reviews", id: "reviews", num: "04" },
-  { href: "#faq", label: "FAQ", id: "faq", num: "05" },
-  { href: "#contact", label: "Contact", id: "contact", num: "06" },
-] as const;
-
-export const trustFacts = [
-  { label: "C-33", detail: "Painting Contractor" },
-  { label: "CSLB", detail: `#${site.license}` },
-  { label: "Local", detail: "Bakersfield" },
-  { label: "Estimates", detail: "Complimentary" },
-] as const;
-
-export const paintingOptions = [
-  { id: "exterior", label: "House Exterior", short: "Exterior" },
-  { id: "interior", label: "Interior", short: "Interior" },
-  { id: "cabinets", label: "Cabinets", short: "Cabinets" },
-  { id: "commercial", label: "Commercial", short: "Commercial" },
-  { id: "other", label: "Other", short: "Other" },
+  { href: "#services", label: "Services" },
+  { href: "#work", label: "Our work" },
+  { href: "#process", label: "Process" },
+  { href: "#reviews", label: "Reviews" },
+  { href: "#faq", label: "FAQ" },
 ] as const;
 
 export const services = [
   {
     id: "exterior",
-    index: "01",
-    title: "Exterior Painting",
-    summary:
-      "Stucco, trim, fascia, garage doors — built for Central Valley heat.",
-    details: [
-      "Full scrape-and-prime on weathered surfaces",
-      "Body, trim, and accent color coordination",
-      "Drywall and stucco repair included in scope",
-    ],
+    num: "01",
+    icon: "home",
+    title: "Exterior painting",
+    text: "Stucco, siding, trim, fascia, doors, and garage doors, prepped and coated to stand up to Central Valley sun.",
+    tags: ["Stucco", "Trim & fascia", "Doors", "Pergolas"],
+    image: "/projects/exterior-after.jpg",
+    alt: "Freshly painted white stucco home with a dark garage door",
   },
   {
     id: "interior",
-    index: "02",
-    title: "Interior Painting",
-    summary: "Rooms finished with clean lines and move-in-ready cleanup.",
-    details: [
-      "Walls, ceilings, baseboards, accent walls",
-      "Furniture and floors protected throughout",
-      "Color guidance when you want a second opinion",
-    ],
+    num: "02",
+    icon: "roller",
+    title: "Interior painting",
+    text: "Walls, ceilings, baseboards, and accent walls with floors and furniture fully protected and a clean site when we leave.",
+    tags: ["Walls", "Ceilings", "Baseboards", "Accent walls"],
+    image: "/projects/interior-after.jpg",
+    alt: "SRL painter spraying a ceiling with floors and walls masked off",
   },
   {
     id: "cabinets",
-    index: "03",
-    title: "Cabinet Finishing",
-    summary: "Spray refinishing on existing kitchen and bath boxes.",
-    details: [
-      "Factory-smooth spray on doors and frames",
-      "Hardware refresh and minor repairs",
-      "Coatings rated for kitchens and baths",
-    ],
-  },
-  {
-    id: "commercial",
-    index: "04",
-    title: "Commercial",
-    summary: "Retail, office, and industrial — scheduled around your hours.",
-    details: [
-      "After-hours and weekend scheduling",
-      "Low-VOC options for occupied buildings",
-      "Phased plans for multi-unit properties",
-    ],
+    num: "03",
+    icon: "cabinet",
+    title: "Cabinets: refurbished or new",
+    text: "Give tired kitchen and bath cabinets a smooth, durable new finish, or let us finish and install new cabinets.",
+    tags: ["Refurbishing", "New cabinets", "Kitchens", "Baths"],
+    image: "/projects/cabinets-before.jpg",
+    alt: "Bright white painted kitchen cabinets with black hardware",
   },
 ] as const;
 
-export const prepDetails = [
-  {
-    label: "Masking",
-    text: "Floors, fixtures, and landscaping protected before work begins.",
-  },
-  {
-    label: "Priming",
-    text: "Primer where surfaces need it — not skipped to save time.",
-  },
-  {
-    label: "Surface prep",
-    text: "Scraping, sanding, and repairs before any finish coat.",
-  },
-  { label: "Repairs", text: "Drywall and stucco addressed as part of scope." },
-  {
-    label: "Clean edges",
-    text: "Cut lines and even coverage on walls, trim, and ceilings.",
-  },
-  { label: "Coverage", text: "Second coats where the finish demands it." },
-] as const;
+export type ProjectCategory = "Exterior" | "Interior" | "Cabinets" | "Outdoor";
 
-export const colorDirections = [
-  {
-    id: "warm",
-    label: "Warm",
-    description:
-      "Soft ivory and honey undertones. Welcoming without feeling dated.",
-    panels: ["#f4efe6", "#e8dcc8", "#d4c4a8", "#b8a088"],
-  },
-  {
-    id: "neutral",
-    label: "Neutral",
-    description:
-      "Balanced stone and greige tones. Works with any architecture.",
-    panels: ["#ebe8e2", "#d5d0c8", "#b8b2a8", "#8a847c"],
-  },
-  {
-    id: "earth",
-    label: "Earth",
-    description:
-      "Terracotta, clay, and muted olive. Grounded California warmth.",
-    panels: ["#d4c4a8", "#a89078", "#7a6b58", "#4a4238"],
-  },
-  {
-    id: "dark",
-    label: "Dark",
-    description:
-      "Charcoal, deep navy, and near-black. Bold contrast and depth.",
-    panels: ["#3a3835", "#2a2826", "#1a1917", "#151515"],
-  },
-  {
-    id: "clean-white",
-    label: "Clean White",
-    description: "Crisp bright whites with cool undertones. Modern and airy.",
-    panels: ["#faf9f6", "#f0eeea", "#e8e6e1", "#d9d6d0"],
-  },
-] as const;
+export const projects: {
+  src: string;
+  alt: string;
+  title: string;
+  category: ProjectCategory;
+  tall?: boolean;
+}[] = [
+  { src: "/projects/exterior-after.jpg", alt: "White stucco home with black garage door and trim", title: "Full exterior repaint", category: "Exterior" },
+  { src: "/projects/cabinets-before.jpg", alt: "White kitchen cabinets with matte black hardware", title: "Kitchen cabinet refresh", category: "Cabinets", tall: true },
+  { src: "/projects/gazebo-after.jpg", alt: "Painted wood pergola over a backyard patio", title: "Backyard pergola", category: "Outdoor" },
+  { src: "/projects/interior-after.jpg", alt: "Painter on a ladder spraying a ceiling in a fully masked room", title: "Ceilings, second coat", category: "Interior", tall: true },
+  { src: "/projects/interior-before.jpg", alt: "Painter rolling a fresh coat on an interior wall", title: "Residential interior", category: "Interior", tall: true },
+  { src: "/projects/cabinets-after.jpg", alt: "White cabinets and display shelving above a tiled kitchen bar", title: "Built-ins & kitchen bar", category: "Cabinets", tall: true },
+  { src: "/projects/lake-before.jpg", alt: "Single-story home with blue-gray siding and white trim", title: "Lake Isabella home", category: "Exterior" },
+  { src: "/projects/lake-after.jpg", alt: "Freshly painted stucco wall and eaves along a side yard", title: "Eaves & side elevation", category: "Exterior", tall: true },
+  { src: "/projects/gazebo-before.jpg", alt: "Stone fireplace and pergola with freshly painted posts", title: "Patio cover & posts", category: "Outdoor" },
+  { src: "/projects/exterior-before.jpg", alt: "Side yard of a white stucco home with dark window trim", title: "Stucco & window trim", category: "Exterior" },
+];
 
 export const serviceAreas = [
   { city: "Bakersfield", note: "Home base" },
@@ -163,86 +91,55 @@ export const process = [
   {
     num: "01",
     title: "Walkthrough",
-    text: "We discuss your space, preparation needs, and timing so the proposed scope and pricing can be put in writing.",
+    text: "We look at your space together, talk colors, prep, and timing, then put the scope and price in writing.",
   },
   {
     num: "02",
-    title: "Preparation",
-    text: "Masking, repairs, scraping, and primer — the work that determines how long the finish lasts.",
+    title: "Protect & prep",
+    text: "Floors, furniture, and landscaping covered. Patching, scraping, sanding, and primer where it's needed.",
   },
   {
     num: "03",
     title: "Paint",
-    text: "Coats applied with products selected for your surfaces and climate.",
+    text: "Quality products chosen for your surfaces and climate, applied with clean lines and even coverage.",
   },
   {
     num: "04",
     title: "Final walkthrough",
-    text: "Room by room with you. Touch-ups as needed. Site left clean.",
+    text: "We walk it with you room by room, handle touch-ups, and leave the site clean.",
   },
+] as const;
+
+export const promises = [
+  { title: "Licensed & bonded", text: `California C-33 license #${site.license}. Verify it any time with the CSLB.` },
+  { title: "Prep comes first", text: "Masking, patching, and priming are part of the job, not an upsell." },
+  { title: "You stay in the loop", text: "Clear scope up front and a contractor who answers the phone." },
+  { title: "Clean when we leave", text: "Drop cloths up, tape off, debris gone. Your home, back to normal." },
 ] as const;
 
 export const faqs = [
   {
-    q: "How do estimates work?",
-    a: `Call ${site.phone}, use the estimate form, or message ${site.instagramHandle} on Instagram. An inquiry is free and does not book work or create a construction contract. Scope, pricing, and scheduling must be confirmed separately in writing.`,
+    q: "How do free estimates work?",
+    a: `Call or text ${site.phone}, fill out the estimate form, or message ${site.instagramHandle} on Instagram. An inquiry is free and doesn't book work or create a contract. Scope, pricing, and scheduling are confirmed separately in writing.`,
   },
   {
     q: "What areas do you serve?",
-    a: "Bakersfield, Shafter, Tehachapi, Lake Isabella, and Los Angeles. Larger commercial jobs elsewhere in Kern County or Southern California — ask.",
+    a: "Bakersfield and surrounding communities including Shafter, Tehachapi, and Lake Isabella, plus projects in Los Angeles. Somewhere else in Kern County or Southern California? Just ask.",
   },
   {
-    q: "Are you licensed?",
-    a: `SRL Painting lists California C-33 Painting & Decorating license #${site.license}. Check the current license status and business details directly with CSLB before hiring.`,
+    q: "Are you licensed and bonded?",
+    a: `Yes. SRL Painting is licensed and bonded, with California C-33 Painting & Decorating license #${site.license}. You can check current license status directly with the CSLB before hiring.`,
   },
   {
-    q: "Interior and exterior?",
-    a: "Interior and exterior painting, commercial painting, and cabinet finishing are available. The services and preparation included in your project are set out in your written scope.",
+    q: "Do you do cabinets?",
+    a: "Yes. We refurbish existing kitchen and bathroom cabinets with a fresh, durable finish, and we also work on new cabinets. Tell us how many doors and drawers you have and we'll take it from there.",
   },
   {
-    q: "How long does it take?",
-    a: "Timing depends on the scope, surface condition, drying time, weather, and access. A project-specific schedule is discussed before work is booked; website descriptions are not guaranteed completion dates.",
+    q: "Do you take commercial jobs?",
+    a: "Yes. Offices, retail, and other business spaces. We'll talk through scheduling so the work fits around your hours.",
   },
-] as const;
-
-export const contactMethods = [
-  { id: "phone", label: "Phone call" },
-  { id: "text", label: "Text message" },
-  { id: "instagram", label: "Instagram DM" },
-] as const;
-
-export const quoteServiceOptions = [
-  { id: "exterior", label: "Exterior" },
-  { id: "interior", label: "Interior" },
-  { id: "cabinets", label: "Cabinets" },
-  { id: "commercial", label: "Commercial" },
-  { id: "other", label: "Other" },
-] as const;
-
-export const estimatorTypes = [
-  { id: "interior", label: "Interior" },
-  { id: "exterior", label: "Exterior" },
-  { id: "cabinets", label: "Cabinets" },
-] as const;
-
-export const estimatorSizes = [
-  { id: "small", label: "Small", hint: "1–2 rooms or single elevation" },
-  { id: "medium", label: "Medium", hint: "Several rooms or full exterior" },
-  { id: "large", label: "Large", hint: "Whole home or multi-building" },
-] as const;
-
-export const estimatorConditions = [
-  { id: "good", label: "Good condition", hint: "Minor touch-ups needed" },
-  { id: "fair", label: "Fair condition", hint: "Some prep required" },
   {
-    id: "heavy",
-    label: "Heavy prep",
-    hint: "Peeling, damage, or bare surfaces",
+    q: "How long does a project take?",
+    a: "It depends on the scope, surface condition, drying time, weather, and access. You'll get a project-specific schedule before work is booked.",
   },
-] as const;
-
-export const estimatorTiming = [
-  { id: "flexible", label: "Flexible" },
-  { id: "soon", label: "Within 30 days" },
-  { id: "urgent", label: "As soon as possible" },
 ] as const;
