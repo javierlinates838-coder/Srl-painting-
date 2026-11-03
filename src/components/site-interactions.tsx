@@ -66,6 +66,23 @@ export function EstimateForm() {
   useEffect(() => {
     if (status === "sent") resultHeading.current?.focus();
   }, [status]);
+  const serviceField = useRef<HTMLSelectElement>(null);
+  const detailsField = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    function prefill(event: Event) {
+      const { service, details } = (event as CustomEvent<{ service: string; details: string }>).detail;
+      setStatus("idle");
+      requestAnimationFrame(() => {
+        if (serviceField.current) serviceField.current.value = service;
+        if (detailsField.current) {
+          detailsField.current.value = details;
+          detailsField.current.focus({ preventScroll: true });
+        }
+      });
+    }
+    window.addEventListener("srl:prefill", prefill);
+    return () => window.removeEventListener("srl:prefill", prefill);
+  }, []);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (pending.current) return;
@@ -171,7 +188,7 @@ export function EstimateForm() {
               </label>
               <label>
                 What are we painting? *
-                <select name="service" required defaultValue="">
+                <select ref={serviceField} name="service" required defaultValue="">
                   <option value="" disabled>
                     Select a service
                   </option>
@@ -202,6 +219,7 @@ export function EstimateForm() {
             <label className="details-label">
               A little about your project *
               <textarea
+                ref={detailsField}
                 name="details"
                 required
                 maxLength={5000}

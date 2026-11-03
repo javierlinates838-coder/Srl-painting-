@@ -22,9 +22,14 @@ export function PageMotion() {
       }
     }, { threshold: .12 });
     document.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element));
+    // Drips start short once JS is running, then run down when they come into view.
+    const drips = new IntersectionObserver((entries) => {
+      for (const entry of entries) if (entry.isIntersecting) { entry.target.classList.add("is-in"); drips.unobserve(entry.target); }
+    }, { threshold: .4 });
+    document.querySelectorAll("[data-drips]").forEach((element) => { element.classList.add("is-armed"); drips.observe(element); });
     function stop() { if (preference.matches) { observer.disconnect(); animations.forEach((animation) => animation.cancel()); } }
     preference.addEventListener("change", stop);
-    return () => { observer.disconnect(); preference.removeEventListener("change", stop); animations.forEach((animation) => animation.cancel()); };
+    return () => { observer.disconnect(); drips.disconnect(); preference.removeEventListener("change", stop); animations.forEach((animation) => animation.cancel()); };
   }, []);
   return null;
 }

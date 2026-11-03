@@ -9,8 +9,14 @@ import { BrandLogo } from "@/components/brand-logo";
 import { BrushStroke } from "@/components/brush-stroke";
 import { ProjectGallery } from "@/components/project-gallery";
 import { MobileContact } from "@/components/mobile-contact";
+import { HeroRoller } from "@/components/hero-roller";
+import { PaintTrail } from "@/components/paint-trail";
+import { ScrollPaint } from "@/components/scroll-paint";
+import { PaintDrips } from "@/components/paint-drips";
+import { ColorStudio } from "@/components/color-studio";
+import { ProcessHouse } from "@/components/process-house";
 import { SiteNavigation, EstimateForm } from "@/components/site-interactions";
-import { faqs, process, promises, services, site } from "@/lib/site";
+import { faqs, promises, services, site } from "@/lib/site";
 
 const ticker = [
   "Interior painting",
@@ -50,10 +56,12 @@ export default function Home() {
           </a>
           <SiteNavigation />
         </div>
+        <ScrollPaint />
       </header>
 
       <main id="main-content">
         <section className="hero" aria-labelledby="hero-title">
+          <PaintTrail />
           <div className="hero-streaks" aria-hidden="true">
             <span />
             <span />
@@ -65,13 +73,16 @@ export default function Home() {
                 Residential · Commercial · Cabinets
               </p>
               <h1 id="hero-title">
-                Paint done
-                <br />
-                <span className="accent-word">
-                  right
-                  <BrushStroke className="accent-stroke" />
-                </span>{" "}
-                the first time.
+                <span className="h-line"><span>Paint done</span></span>
+                <span className="h-line">
+                  <span>
+                    <span className="accent-word">
+                      right
+                      <BrushStroke className="accent-stroke" />
+                    </span>{" "}
+                    the first time.
+                  </span>
+                </span>
               </h1>
               <p className="hero-lede">
                 Bakersfield’s licensed & bonded painting crew. Careful prep,
@@ -102,12 +113,9 @@ export default function Home() {
             </div>
             <div className="hero-visual" data-reveal>
               <div className="hero-photo">
-                <Image
+                <HeroRoller
                   src="/projects/exterior-after.jpg"
                   alt="Bakersfield home freshly painted by SRL: white stucco with a black garage door"
-                  fill
-                  priority
-                  sizes="(max-width: 900px) 100vw, 50vw"
                 />
               </div>
               <figure className="hero-review">
@@ -132,18 +140,21 @@ export default function Home() {
         </section>
 
         <div className="ticker" aria-hidden="true">
-          <div className="ticker-track">
-            {[0, 1].map((copy) => (
-              <div className="ticker-group" key={copy}>
-                {ticker.map((item) => (
-                  <span key={item}>
-                    {item}
-                    <i>✦</i>
-                  </span>
-                ))}
-              </div>
-            ))}
+          <div className="ticker-clip">
+            <div className="ticker-track">
+              {[0, 1].map((copy) => (
+                <div className="ticker-group" key={copy}>
+                  {ticker.map((item) => (
+                    <span key={item}>
+                      {item}
+                      <i>✦</i>
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
+          <PaintDrips className="ticker-drips" />
         </div>
 
         <section id="services" className="section services-section">
@@ -283,6 +294,29 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="studio" className="section studio-section">
+          <div className="shell">
+            <div className="section-head" data-reveal>
+              <div>
+                <p className="kicker">Color studio</p>
+                <h2>
+                  Try it before
+                  <br />
+                  <span className="red">we paint it.</span>
+                </h2>
+              </div>
+              <p>
+                Picking colors is the hard part. Play with body, trim, door,
+                and garage colors on our house below, then send the combo you
+                like along with your estimate request.
+              </p>
+            </div>
+            <div data-reveal>
+              <ColorStudio />
+            </div>
+          </div>
+        </section>
+
         <section id="process" className="section process-section">
           <div className="shell">
             <div className="section-head" data-reveal>
@@ -299,15 +333,7 @@ export default function Home() {
                 call to the final walkthrough.
               </p>
             </div>
-            <ol className="process-grid" data-reveal>
-              {process.map((step) => (
-                <li key={step.num}>
-                  <span className="step-num">{step.num}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.text}</p>
-                </li>
-              ))}
-            </ol>
+            <ProcessHouse />
           </div>
         </section>
 
@@ -410,6 +436,7 @@ export default function Home() {
       </main>
 
       <footer className="site-footer">
+        <PaintDrips className="footer-drips" />
         <div className="shell footer-grid">
           <div className="footer-brand">
             <a
@@ -432,6 +459,7 @@ export default function Home() {
             <ul>
               <li><a href="#services">Services</a></li>
               <li><a href="#work">Our work</a></li>
+              <li><a href="#studio">Color studio</a></li>
               <li><a href="#process">Process</a></li>
               <li><a href="#reviews">Reviews</a></li>
               <li><a href="#faq">FAQ</a></li>
