@@ -13,6 +13,7 @@ export function PaintTrail() {
     const ctx = el.getContext("2d");
     if (!ctx) return;
     let raf = 0;
+    let wetUntil = 0;
     let last: { x: number; y: number; w: number } | null = null;
     const ratio = Math.min(window.devicePixelRatio || 1, 2);
     function resize() {
@@ -34,6 +35,8 @@ export function PaintTrail() {
         ctx!.lineTo(x, y);
         ctx!.stroke();
         last = { x, y, w };
+        wetUntil = performance.now() + 2500;
+        if (!raf) raf = requestAnimationFrame(fade);
       } else last = { x, y, w: 20 };
     }
     function leave() { last = null; }
@@ -42,10 +45,10 @@ export function PaintTrail() {
       ctx!.fillStyle = "rgba(0,0,0,0.06)";
       ctx!.fillRect(0, 0, el!.width, el!.height);
       ctx!.globalCompositeOperation = "source-over";
-      raf = requestAnimationFrame(fade);
+      raf = performance.now() < wetUntil ? requestAnimationFrame(fade) : 0;
+      if (!raf) ctx!.clearRect(0, 0, el!.width, el!.height);
     }
     resize();
-    raf = requestAnimationFrame(fade);
     const observer = new ResizeObserver(resize);
     observer.observe(host);
     host.addEventListener("pointermove", move);

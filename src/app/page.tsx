@@ -19,6 +19,7 @@ import { ServicePanels } from "@/components/service-panels";
 import { BrushBackdrop } from "@/components/brush-backdrop";
 import { BrushEdge } from "@/components/brush-edge";
 import { BigMarquee } from "@/components/big-marquee";
+import { VideoBand } from "@/components/video-band";
 import { SiteNavigation, EstimateForm } from "@/components/site-interactions";
 import { faqs, promises, site } from "@/lib/site";
 
@@ -396,7 +397,15 @@ export default function Home() {
             <EstimateForm />
           </div>
         </section>
-        <BigMarquee words={["Your space.", "Our craft.", "Bakersfield.", "SRL Painting."]} />
+        <VideoBand>
+          <BigMarquee words={["Your space.", "Our craft.", "Bakersfield.", "SRL Painting."]} />
+          <div className="shell video-band-cta">
+            <p>Recent work around Kern County</p>
+            <a className="button primary" href="#contact">
+              Get my free estimate <SrlIcon name="arrow" />
+            </a>
+          </div>
+        </VideoBand>
       </main>
 
       <footer className="site-footer">
