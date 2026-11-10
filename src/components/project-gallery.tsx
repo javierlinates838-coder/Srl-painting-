@@ -16,6 +16,7 @@ export function ProjectGallery() {
   const [open, setOpen] = useState<number | null>(null);
   const [index, setIndex] = useState(0);
   const strip = useRef<HTMLUListElement>(null);
+  const bubble = useRef<HTMLSpanElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLButtonElement | null>(null);
   const visible = projects.filter((p) => filter === "All" || p.category === filter);
@@ -88,7 +89,15 @@ export function ProjectGallery() {
         </div>
       </div>
 
-      <ul className="showcase-strip" ref={strip} aria-label="Project photos">
+      <span className="showcase-bubble" ref={bubble} aria-hidden="true">View</span>
+      <ul className="showcase-strip" ref={strip} aria-label="Project photos"
+        onPointerMove={(event) => {
+          const el = bubble.current;
+          if (!el || event.pointerType !== "mouse") return;
+          el.style.translate = `${event.clientX}px ${event.clientY}px`;
+          el.classList.toggle("is-on", (event.target as HTMLElement).closest("button") !== null);
+        }}
+        onPointerLeave={() => bubble.current?.classList.remove("is-on")}>
         {visible.map((project, i) => (
           <li key={project.src} className={i === index ? "is-current" : undefined}>
             <button

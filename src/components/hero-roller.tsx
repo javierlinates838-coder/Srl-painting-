@@ -20,7 +20,7 @@ export function HeroRoller({ src, alt }: { src: string; alt: string }) {
     const start = performance.now();
     const duration = 2200;
     const tick = (now: number) => {
-      const t = Math.min(1, (now - start - 350) / duration);
+      const t = Math.min(1, (now - start - 1300) / duration);
       const eased = t <= 0 ? 0 : 1 - Math.pow(1 - t, 3);
       setPos(eased * 62);
       if (t < 1) frame.current = requestAnimationFrame(tick);

@@ -15,8 +15,12 @@ import { ScrollPaint } from "@/components/scroll-paint";
 import { PaintDrips } from "@/components/paint-drips";
 import { ColorStudio } from "@/components/color-studio";
 import { ProcessHouse } from "@/components/process-house";
+import { ServicePanels } from "@/components/service-panels";
+import { BrushBackdrop } from "@/components/brush-backdrop";
+import { BrushEdge } from "@/components/brush-edge";
+import { BigMarquee } from "@/components/big-marquee";
 import { SiteNavigation, EstimateForm } from "@/components/site-interactions";
-import { faqs, promises, services, site } from "@/lib/site";
+import { faqs, promises, site } from "@/lib/site";
 
 const ticker = [
   "Interior painting",
@@ -33,6 +37,10 @@ export default function Home() {
   return (
     <>
       <LocalBusinessSchema siteUrl={site.siteUrl} />
+      <div className="intro" aria-hidden="true">
+        <BrandLogo priority className="intro-logo" />
+        <span className="intro-word">SRL Painting</span>
+      </div>
       <PageMotion />
       <div className="topbar">
         <div className="shell topbar-inner">
@@ -61,12 +69,8 @@ export default function Home() {
 
       <main id="main-content">
         <section className="hero" aria-labelledby="hero-title">
+          <BrushBackdrop variant="hero" />
           <PaintTrail />
-          <div className="hero-streaks" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </div>
           <div className="shell hero-grid">
             <div className="hero-copy" data-reveal>
               <p className="kicker">
@@ -173,53 +177,12 @@ export default function Home() {
                 gets the same prep, the same care, and the same clean finish.
               </p>
             </div>
-            <div className="service-grid">
-              {services.map((service) => (
-                <article className="service-card" key={service.id} data-reveal>
-                  <div className="service-photo">
-                    <Image
-                      src={service.image}
-                      alt={service.alt}
-                      fill
-                      sizes="(max-width: 800px) 100vw, 33vw"
-                    />
-                    <span className="service-num">{service.num}</span>
-                  </div>
-                  <div className="service-body">
-                    <h3>
-                      <SrlIcon name={service.icon} />
-                      {service.title}
-                    </h3>
-                    <p>{service.text}</p>
-                    <ul className="tags">
-                      {service.tags.map((tag) => (
-                        <li key={tag}>{tag}</li>
-                      ))}
-                    </ul>
-                    <a href="#contact" className="card-link">
-                      Get a quote <SrlIcon name="arrow" />
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
-            <div className="commercial-band" data-reveal>
-              <div>
-                <p className="kicker light">For businesses</p>
-                <h3>Commercial painting that works around your hours.</h3>
-              </div>
-              <p>
-                Offices, storefronts, and business spaces. We plan scope and
-                scheduling so your doors stay open.
-              </p>
-              <a href="#contact" className="button light">
-                Talk commercial <SrlIcon name="arrow" />
-              </a>
-            </div>
+            <ServicePanels />
           </div>
         </section>
 
         <section className="section why-section" id="about">
+          <BrushEdge tone="cream" />
           <div className="shell why-grid">
             <div className="why-photo" data-reveal>
               <Image
@@ -265,6 +228,7 @@ export default function Home() {
         </section>
 
         <section className="section work-section" id="work">
+          <BrushEdge tone="black" variant={1} />
           <div className="shell">
             <div className="section-head" data-reveal>
               <div>
@@ -318,6 +282,7 @@ export default function Home() {
         </section>
 
         <section id="process" className="section process-section">
+          <BrushEdge tone="paper" variant={2} />
           <div className="shell">
             <div className="section-head" data-reveal>
               <div>
@@ -340,6 +305,7 @@ export default function Home() {
         <ReviewsSection />
 
         <section className="section area-section" id="areas">
+          <BrushEdge tone="black" />
           <div className="shell area-grid">
             <div data-reveal>
               <p className="kicker">Service area</p>
@@ -390,11 +356,8 @@ export default function Home() {
         </section>
 
         <section id="contact" className="section contact-section">
-          <div className="hero-streaks contact-streaks" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </div>
+          <BrushEdge tone="cream" variant={2} />
+          <BrushBackdrop variant="contact" />
           <div className="shell contact-grid">
             <div className="contact-copy" data-reveal>
               <p className="kicker">Free estimate</p>
@@ -433,6 +396,7 @@ export default function Home() {
             <EstimateForm />
           </div>
         </section>
+        <BigMarquee words={["Your space.", "Our craft.", "Bakersfield.", "SRL Painting."]} />
       </main>
 
       <footer className="site-footer">
