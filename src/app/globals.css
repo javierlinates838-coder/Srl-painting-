@@ -1048,32 +1048,43 @@ p { color: var(--muted); }
 
 /* ───────────── Round 4: intro, painted backdrops, edges, doors, rooms ───────────── */
 
-/* Intro curtain: logo, then the whole sheet lifts with a red tail */
-.intro {
+/* Intro curtain. Drawn on the body itself (not a React element) and moved only
+   with transform, so loading scripts can never interrupt or restart it. */
+body:has(.hero)::before, body:has(.hero)::after {
   position: fixed;
-  inset: 0;
+  left: 0;
+  right: 0;
   z-index: 200;
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 16px;
-  background: var(--black);
-  color: white;
   pointer-events: none;
-  animation: intro-out .65s .55s cubic-bezier(.75,0,.2,1) forwards;
+  will-change: transform;
+  animation: intro-out .75s .7s cubic-bezier(.76,0,.24,1) forwards;
 }
-.intro::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 34vh; background: var(--red); }
-.intro-logo { width: 128px; height: auto; animation: intro-pop .45s cubic-bezier(.3,1.5,.5,1) both; }
-.intro-word { font-family: var(--font-display), Impact, sans-serif; font-size: 34px; text-transform: uppercase; letter-spacing: .04em; animation: fade-up .5s .2s both; }
-@keyframes intro-pop { from { opacity: 0; transform: scale(.6) rotate(-8deg); } }
-@keyframes intro-out { to { transform: translateY(calc(-100% - 34vh)); visibility: hidden; } }
-.h-line > span { animation-delay: .6s; }
-.h-line:nth-child(2) > span { animation-delay: .72s; }
-.hero .accent-stroke { animation-delay: 1.35s; }
-.hero-lede { animation-delay: .95s; }
-.hero-actions { animation-delay: 1.05s; }
-.hero-proof { animation-delay: 1.15s; }
-.hero-review { animation-delay: 1.9s, 2.9s; }
+body:has(.hero)::before {
+  content: "";
+  top: 0;
+  height: 100vh;
+  background: var(--black) url(/logo.png) center calc(50% - 34px) / 128px auto no-repeat;
+  box-shadow: 0 34vh 0 var(--red);
+}
+body:has(.hero)::after {
+  content: "SRL PAINTING";
+  top: calc(50% + 44px);
+  z-index: 201;
+  text-align: center;
+  color: white;
+  font-family: var(--font-display), Impact, sans-serif;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: .04em;
+}
+@keyframes intro-out { to { transform: translate3d(0, -140vh, 0); } }
+.h-line > span { animation-delay: .95s; }
+.h-line:nth-child(2) > span { animation-delay: 1.07s; }
+.hero .accent-stroke { animation-delay: 1.7s; }
+.hero-lede { animation-delay: 1.25s; }
+.hero-actions { animation-delay: 1.35s; }
+.hero-proof { animation-delay: 1.45s; }
+.hero-review { animation-delay: 2.2s, 3.2s; }
 .roller-hint { animation-delay: 2.9s, 3.5s; }
 
 /* Canvas brush strokes behind hero and contact */
@@ -1301,10 +1312,9 @@ p { color: var(--muted); }
 @media (max-width: 700px) {
   .brush-edge { height: 28px; }
   .studio-scenes button { font-size: 17px; padding: 8px 18px; min-height: 48px; }
-  .intro-logo { width: 96px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .intro { display: none; }
+  body:has(.hero)::before, body:has(.hero)::after { content: none; }
   .big-marquee-track, .studio-art { animation: none; }
   .panel-media img { transform: none; }
 }

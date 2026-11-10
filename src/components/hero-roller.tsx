@@ -26,7 +26,7 @@ export function HeroRoller({ src, alt }: { src: string; alt: string }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { settle(62); return; }
     const start = performance.now();
     const tick = (now: number) => {
-      const t = Math.min(1, (now - start - 800) / 2000);
+      const t = Math.min(1, (now - start - 1500) / 2000);
       settle(t <= 0 ? 0 : (1 - Math.pow(1 - t, 3)) * 62);
       if (t < 1) frame.current = requestAnimationFrame(tick);
     };

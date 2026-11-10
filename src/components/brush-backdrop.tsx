@@ -85,7 +85,7 @@ export function BrushBackdrop({ variant }: { variant: "hero" | "contact" }) {
     }
     function frame(now: number) {
       if (!started) started = now;
-      if (!draw((now - started) / 1000 - (variant === "hero" ? 0.55 : 0))) raf = requestAnimationFrame(frame);
+      if (!draw((now - started) / 1000 - (variant === "hero" ? 1.4 : 0))) raf = requestAnimationFrame(frame);
     }
     function resize() {
       el!.width = host!.clientWidth * ratio;

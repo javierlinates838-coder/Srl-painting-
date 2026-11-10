@@ -38,10 +38,6 @@ export default function Home() {
   return (
     <>
       <LocalBusinessSchema siteUrl={site.siteUrl} />
-      <div className="intro" aria-hidden="true">
-        <BrandLogo priority className="intro-logo" />
-        <span className="intro-word">SRL Painting</span>
-      </div>
       <PageMotion />
       <div className="topbar">
         <div className="shell topbar-inner">
