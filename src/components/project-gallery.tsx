@@ -1,15 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { projects, type ProjectCategory } from "@/lib/site";
 import { SrlIcon } from "./srl-icon";
 
 const filters: ("All" | ProjectCategory)[] = ["All", "Exterior", "Interior", "Cabinets", "Outdoor"];
 
 // Ragged brush-stroke silhouette used to mask every photo in the strip.
+// A plain CSS polygon: far cheaper to scroll than an SVG clip-path reference.
 const brush =
-  "M20 25 L44 37 L68 36 L92 24 L116 25 L140 26 L164 35 L188 25 L212 37 L236 33 L260 42 L284 36 L308 14 L332 17 L356 13 L380 18 L404 36 L428 35 L452 20 L476 38 L500 27 L524 42 L548 37 L572 42 L596 35 L620 28 L644 29 L668 24 L692 40 L716 36 L740 26 L764 19 L788 34 L812 29 L836 30 L860 32 L884 38 L908 41 L932 25 L956 34 L980 23 L984 84 L998 140 L972 192 L995 246 L976 300 L987 354 L970 406 L989 460 L965 514 L996 568 L980 563 L956 581 L932 575 L908 563 L884 557 L860 567 L836 571 L812 563 L788 581 L764 582 L740 571 L716 560 L692 579 L668 566 L644 580 L620 567 L596 572 L572 560 L548 572 L524 583 L500 578 L476 566 L452 571 L428 577 L404 560 L380 566 L356 560 L332 572 L308 578 L284 573 L260 583 L236 565 L212 561 L188 575 L164 582 L140 570 L116 582 L92 564 L68 575 L44 566 L20 579 L18 520 L32 466 L6 412 L28 358 L10 304 L34 250 L14 196 L22 142 L2 88 L30 34Z";
+  "polygon(2% 4.2%, 4.4% 6.2%, 6.8% 6.0%, 9.2% 4.0%, 11.6% 4.2%, 14% 4.3%, 16.4% 5.8%, 18.8% 4.2%, 21.2% 6.2%, 23.6% 5.5%, 26% 7.0%, 28.4% 6.0%, 30.8% 2.3%, 33.2% 2.8%, 35.6% 2.2%, 38% 3.0%, 40.4% 6.0%, 42.8% 5.8%, 45.2% 3.3%, 47.6% 6.3%, 50% 4.5%, 52.4% 7.0%, 54.8% 6.2%, 57.2% 7.0%, 59.6% 5.8%, 62% 4.7%, 64.4% 4.8%, 66.8% 4.0%, 69.2% 6.7%, 71.6% 6.0%, 74% 4.3%, 76.4% 3.2%, 78.8% 5.7%, 81.2% 4.8%, 83.6% 5.0%, 86% 5.3%, 88.4% 6.3%, 90.8% 6.8%, 93.2% 4.2%, 95.6% 5.7%, 98% 3.8%, 98.4% 14.0%, 99.8% 23.3%, 97.2% 32.0%, 99.5% 41.0%, 97.6% 50.0%, 98.7% 59.0%, 97% 67.7%, 98.9% 76.7%, 96.5% 85.7%, 99.6% 94.7%, 98% 93.8%, 95.6% 96.8%, 93.2% 95.8%, 90.8% 93.8%, 88.4% 92.8%, 86% 94.5%, 83.6% 95.2%, 81.2% 93.8%, 78.8% 96.8%, 76.4% 97.0%, 74% 95.2%, 71.6% 93.3%, 69.2% 96.5%, 66.8% 94.3%, 64.4% 96.7%, 62% 94.5%, 59.6% 95.3%, 57.2% 93.3%, 54.8% 95.3%, 52.4% 97.2%, 50% 96.3%, 47.6% 94.3%, 45.2% 95.2%, 42.8% 96.2%, 40.4% 93.3%, 38% 94.3%, 35.6% 93.3%, 33.2% 95.3%, 30.8% 96.3%, 28.4% 95.5%, 26% 97.2%, 23.6% 94.2%, 21.2% 93.5%, 18.8% 95.8%, 16.4% 97.0%, 14% 95.0%, 11.6% 97.0%, 9.2% 94.0%, 6.8% 95.8%, 4.4% 94.3%, 2% 96.5%, 1.8% 86.7%, 3.2% 77.7%, 0.6% 68.7%, 2.8% 59.7%, 1% 50.7%, 3.4% 41.7%, 1.4% 32.7%, 2.2% 23.7%, 0.2% 14.7%, 3% 5.7%)";
 
 export function ProjectGallery() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
@@ -62,15 +63,7 @@ export function ProjectGallery() {
   const current = open === null ? null : visible[open];
 
   return (
-    <div className="showcase">
-      <svg width="0" height="0" aria-hidden="true" focusable="false" style={{ position: "absolute" }}>
-        <defs>
-          <clipPath id="brush-mask" clipPathUnits="objectBoundingBox">
-            <path transform="scale(0.001, 0.0016667)" d={brush} />
-          </clipPath>
-        </defs>
-      </svg>
-
+    <div className="showcase" style={{ "--brush": brush } as CSSProperties}>
       <div className="showcase-bar">
         <div className="gallery-filters" role="group" aria-label="Filter projects">
           {filters.map((name) => (

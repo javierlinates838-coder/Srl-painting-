@@ -51,7 +51,7 @@ export function BrushBackdrop({ variant }: { variant: "hero" | "contact" }) {
     let raf = 0;
     let started = 0;
     let visible = false;
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
 
     function draw(time: number) {
       const w = host!.clientWidth, h = host!.clientHeight;

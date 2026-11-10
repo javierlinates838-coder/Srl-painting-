@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { services } from "@/lib/site";
 import { StorefrontArt } from "./room-illustrations";
 import { SrlIcon, type IconName } from "./srl-icon";
@@ -34,10 +34,19 @@ const panels: Panel[] = [
 // Four doors: the one you hover, focus or tap swings open to show the detail.
 export function ServicePanels() {
   const [active, setActive] = useState(0);
+  // On phones the doors stack and all stay open: no collapsing, so nothing jumps.
+  const [stacked, setStacked] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 980px)");
+    const sync = () => setStacked(query.matches);
+    sync();
+    query.addEventListener("change", sync);
+    return () => query.removeEventListener("change", sync);
+  }, []);
   return (
     <div className="panels" data-reveal>
       {panels.map((panel, index) => {
-        const open = index === active;
+        const open = stacked || index === active;
         return (
           <article key={panel.id} className={open ? "panel is-open" : "panel"} onMouseEnter={() => setActive(index)}>
             <div className="panel-media" aria-hidden={panel.image ? undefined : true}>
@@ -48,7 +57,7 @@ export function ServicePanels() {
               )}
             </div>
             <h3 className="panel-head">
-              <button type="button" aria-expanded={open} aria-controls={`panel-${panel.id}`} onClick={() => setActive(index)} onFocus={() => setActive(index)}>
+              <button type="button" aria-expanded={open} aria-controls={`panel-${panel.id}`} tabIndex={stacked ? -1 : undefined} onClick={() => setActive(index)} onFocus={() => setActive(index)}>
                 <span className="panel-num">{panel.num}</span>
                 <span className="panel-short">{panel.short}</span>
               </button>

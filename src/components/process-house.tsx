@@ -4,41 +4,30 @@ import { useEffect, useRef, useState } from "react";
 import { process } from "@/lib/site";
 import { HouseDefs, HouseShapes } from "./house-illustration";
 
-const clamp = (n: number) => Math.min(1, Math.max(0, n));
-
-// As the steps scroll past, the house is sketched, taped off, painted and approved.
+// As each step reaches the middle of the screen the house moves to its next
+// state (sketched, taped, painted, approved). CSS transitions do the motion, so
+// nothing is recalculated while the page scrolls.
 export function ProcessHouse() {
-  const section = useRef<HTMLDivElement>(null);
-  const card = useRef<HTMLDivElement>(null);
+  const steps = useRef<HTMLOListElement>(null);
   const [active, setActive] = useState(3);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const el = section.current, target = card.current;
-      if (!el || !target) return;
-      const r = el.getBoundingClientRect();
-      if (r.bottom < -200 || r.top > window.innerHeight + 200) return;
-      const progress = clamp((window.innerHeight * 0.55 - r.top) / Math.max(r.height - window.innerHeight * 0.5, 1));
-      target.style.setProperty("--draw", String(clamp(progress / 0.3)));
-      target.style.setProperty("--tape", String(clamp((progress - 0.25) / 0.2) * (1 - clamp((progress - 0.72) / 0.12))));
-      target.style.setProperty("--fill", String(clamp((progress - 0.48) / 0.25)));
-      target.style.setProperty("--done", String(clamp((progress - 0.8) / 0.15)));
-      setActive(progress < 0.25 ? 0 : progress < 0.5 ? 1 : progress < 0.78 ? 2 : 3);
-    };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); cancelAnimationFrame(raf); };
+    const list = steps.current;
+    if (!list) return;
+    const items = Array.from(list.children);
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) if (entry.isIntersecting) setActive(items.indexOf(entry.target));
+    }, { rootMargin: "-48% 0px -48% 0px" });
+    items.forEach((item) => observer.observe(item));
+    // Above the list the house starts as a bare sketch.
+    const start = requestAnimationFrame(() => { if (list.getBoundingClientRect().top > window.innerHeight * 0.5) setActive(0); });
+    return () => { observer.disconnect(); cancelAnimationFrame(start); };
   }, []);
 
   return (
-    <div className="process-layout" ref={section}>
+    <div className="process-layout">
       <div className="process-visual">
-        <div className="process-card" ref={card}>
+        <div className="process-card" data-step={active}>
           <svg viewBox="0 0 640 420" role="img" aria-label={`Illustration of step ${active + 1}: ${process[active].title}`}>
             <HouseDefs id="proc" />
             <g className="proc-fill"><HouseShapes id="proc" /></g>
@@ -60,7 +49,7 @@ export function ProcessHouse() {
           </div>
         </div>
       </div>
-      <ol className="process-steps">
+      <ol className="process-steps" ref={steps}>
         {process.map((step, i) => (
           <li key={step.num} className={i === active ? "is-active" : undefined}>
             <span className="step-num">{step.num}</span>
