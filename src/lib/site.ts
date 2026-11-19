@@ -18,12 +18,36 @@ export const site = {
 } as const;
 
 export const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#work", label: "Our work" },
-  { href: "#studio", label: "Color studio" },
-  { href: "#process", label: "Process" },
-  { href: "#reviews", label: "Reviews" },
+  { href: "/services", label: "Services" },
+  { href: "/work", label: "Our work" },
+  { href: "/color-studio", label: "Color studio" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ] as const;
+
+// What each service usually includes. The written scope for your project is what counts.
+export const serviceDetails: Record<string, readonly string[]> = {
+  exterior: [
+    "Scraping and priming on weathered surfaces where needed",
+    "Body, trim, and accent colors planned together",
+    "Stucco and minor drywall repair handled in your scope",
+  ],
+  interior: [
+    "Walls, ceilings, baseboards, and accent walls",
+    "Floors and furniture protected the whole time",
+    "Color guidance when you want a second opinion",
+  ],
+  cabinets: [
+    "Smooth, even finish on doors, drawers, and frames",
+    "Hardware swaps and small repairs",
+    "Coatings made to hold up in kitchens and baths",
+  ],
+  commercial: [
+    "Scheduling planned around your business hours",
+    "Low-odor options for occupied spaces",
+    "Phased work for larger or multi-unit properties",
+  ],
+};
 
 export const services = [
   {

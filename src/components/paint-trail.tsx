@@ -9,7 +9,11 @@ export function PaintTrail() {
     const el = canvas.current;
     const host = el?.parentElement;
     if (!el || !host) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !window.matchMedia("(pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !window.matchMedia("(pointer: fine)").matches) {
+      // Touch screens: no trail, and no idle canvas left on the page.
+      el.hidden = true;
+      return;
+    }
     const ctx = el.getContext("2d");
     if (!ctx) return;
     let raf = 0;

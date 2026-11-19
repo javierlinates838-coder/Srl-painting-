@@ -24,9 +24,10 @@ export function HeroRoller({ src, alt }: { src: string; alt: string }) {
   useEffect(() => {
     const settle = (pos: number) => { paint(pos); if (range.current) range.current.value = String(Math.round(pos)); };
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { settle(62); return; }
+    const delay = document.documentElement.classList.contains("show-intro") ? 1500 : 300;
     const start = performance.now();
     const tick = (now: number) => {
-      const t = Math.min(1, (now - start - 1500) / 2000);
+      const t = Math.min(1, (now - start - delay) / 2000);
       settle(t <= 0 ? 0 : (1 - Math.pow(1 - t, 3)) * 62);
       if (t < 1) frame.current = requestAnimationFrame(tick);
     };

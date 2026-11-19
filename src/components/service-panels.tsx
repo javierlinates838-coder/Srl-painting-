@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { services } from "@/lib/site";
 import { StorefrontArt } from "./room-illustrations";
@@ -69,9 +70,9 @@ export function ServicePanels() {
               <ul className="tags">
                 {panel.tags.map((tag) => <li key={tag}>{tag}</li>)}
               </ul>
-              <a href="#contact" className="button primary">
+              <Link href="/contact" className="button primary">
                 Get a quote <SrlIcon name="arrow" />
-              </a>
+              </Link>
             </div>
           </article>
         );

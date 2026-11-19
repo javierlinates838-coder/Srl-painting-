@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type CSSProperties, type ReactNode } from "react";
+import { useRouter } from "next/navigation";
 import { HouseDefs, HouseShapes } from "./house-illustration";
 import { KitchenScene, LivingRoomScene } from "./room-illustrations";
 import { SrlIcon } from "./srl-icon";
@@ -101,6 +102,7 @@ export function ColorStudio() {
   const [partIndex, setPartIndex] = useState(0);
   const [choices, setChoices] = useState<number[][]>(scenes.map((s) => s.presets[0].colors));
   const [pulse, setPulse] = useState(0);
+  const router = useRouter();
 
   const scene = scenes[sceneIndex];
   const choice = choices[sceneIndex];
@@ -114,10 +116,13 @@ export function ColorStudio() {
     setPulse((n) => n + 1);
   }
   function sendToEstimate() {
-    window.dispatchEvent(new CustomEvent("srl:prefill", {
-      detail: { service: scene.service, details: `Color idea from the Color Studio (${scene.label.toLowerCase()}): ${summary}.\n` },
-    }));
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    try {
+      sessionStorage.setItem("srl-prefill", JSON.stringify({
+        service: scene.service,
+        details: `Color idea from the Color Studio (${scene.label.toLowerCase()}): ${summary}.\n`,
+      }));
+    } catch {}
+    router.push("/contact");
   }
 
   const style = Object.fromEntries(scene.parts.map((p, i) => [p.cssVar, pick(i)[1]])) as CSSProperties;

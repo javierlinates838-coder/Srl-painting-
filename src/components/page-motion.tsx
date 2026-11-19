@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 // Progressive enhancement: content stays visible if scripts or animation fail.
 export function PageMotion() {
+  const pathname = usePathname();
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (preference.matches || !window.IntersectionObserver || !Element.prototype.animate) return;
@@ -45,6 +47,6 @@ export function PageMotion() {
     function stop() { if (preference.matches) { observer.disconnect(); animations.forEach((animation) => animation.cancel()); } }
     preference.addEventListener("change", stop);
     return () => { magnets.forEach((el) => { el.removeEventListener("pointermove", pull); el.removeEventListener("pointerleave", release); }); observer.disconnect(); drips.disconnect(); preference.removeEventListener("change", stop); animations.forEach((animation) => animation.cancel()); };
-  }, []);
+  }, [pathname]);
   return null;
 }

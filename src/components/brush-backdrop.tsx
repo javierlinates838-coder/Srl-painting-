@@ -31,12 +31,14 @@ function random(seed: number) {
 
 export function BrushBackdrop({ variant }: { variant: "hero" | "contact" }) {
   const canvas = useRef<HTMLCanvasElement>(null);
+  const still = useRef<HTMLImageElement>(null);
   useEffect(() => {
     const el = canvas.current;
     const host = el?.parentElement;
     const ctx = el?.getContext("2d");
     if (!el || !host || !ctx) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const introPlaying = document.documentElement.classList.contains("show-intro");
     const rand = random(variant === "hero" ? 11 : 29);
     const bristles = presets[variant].map((stroke) =>
       Array.from({ length: Math.round(stroke.width * 0.9) }, () => ({
@@ -83,9 +85,23 @@ export function BrushBackdrop({ variant }: { variant: "hero" | "contact" }) {
       ctx!.globalAlpha = 1;
       return done;
     }
+    // Once the strokes are finished, swap the canvas for a plain image: a live
+    // full-size canvas makes every frame of scrolling more expensive.
+    let url = "";
+    function freeze() {
+      sizes.disconnect();
+      el!.toBlob((blob) => {
+        const img = still.current;
+        if (!blob || !img) return;
+        url = URL.createObjectURL(blob);
+        img.onload = () => { img.hidden = false; el!.width = 0; el!.height = 0; el!.hidden = true; };
+        img.src = url;
+      });
+    }
     function frame(now: number) {
       if (!started) started = now;
-      if (!draw((now - started) / 1000 - (variant === "hero" ? 1.4 : 0))) raf = requestAnimationFrame(frame);
+      if (!draw((now - started) / 1000 - (variant === "hero" ? (introPlaying ? 1.4 : 0.2) : 0))) raf = requestAnimationFrame(frame);
+      else freeze();
     }
     function resize() {
       el!.width = host!.clientWidth * ratio;
@@ -100,7 +116,13 @@ export function BrushBackdrop({ variant }: { variant: "hero" | "contact" }) {
       if (entries.some((e) => e.isIntersecting)) { visible = true; seen.disconnect(); raf = requestAnimationFrame(frame); }
     }, { threshold: 0.15 });
     seen.observe(host);
-    return () => { cancelAnimationFrame(raf); sizes.disconnect(); seen.disconnect(); };
+    return () => { cancelAnimationFrame(raf); sizes.disconnect(); seen.disconnect(); if (url) URL.revokeObjectURL(url); };
   }, [variant]);
-  return <canvas ref={canvas} className="brush-backdrop" aria-hidden="true" />;
+  return (
+    <>
+      <canvas ref={canvas} className="brush-backdrop" aria-hidden="true" />
+      {/* eslint-disable-next-line @next/next/no-img-element -- a generated snapshot, not a site image */}
+      <img ref={still} className="brush-backdrop" alt="" aria-hidden="true" hidden />
+    </>
+  );
 }

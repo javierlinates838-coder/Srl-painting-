@@ -6,7 +6,7 @@ const read = (p) => fs.readFileSync(p, "utf8");
 const source = read("src/components/site-interactions.tsx");
 const css = read("src/app/globals.css");
 const layout = read("src/app/layout.tsx");
-const home = read("src/app/page.tsx");
+const chrome = read("src/app/(site)/layout.tsx");
 let controls = 0;
 const tree = ts.createSourceFile(
   "interactions.tsx",
@@ -66,7 +66,7 @@ assert.match(css, /prefers-reduced-motion/);
 assert.match(css, /:focus-visible/);
 assert.match(read("src/components/srl-icon.tsx"), /aria-hidden="true"/);
 // "Bonded" is only claimed alongside the verifiable CSLB license number.
-assert.match(home, /Licensed & bonded · CSLB/);
+assert.match(chrome, /Licensed & bonded · CSLB/);
 assert.doesNotMatch(read("src/lib/site.ts"), /Maria G\.|James T\.|David R\./);
 assert.match(read("src/components/reviews-section.tsx"), /site.googleReviews/);
 function luminance(hex) {

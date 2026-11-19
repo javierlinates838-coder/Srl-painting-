@@ -1,26 +1,30 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
 import { SrlIcon } from "./srl-icon";
 
-// Slides in once the hero's own call-to-action buttons have scrolled away.
+// Phone call / estimate bar that slides in after the first screen.
 export function MobileContact() {
   const [visible, setVisible] = useState(false);
+  const onContact = usePathname().replace(/\.html$/, "").endsWith("/contact");
   useEffect(() => {
-    const update = () => setVisible(window.scrollY > 640);
+    const update = () => setVisible(window.scrollY > 520);
     update();
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
+  const show = visible && !onContact;
   return (
-    <div className={visible ? "mobile-contact is-visible" : "mobile-contact"} inert={!visible}>
+    <div className={show ? "mobile-contact is-visible" : "mobile-contact"} inert={!show}>
       <a href={`tel:${site.phoneTel}`}>
         <SrlIcon name="phone" /> Call
       </a>
-      <a href="#contact" className="is-primary">
+      <Link href="/contact" className="is-primary">
         Free estimate <SrlIcon name="arrow" />
-      </a>
+      </Link>
     </div>
   );
 }

@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { SrlIcon } from "./srl-icon";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { navLinks, site } from "@/lib/site";
+import { site } from "@/lib/site";
+import { NavLinks } from "./nav-links";
 
 export function SiteNavigation() {
   const [open, setOpen] = useState(false);
@@ -30,11 +31,7 @@ export function SiteNavigation() {
           }
         }}
       >
-        {navLinks.map((link) => (
-          <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
-            {link.label}
-          </a>
-        ))}
+        <NavLinks onNavigate={() => setOpen(false)} />
         <a
           href={site.instagram}
           target="_blank"
@@ -44,13 +41,13 @@ export function SiteNavigation() {
         >
           <SrlIcon name="instagram" />
         </a>
-        <a
+        <Link
           className="button primary"
-          href="#contact"
+          href="/contact"
           onClick={() => setOpen(false)}
         >
           Free estimate <SrlIcon name="arrow" />
-        </a>
+        </Link>
       </nav>
     </>
   );
@@ -69,19 +66,21 @@ export function EstimateForm() {
   const serviceField = useRef<HTMLSelectElement>(null);
   const detailsField = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
-    function prefill(event: Event) {
-      const { service, details } = (event as CustomEvent<{ service: string; details: string }>).detail;
-      setStatus("idle");
-      requestAnimationFrame(() => {
-        if (serviceField.current) serviceField.current.value = service;
-        if (detailsField.current) {
-          detailsField.current.value = details;
-          detailsField.current.focus({ preventScroll: true });
-        }
-      });
-    }
-    window.addEventListener("srl:prefill", prefill);
-    return () => window.removeEventListener("srl:prefill", prefill);
+    let saved: { service: string; details: string } | null = null;
+    try {
+      saved = JSON.parse(sessionStorage.getItem("srl-prefill") ?? "null");
+      sessionStorage.removeItem("srl-prefill");
+    } catch {}
+    if (!saved) return;
+    const { service, details } = saved;
+    const frame = requestAnimationFrame(() => {
+      if (serviceField.current) serviceField.current.value = service;
+      if (detailsField.current) {
+        detailsField.current.value = details;
+        detailsField.current.focus({ preventScroll: true });
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
